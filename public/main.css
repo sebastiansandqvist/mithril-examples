@@ -1,0 +1,150 @@
+body {
+	background: #fafafa;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+}
+
+/* ---------------------- LAYOUT ---------------------- */
+
+.Display {
+	background: #5a5;
+	padding: 50px;
+}
+
+.Container {
+	margin: 0 auto;
+	width: 860px;
+}
+
+.Content {
+	margin: 50px auto;
+}
+
+.Section {
+	margin-bottom: 40px
+}
+
+.Demo {
+	overflow: hidden
+}
+
+.Demo-left {
+	float: left;
+	width: 560px;
+}
+
+.Demo-right {
+	box-sizing: border-box;
+	float: left;
+	padding-left: 20px;
+	width: 300px;
+}
+
+.Demo-result {
+	background: #fff;
+	border: 1px solid #f5f5f5;
+	padding: 10px;
+	margin-top: 20px;
+}
+
+/* ---------------------- NAVIGATION ---------------------- */
+
+.Nav {
+	background: #6b6;
+	padding: 20px;
+	text-align: center;
+}
+
+.Nav-link {
+	color: #fff;
+	font-weight: 400;
+	margin: 0 15px;
+	text-decoration: none;
+}
+
+.Nav-link.active {
+	border-bottom: 1px solid #8d8;
+	font-weight: 600;
+}
+
+/* ---------------------- TABS ---------------------- */
+
+.Tabs {
+	background: #2c3e50;
+	margin-top: 20px;
+}
+
+.TabBar {
+	background: #3a536c;
+	overflow: hidden;
+}
+
+.Tab {
+	color: white;
+	cursor: pointer;
+	float: left;
+	padding: 10px 25px;
+}
+
+.Tab.active {
+	background: #2c3e50;
+	cursor: default;
+}
+
+.TabContent {
+	padding: 10px 20px;
+}
+
+/* ---------------------- TYPOGRAPHY ---------------------- */
+
+h1 {
+	color: #fff;
+	font-weight: 300;
+	font-size: 24;
+	margin: 0;
+	text-align: center;
+}
+
+h2 {
+	color: #34495e;
+	font-size: 20px;
+	font-weight: 600;
+	margin: 0 0 10px 0;
+}
+
+p {
+	color: #34495e;
+	font-size: 16px;
+	font-weight: 400;
+	margin: 0;
+	padding: 10px 0 0 0;
+}
+
+pre {
+	tab-size: 2;
+}
+
+code {
+	color: white;
+	font-family: 'Monaco', monospace;
+	font-size: 14px;
+}
+
+code.inline {
+	background: #eee;
+	color: #34495e;
+	padding: 0 5px;
+}
+
+.keyword {
+	color: #b48ead;
+}
+
+.string {
+	color: #a3be8c;
+}
+
+.operator,
+.punctuation {
+	color: #c1e0ff;
+}

@@ -1,0 +1,39 @@
+{
+  "name": "mithril-examples",
+  "version": "1.0.0",
+  "description": "mithril.js ui examples",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "rollup -c build/rollup.config.js",
+    "watch": "rollup -c build/rollup.config.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastiansandqvist/mithril-examples.git"
+  },
+  "author": "sebastian sandqvist",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sebastiansandqvist/mithril-examples/issues"
+  },
+  "homepage": "https://github.com/sebastiansandqvist/mithril-examples#readme",
+  "devDependencies": {
+    "@seabass/eslint-config": "1.7.0",
+    "babel-eslint": "7.0.0",
+    "eslint": "3.8.0",
+    "rollup": "0.36.3",
+    "rollup-plugin-buble": "0.14.0",
+    "rollup-plugin-commonjs": "5.0.5",
+    "rollup-plugin-node-resolve": "2.0.0",
+    "rollup-watch": "2.5.0"
+  },
+  "dependencies": {
+    "mithril": "git://github.com/lhorie/mithril.js.git#664888d151092c186a036467b7210b80410ba534",
+    "prismjs": "1.5.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015-native-modules"
+    ]
+  }
+}
