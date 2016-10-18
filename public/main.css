@@ -137,14 +137,23 @@ code.inline {
 }
 
 .keyword {
-	color: #b48ead;
+	color: #93ddf5;
+}
+
+.number,
+.boolean {
+	color: #ae81ff;
 }
 
 .string {
-	color: #a3be8c;
+	color: #a7e040;
 }
 
 .operator,
 .punctuation {
 	color: #c1e0ff;
+}
+
+.comment {
+	color: #7d9bb9;
 }

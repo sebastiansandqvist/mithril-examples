@@ -1,33 +1,31 @@
 import m from 'mithril';
 
-function oninit({ state }) {
-	state.activeIndex = 0;
-	state.setActive = function(newIndex) {
-		state.activeIndex = newIndex;
-	};
+let activeIndex = 0;
+
+function setActive(newIndex) {
+	activeIndex = newIndex;
 }
 
-function view({ attrs, state }) {
+function view({ attrs }) {
 	return (
 		m('.Tabs',
 			m('.TabBar',
 				attrs.tabs.map((tab, i) =>
 					m('.Tab', {
 						key: i,
-						className: state.activeIndex === i ? 'active' : '',
-						onclick: () => state.setActive(i)
+						className: activeIndex === i ? 'active' : '',
+						onclick: () => setActive(i)
 					}, attrs.tabs[i].id)
 				)
 			),
 			m('pre.TabContent',
-				m('code', m.trust(attrs.tabs[state.activeIndex].code))
+				m('code', m.trust(attrs.tabs[activeIndex].code))
 			)
 		)
 	);
 }
 
 const Tabs = {
-	oninit,
 	view
 };
 

@@ -2,21 +2,21 @@ import m from 'mithril';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`var HelloWorldButton = {
+`var HelloButton = {
 	view: function() {
 		return m('button', 'Hello world!');
 	}
 };`);
 
 const es6 = codeString(
-`const HelloWorldButton = {
+`const HelloButton = {
 	view() {
 		return m('button', 'Hello world!');
 	}
 };`);
 
 const jsx = codeString(
-`const HelloWorldButton = {
+`const HelloButton = {
 	view() {
 		return <button>Hello world!</button>;
 	}

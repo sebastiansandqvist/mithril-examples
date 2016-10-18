@@ -1397,38 +1397,33 @@ var Page = {
 	view: view$2
 };
 
-function oninit(ref) {
-	var state = ref.state;
+var activeIndex = 0;
 
-	state.activeIndex = 0;
-	state.setActive = function(newIndex) {
-		state.activeIndex = newIndex;
-	};
+function setActive(newIndex) {
+	activeIndex = newIndex;
 }
 
 function view$4(ref) {
 	var attrs = ref.attrs;
-	var state = ref.state;
 
 	return (
 		index('.Tabs',
 			index('.TabBar',
 				attrs.tabs.map(function (tab, i) { return index('.Tab', {
 						key: i,
-						className: state.activeIndex === i ? 'active' : '',
-						onclick: function () { return state.setActive(i); }
+						className: activeIndex === i ? 'active' : '',
+						onclick: function () { return setActive(i); }
 					}, attrs.tabs[i].id); }
 				)
 			),
 			index('pre.TabContent',
-				index('code', index.trust(attrs.tabs[state.activeIndex].code))
+				index('code', index.trust(attrs.tabs[activeIndex].code))
 			)
 		)
 	);
 }
 
 var Tabs = {
-	oninit: oninit,
 	view: view$4
 };
 
@@ -2230,13 +2225,13 @@ function codeString(str) {
 }
 
 var es5 = codeString(
-"var HelloWorldButton = {\n\tview: function() {\n\t\treturn m('button', 'Hello world!');\n\t}\n};");
+"var HelloButton = {\n\tview: function() {\n\t\treturn m('button', 'Hello world!');\n\t}\n};");
 
 var es6 = codeString(
-"const HelloWorldButton = {\n\tview() {\n\t\treturn m('button', 'Hello world!');\n\t}\n};");
+"const HelloButton = {\n\tview() {\n\t\treturn m('button', 'Hello world!');\n\t}\n};");
 
 var jsx = codeString(
-"const HelloWorldButton = {\n\tview() {\n\t\treturn <button>Hello world!</button>;\n\t}\n};");
+"const HelloButton = {\n\tview() {\n\t\treturn <button>Hello world!</button>;\n\t}\n};");
 
 var code = [
 	{ id: 'es5', code: es5 },
@@ -2251,13 +2246,13 @@ var Component = {
 };
 
 var es5$1 = codeString(
-"var Component = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input[type=text]'),\n\t\t\t\tm(HelloWorldButton)\n\t\t\t)\n\t\t);\n\t}\n};");
+"var HelloButton = {\n\tview: function(vnode) {\n\t\treturn m('button', 'Hello ' + vnode.attrs.title);\n\t}\n};\n\nvar Component = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(HelloButton, { title: 'world'})\n\t\t\t\tm(HelloButton, { title: 'everyone'})\n\t\t\t\tm(HelloButton, { title: 'darkness my old friend'})\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var es6$1 = codeString(
-"const Component = {\n\tview() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input[type=text]'),\n\t\t\t\tm(HelloWorldButton)\n\t\t\t)\n\t\t);\n\t}\n};");
+"const HelloButton = {\n\tview({ attrs }) {\n\t\treturn m('button', `Hello ${attrs.title}`);\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(HelloButton, { title: 'world'})\n\t\t\t\tm(HelloButton, { title: 'everyone'})\n\t\t\t\tm(HelloButton, { title: 'darkness my old friend'})\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var jsx$1 = codeString(
-"const Component = {\n\tview() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<input type='text'/>\n\t\t\t\t<HelloWorldButton/>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const HelloButton = {\n\tview({ attrs }) {\n\t\treturn <button>Hello {attrs.title}</button>;\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<HelloButton title='world'/>\n\t\t\t\t<HelloButton title='everyone'/>\n\t\t\t\t<HelloButton title='darkness my old friend'/>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
 var code$1 = [
 	{ id: 'es5', code: es5$1 },
@@ -2265,25 +2260,34 @@ var code$1 = [
 	{ id: 'jsx', code: jsx$1 }
 ];
 
+var HelloButton = {
+	view: function view(ref) {
+		var attrs = ref.attrs;
+
+		return index('button', ("Hello " + (attrs.title)));
+	}
+};
+
 var Component$1 = {
-	view: function view() {
+	view: function view$1() {
 		return (
 			index('div',
-				index('input[type=text]'),
-				index(Component)
+				index(HelloButton, { title: 'world'}),
+				index(HelloButton, { title: 'everyone'}),
+				index(HelloButton, { title: 'darkness my old friend'})
 			)
 		);
 	}
 };
 
 var es5$2 = codeString(
-"var HelloWorldButton = {\n\tview(vnode) {\n\t\treturn m('button', 'Hello ' + vnode.attrs.title);\n\t}\n};");
+"const HelloButton = {\n\tview: function(vnode) {\n\t\treturn m('button', 'Hello ' + vnode.attrs.title);\n\t}\n};\n\nvar Component = {\n\toninit: function(vnode) {\n\t\tvnode.state.inputValue = ''; // initial state\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tvalue: vnode.state.inputValue, // read from state\n\t\t\t\t\toninput: function(event) {\n\t\t\t\t\t\tvnode.state.inputValue = event.target.value;\n\t\t\t\t\t}\n\t\t\t\t}),\n\t\t\t\tm(HelloButton, {\n\t\t\t\t\ttitle: vnode.state.inputValue\n\t\t\t\t})\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var es6$2 = codeString(
-"const HelloWorldButton = {\n\tview({ attrs }) {\n\t\treturn m('button', `Hello ${attrs.title}`);\n\t}\n};");
+"const HelloButton = {\n\tview({ attrs }) {\n\t\treturn m('button', `Hello ${attrs.title}`);\n\t}\n};\n\nconst Component = {\n\toninit({ state }) {\n\t\tstate.inputValue = ''; // initial state\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tvalue: state.inputValue, // read from state\n\t\t\t\t\toninput(event) {\n\t\t\t\t\t\tstate.inputValue = event.target.value;\n\t\t\t\t\t}\n\t\t\t\t}),\n\t\t\t\tm(HelloButton, { title: state.inputValue })\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var jsx$2 = codeString(
-"const HelloWorldButton = {\n\tview({ attrs }) {\n\t\treturn <button>Hello {attrs.title}</button>;\n\t}\n};");
+"const HelloButton = {\n\tview({ attrs }) {\n\t\treturn <button>Hello {attrs.title}</button>;\n\t}\n};\n\nconst Component = {\n\toninit({ state }) {\n\t\tstate.inputValue = ''; // initial state\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<input\n\t\t\t\t\ttype='text'\n\t\t\t\t\tvalue={state.inputValue}\n\t\t\t\t\toninput={\n\t\t\t\t\t\t(event) => { state.inputValue = event.target.value }\n\t\t\t\t\t}/>\n\t\t\t\t<HelloButton title={state.inputValue}/>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
 var code$2 = [
 	{ id: 'es5', code: es5$2 },
@@ -2291,11 +2295,227 @@ var code$2 = [
 	{ id: 'jsx', code: jsx$2 }
 ];
 
-var Component$2 = {
+var HelloButton$1 = {
 	view: function view(ref) {
 		var attrs = ref.attrs;
 
 		return index('button', ("Hello " + (attrs.title)));
+	}
+};
+
+var Component$2 = {
+	oninit: function oninit(ref) {
+		var state = ref.state;
+
+		state.inputValue = ''; // initial state
+	},
+	view: function view$1(ref) {
+		var state = ref.state;
+
+		return (
+			index('div',
+				index('input[type=text]', {
+					value: state.inputValue, // read the value from state
+					oninput: function oninput(event) {
+						state.inputValue = event.target.value;
+					}
+				}),
+				index(HelloButton$1, { title: state.inputValue })
+			)
+		);
+	}
+};
+
+var es5$3 = codeString(
+"var HelloWorldButton = {\n\tview: function(vnode) {\n\t\treturn m('button', 'Hello ' + vnode.attrs.title);\n\t}\n};\n\nvar Component = {\n\toninit: function(vnode) {\n\t\tvnode.state.inputValue = m.prop('');\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tvalue: vnode.state.inputValue(),\n\t\t\t\t\toninput: m.withAttr('value', vnode.state.inputValue)\n\t\t\t\t}),\n\t\t\t\tm(HelloWorldButton, {\n\t\t\t\t\ttitle: vnode.state.inputValue()\n\t\t\t\t})\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var es6$3 = codeString(
+"const HelloWorldButton = {\n\tview({ attrs }) {\n\t\treturn m('button', `Hello ${attrs.title}`);\n\t}\n};\n\nconst Component = {\n\toninit({ state }) {\n\t\tstate.inputValue = m.prop('');\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tvalue: state.inputValue(),\n\t\t\t\t\toninput: m.withAttr('value', state.inputValue)\n\t\t\t\t}),\n\t\t\t\tm(HelloWorldButton, { title: state.inputValue() })\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var jsx$3 = codeString(
+"const HelloWorldButton = {\n\tview({ attrs }) {\n\t\treturn <button>Hello {attrs.title}</button>;\n\t}\n};\n\nconst Component = {\n\toninit({ state }) {\n\t\tstate.inputValue = m.prop('');\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<input\n\t\t\t\t\ttype='text'\n\t\t\t\t\tvalue={state.inputValue()}\n\t\t\t\t\toninput={m.withAttr('value', state.inputValue)}/>\n\t\t\t\t<HelloWorldButton title={state.inputValue()}/>\n\t\t\t</div>\n\t\t);\n\t}\n}");
+
+var code$3 = [
+	{ id: 'es5', code: es5$3 },
+	{ id: 'es6', code: es6$3 },
+	{ id: 'jsx', code: jsx$3 }
+];
+
+var HelloWorldButton = {
+	view: function view(ref) {
+		var attrs = ref.attrs;
+
+		return index('button', ("Hello " + (attrs.title)));
+	}
+};
+
+var Component$3 = {
+	oninit: function oninit(ref) {
+		var state = ref.state;
+
+		state.inputValue = index.prop('');
+	},
+	view: function view$1(ref) {
+		var state = ref.state;
+
+		return (
+			index('div',
+				index('input[type=text]', {
+					value: state.inputValue(),
+					oninput: index.withAttr('value', state.inputValue)
+				}),
+				index(HelloWorldButton, { title: state.inputValue() })
+			)
+		);
+	}
+};
+
+var es5$4 = codeString(
+"var Stopwatch = {\n\toninit: function(vnode) {\n\t\tvnode.state.seconds = 0;\n\t\tvnode.state.count = () => {\n\t\t\tvnode.state.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tvnode.state.interval = setInterval(vnode.state.count, 1000);\n\t},\n\tonremove: function(vnode) {\n\t\tclearInterval(vnode.state.interval);\n\t},\n\tview: function(vnode) {\n\t\treturn m('span', 'Timer: ' + vnode.state.seconds);\n\t}\n};");
+
+var es6$4 = codeString(
+"const Stopwatch = {\n\toninit({ state }) {\n\t\tstate.seconds = 0;\n\t\tstate.count = () => {\n\t\t\tstate.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tstate.interval = setInterval(state.count, 1000);\n\t},\n\tonremove({ state }) {\n\t\tclearInterval(state.interval);\n\t},\n\tview({ state }) {\n\t\treturn m('span', `Timer: ${state.seconds}`);\n\t}\n};");
+
+var jsx$4 = codeString(
+"const Stopwatch = {\n\toninit({ state }) {\n\t\tstate.seconds = 0;\n\t\tstate.count = () => {\n\t\t\tstate.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tstate.interval = setInterval(state.count, 1000);\n\t},\n\tonremove({ state }) {\n\t\tclearInterval(state.interval);\n\t},\n\tview({ state }) {\n\t\treturn <span>Timer: {state.seconds}</span>;\n\t}\n};");
+
+var code$4 = [
+	{ id: 'es5', code: es5$4 },
+	{ id: 'es6', code: es6$4 },
+	{ id: 'jsx', code: jsx$4 }
+];
+
+var Component$4 = {
+	oninit: function oninit(ref) {
+		var state = ref.state;
+
+		state.seconds = 0;
+		state.count = function () {
+			state.seconds++;
+			index.redraw();
+		};
+		state.interval = setInterval(state.count, 1000);
+	},
+	onremove: function onremove(ref) {
+		var state = ref.state;
+
+		clearInterval(state.interval);
+	},
+	view: function view(ref) {
+		var state = ref.state;
+
+		return index('span', ("Timer: " + (state.seconds)));
+	}
+};
+
+var es5$5 = codeString(
+"var Stopwatch = {\n\toninit: function(vnode) {\n\t\tvnode.state.seconds = 0;\n\t\tvnode.state.isPaused = false;\n\t\tvnode.state.reset = function() {\n\t\t\tvnode.state.seconds = 0;\n\t\t};\n\t\tvnode.state.toggle = function() {\n\t\t\tvnode.state.isPaused = !vnode.state.isPaused;\n\t\t\tclearInterval(vnode.state.interval);\n\t\t\tif (!vnode.state.isPaused) {\n\t\t\t\tvnode.state.interval =\n\t\t\t\t\tsetInterval(vnode.state.count, 1000);\n\t\t\t}\n\t\t};\n\t\tvnode.state.count = function() {\n\t\t\tvnode.state.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tvnode.state.interval =\n\t\t\tsetInterval(vnode.state.count, 1000);\n\t},\n\tonremove: function(vnode) {\n\t\tclearInterval(vnode.state.interval);\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('span', 'Timer: ' + vnode.state.seconds),\n\t\t\t\tm('button', {\n\t\t\t\t\tonclick: vnode.state.reset\n\t\t\t\t}, 'Reset'),\n\t\t\t\tm('button', {\n\t\t\t\t\tonclick: vnode.state.toggle\n\t\t\t\t}, state.isPaused ? 'Start' : 'Pause')\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var es6$5 = codeString(
+"const Stopwatch = {\n\toninit({ state }) {\n\t\tstate.seconds = 0;\n\t\tstate.isPaused = false;\n\t\tstate.reset = () => { state.seconds = 0; };\n\t\tstate.toggle = () => {\n\t\t\tstate.isPaused = !state.isPaused;\n\t\t\tclearInterval(state.interval);\n\t\t\tif (!state.isPaused) {\n\t\t\t\tstate.interval = setInterval(state.count, 1000);\n\t\t\t}\n\t\t};\n\t\tstate.count = () => {\n\t\t\tstate.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tstate.interval = setInterval(state.count, 1000);\n\t},\n\tonremove({ state }) {\n\t\tclearInterval(state.interval);\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('span', `Timer: ${state.seconds}`),\n\t\t\t\tm('button', { onclick: state.reset }, 'Reset'),\n\t\t\t\tm('button', {\n\t\t\t\t\tonclick: state.toggle\n\t\t\t\t}, state.isPaused ? 'Start' : 'Pause')\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var jsx$5 = codeString(
+"const Stopwatch = {\n\toninit({ state }) {\n\t\tstate.seconds = 0;\n\t\tstate.isPaused = false;\n\t\tstate.reset = () => { state.seconds = 0; };\n\t\tstate.toggle = () => {\n\t\t\tstate.isPaused = !state.isPaused;\n\t\t\tclearInterval(state.interval);\n\t\t\tif (!state.isPaused) {\n\t\t\t\tstate.interval = setInterval(state.count, 1000);\n\t\t\t}\n\t\t};\n\t\tstate.count = () => {\n\t\t\tstate.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tstate.interval = setInterval(state.count, 1000);\n\t},\n\tonremove({ state }) {\n\t\tclearInterval(state.interval);\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<span>Timer: {state.seconds}</span>\n\t\t\t\t<button onclick={state.reset}>Reset</button>\n\t\t\t\t<button onclick={state.toggle}>\n\t\t\t\t\t{state.isPaused ? 'Start' : 'Pause'}\n\t\t\t\t</button>\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var code$5 = [
+	{ id: 'es5', code: es5$5 },
+	{ id: 'es6', code: es6$5 },
+	{ id: 'jsx', code: jsx$5 }
+];
+
+var Component$5 = {
+	oninit: function oninit(ref) {
+		var state = ref.state;
+
+		state.seconds = 0;
+		state.isPaused = false;
+		state.reset = function () { state.seconds = 0; };
+		state.toggle = function () {
+			state.isPaused = !state.isPaused;
+			clearInterval(state.interval);
+			if (!state.isPaused) {
+				state.interval = setInterval(state.count, 1000);
+			}
+		};
+		state.count = function () {
+			state.seconds++;
+			index.redraw();
+		};
+		state.interval = setInterval(state.count, 1000);
+	},
+	onremove: function onremove(ref) {
+		var state = ref.state;
+
+		clearInterval(state.interval);
+	},
+	view: function view(ref) {
+		var state = ref.state;
+
+		return (
+			index('div',
+				index('span', ("Timer: " + (state.seconds))),
+				index('button', { onclick: state.reset }, 'Reset'),
+				index('button', { onclick: state.toggle }, state.isPaused ? 'Start' : 'Pause')
+			)
+		);
+	}
+};
+
+var es5$6 = codeString(
+"var Rotator = {\n\toninit: function(vnode) {\n\t\tvnode.state.list = ['One', 'Two', 'Three', 'Four'];\n\t\tvnode.state.rotate = function() {\n\t\t\tvnode.state.list.push(vnode.state.list.shift());\n\t\t};\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.list.map(function(item, i) {\n\t\t\t\t\t\treturn m('li', { key: i }, item)\n\t\t\t\t\t}\n\t\t\t\t),\n\t\t\t\tm('button', { onclick: state.rotate }, 'Rotate')\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var es6$6 = codeString(
+"const Rotator = {\n\toninit({ state }) {\n\t\tstate.list = ['One', 'Two', 'Three', 'Four'];\n\t\tstate.rotate = () => state.list.push(state.list.shift());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.list.map((item, i) =>\n\t\t\t\t\t\tm('li', { key: i }, item)\n\t\t\t\t\t)\n\t\t\t\t),\n\t\t\t\tm('button', { onclick: state.rotate }, 'Rotate')\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var jsx$6 = codeString(
+"const Rotator = {\n\toninit({ state }) {\n\t\tstate.list = ['One', 'Two', 'Three', 'Four'];\n\t\tstate.rotate = () => state.list.push(state.list.shift());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.list.map((item, i) =>\n\t\t\t\t\t\t\t<li key={i}>{item}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t\t<button onclick={state.rotate}>Rotate</button>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+
+var code$6 = [
+	{ id: 'es5', code: es5$6 },
+	{ id: 'es6', code: es6$6 },
+	{ id: 'jsx', code: jsx$6 }
+];
+
+var Component$6 = {
+	oninit: function oninit(ref) {
+		var state = ref.state;
+
+		state.list = ['One', 'Two', 'Three', 'Four'];
+		state.rotate = function () { return state.list.push(state.list.shift()); };
+	},
+	view: function view(ref) {
+		var state = ref.state;
+
+		return (
+			index('div',
+				index('ul',
+					state.list.map(function (item, i) { return index('li', { key: i }, item); }
+					)
+				),
+				index('button', { onclick: state.rotate }, 'Rotate')
+			)
+		);
+	}
+};
+
+var es5$7 = codeString(
+"var HelloButton = {\n\tview: function() {\n\t\treturn m('button', 'Hello world!');\n\t}\n};");
+
+var es6$7 = codeString(
+"const HelloButton = {\n\tview() {\n\t\treturn m('button', 'Hello world!');\n\t}\n};");
+
+var jsx$7 = codeString(
+"const HelloButton = {\n\tview() {\n\t\treturn <button>Hello world!</button>;\n\t}\n};");
+
+var code$7 = [
+	{ id: 'es5', code: es5$7 },
+	{ id: 'es6', code: es6$7 },
+	{ id: 'jsx', code: jsx$7 }
+];
+
+var Component$7 = {
+	view: function view() {
+		return index('button', 'Hello world!');
 	}
 };
 
@@ -2323,44 +2543,142 @@ function view$1$1() {
 						index(Tabs, { tabs: code })
 					),
 					index('.Demo-right',
-						index('.Demo-result',
-							index('div', index(Component))
-						)
+						index('.Demo-result', index(Component))
 					)
 				),
 				index('p',
 					'The first argument to ',
 					index('code.inline', 'm'),
-					' is the element (as a css-like string) or component that should be rendered, and the optional last argument(s)',
+					' is the element (as a css selector-like string) or component that should be rendered, and the optional last argument(s)',
 					' are the children of that component.'
+				),
+				index('p',
+					'Components can pass properties down to their children by passing in an object as the second argument in the call to ',
+					index('code.inline', 'm'),
+					'. Those properties become available to the component through the ',
+					index('code.inline', 'attrs'),
+					' object in the mithril virtual dom node.'
 				),
 				index('.Demo',
 					index('.Demo-left',
 						index(Tabs, { tabs: code$1 })
 					),
 					index('.Demo-right',
-						index('.Demo-result',
-							index('div', index(Component$1))
-						)
+						index('.Demo-result', index(Component$1))
 					)
 				),
 				index('p',
-					'State is passed through components via an optional second ',
+					'In addition to the ',
+					index('code.inline', 'view'),
+					' method, Mithril components have a variety of ',
+					index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/lifecycle-methods.renderToStaticMarkup]', 'lifecycle hooks'),
+					'. Using the ',
+					index('code.inline', 'oninit'),
+					' lifecycle hook, which runs once immediately before rendering the component, ',
+					' we can set the initial state. At this point it is worth noting that the ',
+					index('code.inline', 'vnode'),
+					' object that is passed to the ',
+					index('code.inline', 'view'),
+					' method contains, in addition to ',
 					index('code.inline', 'attrs'),
-					' argument to ',
-					index('code.inline', 'm'),
-					'. We can change the ',
-					index('code.inline', 'HelloWorldButton'),
-					' to have dynamic contents as follows:'
+					', a ',
+					index('code.inline', 'state'),
+					' object that can be used to store the state of that specific component.'
 				),
 				index('.Demo',
 					index('.Demo-left',
 						index(Tabs, { tabs: code$2 })
 					),
 					index('.Demo-right',
-						index('.Demo-result',
-							index('div', index(Component$2))
-						)
+						index('.Demo-result', index(Component$2))
+					)
+				),
+				index('p',
+					'Mithril provides two utilities ',
+					index('code.inline', 'm.withAttr'),
+					' and ',
+					index('code.inline', 'm.prop'),
+					' that help simplify this process.'
+				),
+				index('p',
+					index('code.inline', index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/prop.md]', 'm.prop')),
+					' is, at its simplest, a getter-setter function, while ',
+					index('code.inline', index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/withAttr.md]', 'm.withAttr')),
+					' creates an event handler that uses a specified dom element property as the argument to a provided callback. ',
+					'We can use them both to simplify the previous code. All together, this is the final version of this example:'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$3 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$3))
+					)
+				)
+			),
+			index('.Section',
+				index('h2', 'Stopwatch'),
+				index('p',
+					'In the previous example, there was no need to manually tell mithril to update the view when ',
+					'the contents of the input changed, because mithril automatically redraws after event handlers ',
+					'are called. In this example, there are no events that trigger an update, so we tell mithril to update via',
+					index('code.inline', 'm.redraw'),
+					'.'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$4 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$4))
+					)
+				),
+				index('p',
+					'Adding a reset button is as simple as creating the button element in the ',
+					index('code.inline', 'view'),
+					' function and setting its ',
+					index('code.inline', 'onclick'),
+					' handler to a function that changes the count to 0. Similarly, the Start/Pause toggle',
+					' is just a button that either clears or starts a new counter.'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$5 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$5))
+					)
+				)
+			),
+			index('.Section',
+				index('h2', 'List rotator'),
+				index('p',
+					'When rendering a list of data, it is a good idea to supply Mithril with a ',
+					index('code.inline', 'key'),
+					' attribute for each element in that list. ',
+					index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/keys.md]', 'keys'),
+					' help Mithril maintain references to each element and should be unique for each item in the list.'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$6 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$6))
+					)
+				)
+			),
+			index('.Section',
+				index('h2', 'Form validation'),
+				index('p',
+					'...'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$7 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$7))
 					)
 				)
 			)
