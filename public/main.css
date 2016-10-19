@@ -24,6 +24,10 @@ body {
 	margin-bottom: 40px
 }
 
+.drop20 {
+	margin-top: 20px;
+}
+
 /* ---------------------- DEMO ---------------------- */
 
 .Demo {
@@ -73,7 +77,6 @@ body {
 
 .Tabs {
 	background: #2c3e50;
-	margin-top: 20px;
 }
 
 .TabBar {
@@ -94,6 +97,7 @@ body {
 }
 
 .TabContent {
+	color: #fff;
 	padding: 10px 20px;
 }
 

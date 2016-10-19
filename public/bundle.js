@@ -1397,27 +1397,23 @@ var Page = {
 	view: view$2
 };
 
-var activeIndex = 0;
-
-function setActive(newIndex) {
-	activeIndex = newIndex;
-}
+var activeIndex = index.prop(0);
 
 function view$4(ref) {
 	var attrs = ref.attrs;
 
 	return (
-		index('.Tabs',
+		index('.Tabs.drop20',
 			index('.TabBar',
 				attrs.tabs.map(function (tab, i) { return index('.Tab', {
 						key: i,
-						className: activeIndex === i ? 'active' : '',
-						onclick: function () { return setActive(i); }
+						className: activeIndex() === i ? 'active' : '',
+						onclick: function () { return activeIndex(i); }
 					}, attrs.tabs[i].id); }
 				)
 			),
 			index('pre.TabContent',
-				index('code', index.trust(attrs.tabs[activeIndex].code))
+				index('code', index.trust(attrs.tabs[activeIndex()].code))
 			)
 		)
 	);
@@ -2540,6 +2536,112 @@ var Component$7 = {
 	}
 };
 
+var es5$8 = codeString(
+"function setHeight(domNode) {\n\tdomNode.style.height = ''; // reset before recalculating\n\tdomNode.style.height = domNode.scrollHeight + 'px';\n}\n\nvar Textarea = {\n\toninit: function(vnode) {\n\t\tvnode.state.value = m.prop();\n\t},\n\toncreate: function(vnode) {\n\t\tvnode.state.value.map(function() {\n\t\t\tsetHeight(vnode.dom);\n\t\t)};\n\t},\n\tview: function(vnode) {\n\t\treturn m('textarea', {\n\t\t\tvalue: vnode.state.value(),\n\t\t\toninput: m.withAttr('value', vnode.state.value)\n\t\t});\n\t}\n};");
+
+var es6$8 = codeString(
+"function setHeight(domNode) {\n\tdomNode.style.height = ''; // reset before recalculating\n\tdomNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n\toninit({ state }) {\n\t\tstate.value = m.prop();\n\t},\n\toncreate({ dom, state }) {\n\t\tstate.value.map(() => setHeight(dom));\n\t},\n\tview({ state }) {\n\t\treturn m('textarea', {\n\t\t\tvalue: state.value(),\n\t\t\toninput: m.withAttr('value', state.value)\n\t\t});\n\t}\n};");
+
+var jsx$8 = codeString(
+"function setHeight(domNode) {\n\tdomNode.style.height = ''; // reset before recalculating\n\tdomNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n\toninit({ state }) {\n\t\tstate.value = m.prop();\n\t},\n\toncreate({ dom, state }) {\n\t\tstate.value.map(() => setHeight(dom));\n\t},\n\tview({ state }) {\n\t\treturn <textarea\n\t\t\tvalue={state.value()}\n\t\t\toninput={m.withAttr('value', state.value)}/>;\n\t}\n};");
+
+var code$8 = [
+	{ id: 'es5', code: es5$8 },
+	{ id: 'es6', code: es6$8 },
+	{ id: 'jsx', code: jsx$8 }
+];
+
+function setHeight(domNode) {
+	domNode.style.height = ''; // reset before recalculating
+	domNode.style.height = (domNode.scrollHeight) + "px";
+}
+
+var Component$8 = {
+	oninit: function oninit(ref) {
+		var state = ref.state;
+
+		state.value = index.prop();
+	},
+	oncreate: function oncreate(ref) {
+		var dom = ref.dom;
+		var state = ref.state;
+
+		state.value.map(function () { return setHeight(dom); });
+	},
+	view: function view(ref) {
+		var state = ref.state;
+
+		return index('textarea', {
+			value: state.value(),
+			oninput: index.withAttr('value', state.value)
+		});
+	}
+};
+
+var es5$9 = codeString(
+"var tabContent1 = [\n\t{ id: 'One', content: 'First tab' },\n\t{ id: 'Two', content: 'Second tab' },\n\t{ id: 'Three', content: 'Third tab' }\n];\n\nvar tabContent2 = [\n\t{ id: 'Lorem', content: 'Lorem ipsum...' },\n\t{ id: 'Ipsum', content: 'Duis aute...' }\n];\n\nvar Tabs = {\n\toninit: function(vnode) {\n\t\tvnode.state.activeTab = m.prop(0);\n\t},\n\tview: function(vnode) {\n\t\tvar active = vnode.state.activeTab();\n\t\treturn (\n\t\t\tm('.Tabs',\n\t\t\t\tm('.TabBar',\n\t\t\t\t\tvnode.attrs.tabs.map(function(tab, i) {\n\t\t\t\t\t\treturn m('.Tab', {\n\t\t\t\t\t\t\tkey: i,\n\t\t\t\t\t\t\tclassName: i === active ? 'active' : '',\n\t\t\t\t\t\t\tonclick: function() {\n\t\t\t\t\t\t\t\tvnode.state.activeTab(i);\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}, tab.id)\n\t\t\t\t\t})\n\t\t\t\t),\n\t\t\t\tm('.TabContent', vnode.attrs.tabs[active].content)\n\t\t\t)\n\t\t);\n\t}\n};\n\nvar Component = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(Tabs, { tabs: tabContent1 }),\n\t\t\t\tm('br'),\n\t\t\t\tm(Tabs, { tabs: tabContent2 })\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var es6$9 = codeString(
+"const tabContent1 = [\n\t{ id: 'One', content: 'First tab' },\n\t{ id: 'Two', content: 'Second tab' },\n\t{ id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n\t{ id: 'Lorem', content: 'Lorem ipsum...' },\n\t{ id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n\toninit({ state }) {\n\t\tstate.activeTab = m.prop(0);\n\t},\n\tview({ attrs, state }) {\n\t\treturn (\n\t\t\tm('.Tabs',\n\t\t\t\tm('.TabBar',\n\t\t\t\t\tattrs.tabs.map((tab, i) =>\n\t\t\t\t\t\tm('.Tab', {\n\t\t\t\t\t\t\tkey: i,\n\t\t\t\t\t\t\tclassName: state.activeTab() === i ? 'active' : '',\n\t\t\t\t\t\t\tonclick() { state.activeTab(i); }\n\t\t\t\t\t\t}, tab.id)\n\t\t\t\t\t)\n\t\t\t\t),\n\t\t\t\tm('.TabContent', attrs.tabs[state.activeTab()].content)\n\t\t\t)\n\t\t);\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(Tabs, { tabs: tabContent1 }),\n\t\t\t\tm('br'),\n\t\t\t\tm(Tabs, { tabs: tabContent2 })\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var jsx$9 = codeString(
+"const tabContent1 = [\n\t{ id: 'One', content: 'First tab' },\n\t{ id: 'Two', content: 'Second tab' },\n\t{ id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n\t{ id: 'Lorem', content: 'Lorem ipsum...' },\n\t{ id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n\toninit({ state }) {\n\t\tstate.activeTab = m.prop(0);\n\t},\n\tview({ attrs, state }) {\n\t\tconst active = state.activeTab();\n\t\treturn (\n\t\t\t<div className='Tabs'>\n\t\t\t\t<div className='TabBar'>\n\t\t\t\t\t{\n\t\t\t\t\t\tattrs.tabs.map((tab, i) =>\n\t\t\t\t\t\t\t<div\n\t\t\t\t\t\t\t\tkey={i}\n\t\t\t\t\t\t\t\tclassName={`Tab ${active === i ? 'active' : ''}`}\n\t\t\t\t\t\t\t\tonclick={() => state.activeTab(i) }>\n\t\t\t\t\t\t\t\t{tab.id}\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</div>\n\t\t\t\t<div className='TabContent'>\n\t\t\t\t\t{attrs.tabs[state.activeTab()].content}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t);\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<Tabs tabs={tabContent1}/>\n\t\t\t\t<br/>\n\t\t\t\t<Tabs tabs={tabContent2}/>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+
+var code$9 = [
+	{ id: 'es5', code: es5$9 },
+	{ id: 'es6', code: es6$9 },
+	{ id: 'jsx', code: jsx$9 }
+];
+
+var tabContent1 = [
+	{ id: 'One', content: 'First tab' },
+	{ id: 'Two', content: 'Second tab' },
+	{ id: 'Three', content: 'Third tab' }
+];
+
+var tabContent2 = [
+	{ id: 'Lorem', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' },
+	{ id: 'Ipsum', content: 'Duis aute irure dolor in reprehenderit in voluptate velit' }
+];
+
+var Tabs$2 = {
+	oninit: function oninit(ref) {
+		var state = ref.state;
+
+		state.activeTab = index.prop(0);
+	},
+	view: function view(ref) {
+		var attrs = ref.attrs;
+		var state = ref.state;
+
+		return (
+			index('.Tabs',
+				index('.TabBar',
+					attrs.tabs.map(function (tab, i) { return index('.Tab', {
+							key: i,
+							className: state.activeTab() === i ? 'active' : '',
+							onclick: function onclick() { state.activeTab(i); }
+						}, tab.id); }
+					)
+				),
+				index('.TabContent', attrs.tabs[state.activeTab()].content)
+			)
+		);
+	}
+};
+
+var Component$9 = {
+	view: function view$1() {
+		return (
+			index('div',
+				index(Tabs$2, { tabs: tabContent1 }),
+				index('br'),
+				index(Tabs$2, { tabs: tabContent2 })
+			)
+		);
+	}
+};
+
 function view$1$1() {
 	return (
 		index(Page, { id: 'Getting started' },
@@ -2697,6 +2799,51 @@ function view$1$1() {
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$7))
+					)
+				)
+			),
+			index('.Section',
+				index('h2', 'Autogrow textarea'),
+				index('p',
+					'In some cases it is necessary to interact directly with the rendered dom node, not ',
+					'just mithril virtual dom nodes. For those cases, certain lifecycle methods (including ',
+					index('code.inline', 'oncreate'),
+					' provide access to the actual node through the ',
+					index('code.inline', 'dom'),
+					' property. This example uses it to set the height of the textarea.'
+				),
+				index('p',
+					'This example also relies on the fact that, in addition to being a getter-setter, ',
+					'any variable set to ',
+					index('code.inline', 'm.prop()'),
+					' can be observed for changes. Whenever the value is updated, its ',
+					index('code.inline', 'map'),
+					' function calls its callback with the new value. (In this case, we just ignore the ',
+					' new value since the height is set regardless of the specific contents).'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$8 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$8))
+					)
+				)
+			),
+			index('.Section',
+				index('h2', 'Tabs'),
+				index('p',
+					'The only state that tabs need to keep internally is the index of the active tab. The example components ',
+					'store this state in each instance of the tabs, whereas the ',
+					index('a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2]', 'tabs on this site'),
+					' keep that state globally so that all instances stay synced to the same active index.'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$9 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$9))
 					)
 				)
 			)

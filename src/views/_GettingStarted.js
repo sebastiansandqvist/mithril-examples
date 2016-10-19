@@ -42,6 +42,16 @@ import {
 	Component as PasswordComponent1
 } from '../examples/password1.js';
 
+import {
+	code as textarea1,
+	Component as TextareaComponent1
+} from '../examples/textarea1.js';
+
+import {
+	code as tabs1,
+	Component as TabsComponent1
+} from '../examples/tabs1.js';
+
 function view() {
 	return (
 		m(Page, { id: 'Getting started' },
@@ -199,6 +209,51 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(PasswordComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Autogrow textarea'),
+				m('p',
+					'In some cases it is necessary to interact directly with the rendered dom node, not ',
+					'just mithril virtual dom nodes. For those cases, certain lifecycle methods (including ',
+					m('code.inline', 'oncreate'),
+					' provide access to the actual node through the ',
+					m('code.inline', 'dom'),
+					' property. This example uses it to set the height of the textarea.'
+				),
+				m('p',
+					'This example also relies on the fact that, in addition to being a getter-setter, ',
+					'any variable set to ',
+					m('code.inline', 'm.prop()'),
+					' can be observed for changes. Whenever the value is updated, its ',
+					m('code.inline', 'map'),
+					' function calls its callback with the new value. (In this case, we just ignore the ',
+					' new value since the height is set regardless of the specific contents).'
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: textarea1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(TextareaComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Tabs'),
+				m('p',
+					'The only state that tabs need to keep internally is the index of the active tab. The example components ',
+					'store this state in each instance of the tabs, whereas the ',
+					m('a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2]', 'tabs on this site'),
+					' keep that state globally so that all instances stay synced to the same active index.'
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: tabs1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(TabsComponent1))
 					)
 				)
 			)
