@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rollup -c build/rollup.config.js",
     "open": "open public/index.html",
+    "start": "firebase serve --port 3000",
     "watch": "rollup -c build/rollup.config.js --watch"
   },
   "repository": {

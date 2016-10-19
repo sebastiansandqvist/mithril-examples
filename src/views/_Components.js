@@ -54,7 +54,7 @@ import {
 
 function view() {
 	return (
-		m(Page, { id: 'Getting started' },
+		m(Page, { id: 'Components' },
 			m('.Section',
 				m('h2', 'Overview'),
 				m('p', 'Mithril is a client-side MVC framework. You can read more about it at the ',

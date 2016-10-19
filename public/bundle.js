@@ -1337,7 +1337,7 @@ m.version = "bleeding-edge";
 var index = m;
 
 var pages = [
-	'Getting started',
+	'Components',
 	'Applications',
 	'Requests',
 	'Routing',
@@ -1350,7 +1350,7 @@ var Link = {
 
 		return (
 			index('a.Nav-link', {
-				href: ("/" + (attrs.page)),
+				href: ("/" + (attrs.page.replace('.', '').toLowerCase())),
 				oncreate: index.route.link,
 				className: attrs.active === attrs.page ? 'active' : ''
 			}, attrs.page)
@@ -2644,7 +2644,7 @@ var Component$9 = {
 
 function view$1$1() {
 	return (
-		index(Page, { id: 'Getting started' },
+		index(Page, { id: 'Components' },
 			index('.Section',
 				index('h2', 'Overview'),
 				index('p', 'Mithril is a client-side MVC framework. You can read more about it at the ',
@@ -2855,10 +2855,56 @@ var GettingStarted = {
 	view: view$1$1
 };
 
-var routes = {
-	'/': GettingStarted
+function view$5() {
+	return (
+		index(Page, { id: 'Applications' })
+	);
+}
+
+var Applications = {
+	view: view$5
 };
 
+function view$6() {
+	return (
+		index(Page, { id: 'Requests' })
+	);
+}
+
+var Requests = {
+	view: view$6
+};
+
+function view$7() {
+	return (
+		index(Page, { id: 'Routing' })
+	);
+}
+
+var Routing = {
+	view: view$7
+};
+
+function view$8() {
+	return (
+		index(Page, { id: 'm.prop' })
+	);
+}
+
+var Prop = {
+	view: view$8
+};
+
+var routes = {
+	'/': GettingStarted,
+	'/components': GettingStarted,
+	'/applications': Applications,
+	'/requests': Requests,
+	'/routing': Routing,
+	'/mprop': Prop
+};
+
+index.route.prefix('');
 index.route(document.getElementById('app'), '/', routes);
 
 }());
