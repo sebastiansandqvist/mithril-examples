@@ -2499,13 +2499,13 @@ var Component$6 = {
 };
 
 var es5$7 = codeString(
-"var HelloButton = {\n\tview: function() {\n\t\treturn m('button', 'Hello world!');\n\t}\n};");
+"var PasswordInput = {\n\toninit: function(vnode) {\n\t\tvnode.state.visible = m.prop(false);\n\t\tvnode.state.value = m.prop('');\n\t\tvnode.state.toggle = function() {\n\t\t\tvnode.state.visible(!vnode.state.visible());\n\t\t};\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input', {\n\t\t\t\t\ttype: vnode.state.visible() ? 'text' : 'password',\n\t\t\t\t\tplaceholder: vnode.state.visible() ?\n\t\t\t\t\t\t'password' : '••••••••',\n\t\t\t\t\tvalue: vnode.state.value(),\n\t\t\t\t\toninput: m.withAttr('value', vnode.state.value)\n\t\t\t\t}),\n\t\t\t\tm('button', {\n\t\t\t\t\tonclick: vnode.state.toggle\n\t\t\t\t}, vnode.state.visible() ? 'Hide' : 'Show')\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var es6$7 = codeString(
-"const HelloButton = {\n\tview() {\n\t\treturn m('button', 'Hello world!');\n\t}\n};");
+"const PasswordInput = {\n\toninit({ state }) {\n\t\tstate.visible = m.prop(false);\n\t\tstate.value = m.prop('');\n\t\tstate.toggle = () => state.visible(!state.visible());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input', {\n\t\t\t\t\ttype: state.visible() ? 'text' : 'password',\n\t\t\t\t\tplaceholder: state.visible() ? 'password' : '••••••••',\n\t\t\t\t\tvalue: state.value(),\n\t\t\t\t\toninput: m.withAttr('value', state.value)\n\t\t\t\t}),\n\t\t\t\tm('button', {\n\t\t\t\t\tonclick: state.toggle\n\t\t\t\t}, state.visible() ? 'Hide' : 'Show')\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var jsx$7 = codeString(
-"const HelloButton = {\n\tview() {\n\t\treturn <button>Hello world!</button>;\n\t}\n};");
+"const PasswordInput = {\n\toninit({ state }) {\n\t\tstate.visible = m.prop(false);\n\t\tstate.value = m.prop('');\n\t\tstate.toggle = () => state.visible(!state.visible());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<input\n\t\t\t\t\ttype={state.visible() ? 'text' : 'password'}\n\t\t\t\t\tplaceholder={state.visible() ? 'password' : '••••••••'}\n\t\t\t\t\tvalue={state.value()}\n\t\t\t\t\toninput={m.withAttr('value', state.value)}/>\n\t\t\t\t<button onclick={state.toggle}>\n\t\t\t\t\t{state.visible() ? 'Hide' : 'Show'}\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
 var code$7 = [
 	{ id: 'es5', code: es5$7 },
@@ -2514,8 +2514,29 @@ var code$7 = [
 ];
 
 var Component$7 = {
-	view: function view() {
-		return index('button', 'Hello world!');
+	oninit: function oninit(ref) {
+		var state = ref.state;
+
+		state.visible = index.prop(false);
+		state.value = index.prop('');
+		state.toggle = function () { return state.visible(!state.visible()); };
+	},
+	view: function view(ref) {
+		var state = ref.state;
+
+		return (
+			index('div',
+				index('input', {
+					type: state.visible() ? 'text' : 'password',
+					placeholder: state.visible() ? 'password' : '••••••••',
+					value: state.value(),
+					oninput: index.withAttr('value', state.value)
+				}),
+				index('button', {
+					onclick: state.toggle
+				}, state.visible() ? 'Hide' : 'Show')
+			)
+		);
 	}
 };
 
@@ -2619,9 +2640,9 @@ function view$1$1() {
 			index('.Section',
 				index('h2', 'Stopwatch'),
 				index('p',
-					'In the previous example, there was no need to manually tell mithril to update the view when ',
+					'In the previous example there was no need to manually tell mithril to update the view when ',
 					'the contents of the input changed, because mithril automatically redraws after event handlers ',
-					'are called. In this example, there are no events that trigger an update, so we tell mithril to update via',
+					'are called. In this example there are no events that trigger an update, so we tell mithril to update via',
 					index('code.inline', 'm.redraw'),
 					'.'
 				),
@@ -2669,10 +2690,7 @@ function view$1$1() {
 				)
 			),
 			index('.Section',
-				index('h2', 'Form validation'),
-				index('p',
-					'...'
-				),
+				index('h2', 'Password input'),
 				index('.Demo',
 					index('.Demo-left',
 						index(Tabs, { tabs: code$7 })

@@ -38,9 +38,9 @@ import {
 } from '../examples/rotator1.js';
 
 import {
-	code as form1,
-	Component as FormComponent1
-} from '../examples/form1.js';
+	code as password1,
+	Component as PasswordComponent1
+} from '../examples/password1.js';
 
 function view() {
 	return (
@@ -142,9 +142,9 @@ function view() {
 			m('.Section',
 				m('h2', 'Stopwatch'),
 				m('p',
-					'In the previous example, there was no need to manually tell mithril to update the view when ',
+					'In the previous example there was no need to manually tell mithril to update the view when ',
 					'the contents of the input changed, because mithril automatically redraws after event handlers ',
-					'are called. In this example, there are no events that trigger an update, so we tell mithril to update via',
+					'are called. In this example there are no events that trigger an update, so we tell mithril to update via',
 					m('code.inline', 'm.redraw'),
 					'.'
 				),
@@ -192,16 +192,13 @@ function view() {
 				)
 			),
 			m('.Section',
-				m('h2', 'Form validation'),
-				m('p',
-					'...'
-				),
+				m('h2', 'Password input'),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: form1 })
+						m(Tabs, { tabs: password1 })
 					),
 					m('.Demo-right',
-						m('.Demo-result', m(FormComponent1))
+						m('.Demo-result', m(PasswordComponent1))
 					)
 				)
 			)
