@@ -2875,9 +2875,167 @@ var Requests = {
 	view: view$6
 };
 
-function view$7() {
+var es5$10 = codeString(
+"var RouteView = {\n\tview: function() {\n\t\treturn m('div', 'Current route: ', m.route.get());\n\t}\n};");
+
+var es6$10 = codeString(
+"const RouteView = {\n\tview() {\n\t\treturn m('div', 'Current route: ', m.route.get());\n\t}\n};");
+
+var jsx$10 = codeString(
+"const RouteView = {\n\tview() {\n\t\treturn <div>Current route: {m.route.get()}</div>;\n\t}\n};");
+
+var code$10 = [
+	{ id: 'es5', code: es5$10 },
+	{ id: 'es6', code: es6$10 },
+	{ id: 'jsx', code: jsx$10 }
+];
+
+var Component$10 = {
+	view: function view() {
+		return index('div', 'Current route: ', index.route.get());
+	}
+};
+
+var es5$11 = codeString(
+"var LinkView = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var es6$11 = codeString(
+"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var jsx$11 = codeString(
+"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing' oncreate={m.route.link}>\n\t\t\t\t\t\tRouting page (root)\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/foo' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/foo\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/bar' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/bar\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t);\n\t}\n};");
+
+var code$11 = [
+	{ id: 'es5', code: es5$11 },
+	{ id: 'es6', code: es6$11 },
+	{ id: 'jsx', code: jsx$11 }
+];
+
+var Component$11 = {
+	view: function view() {
+		return (
+			index('ul',
+				index('li',
+					index('a[href=/routing]', {
+						oncreate: index.route.link
+					}, 'Routing page (root)')
+				),
+				index('li',
+					index('a[href=/routing/foo]', {
+						oncreate: index.route.link
+					}, '/routing/foo')
+				),
+				index('li',
+					index('a[href=/routing/bar]', {
+						oncreate: index.route.link
+					}, '/routing/bar')
+				)
+			)
+		);
+	}
+};
+
+var es5$12 = codeString(
+"var ButtonView = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing') }\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing/foo') }\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing/bar') }\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var es6$12 = codeString(
+"const ButtonView = {\n\tview() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing')\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing/foo')\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing/bar')\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var jsx$12 = codeString(
+"const ButtonView = {\n\tview() {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing')}>\n\t\t\t\t\t\tRouting page (root)\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing/foo')}>\n\t\t\t\t\t\t/routing/foo\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing/bar')}>\n\t\t\t\t\t\t/routing/bar\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t);\n\t}\n};");
+
+var code$12 = [
+	{ id: 'es5', code: es5$12 },
+	{ id: 'es6', code: es6$12 },
+	{ id: 'jsx', code: jsx$12 }
+];
+
+var Component$12 = {
+	view: function view() {
+		return (
+			index('ul',
+				index('li',
+					index('button', {
+						onclick: function () { return index.route.set('/routing'); }
+					}, 'Routing page (root)')
+				),
+				index('li',
+					index('button', {
+						onclick: function () { return index.route.set('/routing/foo'); }
+					}, '/routing/foo')
+				),
+				index('li',
+					index('button', {
+						onclick: function () { return index.route.set('/routing/bar'); }
+					}, '/routing/bar')
+				)
+			)
+		);
+	}
+};
+
+function view$7(ref) {
+	var attrs = ref.attrs;
+
 	return (
-		index(Page, { id: 'Routing' })
+		index(Page, { id: 'Routing' },
+			index('.Section',
+				index('h2', 'Getting the current route'),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$10 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$10))
+					)
+				)
+			),
+			index('.Section',
+				index('h2', 'Setting the current route (with links)'),
+				index('p',
+					'When using links (',
+					index('code.inline', 'a'),
+					' elements), Mithril provides a method that prevents the default behavior of links ',
+					'(which would refresh the page unnecessarily) and ensures that those links adhere to the ',
+					'current routing mode, whether it\'s hash based, query string based, or pathname based. ',
+					'For any links that do not route away from the current site, use ',
+					index('code.inline', 'm.route.link'),
+					' in that link\'s ',
+					index('code.inline', 'oncreate'),
+					' lifecycle method.'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$11 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$11))
+					)
+				)
+			),
+			index('.Section',
+				index('h2', 'Setting the current route programmatically'),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$12 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$12))
+					)
+				)
+			),
+			index('.Section',
+				index('h2', 'Further reading'),
+				index('p',
+					'Take a look at the ',
+					index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/route.md]', 'official router documentation'),
+					' for more information on how routing works in Mithril. ',
+					'The implementation of the router used for this website can be found ',
+					index('a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/index.js?ts=2]', 'on github'),
+					'.'
+				)
+			)
+		)
 	);
 }
 
@@ -2901,6 +3059,7 @@ var routes = {
 	'/applications': Applications,
 	'/requests': Requests,
 	'/routing': Routing,
+	'/routing/:param': Routing,
 	'/mprop': Prop
 };
 

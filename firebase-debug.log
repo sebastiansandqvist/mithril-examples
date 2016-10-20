@@ -1,0 +1,14 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/iojs /usr/local/bin/firebase serve --port 3000
+[debug] CLI Version:  3.0.2
+[debug] Platform:     darwin
+[debug] Node Version: v6.7.0
+[debug] Time:         Wed Oct 19 2016 17:47:24 GMT-0700 (PDT)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: /Users/sebastiansandqvist/Documents/Sites & Projects/apps/mithril-examples
+[info] Public Directory: public
+[info] 
+[info] Server listening at: http://localhost:3000

@@ -7,4 +7,4 @@
 - debounced typing indicator
 - todo list
 - calculator
-- autogrow textarea
+- 

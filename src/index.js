@@ -11,6 +11,7 @@ const routes = {
 	'/applications': Applications,
 	'/requests': Requests,
 	'/routing': Routing,
+	'/routing/:param': Routing,
 	'/mprop': Prop
 };
 
