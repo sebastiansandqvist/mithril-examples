@@ -51,7 +51,9 @@ var BrailleTranslator = {
 	oninit: function(vnode) {
 		vnode.state.input = m.prop('');
 		vnode.state.output = vnode.state.input.map(function(text) {
-			return text.toLowerCase().split('')
+			return text
+				.toLowerCase()
+				.split('')
 				.map(mapAsciiToBraille)
 				.join('');
 		});
@@ -123,7 +125,9 @@ const BrailleTranslator = {
 	oninit({ state }) {
 		state.input = m.prop('');
 		state.output = state.input.map(function(text) {
-			return text.split('')
+			return text
+				.toLowerCase()
+				.split('')
 				.map(mapAsciiToBraille)
 				.join('');
 		});
@@ -195,7 +199,9 @@ const BrailleTranslator = {
 	oninit({ state }) {
 		state.input = m.prop('');
 		state.output = state.input.map(function(text) {
-			return text.split('')
+			return text
+				.toLowerCase()
+				.split('')
 				.map(mapAsciiToBraille)
 				.join('');
 		});
@@ -272,7 +278,9 @@ export const Component = {
 	oninit({ state }) {
 		state.input = m.prop('');
 		state.output = state.input.map(function(text) {
-			return text.split('')
+			return text
+				.toLowerCase()
+				.split('')
 				.map(mapAsciiToBraille)
 				.join('');
 		});
