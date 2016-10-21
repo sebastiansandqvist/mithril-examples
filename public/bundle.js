@@ -2227,149 +2227,149 @@ function codeString(str) {
 }
 
 var es5 = codeString(
-"var HelloButton = {\n\tview: function() {\n\t\treturn m('button', 'Hello world!');\n\t}\n};");
+"var HelloButton = {\n  view: function() {\n    return m('button', 'Hello world!');\n  }\n};");
 
 var es6 = codeString(
-"const HelloButton = {\n\tview() {\n\t\treturn m('button', 'Hello world!');\n\t}\n};");
+"const HelloButton = {\n  view() {\n    return m('button', 'Hello world!');\n  }\n};");
 
 var jsx = codeString(
-"const HelloButton = {\n\tview() {\n\t\treturn <button>Hello world!</button>;\n\t}\n};");
+"const HelloButton = {\n  view() {\n    return <button>Hello world!</button>;\n  }\n};");
 
 var code = [
-	{ id: 'es5', code: es5 },
-	{ id: 'es6', code: es6 },
-	{ id: 'jsx', code: jsx }
+  { id: 'es5', code: es5 },
+  { id: 'es6', code: es6 },
+  { id: 'jsx', code: jsx }
 ];
 
 var Component = {
-	view: function view() {
-		return index('button', 'Hello world!');
-	}
+  view: function view() {
+    return index('button', 'Hello world!');
+  }
 };
 
 var es5$1 = codeString(
-"var HelloButton = {\n\tview: function(vnode) {\n\t\treturn m('button', 'Hello ' + vnode.attrs.title);\n\t}\n};\n\nvar Component = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(HelloButton, { title: 'world' }),\n\t\t\t\tm(HelloButton, { title: 'everyone' }),\n\t\t\t\tm(HelloButton, { title: 'darkness my old friend' })\n\t\t\t)\n\t\t);\n\t}\n};");
+"var HelloButton = {\n  view: function(vnode) {\n    return m('button', 'Hello ' + vnode.attrs.title);\n  }\n};\n\nvar Component = {\n  view: function() {\n    return (\n      m('div',\n        m(HelloButton, { title: 'world' }),\n        m(HelloButton, { title: 'everyone' }),\n        m(HelloButton, { title: 'darkness my old friend' })\n      )\n    );\n  }\n};");
 
 var es6$1 = codeString(
-"const HelloButton = {\n\tview({ attrs }) {\n\t\treturn m('button', `Hello ${attrs.title}`);\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(HelloButton, { title: 'world' }),\n\t\t\t\tm(HelloButton, { title: 'everyone' }),\n\t\t\t\tm(HelloButton, { title: 'darkness my old friend' })\n\t\t\t)\n\t\t);\n\t}\n};");
+"const HelloButton = {\n  view({ attrs }) {\n    return m('button', `Hello ${attrs.title}`);\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      m('div',\n        m(HelloButton, { title: 'world' }),\n        m(HelloButton, { title: 'everyone' }),\n        m(HelloButton, { title: 'darkness my old friend' })\n      )\n    );\n  }\n};");
 
 var jsx$1 = codeString(
-"const HelloButton = {\n\tview({ attrs }) {\n\t\treturn <button>Hello {attrs.title}</button>;\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<HelloButton title='world'/>\n\t\t\t\t<HelloButton title='everyone'/>\n\t\t\t\t<HelloButton title='darkness my old friend'/>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const HelloButton = {\n  view({ attrs }) {\n    return <button>Hello {attrs.title}</button>;\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      <div>\n        <HelloButton title='world'/>\n        <HelloButton title='everyone'/>\n        <HelloButton title='darkness my old friend'/>\n      </div>\n    );\n  }\n};");
 
 var code$1 = [
-	{ id: 'es5', code: es5$1 },
-	{ id: 'es6', code: es6$1 },
-	{ id: 'jsx', code: jsx$1 }
+  { id: 'es5', code: es5$1 },
+  { id: 'es6', code: es6$1 },
+  { id: 'jsx', code: jsx$1 }
 ];
 
 var HelloButton = {
-	view: function view(ref) {
-		var attrs = ref.attrs;
+  view: function view(ref) {
+    var attrs = ref.attrs;
 
-		return index('button', ("Hello " + (attrs.title)));
-	}
+    return index('button', ("Hello " + (attrs.title)));
+  }
 };
 
 var Component$1 = {
-	view: function view$1() {
-		return (
-			index('div',
-				index(HelloButton, { title: 'world'}),
-				index(HelloButton, { title: 'everyone'}),
-				index(HelloButton, { title: 'darkness my old friend'})
-			)
-		);
-	}
+  view: function view$1() {
+    return (
+      index('div',
+        index(HelloButton, { title: 'world'}),
+        index(HelloButton, { title: 'everyone'}),
+        index(HelloButton, { title: 'darkness my old friend'})
+      )
+    );
+  }
 };
 
 var es5$2 = codeString(
-"const HelloButton = {\n\tview: function(vnode) {\n\t\treturn m('button', 'Hello ' + vnode.attrs.title);\n\t}\n};\n\nvar Component = {\n\toninit: function(vnode) {\n\t\tvnode.state.inputValue = ''; // initial state\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tvalue: vnode.state.inputValue, // read from state\n\t\t\t\t\toninput: function(event) {\n\t\t\t\t\t\tvnode.state.inputValue = event.target.value;\n\t\t\t\t\t}\n\t\t\t\t}),\n\t\t\t\tm(HelloButton, {\n\t\t\t\t\ttitle: vnode.state.inputValue\n\t\t\t\t})\n\t\t\t)\n\t\t);\n\t}\n};");
+"const HelloButton = {\n  view: function(vnode) {\n    return m('button', 'Hello ' + vnode.attrs.title);\n  }\n};\n\nvar Component = {\n  oninit: function(vnode) {\n    vnode.state.inputValue = ''; // initial state\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: vnode.state.inputValue, // read from state\n          oninput: function(event) {\n            vnode.state.inputValue = event.target.value;\n          }\n        }),\n        m(HelloButton, {\n          title: vnode.state.inputValue\n        })\n      )\n    );\n  }\n};");
 
 var es6$2 = codeString(
-"const HelloButton = {\n\tview({ attrs }) {\n\t\treturn m('button', `Hello ${attrs.title}`);\n\t}\n};\n\nconst Component = {\n\toninit({ state }) {\n\t\tstate.inputValue = ''; // initial state\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tvalue: state.inputValue, // read from state\n\t\t\t\t\toninput(event) {\n\t\t\t\t\t\tstate.inputValue = event.target.value;\n\t\t\t\t\t}\n\t\t\t\t}),\n\t\t\t\tm(HelloButton, { title: state.inputValue })\n\t\t\t)\n\t\t);\n\t}\n};");
+"const HelloButton = {\n  view({ attrs }) {\n    return m('button', `Hello ${attrs.title}`);\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = ''; // initial state\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: state.inputValue, // read from state\n          oninput(event) {\n            state.inputValue = event.target.value;\n          }\n        }),\n        m(HelloButton, { title: state.inputValue })\n      )\n    );\n  }\n};");
 
 var jsx$2 = codeString(
-"const HelloButton = {\n\tview({ attrs }) {\n\t\treturn <button>Hello {attrs.title}</button>;\n\t}\n};\n\nconst Component = {\n\toninit({ state }) {\n\t\tstate.inputValue = ''; // initial state\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<input\n\t\t\t\t\ttype='text'\n\t\t\t\t\tvalue={state.inputValue}\n\t\t\t\t\toninput={\n\t\t\t\t\t\t(event) => { state.inputValue = event.target.value }\n\t\t\t\t\t}/>\n\t\t\t\t<HelloButton title={state.inputValue}/>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const HelloButton = {\n  view({ attrs }) {\n    return <button>Hello {attrs.title}</button>;\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = ''; // initial state\n  },\n  view({ state }) {\n    return (\n      <div>\n        <input\n          type='text'\n          value={state.inputValue}\n          oninput={\n            (event) => { state.inputValue = event.target.value }\n          }/>\n        <HelloButton title={state.inputValue}/>\n      </div>\n    );\n  }\n};");
 
 var code$2 = [
-	{ id: 'es5', code: es5$2 },
-	{ id: 'es6', code: es6$2 },
-	{ id: 'jsx', code: jsx$2 }
+  { id: 'es5', code: es5$2 },
+  { id: 'es6', code: es6$2 },
+  { id: 'jsx', code: jsx$2 }
 ];
 
 var HelloButton$1 = {
-	view: function view(ref) {
-		var attrs = ref.attrs;
+  view: function view(ref) {
+    var attrs = ref.attrs;
 
-		return index('button', ("Hello " + (attrs.title)));
-	}
+    return index('button', ("Hello " + (attrs.title)));
+  }
 };
 
 var Component$2 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.inputValue = ''; // initial state
-	},
-	view: function view$1(ref) {
-		var state = ref.state;
+    state.inputValue = ''; // initial state
+  },
+  view: function view$1(ref) {
+    var state = ref.state;
 
-		return (
-			index('div',
-				index('input[type=text]', {
-					value: state.inputValue, // read the value from state
-					oninput: function oninput(event) {
-						state.inputValue = event.target.value;
-					}
-				}),
-				index(HelloButton$1, { title: state.inputValue })
-			)
-		);
-	}
+    return (
+      index('div',
+        index('input[type=text]', {
+          value: state.inputValue, // read the value from state
+          oninput: function oninput(event) {
+            state.inputValue = event.target.value;
+          }
+        }),
+        index(HelloButton$1, { title: state.inputValue })
+      )
+    );
+  }
 };
 
 var es5$3 = codeString(
-"var HelloWorldButton = {\n\tview: function(vnode) {\n\t\treturn m('button', 'Hello ' + vnode.attrs.title);\n\t}\n};\n\nvar Component = {\n\toninit: function(vnode) {\n\t\tvnode.state.inputValue = m.prop('');\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tvalue: vnode.state.inputValue(),\n\t\t\t\t\toninput: m.withAttr('value', vnode.state.inputValue)\n\t\t\t\t}),\n\t\t\t\tm(HelloWorldButton, {\n\t\t\t\t\ttitle: vnode.state.inputValue()\n\t\t\t\t})\n\t\t\t)\n\t\t);\n\t}\n};");
+"var HelloWorldButton = {\n  view: function(vnode) {\n    return m('button', 'Hello ' + vnode.attrs.title);\n  }\n};\n\nvar Component = {\n  oninit: function(vnode) {\n    vnode.state.inputValue = m.prop('');\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: vnode.state.inputValue(),\n          oninput: m.withAttr('value', vnode.state.inputValue)\n        }),\n        m(HelloWorldButton, {\n          title: vnode.state.inputValue()\n        })\n      )\n    );\n  }\n};");
 
 var es6$3 = codeString(
-"const HelloWorldButton = {\n\tview({ attrs }) {\n\t\treturn m('button', `Hello ${attrs.title}`);\n\t}\n};\n\nconst Component = {\n\toninit({ state }) {\n\t\tstate.inputValue = m.prop('');\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tvalue: state.inputValue(),\n\t\t\t\t\toninput: m.withAttr('value', state.inputValue)\n\t\t\t\t}),\n\t\t\t\tm(HelloWorldButton, { title: state.inputValue() })\n\t\t\t)\n\t\t);\n\t}\n};");
+"const HelloWorldButton = {\n  view({ attrs }) {\n    return m('button', `Hello ${attrs.title}`);\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = m.prop('');\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: state.inputValue(),\n          oninput: m.withAttr('value', state.inputValue)\n        }),\n        m(HelloWorldButton, { title: state.inputValue() })\n      )\n    );\n  }\n};");
 
 var jsx$3 = codeString(
-"const HelloWorldButton = {\n\tview({ attrs }) {\n\t\treturn <button>Hello {attrs.title}</button>;\n\t}\n};\n\nconst Component = {\n\toninit({ state }) {\n\t\tstate.inputValue = m.prop('');\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<input\n\t\t\t\t\ttype='text'\n\t\t\t\t\tvalue={state.inputValue()}\n\t\t\t\t\toninput={m.withAttr('value', state.inputValue)}/>\n\t\t\t\t<HelloWorldButton title={state.inputValue()}/>\n\t\t\t</div>\n\t\t);\n\t}\n}");
+"const HelloWorldButton = {\n  view({ attrs }) {\n    return <button>Hello {attrs.title}</button>;\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = m.prop('');\n  },\n  view({ state }) {\n    return (\n      <div>\n        <input\n          type='text'\n          value={state.inputValue()}\n          oninput={m.withAttr('value', state.inputValue)}/>\n        <HelloWorldButton title={state.inputValue()}/>\n      </div>\n    );\n  }\n}");
 
 var code$3 = [
-	{ id: 'es5', code: es5$3 },
-	{ id: 'es6', code: es6$3 },
-	{ id: 'jsx', code: jsx$3 }
+  { id: 'es5', code: es5$3 },
+  { id: 'es6', code: es6$3 },
+  { id: 'jsx', code: jsx$3 }
 ];
 
 var HelloWorldButton = {
-	view: function view(ref) {
-		var attrs = ref.attrs;
+  view: function view(ref) {
+    var attrs = ref.attrs;
 
-		return index('button', ("Hello " + (attrs.title)));
-	}
+    return index('button', ("Hello " + (attrs.title)));
+  }
 };
 
 var Component$3 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.inputValue = index.prop('');
-	},
-	view: function view$1(ref) {
-		var state = ref.state;
+    state.inputValue = index.prop('');
+  },
+  view: function view$1(ref) {
+    var state = ref.state;
 
-		return (
-			index('div',
-				index('input[type=text]', {
-					value: state.inputValue(),
-					oninput: index.withAttr('value', state.inputValue)
-				}),
-				index(HelloWorldButton, { title: state.inputValue() })
-			)
-		);
-	}
+    return (
+      index('div',
+        index('input[type=text]', {
+          value: state.inputValue(),
+          oninput: index.withAttr('value', state.inputValue)
+        }),
+        index(HelloWorldButton, { title: state.inputValue() })
+      )
+    );
+  }
 };
 
 function view$1$1() {
@@ -2478,279 +2478,279 @@ var GettingStarted = {
 };
 
 var es5$4 = codeString(
-"var Stopwatch = {\n\toninit: function(vnode) {\n\t\tvnode.state.seconds = 0;\n\t\tvnode.state.count = () => {\n\t\t\tvnode.state.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tvnode.state.interval = setInterval(vnode.state.count, 1000);\n\t},\n\tonremove: function(vnode) {\n\t\tclearInterval(vnode.state.interval);\n\t},\n\tview: function(vnode) {\n\t\treturn m('span', 'Timer: ' + vnode.state.seconds);\n\t}\n};");
+"var Stopwatch = {\n  oninit: function(vnode) {\n    vnode.state.seconds = 0;\n    vnode.state.count = () => {\n      vnode.state.seconds++;\n      m.redraw();\n    };\n    vnode.state.interval = setInterval(vnode.state.count, 1000);\n  },\n  onremove: function(vnode) {\n    clearInterval(vnode.state.interval);\n  },\n  view: function(vnode) {\n    return m('span', 'Timer: ' + vnode.state.seconds);\n  }\n};");
 
 var es6$4 = codeString(
-"const Stopwatch = {\n\toninit({ state }) {\n\t\tstate.seconds = 0;\n\t\tstate.count = () => {\n\t\t\tstate.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tstate.interval = setInterval(state.count, 1000);\n\t},\n\tonremove({ state }) {\n\t\tclearInterval(state.interval);\n\t},\n\tview({ state }) {\n\t\treturn m('span', `Timer: ${state.seconds}`);\n\t}\n};");
+"const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return m('span', `Timer: ${state.seconds}`);\n  }\n};");
 
 var jsx$4 = codeString(
-"const Stopwatch = {\n\toninit({ state }) {\n\t\tstate.seconds = 0;\n\t\tstate.count = () => {\n\t\t\tstate.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tstate.interval = setInterval(state.count, 1000);\n\t},\n\tonremove({ state }) {\n\t\tclearInterval(state.interval);\n\t},\n\tview({ state }) {\n\t\treturn <span>Timer: {state.seconds}</span>;\n\t}\n};");
+"const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return <span>Timer: {state.seconds}</span>;\n  }\n};");
 
 var code$4 = [
-	{ id: 'es5', code: es5$4 },
-	{ id: 'es6', code: es6$4 },
-	{ id: 'jsx', code: jsx$4 }
+  { id: 'es5', code: es5$4 },
+  { id: 'es6', code: es6$4 },
+  { id: 'jsx', code: jsx$4 }
 ];
 
 var Component$4 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.seconds = 0;
-		state.count = function () {
-			state.seconds++;
-			index.redraw();
-		};
-		state.interval = setInterval(state.count, 1000);
-	},
-	onremove: function onremove(ref) {
-		var state = ref.state;
+    state.seconds = 0;
+    state.count = function () {
+      state.seconds++;
+      index.redraw();
+    };
+    state.interval = setInterval(state.count, 1000);
+  },
+  onremove: function onremove(ref) {
+    var state = ref.state;
 
-		clearInterval(state.interval);
-	},
-	view: function view(ref) {
-		var state = ref.state;
+    clearInterval(state.interval);
+  },
+  view: function view(ref) {
+    var state = ref.state;
 
-		return index('span', ("Timer: " + (state.seconds)));
-	}
+    return index('span', ("Timer: " + (state.seconds)));
+  }
 };
 
 var es5$5 = codeString(
-"var Stopwatch = {\n\toninit: function(vnode) {\n\t\tvnode.state.seconds = 0;\n\t\tvnode.state.isPaused = false;\n\t\tvnode.state.reset = function() {\n\t\t\tvnode.state.seconds = 0;\n\t\t};\n\t\tvnode.state.toggle = function() {\n\t\t\tvnode.state.isPaused = !vnode.state.isPaused;\n\t\t\tclearInterval(vnode.state.interval);\n\t\t\tif (!vnode.state.isPaused) {\n\t\t\t\tvnode.state.interval =\n\t\t\t\t\tsetInterval(vnode.state.count, 1000);\n\t\t\t}\n\t\t};\n\t\tvnode.state.count = function() {\n\t\t\tvnode.state.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tvnode.state.interval =\n\t\t\tsetInterval(vnode.state.count, 1000);\n\t},\n\tonremove: function(vnode) {\n\t\tclearInterval(vnode.state.interval);\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('span', 'Timer: ' + vnode.state.seconds),\n\t\t\t\tm('button', { onclick: vnode.state.reset }, 'Reset'),\n\t\t\t\tm('button', {\n\t\t\t\t\tonclick: vnode.state.toggle\n\t\t\t\t}, state.isPaused ? 'Start' : 'Pause')\n\t\t\t)\n\t\t);\n\t}\n};");
+"var Stopwatch = {\n  oninit: function(vnode) {\n    vnode.state.seconds = 0;\n    vnode.state.isPaused = false;\n    vnode.state.reset = function() {\n      vnode.state.seconds = 0;\n    };\n    vnode.state.toggle = function() {\n      vnode.state.isPaused = !vnode.state.isPaused;\n      clearInterval(vnode.state.interval);\n      if (!vnode.state.isPaused) {\n        vnode.state.interval =\n          setInterval(vnode.state.count, 1000);\n      }\n    };\n    vnode.state.count = function() {\n      vnode.state.seconds++;\n      m.redraw();\n    };\n    vnode.state.interval =\n      setInterval(vnode.state.count, 1000);\n  },\n  onremove: function(vnode) {\n    clearInterval(vnode.state.interval);\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('span', 'Timer: ' + vnode.state.seconds),\n        m('button', { onclick: vnode.state.reset }, 'Reset'),\n        m('button', {\n          onclick: vnode.state.toggle\n        }, state.isPaused ? 'Start' : 'Pause')\n      )\n    );\n  }\n};");
 
 var es6$5 = codeString(
-"const Stopwatch = {\n\toninit({ state }) {\n\t\tstate.seconds = 0;\n\t\tstate.isPaused = false;\n\t\tstate.reset = () => { state.seconds = 0; };\n\t\tstate.toggle = () => {\n\t\t\tstate.isPaused = !state.isPaused;\n\t\t\tclearInterval(state.interval);\n\t\t\tif (!state.isPaused) {\n\t\t\t\tstate.interval = setInterval(state.count, 1000);\n\t\t\t}\n\t\t};\n\t\tstate.count = () => {\n\t\t\tstate.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tstate.interval = setInterval(state.count, 1000);\n\t},\n\tonremove({ state }) {\n\t\tclearInterval(state.interval);\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('span', `Timer: ${state.seconds}`),\n\t\t\t\tm('button', { onclick: state.reset }, 'Reset'),\n\t\t\t\tm('button', {\n\t\t\t\t\tonclick: state.toggle\n\t\t\t\t}, state.isPaused ? 'Start' : 'Pause')\n\t\t\t)\n\t\t);\n\t}\n};");
+"const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.isPaused = false;\n    state.reset = () => { state.seconds = 0; };\n    state.toggle = () => {\n      state.isPaused = !state.isPaused;\n      clearInterval(state.interval);\n      if (!state.isPaused) {\n        state.interval = setInterval(state.count, 1000);\n      }\n    };\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('span', `Timer: ${state.seconds}`),\n        m('button', { onclick: state.reset }, 'Reset'),\n        m('button', {\n          onclick: state.toggle\n        }, state.isPaused ? 'Start' : 'Pause')\n      )\n    );\n  }\n};");
 
 var jsx$5 = codeString(
-"const Stopwatch = {\n\toninit({ state }) {\n\t\tstate.seconds = 0;\n\t\tstate.isPaused = false;\n\t\tstate.reset = () => { state.seconds = 0; };\n\t\tstate.toggle = () => {\n\t\t\tstate.isPaused = !state.isPaused;\n\t\t\tclearInterval(state.interval);\n\t\t\tif (!state.isPaused) {\n\t\t\t\tstate.interval = setInterval(state.count, 1000);\n\t\t\t}\n\t\t};\n\t\tstate.count = () => {\n\t\t\tstate.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tstate.interval = setInterval(state.count, 1000);\n\t},\n\tonremove({ state }) {\n\t\tclearInterval(state.interval);\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<span>Timer: {state.seconds}</span>\n\t\t\t\t<button onclick={state.reset}>Reset</button>\n\t\t\t\t<button onclick={state.toggle}>\n\t\t\t\t\t{state.isPaused ? 'Start' : 'Pause'}\n\t\t\t\t</button>\n\t\t\t)\n\t\t);\n\t}\n};");
+"const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.isPaused = false;\n    state.reset = () => { state.seconds = 0; };\n    state.toggle = () => {\n      state.isPaused = !state.isPaused;\n      clearInterval(state.interval);\n      if (!state.isPaused) {\n        state.interval = setInterval(state.count, 1000);\n      }\n    };\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return (\n      <div>\n        <span>Timer: {state.seconds}</span>\n        <button onclick={state.reset}>Reset</button>\n        <button onclick={state.toggle}>\n          {state.isPaused ? 'Start' : 'Pause'}\n        </button>\n      )\n    );\n  }\n};");
 
 var code$5 = [
-	{ id: 'es5', code: es5$5 },
-	{ id: 'es6', code: es6$5 },
-	{ id: 'jsx', code: jsx$5 }
+  { id: 'es5', code: es5$5 },
+  { id: 'es6', code: es6$5 },
+  { id: 'jsx', code: jsx$5 }
 ];
 
 var Component$5 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.seconds = 0;
-		state.isPaused = false;
-		state.reset = function () { state.seconds = 0; };
-		state.toggle = function () {
-			state.isPaused = !state.isPaused;
-			clearInterval(state.interval);
-			if (!state.isPaused) {
-				state.interval = setInterval(state.count, 1000);
-			}
-		};
-		state.count = function () {
-			state.seconds++;
-			index.redraw();
-		};
-		state.interval = setInterval(state.count, 1000);
-	},
-	onremove: function onremove(ref) {
-		var state = ref.state;
+    state.seconds = 0;
+    state.isPaused = false;
+    state.reset = function () { state.seconds = 0; };
+    state.toggle = function () {
+      state.isPaused = !state.isPaused;
+      clearInterval(state.interval);
+      if (!state.isPaused) {
+        state.interval = setInterval(state.count, 1000);
+      }
+    };
+    state.count = function () {
+      state.seconds++;
+      index.redraw();
+    };
+    state.interval = setInterval(state.count, 1000);
+  },
+  onremove: function onremove(ref) {
+    var state = ref.state;
 
-		clearInterval(state.interval);
-	},
-	view: function view(ref) {
-		var state = ref.state;
+    clearInterval(state.interval);
+  },
+  view: function view(ref) {
+    var state = ref.state;
 
-		return (
-			index('div',
-				index('span', ("Timer: " + (state.seconds))),
-				index('button', { onclick: state.reset }, 'Reset'),
-				index('button', { onclick: state.toggle }, state.isPaused ? 'Start' : 'Pause')
-			)
-		);
-	}
+    return (
+      index('div',
+        index('span', ("Timer: " + (state.seconds))),
+        index('button', { onclick: state.reset }, 'Reset'),
+        index('button', { onclick: state.toggle }, state.isPaused ? 'Start' : 'Pause')
+      )
+    );
+  }
 };
 
 var es5$6 = codeString(
-"var Rotator = {\n\toninit: function(vnode) {\n\t\tvnode.state.list = ['One', 'Two', 'Three', 'Four'];\n\t\tvnode.state.rotate = function() {\n\t\t\tvnode.state.list.push(vnode.state.list.shift());\n\t\t};\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.list.map(function(item, i) {\n\t\t\t\t\t\treturn m('li', { key: i }, item)\n\t\t\t\t\t}\n\t\t\t\t),\n\t\t\t\tm('button', { onclick: state.rotate }, 'Rotate')\n\t\t\t)\n\t\t);\n\t}\n};");
+"var Rotator = {\n  oninit: function(vnode) {\n    vnode.state.list = ['One', 'Two', 'Three', 'Four'];\n    vnode.state.rotate = function() {\n      vnode.state.list.push(vnode.state.list.shift());\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('ul',\n          state.list.map(function(item, i) {\n            return m('li', { key: i }, item)\n          }\n        ),\n        m('button', { onclick: state.rotate }, 'Rotate')\n      )\n    );\n  }\n};");
 
 var es6$6 = codeString(
-"const Rotator = {\n\toninit({ state }) {\n\t\tstate.list = ['One', 'Two', 'Three', 'Four'];\n\t\tstate.rotate = () => state.list.push(state.list.shift());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.list.map((item, i) =>\n\t\t\t\t\t\tm('li', { key: i }, item)\n\t\t\t\t\t)\n\t\t\t\t),\n\t\t\t\tm('button', { onclick: state.rotate }, 'Rotate')\n\t\t\t)\n\t\t);\n\t}\n};");
+"const Rotator = {\n  oninit({ state }) {\n    state.list = ['One', 'Two', 'Three', 'Four'];\n    state.rotate = () => state.list.push(state.list.shift());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('ul',\n          state.list.map((item, i) =>\n            m('li', { key: i }, item)\n          )\n        ),\n        m('button', { onclick: state.rotate }, 'Rotate')\n      )\n    );\n  }\n};");
 
 var jsx$6 = codeString(
-"const Rotator = {\n\toninit({ state }) {\n\t\tstate.list = ['One', 'Two', 'Three', 'Four'];\n\t\tstate.rotate = () => state.list.push(state.list.shift());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.list.map((item, i) =>\n\t\t\t\t\t\t\t<li key={i}>{item}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t\t<button onclick={state.rotate}>Rotate</button>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const Rotator = {\n  oninit({ state }) {\n    state.list = ['One', 'Two', 'Three', 'Four'];\n    state.rotate = () => state.list.push(state.list.shift());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <ul>\n          {\n            state.list.map((item, i) =>\n              <li key={i}>{item}</li>\n            )\n          }\n        </ul>\n        <button onclick={state.rotate}>Rotate</button>\n      </div>\n    );\n  }\n};");
 
 var code$6 = [
-	{ id: 'es5', code: es5$6 },
-	{ id: 'es6', code: es6$6 },
-	{ id: 'jsx', code: jsx$6 }
+  { id: 'es5', code: es5$6 },
+  { id: 'es6', code: es6$6 },
+  { id: 'jsx', code: jsx$6 }
 ];
 
 var Component$6 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.list = ['One', 'Two', 'Three', 'Four'];
-		state.rotate = function () { return state.list.push(state.list.shift()); };
-	},
-	view: function view(ref) {
-		var state = ref.state;
+    state.list = ['One', 'Two', 'Three', 'Four'];
+    state.rotate = function () { return state.list.push(state.list.shift()); };
+  },
+  view: function view(ref) {
+    var state = ref.state;
 
-		return (
-			index('div',
-				index('ul',
-					state.list.map(function (item, i) { return index('li', { key: i }, item); }
-					)
-				),
-				index('button', { onclick: state.rotate }, 'Rotate')
-			)
-		);
-	}
+    return (
+      index('div',
+        index('ul',
+          state.list.map(function (item, i) { return index('li', { key: i }, item); }
+          )
+        ),
+        index('button', { onclick: state.rotate }, 'Rotate')
+      )
+    );
+  }
 };
 
 var es5$7 = codeString(
-"var PasswordInput = {\n\toninit: function(vnode) {\n\t\tvnode.state.visible = m.prop(false);\n\t\tvnode.state.value = m.prop('');\n\t\tvnode.state.toggle = function() {\n\t\t\tvnode.state.visible(!vnode.state.visible());\n\t\t};\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input', {\n\t\t\t\t\ttype: vnode.state.visible() ? 'text' : 'password',\n\t\t\t\t\tplaceholder: vnode.state.visible() ?\n\t\t\t\t\t\t'password' : '••••••••',\n\t\t\t\t\tvalue: vnode.state.value(),\n\t\t\t\t\toninput: m.withAttr('value', vnode.state.value)\n\t\t\t\t}),\n\t\t\t\tm('button', {\n\t\t\t\t\tonclick: vnode.state.toggle\n\t\t\t\t}, vnode.state.visible() ? 'Hide' : 'Show')\n\t\t\t)\n\t\t);\n\t}\n};");
+"var PasswordInput = {\n  oninit: function(vnode) {\n    vnode.state.visible = m.prop(false);\n    vnode.state.value = m.prop('');\n    vnode.state.toggle = function() {\n      vnode.state.visible(!vnode.state.visible());\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('input', {\n          type: vnode.state.visible() ? 'text' : 'password',\n          placeholder: vnode.state.visible() ?\n            'password' : '••••••••',\n          value: vnode.state.value(),\n          oninput: m.withAttr('value', vnode.state.value)\n        }),\n        m('button', {\n          onclick: vnode.state.toggle\n        }, vnode.state.visible() ? 'Hide' : 'Show')\n      )\n    );\n  }\n};");
 
 var es6$7 = codeString(
-"const PasswordInput = {\n\toninit({ state }) {\n\t\tstate.visible = m.prop(false);\n\t\tstate.value = m.prop('');\n\t\tstate.toggle = () => state.visible(!state.visible());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('input', {\n\t\t\t\t\ttype: state.visible() ? 'text' : 'password',\n\t\t\t\t\tplaceholder: state.visible() ? 'password' : '••••••••',\n\t\t\t\t\tvalue: state.value(),\n\t\t\t\t\toninput: m.withAttr('value', state.value)\n\t\t\t\t}),\n\t\t\t\tm('button', {\n\t\t\t\t\tonclick: state.toggle\n\t\t\t\t}, state.visible() ? 'Hide' : 'Show')\n\t\t\t)\n\t\t);\n\t}\n};");
+"const PasswordInput = {\n  oninit({ state }) {\n    state.visible = m.prop(false);\n    state.value = m.prop('');\n    state.toggle = () => state.visible(!state.visible());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('input', {\n          type: state.visible() ? 'text' : 'password',\n          placeholder: state.visible() ? 'password' : '••••••••',\n          value: state.value(),\n          oninput: m.withAttr('value', state.value)\n        }),\n        m('button', {\n          onclick: state.toggle\n        }, state.visible() ? 'Hide' : 'Show')\n      )\n    );\n  }\n};");
 
 var jsx$7 = codeString(
-"const PasswordInput = {\n\toninit({ state }) {\n\t\tstate.visible = m.prop(false);\n\t\tstate.value = m.prop('');\n\t\tstate.toggle = () => state.visible(!state.visible());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<input\n\t\t\t\t\ttype={state.visible() ? 'text' : 'password'}\n\t\t\t\t\tplaceholder={state.visible() ? 'password' : '••••••••'}\n\t\t\t\t\tvalue={state.value()}\n\t\t\t\t\toninput={m.withAttr('value', state.value)}/>\n\t\t\t\t<button onclick={state.toggle}>\n\t\t\t\t\t{state.visible() ? 'Hide' : 'Show'}\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const PasswordInput = {\n  oninit({ state }) {\n    state.visible = m.prop(false);\n    state.value = m.prop('');\n    state.toggle = () => state.visible(!state.visible());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <input\n          type={state.visible() ? 'text' : 'password'}\n          placeholder={state.visible() ? 'password' : '••••••••'}\n          value={state.value()}\n          oninput={m.withAttr('value', state.value)}/>\n        <button onclick={state.toggle}>\n          {state.visible() ? 'Hide' : 'Show'}\n        </button>\n      </div>\n    );\n  }\n};");
 
 var code$7 = [
-	{ id: 'es5', code: es5$7 },
-	{ id: 'es6', code: es6$7 },
-	{ id: 'jsx', code: jsx$7 }
+  { id: 'es5', code: es5$7 },
+  { id: 'es6', code: es6$7 },
+  { id: 'jsx', code: jsx$7 }
 ];
 
 var Component$7 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.visible = index.prop(false);
-		state.value = index.prop('');
-		state.toggle = function () { return state.visible(!state.visible()); };
-	},
-	view: function view(ref) {
-		var state = ref.state;
+    state.visible = index.prop(false);
+    state.value = index.prop('');
+    state.toggle = function () { return state.visible(!state.visible()); };
+  },
+  view: function view(ref) {
+    var state = ref.state;
 
-		return (
-			index('div',
-				index('input', {
-					type: state.visible() ? 'text' : 'password',
-					placeholder: state.visible() ? 'password' : '••••••••',
-					value: state.value(),
-					oninput: index.withAttr('value', state.value)
-				}),
-				index('button', {
-					onclick: state.toggle
-				}, state.visible() ? 'Hide' : 'Show')
-			)
-		);
-	}
+    return (
+      index('div',
+        index('input', {
+          type: state.visible() ? 'text' : 'password',
+          placeholder: state.visible() ? 'password' : '••••••••',
+          value: state.value(),
+          oninput: index.withAttr('value', state.value)
+        }),
+        index('button', {
+          onclick: state.toggle
+        }, state.visible() ? 'Hide' : 'Show')
+      )
+    );
+  }
 };
 
 var es5$8 = codeString(
-"function setHeight(domNode) {\n\tdomNode.style.height = ''; // reset before recalculating\n\tdomNode.style.height = domNode.scrollHeight + 'px';\n}\n\nvar Textarea = {\n\toninit: function(vnode) {\n\t\tvnode.state.value = m.prop();\n\t},\n\toncreate: function(vnode) {\n\t\tvnode.state.value.map(function() {\n\t\t\tsetHeight(vnode.dom);\n\t\t)};\n\t},\n\tview: function(vnode) {\n\t\treturn m('textarea', {\n\t\t\tvalue: vnode.state.value(),\n\t\t\toninput: m.withAttr('value', vnode.state.value)\n\t\t});\n\t}\n};");
+"function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = domNode.scrollHeight + 'px';\n}\n\nvar Textarea = {\n  oninit: function(vnode) {\n    vnode.state.value = m.prop();\n  },\n  oncreate: function(vnode) {\n    vnode.state.value.map(function() {\n      setHeight(vnode.dom);\n    )};\n  },\n  view: function(vnode) {\n    return m('textarea', {\n      value: vnode.state.value(),\n      oninput: m.withAttr('value', vnode.state.value)\n    });\n  }\n};");
 
 var es6$8 = codeString(
-"function setHeight(domNode) {\n\tdomNode.style.height = ''; // reset before recalculating\n\tdomNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n\toninit({ state }) {\n\t\tstate.value = m.prop();\n\t},\n\toncreate({ dom, state }) {\n\t\tstate.value.map(() => setHeight(dom));\n\t},\n\tview({ state }) {\n\t\treturn m('textarea', {\n\t\t\tvalue: state.value(),\n\t\t\toninput: m.withAttr('value', state.value)\n\t\t});\n\t}\n};");
+"function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n  oninit({ state }) {\n    state.value = m.prop();\n  },\n  oncreate({ dom, state }) {\n    state.value.map(() => setHeight(dom));\n  },\n  view({ state }) {\n    return m('textarea', {\n      value: state.value(),\n      oninput: m.withAttr('value', state.value)\n    });\n  }\n};");
 
 var jsx$8 = codeString(
-"function setHeight(domNode) {\n\tdomNode.style.height = ''; // reset before recalculating\n\tdomNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n\toninit({ state }) {\n\t\tstate.value = m.prop();\n\t},\n\toncreate({ dom, state }) {\n\t\tstate.value.map(() => setHeight(dom));\n\t},\n\tview({ state }) {\n\t\treturn <textarea\n\t\t\tvalue={state.value()}\n\t\t\toninput={m.withAttr('value', state.value)}/>;\n\t}\n};");
+"function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n  oninit({ state }) {\n    state.value = m.prop();\n  },\n  oncreate({ dom, state }) {\n    state.value.map(() => setHeight(dom));\n  },\n  view({ state }) {\n    return <textarea\n      value={state.value()}\n      oninput={m.withAttr('value', state.value)}/>;\n  }\n};");
 
 var code$8 = [
-	{ id: 'es5', code: es5$8 },
-	{ id: 'es6', code: es6$8 },
-	{ id: 'jsx', code: jsx$8 }
+  { id: 'es5', code: es5$8 },
+  { id: 'es6', code: es6$8 },
+  { id: 'jsx', code: jsx$8 }
 ];
 
 function setHeight(domNode) {
-	domNode.style.height = ''; // reset before recalculating
-	domNode.style.height = (domNode.scrollHeight) + "px";
+  domNode.style.height = ''; // reset before recalculating
+  domNode.style.height = (domNode.scrollHeight) + "px";
 }
 
 var Component$8 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.value = index.prop();
-	},
-	oncreate: function oncreate(ref) {
-		var dom = ref.dom;
-		var state = ref.state;
+    state.value = index.prop();
+  },
+  oncreate: function oncreate(ref) {
+    var dom = ref.dom;
+    var state = ref.state;
 
-		state.value.map(function () { return setHeight(dom); });
-	},
-	view: function view(ref) {
-		var state = ref.state;
+    state.value.map(function () { return setHeight(dom); });
+  },
+  view: function view(ref) {
+    var state = ref.state;
 
-		return index('textarea', {
-			value: state.value(),
-			oninput: index.withAttr('value', state.value)
-		});
-	}
+    return index('textarea', {
+      value: state.value(),
+      oninput: index.withAttr('value', state.value)
+    });
+  }
 };
 
 var es5$9 = codeString(
-"var tabContent1 = [\n\t{ id: 'One', content: 'First tab' },\n\t{ id: 'Two', content: 'Second tab' },\n\t{ id: 'Three', content: 'Third tab' }\n];\n\nvar tabContent2 = [\n\t{ id: 'Lorem', content: 'Lorem ipsum...' },\n\t{ id: 'Ipsum', content: 'Duis aute...' }\n];\n\nvar Tabs = {\n\toninit: function(vnode) {\n\t\tvnode.state.activeTab = m.prop(0);\n\t},\n\tview: function(vnode) {\n\t\tvar active = vnode.state.activeTab();\n\t\treturn (\n\t\t\tm('.Tabs',\n\t\t\t\tm('.TabBar',\n\t\t\t\t\tvnode.attrs.tabs.map(function(tab, i) {\n\t\t\t\t\t\treturn m('.Tab', {\n\t\t\t\t\t\t\tkey: i,\n\t\t\t\t\t\t\tclassName: i === active ? 'active' : '',\n\t\t\t\t\t\t\tonclick: function() {\n\t\t\t\t\t\t\t\tvnode.state.activeTab(i);\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}, tab.id)\n\t\t\t\t\t})\n\t\t\t\t),\n\t\t\t\tm('.TabContent', vnode.attrs.tabs[active].content)\n\t\t\t)\n\t\t);\n\t}\n};\n\nvar Component = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(Tabs, { tabs: tabContent1 }),\n\t\t\t\tm('br'),\n\t\t\t\tm(Tabs, { tabs: tabContent2 })\n\t\t\t)\n\t\t);\n\t}\n};");
+"var tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nvar tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nvar Tabs = {\n  oninit: function(vnode) {\n    vnode.state.activeTab = m.prop(0);\n  },\n  view: function(vnode) {\n    var active = vnode.state.activeTab();\n    return (\n      m('.Tabs',\n        m('.TabBar',\n          vnode.attrs.tabs.map(function(tab, i) {\n            return m('.Tab', {\n              key: i,\n              className: i === active ? 'active' : '',\n              onclick: function() {\n                vnode.state.activeTab(i);\n              }\n            }, tab.id)\n          })\n        ),\n        m('.TabContent', vnode.attrs.tabs[active].content)\n      )\n    );\n  }\n};\n\nvar Component = {\n  view: function() {\n    return (\n      m('div',\n        m(Tabs, { tabs: tabContent1 }),\n        m('br'),\n        m(Tabs, { tabs: tabContent2 })\n      )\n    );\n  }\n};");
 
 var es6$9 = codeString(
-"const tabContent1 = [\n\t{ id: 'One', content: 'First tab' },\n\t{ id: 'Two', content: 'Second tab' },\n\t{ id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n\t{ id: 'Lorem', content: 'Lorem ipsum...' },\n\t{ id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n\toninit({ state }) {\n\t\tstate.activeTab = m.prop(0);\n\t},\n\tview({ attrs, state }) {\n\t\treturn (\n\t\t\tm('.Tabs',\n\t\t\t\tm('.TabBar',\n\t\t\t\t\tattrs.tabs.map((tab, i) =>\n\t\t\t\t\t\tm('.Tab', {\n\t\t\t\t\t\t\tkey: i,\n\t\t\t\t\t\t\tclassName: state.activeTab() === i ? 'active' : '',\n\t\t\t\t\t\t\tonclick() { state.activeTab(i); }\n\t\t\t\t\t\t}, tab.id)\n\t\t\t\t\t)\n\t\t\t\t),\n\t\t\t\tm('.TabContent', attrs.tabs[state.activeTab()].content)\n\t\t\t)\n\t\t);\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(Tabs, { tabs: tabContent1 }),\n\t\t\t\tm('br'),\n\t\t\t\tm(Tabs, { tabs: tabContent2 })\n\t\t\t)\n\t\t);\n\t}\n};");
+"const tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n  oninit({ state }) {\n    state.activeTab = m.prop(0);\n  },\n  view({ attrs, state }) {\n    return (\n      m('.Tabs',\n        m('.TabBar',\n          attrs.tabs.map((tab, i) =>\n            m('.Tab', {\n              key: i,\n              className: state.activeTab() === i ? 'active' : '',\n              onclick() { state.activeTab(i); }\n            }, tab.id)\n          )\n        ),\n        m('.TabContent', attrs.tabs[state.activeTab()].content)\n      )\n    );\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      m('div',\n        m(Tabs, { tabs: tabContent1 }),\n        m('br'),\n        m(Tabs, { tabs: tabContent2 })\n      )\n    );\n  }\n};");
 
 var jsx$9 = codeString(
-"const tabContent1 = [\n\t{ id: 'One', content: 'First tab' },\n\t{ id: 'Two', content: 'Second tab' },\n\t{ id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n\t{ id: 'Lorem', content: 'Lorem ipsum...' },\n\t{ id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n\toninit({ state }) {\n\t\tstate.activeTab = m.prop(0);\n\t},\n\tview({ attrs, state }) {\n\t\tconst active = state.activeTab();\n\t\treturn (\n\t\t\t<div className='Tabs'>\n\t\t\t\t<div className='TabBar'>\n\t\t\t\t\t{\n\t\t\t\t\t\tattrs.tabs.map((tab, i) =>\n\t\t\t\t\t\t\t<div\n\t\t\t\t\t\t\t\tkey={i}\n\t\t\t\t\t\t\t\tclassName={`Tab ${active === i ? 'active' : ''}`}\n\t\t\t\t\t\t\t\tonclick={() => state.activeTab(i) }>\n\t\t\t\t\t\t\t\t{tab.id}\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</div>\n\t\t\t\t<div className='TabContent'>\n\t\t\t\t\t{attrs.tabs[state.activeTab()].content}\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t);\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<Tabs tabs={tabContent1}/>\n\t\t\t\t<br/>\n\t\t\t\t<Tabs tabs={tabContent2}/>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n  oninit({ state }) {\n    state.activeTab = m.prop(0);\n  },\n  view({ attrs, state }) {\n    const active = state.activeTab();\n    return (\n      <div className='Tabs'>\n        <div className='TabBar'>\n          {\n            attrs.tabs.map((tab, i) =>\n              <div\n                key={i}\n                className={`Tab ${active === i ? 'active' : ''}`}\n                onclick={() => state.activeTab(i) }>\n                {tab.id}\n              </div>\n            )\n          }\n        </div>\n        <div className='TabContent'>\n          {attrs.tabs[state.activeTab()].content}\n        </div>\n      </div>\n    );\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      <div>\n        <Tabs tabs={tabContent1}/>\n        <br/>\n        <Tabs tabs={tabContent2}/>\n      </div>\n    );\n  }\n};");
 
 var code$9 = [
-	{ id: 'es5', code: es5$9 },
-	{ id: 'es6', code: es6$9 },
-	{ id: 'jsx', code: jsx$9 }
+  { id: 'es5', code: es5$9 },
+  { id: 'es6', code: es6$9 },
+  { id: 'jsx', code: jsx$9 }
 ];
 
 var tabContent1 = [
-	{ id: 'One', content: 'First tab' },
-	{ id: 'Two', content: 'Second tab' },
-	{ id: 'Three', content: 'Third tab' }
+  { id: 'One', content: 'First tab' },
+  { id: 'Two', content: 'Second tab' },
+  { id: 'Three', content: 'Third tab' }
 ];
 
 var tabContent2 = [
-	{ id: 'Lorem', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' },
-	{ id: 'Ipsum', content: 'Duis aute irure dolor in reprehenderit in voluptate velit' }
+  { id: 'Lorem', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' },
+  { id: 'Ipsum', content: 'Duis aute irure dolor in reprehenderit in voluptate velit' }
 ];
 
 var Tabs$2 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.activeTab = index.prop(0);
-	},
-	view: function view(ref) {
-		var attrs = ref.attrs;
-		var state = ref.state;
+    state.activeTab = index.prop(0);
+  },
+  view: function view(ref) {
+    var attrs = ref.attrs;
+    var state = ref.state;
 
-		return (
-			index('.Tabs',
-				index('.TabBar',
-					attrs.tabs.map(function (tab, i) { return index('.Tab', {
-							key: i,
-							className: state.activeTab() === i ? 'active' : '',
-							onclick: function onclick() { state.activeTab(i); }
-						}, tab.id); }
-					)
-				),
-				index('.TabContent', attrs.tabs[state.activeTab()].content)
-			)
-		);
-	}
+    return (
+      index('.Tabs',
+        index('.TabBar',
+          attrs.tabs.map(function (tab, i) { return index('.Tab', {
+              key: i,
+              className: state.activeTab() === i ? 'active' : '',
+              onclick: function onclick() { state.activeTab(i); }
+            }, tab.id); }
+          )
+        ),
+        index('.TabContent', attrs.tabs[state.activeTab()].content)
+      )
+    );
+  }
 };
 
 var Component$9 = {
-	view: function view$1() {
-		return (
-			index('div',
-				index(Tabs$2, { tabs: tabContent1 }),
-				index('br'),
-				index(Tabs$2, { tabs: tabContent2 })
-			)
-		);
-	}
+  view: function view$1() {
+    return (
+      index('div',
+        index(Tabs$2, { tabs: tabContent1 }),
+        index('br'),
+        index(Tabs$2, { tabs: tabContent2 })
+      )
+    );
+  }
 };
 
 function view$5() {
@@ -2875,261 +2875,261 @@ var Components = {
 };
 
 var es5$10 = codeString(
-"var TodoList = {\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tvnode.attrs.items.map(function(item, i) {\n\t\t\t\t\treturn m('li', { key: i }, item);\n\t\t\t\t})\n\t\t\t)\n\t\t);\n\t}\n};\n\nvar TodoApp = {\n\toninit: function(vnode) {\n\t\tvnode.state.items = [];\n\t\tvnode.state.text = m.prop('');\n\t\tvnode.state.handleSubmit = function(event) {\n\t\t\tevent.preventDefault();\n\t\t\tvnode.state.items.push(vnode.state.text());\n\t\t\tvnode.state.text('');\n\t\t};\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'To-do'),\n\t\t\t\tm(TodoList, { items: vnode.state.items }),\n\t\t\t\tm('form', { onsubmit: vnode.state.handleSubmit },\n\t\t\t\t\tm('input[type=text]', {\n\t\t\t\t\t\toninput: m.withAttr('value', vnode.state.text),\n\t\t\t\t\t\tvalue: vnode.state.text()\n\t\t\t\t\t}),\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\ttype: 'submit'\n\t\t\t\t\t}, `Add #${vnode.state.items.length + 1}`)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"var TodoList = {\n  view: function(vnode) {\n    return (\n      m('ul',\n        vnode.attrs.items.map(function(item, i) {\n          return m('li', { key: i }, item);\n        })\n      )\n    );\n  }\n};\n\nvar TodoApp = {\n  oninit: function(vnode) {\n    vnode.state.items = [];\n    vnode.state.text = m.prop('');\n    vnode.state.handleSubmit = function(event) {\n      event.preventDefault();\n      vnode.state.items.push(vnode.state.text());\n      vnode.state.text('');\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'To-do'),\n        m(TodoList, { items: vnode.state.items }),\n        m('form', { onsubmit: vnode.state.handleSubmit },\n          m('input[type=text]', {\n            oninput: m.withAttr('value', vnode.state.text),\n            value: vnode.state.text()\n          }),\n          m('button', {\n            type: 'submit'\n          }, `Add #${vnode.state.items.length + 1}`)\n        )\n      )\n    );\n  }\n};");
 
 var es6$10 = codeString(
-"const TodoList = {\n\tview({ attrs }) {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tattrs.items.map((item, i) =>\n\t\t\t\t\tm('li', { key: i }, item)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};\n\nconst TodoApp = {\n\toninit({ state }) {\n\t\tstate.items = [];\n\t\tstate.text = m.prop('');\n\t\tstate.handleSubmit = function(event) {\n\t\t\tevent.preventDefault();\n\t\t\tstate.items.push(state.text());\n\t\t\tstate.text('');\n\t\t};\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'To-do'),\n\t\t\t\tm(TodoList, { items: state.items }),\n\t\t\t\tm('form', { onsubmit: state.handleSubmit },\n\t\t\t\t\tm('input[type=text]', {\n\t\t\t\t\t\toninput: m.withAttr('value', state.text),\n\t\t\t\t\t\tvalue: state.text()\n\t\t\t\t\t}),\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\ttype: 'submit'\n\t\t\t\t\t}, `Add #${state.items.length + 1}`)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"const TodoList = {\n  view({ attrs }) {\n    return (\n      m('ul',\n        attrs.items.map((item, i) =>\n          m('li', { key: i }, item)\n        )\n      )\n    );\n  }\n};\n\nconst TodoApp = {\n  oninit({ state }) {\n    state.items = [];\n    state.text = m.prop('');\n    state.handleSubmit = function(event) {\n      event.preventDefault();\n      state.items.push(state.text());\n      state.text('');\n    };\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'To-do'),\n        m(TodoList, { items: state.items }),\n        m('form', { onsubmit: state.handleSubmit },\n          m('input[type=text]', {\n            oninput: m.withAttr('value', state.text),\n            value: state.text()\n          }),\n          m('button', {\n            type: 'submit'\n          }, `Add #${state.items.length + 1}`)\n        )\n      )\n    );\n  }\n};");
 
 var jsx$10 = codeString(
-"const TodoList = {\n\tview({ attrs }) {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t{\n\t\t\t\t\tattrs.items.map((item, i) => <li key={i}>{item}</li>)\n\t\t\t\t}\n\t\t\t</ul>\n\t\t);\n\t}\n};\n\nconst TodoApp = {\n\toninit({ state }) {\n\t\tstate.items = [];\n\t\tstate.text = m.prop('');\n\t\tstate.handleSubmit = function(event) {\n\t\t\tevent.preventDefault();\n\t\t\tstate.items.push(state.text());\n\t\t\tstate.text('');\n\t\t};\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>To-do</h3>\n\t\t\t\t<TodoList items={state.items}/>\n\t\t\t\t<form onsubmit={state.handleSubmit}>\n\t\t\t\t\t<input\n\t\t\t\t\t\ttype='text'\n\t\t\t\t\t\toninput={m.withAttr('value', state.text)}/>\n\t\t\t\t\t<button type='submit'>\n\t\t\t\t\t\tAdd #{state.items.length + 1}\n\t\t\t\t\t</button>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const TodoList = {\n  view({ attrs }) {\n    return (\n      <ul>\n        {\n          attrs.items.map((item, i) => <li key={i}>{item}</li>)\n        }\n      </ul>\n    );\n  }\n};\n\nconst TodoApp = {\n  oninit({ state }) {\n    state.items = [];\n    state.text = m.prop('');\n    state.handleSubmit = function(event) {\n      event.preventDefault();\n      state.items.push(state.text());\n      state.text('');\n    };\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>To-do</h3>\n        <TodoList items={state.items}/>\n        <form onsubmit={state.handleSubmit}>\n          <input\n            type='text'\n            oninput={m.withAttr('value', state.text)}/>\n          <button type='submit'>\n            Add #{state.items.length + 1}\n          </button>\n        </form>\n      </div>\n    );\n  }\n};");
 
 var code$10 = [
-	{ id: 'es5', code: es5$10 },
-	{ id: 'es6', code: es6$10 },
-	{ id: 'jsx', code: jsx$10 }
+  { id: 'es5', code: es5$10 },
+  { id: 'es6', code: es6$10 },
+  { id: 'jsx', code: jsx$10 }
 ];
 
 var TodoList = {
-	view: function view(ref) {
-		var attrs = ref.attrs;
+  view: function view(ref) {
+    var attrs = ref.attrs;
 
-		return (
-			index('ul',
-				attrs.items.map(function (item, i) { return index('li', { key: i }, item); }
-				)
-			)
-		);
-	}
+    return (
+      index('ul',
+        attrs.items.map(function (item, i) { return index('li', { key: i }, item); }
+        )
+      )
+    );
+  }
 };
 
 var Component$10 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.items = [];
-		state.text = index.prop('');
-		state.handleSubmit = function(event) {
-			event.preventDefault();
-			state.items.push(state.text());
-			state.text('');
-		};
-	},
-	view: function view$1(ref) {
-		var state = ref.state;
+    state.items = [];
+    state.text = index.prop('');
+    state.handleSubmit = function(event) {
+      event.preventDefault();
+      state.items.push(state.text());
+      state.text('');
+    };
+  },
+  view: function view$1(ref) {
+    var state = ref.state;
 
-		return (
-			index('div',
-				index('h3', 'To-do'),
-				index(TodoList, { items: state.items }),
-				index('form', { onsubmit: state.handleSubmit },
-					index('input[type=text]', {
-						oninput: index.withAttr('value', state.text),
-						value: state.text()
-					}),
-					index('button', { type: 'submit' }, ("Add #" + (state.items.length + 1)))
-				)
-			)
-		);
-	}
+    return (
+      index('div',
+        index('h3', 'To-do'),
+        index(TodoList, { items: state.items }),
+        index('form', { onsubmit: state.handleSubmit },
+          index('input[type=text]', {
+            oninput: index.withAttr('value', state.text),
+            value: state.text()
+          }),
+          index('button', { type: 'submit' }, ("Add #" + (state.items.length + 1)))
+        )
+      )
+    );
+  }
 };
 
 var es5$11 = codeString(
-"var ListView = {\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\t\tvnode.attrs.items ?\n\t\t\t\t\t\tvnode.attrs.items.map(function(book, i) {\n\t\t\t\t\t\t\treturn m('li', { key: i },\n\t\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\t\tonclick: function() {\n\t\t\t\t\t\t\t\t\t\tvnode.attrs.action(book);\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}, vnode.attrs.actionLabel)\n\t\t\t\t\t\t\t)\n\t\t\t\t\t}) : m('div', 'Loading...')\n\t\t\t)\n\t\t);\n\t}\n};\n\nvar BookShop = {\n\toninit: function(vnode) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tvnode.state.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tvnode.state.cart = m.prop([]);\n\t\tvnode.state.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tvnode.state.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase()\n\t\t\t\t\t.indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [vnode.state.text, vnode.state.books, vnode.state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tvnode.state.total = vnode.state.cart.map(function(cart) {\n\t\t\treturn cart.reduce(function(prev, next) {\n\t\t\t\treturn prev + next.price;\n\t\t\t}, 0);\n\t\t});\n\n\t\tvnode.state.addToCart = function(book) {\n\t\t\tvnode.state.cart(vnode.state.cart().concat(book));\n\t\t};\n\n\t\tvnode.state.removeFromCart = function(book) {\n\t\t\tvnode.state.cart(\n\t\t\t\tvnode.state.cart().filter((item) => item !== book)\n\t\t\t);\n\t\t};\n\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Book Shop'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'Filter',\n\t\t\t\t\tvalue: vnode.state.text(),\n\t\t\t\t\toninput: m.withAttr('value', vnode.state.text)\n\t\t\t\t}),\n\t\t\t\tm(ListView, {\n\t\t\t\t\titems: vnode.state.shop(),\n\t\t\t\t\taction: vnode.state.addToCart,\n\t\t\t\t\tactionLabel: 'Add'\n\t\t\t\t}),\n\t\t\t\tm('hr'),\n\t\t\t\tm('h3', 'Cart'),\n\t\t\t\tm(ListView, {\n\t\t\t\t\titems: vnode.state.cart(),\n\t\t\t\t\taction: vnode.state.removeFromCart,\n\t\t\t\t\tactionLabel: 'Remove'\n\t\t\t\t}),\n\t\t\t\tm('strong', 'Total: '),\n\t\t\t\tm('span', '$', vnode.state.total())\n\t\t\t)\n\t\t);\n\t}\n};");
+"var ListView = {\n  view: function(vnode) {\n    return (\n      m('ul',\n          vnode.attrs.items ?\n            vnode.attrs.items.map(function(book, i) {\n              return m('li', { key: i },\n                m('span', book.name, ' $', book.price),\n                m('button.right', {\n                  onclick: function() {\n                    vnode.attrs.action(book);\n                  }\n                }, vnode.attrs.actionLabel)\n              )\n          }) : m('div', 'Loading...')\n      )\n    );\n  }\n};\n\nvar BookShop = {\n  oninit: function(vnode) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    vnode.state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    vnode.state.cart = m.prop([]);\n    vnode.state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    vnode.state.shop = m.prop.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase()\n          .indexOf(text().toLowerCase()) > -1 &&\n            cart().indexOf(book) === -1;\n      });\n    }, [vnode.state.text, vnode.state.books, vnode.state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    vnode.state.total = vnode.state.cart.map(function(cart) {\n      return cart.reduce(function(prev, next) {\n        return prev + next.price;\n      }, 0);\n    });\n\n    vnode.state.addToCart = function(book) {\n      vnode.state.cart(vnode.state.cart().concat(book));\n    };\n\n    vnode.state.removeFromCart = function(book) {\n      vnode.state.cart(\n        vnode.state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Book Shop'),\n        m('input[type=text]', {\n          placeholder: 'Filter',\n          value: vnode.state.text(),\n          oninput: m.withAttr('value', vnode.state.text)\n        }),\n        m(ListView, {\n          items: vnode.state.shop(),\n          action: vnode.state.addToCart,\n          actionLabel: 'Add'\n        }),\n        m('hr'),\n        m('h3', 'Cart'),\n        m(ListView, {\n          items: vnode.state.cart(),\n          action: vnode.state.removeFromCart,\n          actionLabel: 'Remove'\n        }),\n        m('strong', 'Total: '),\n        m('span', '$', vnode.state.total())\n      )\n    );\n  }\n};");
 
 var es6$11 = codeString(
-"const ListView = {\n\tview({ attrs }) {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\t\tattrs.items ? attrs.items.map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i },\n\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\tonclick() {\n\t\t\t\t\t\t\t\t\tattrs.action(book);\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}, attrs.actionLabel)\n\t\t\t\t\t\t)\n\t\t\t\t\t) : m('div', 'Loading...')\n\n\t\t\t)\n\t\t);\n\t}\n};\n\nconst BookShop = {\n\toninit({ state }) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tstate.cart = m.prop([]);\n\t\tstate.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tstate.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [state.text, state.books, state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tstate.total = state.cart.map(function(cart) {\n\t\t\treturn cart.reduce((prev, next) => prev + next.price, 0);\n\t\t});\n\n\t\tstate.addToCart = function(book) {\n\t\t\tstate.cart(state.cart().concat(book));\n\t\t};\n\n\t\tstate.removeFromCart = function(book) {\n\t\t\tstate.cart(\n\t\t\t\tstate.cart().filter((item) => item !== book)\n\t\t\t);\n\t\t};\n\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Book Shop'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'Filter',\n\t\t\t\t\tvalue: state.text(),\n\t\t\t\t\toninput: m.withAttr('value', state.text)\n\t\t\t\t}),\n\t\t\t\tm(ListView, {\n\t\t\t\t\titems: state.shop(),\n\t\t\t\t\taction: state.addToCart,\n\t\t\t\t\tactionLabel: 'Add'\n\t\t\t\t}),\n\t\t\t\tm('hr'),\n\t\t\t\tm('h3', 'Cart'),\n\t\t\t\tm(ListView, {\n\t\t\t\t\titems: state.cart(),\n\t\t\t\t\taction: state.removeFromCart,\n\t\t\t\t\tactionLabel: 'Remove'\n\t\t\t\t}),\n\t\t\t\tm('strong', 'Total: '),\n\t\t\t\tm('span', '$', state.total())\n\t\t\t)\n\t\t);\n\t}\n};");
+"const ListView = {\n  view({ attrs }) {\n    return (\n      m('ul',\n          attrs.items ? attrs.items.map((book, i) =>\n            m('li', { key: i },\n              m('span', book.name, ' $', book.price),\n              m('button.right', {\n                onclick() {\n                  attrs.action(book);\n                }\n              }, attrs.actionLabel)\n            )\n          ) : m('div', 'Loading...')\n\n      )\n    );\n  }\n};\n\nconst BookShop = {\n  oninit({ state }) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    state.cart = m.prop([]);\n    state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    state.shop = m.prop.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n          cart().indexOf(book) === -1;\n      });\n    }, [state.text, state.books, state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    state.total = state.cart.map(function(cart) {\n      return cart.reduce((prev, next) => prev + next.price, 0);\n    });\n\n    state.addToCart = function(book) {\n      state.cart(state.cart().concat(book));\n    };\n\n    state.removeFromCart = function(book) {\n      state.cart(\n        state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Book Shop'),\n        m('input[type=text]', {\n          placeholder: 'Filter',\n          value: state.text(),\n          oninput: m.withAttr('value', state.text)\n        }),\n        m(ListView, {\n          items: state.shop(),\n          action: state.addToCart,\n          actionLabel: 'Add'\n        }),\n        m('hr'),\n        m('h3', 'Cart'),\n        m(ListView, {\n          items: state.cart(),\n          action: state.removeFromCart,\n          actionLabel: 'Remove'\n        }),\n        m('strong', 'Total: '),\n        m('span', '$', state.total())\n      )\n    );\n  }\n};");
 
 var jsx$11 = codeString(
-"const ListView = {\n\tview({ attrs }) {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t{\n\t\t\t\t\tattrs.items ? attrs.items.map((book, i) =>\n\t\t\t\t\t\t<li key={i}>\n\t\t\t\t\t\t\t<span>{book.name} ${book.price}</span>\n\t\t\t\t\t\t\t<button className='right' onclick={() => attrs.action(book)}>\n\t\t\t\t\t\t\t\t{attrs.actionLabel}\n\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t) : <div>Loading...</div>\n\t\t\t\t}\n\t\t\t</ul>\n\t\t);\n\t}\n};\n\nconst BookShop = {\n\toninit({ state }) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tstate.cart = m.prop([]);\n\t\tstate.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tstate.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [state.text, state.books, state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tstate.total = state.cart.map(function(cart) {\n\t\t\treturn cart.reduce((prev, next) => prev + next.price, 0);\n\t\t});\n\n\t\tstate.addToCart = function(book) {\n\t\t\tstate.cart(state.cart().concat(book));\n\t\t};\n\n\t\tstate.removeFromCart = function(book) {\n\t\t\tstate.cart(\n\t\t\t\tstate.cart().filter((item) => item !== book)\n\t\t\t);\n\t\t};\n\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Book shop</h3>\n\t\t\t\t<input\n\t\t\t\t\ttype='text'\n\t\t\t\t\tplaceholder='filter'\n\t\t\t\t\tvalue={state.text()}\n\t\t\t\t\toninput={m.withAttr('value', state.text)}/>\n\t\t\t\t<ListView\n\t\t\t\t\titems={state.shop()}\n\t\t\t\t\taction={state.addToCart}\n\t\t\t\t\tactionLabel='Add'/>\n\t\t\t\t<hr/>\n\t\t\t\t<h3>Cart</h3>\n\t\t\t\t<ListView\n\t\t\t\t\titems={state.cart()}\n\t\t\t\t\taction={state.removeFromCart}\n\t\t\t\t\tactionLabel='Remove'/>\n\t\t\t\t<strong>Total: </strong>\n\t\t\t\t<span>${state.total()}</span>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const ListView = {\n  view({ attrs }) {\n    return (\n      <ul>\n        {\n          attrs.items ? attrs.items.map((book, i) =>\n            <li key={i}>\n              <span>{book.name} ${book.price}</span>\n              <button className='right' onclick={() => attrs.action(book)}>\n                {attrs.actionLabel}\n              </button>\n            </li>\n          ) : <div>Loading...</div>\n        }\n      </ul>\n    );\n  }\n};\n\nconst BookShop = {\n  oninit({ state }) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    state.cart = m.prop([]);\n    state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    state.shop = m.prop.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n          cart().indexOf(book) === -1;\n      });\n    }, [state.text, state.books, state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    state.total = state.cart.map(function(cart) {\n      return cart.reduce((prev, next) => prev + next.price, 0);\n    });\n\n    state.addToCart = function(book) {\n      state.cart(state.cart().concat(book));\n    };\n\n    state.removeFromCart = function(book) {\n      state.cart(\n        state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Book shop</h3>\n        <input\n          type='text'\n          placeholder='filter'\n          value={state.text()}\n          oninput={m.withAttr('value', state.text)}/>\n        <ListView\n          items={state.shop()}\n          action={state.addToCart}\n          actionLabel='Add'/>\n        <hr/>\n        <h3>Cart</h3>\n        <ListView\n          items={state.cart()}\n          action={state.removeFromCart}\n          actionLabel='Remove'/>\n        <strong>Total: </strong>\n        <span>${state.total()}</span>\n      </div>\n    );\n  }\n};");
 
 var code$11 = [
-	{ id: 'es5', code: es5$11 },
-	{ id: 'es6', code: es6$11 },
-	{ id: 'jsx', code: jsx$11 }
+  { id: 'es5', code: es5$11 },
+  { id: 'es6', code: es6$11 },
+  { id: 'jsx', code: jsx$11 }
 ];
 
 var ListView = {
-	view: function view(ref) {
-		var attrs = ref.attrs;
+  view: function view(ref) {
+    var attrs = ref.attrs;
 
-		return (
-			index('ul',
-					attrs.items ? attrs.items.map(function (book, i) { return index('li', { key: i },
-							index('span', book.name, ' $', book.price),
-							index('button.right', {
-								onclick: function onclick() {
-									attrs.action(book);
-								}
-							}, attrs.actionLabel)
-						); }
-					) : index('div', 'Loading...')
+    return (
+      index('ul',
+          attrs.items ? attrs.items.map(function (book, i) { return index('li', { key: i },
+              index('span', book.name, ' $', book.price),
+              index('button.right', {
+                onclick: function onclick() {
+                  attrs.action(book);
+                }
+              }, attrs.actionLabel)
+            ); }
+          ) : index('div', 'Loading...')
 
-			)
-		);
-	}
+      )
+    );
+  }
 };
 
 var Component$11 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
 
-		// fetch array of book objects from server of form:
-		// { name: 'The Iliad', price: 12 }
-		state.books = index.request({
-			method: 'GET',
-			url: 'https://mithril-examples.firebaseio.com/books.json'
-		});
+    // fetch array of book objects from server of form:
+    // { name: 'The Iliad', price: 12 }
+    state.books = index.request({
+      method: 'GET',
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    });
 
-		state.cart = index.prop([]);
-		state.text = index.prop('');
+    state.cart = index.prop([]);
+    state.text = index.prop('');
 
-		// once books have loaded, filter by title and prevent
-		// items in cart from showing up in the shop
-		state.shop = index.prop.combine(function(text, books, cart) {
-			return books().filter(function(book) {
-				return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
-					cart().indexOf(book) === -1;
-			});
-		}, [state.text, state.books, state.cart]);
+    // once books have loaded, filter by title and prevent
+    // items in cart from showing up in the shop
+    state.shop = index.prop.combine(function(text, books, cart) {
+      return books().filter(function(book) {
+        return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
+          cart().indexOf(book) === -1;
+      });
+    }, [state.text, state.books, state.cart]);
 
-		// when the cart updates, state.total = price of books in cart
-		state.total = state.cart.map(function(cart) {
-			return cart.reduce(function (prev, next) { return prev + next.price; }, 0);
-		});
+    // when the cart updates, state.total = price of books in cart
+    state.total = state.cart.map(function(cart) {
+      return cart.reduce(function (prev, next) { return prev + next.price; }, 0);
+    });
 
-		state.addToCart = function(book) {
-			state.cart(state.cart().concat(book));
-		};
+    state.addToCart = function(book) {
+      state.cart(state.cart().concat(book));
+    };
 
-		state.removeFromCart = function(book) {
-			state.cart(
-				state.cart().filter(function (item) { return item !== book; })
-			);
-		};
+    state.removeFromCart = function(book) {
+      state.cart(
+        state.cart().filter(function (item) { return item !== book; })
+      );
+    };
 
-	},
-	view: function view$1(ref) {
-		var state = ref.state;
+  },
+  view: function view$1(ref) {
+    var state = ref.state;
 
-		return (
-			index('div',
-				index('h3', 'Book Shop'),
-				index('input[type=text]', {
-					placeholder: 'Filter',
-					value: state.text(),
-					oninput: index.withAttr('value', state.text)
-				}),
-				index(ListView, {
-					items: state.shop(),
-					action: state.addToCart,
-					actionLabel: 'Add'
-				}),
-				index('hr'),
-				index('h3', 'Cart'),
-				index(ListView, {
-					items: state.cart(),
-					action: state.removeFromCart,
-					actionLabel: 'Remove'
-				}),
-				index('strong', 'Total: '),
-				index('span', '$', state.total())
-			)
-		);
-	}
+    return (
+      index('div',
+        index('h3', 'Book Shop'),
+        index('input[type=text]', {
+          placeholder: 'Filter',
+          value: state.text(),
+          oninput: index.withAttr('value', state.text)
+        }),
+        index(ListView, {
+          items: state.shop(),
+          action: state.addToCart,
+          actionLabel: 'Add'
+        }),
+        index('hr'),
+        index('h3', 'Cart'),
+        index(ListView, {
+          items: state.cart(),
+          action: state.removeFromCart,
+          actionLabel: 'Remove'
+        }),
+        index('strong', 'Total: '),
+        index('span', '$', state.total())
+      )
+    );
+  }
 };
 
 var es5$12 = codeString(
-"function mapAsciiToBraille(character) {\n\n\tvar map = {\n\t\ta: '⠁',\n\t\tb: '⠃',\n\t\tc: '⠉',\n\t\td: '⠙',\n\t\te: '⠑',\n\t\tf: '⠋',\n\t\tg: '⠛',\n\t\th: '⠓',\n\t\ti: '⠊',\n\t\tj: '⠚',\n\t\tk: '⠅',\n\t\tl: '⠇',\n\t\tm: '⠍',\n\t\tn: '⠝',\n\t\to: '⠕',\n\t\tp: '⠏',\n\t\tq: '⠟',\n\t\tr: '⠗',\n\t\ts: '⠎',\n\t\tt: '⠞',\n\t\tu: '⠥',\n\t\tv: '⠧',\n\t\tw: '⠺',\n\t\tx: '⠭',\n\t\ty: '⠽',\n\t\tz: '⠵',\n\t\t0: '⠼⠚',\n\t\t1: '⠼⠁',\n\t\t2: '⠼⠃',\n\t\t3: '⠼⠉',\n\t\t4: '⠼⠙',\n\t\t5: '⠼⠑',\n\t\t6: '⠼⠋',\n\t\t7: '⠼⠛',\n\t\t8: '⠼⠓',\n\t\t9: '⠼⠊'\n\t};\n\n\treturn map[character] || character;\n\n}\n\nvar BrailleTranslator = {\n\toninit: function(vnode) {\n\t\tvnode.state.input = m.prop('');\n\t\tvnode.state.output = vnode.state.input.map(function(text) {\n\t\t\treturn text\n\t\t\t\t.toLowerCase()\n\t\t\t\t.split('')\n\t\t\t\t.map(mapAsciiToBraille)\n\t\t\t\t.join('');\n\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('div', 'Enter ascii text:'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'input',\n\t\t\t\t\tvalue: vnode.state.input(),\n\t\t\t\t\toninput: m.withAttr('value', vnode.state.input)\n\t\t\t\t}),\n\t\t\t\tm('hr'),\n\t\t\t\tm('div', 'Braille:'),\n\t\t\t\tm('div', vnode.state.output())\n\t\t\t)\n\t\t);\n\t}\n};");
+"function mapAsciiToBraille(character) {\n\n  var map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nvar BrailleTranslator = {\n  oninit: function(vnode) {\n    vnode.state.input = m.prop('');\n    vnode.state.output = vnode.state.input.map(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('div', 'Enter ascii text:'),\n        m('input[type=text]', {\n          placeholder: 'input',\n          value: vnode.state.input(),\n          oninput: m.withAttr('value', vnode.state.input)\n        }),\n        m('hr'),\n        m('div', 'Braille:'),\n        m('div', vnode.state.output())\n      )\n    );\n  }\n};");
 
 var es6$12 = codeString(
-"function mapAsciiToBraille(character) {\n\n\tconst map = {\n\t\ta: '⠁',\n\t\tb: '⠃',\n\t\tc: '⠉',\n\t\td: '⠙',\n\t\te: '⠑',\n\t\tf: '⠋',\n\t\tg: '⠛',\n\t\th: '⠓',\n\t\ti: '⠊',\n\t\tj: '⠚',\n\t\tk: '⠅',\n\t\tl: '⠇',\n\t\tm: '⠍',\n\t\tn: '⠝',\n\t\to: '⠕',\n\t\tp: '⠏',\n\t\tq: '⠟',\n\t\tr: '⠗',\n\t\ts: '⠎',\n\t\tt: '⠞',\n\t\tu: '⠥',\n\t\tv: '⠧',\n\t\tw: '⠺',\n\t\tx: '⠭',\n\t\ty: '⠽',\n\t\tz: '⠵',\n\t\t0: '⠼⠚',\n\t\t1: '⠼⠁',\n\t\t2: '⠼⠃',\n\t\t3: '⠼⠉',\n\t\t4: '⠼⠙',\n\t\t5: '⠼⠑',\n\t\t6: '⠼⠋',\n\t\t7: '⠼⠛',\n\t\t8: '⠼⠓',\n\t\t9: '⠼⠊'\n\t};\n\n\treturn map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n\toninit({ state }) {\n\t\tstate.input = m.prop('');\n\t\tstate.output = state.input.map(function(text) {\n\t\t\treturn text\n\t\t\t\t.toLowerCase()\n\t\t\t\t.split('')\n\t\t\t\t.map(mapAsciiToBraille)\n\t\t\t\t.join('');\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('div', 'Enter ascii text:'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'input',\n\t\t\t\t\tvalue: state.input(),\n\t\t\t\t\toninput: m.withAttr('value', state.input)\n\t\t\t\t}),\n\t\t\t\tm('hr'),\n\t\t\t\tm('div', 'Braille:'),\n\t\t\t\tm('div', state.output())\n\t\t\t)\n\t\t);\n\t}\n};");
+"function mapAsciiToBraille(character) {\n\n  const map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n  oninit({ state }) {\n    state.input = m.prop('');\n    state.output = state.input.map(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('div', 'Enter ascii text:'),\n        m('input[type=text]', {\n          placeholder: 'input',\n          value: state.input(),\n          oninput: m.withAttr('value', state.input)\n        }),\n        m('hr'),\n        m('div', 'Braille:'),\n        m('div', state.output())\n      )\n    );\n  }\n};");
 
 var jsx$12 = codeString(
-"function mapAsciiToBraille(character) {\n\n\tconst map = {\n\t\ta: '⠁',\n\t\tb: '⠃',\n\t\tc: '⠉',\n\t\td: '⠙',\n\t\te: '⠑',\n\t\tf: '⠋',\n\t\tg: '⠛',\n\t\th: '⠓',\n\t\ti: '⠊',\n\t\tj: '⠚',\n\t\tk: '⠅',\n\t\tl: '⠇',\n\t\tm: '⠍',\n\t\tn: '⠝',\n\t\to: '⠕',\n\t\tp: '⠏',\n\t\tq: '⠟',\n\t\tr: '⠗',\n\t\ts: '⠎',\n\t\tt: '⠞',\n\t\tu: '⠥',\n\t\tv: '⠧',\n\t\tw: '⠺',\n\t\tx: '⠭',\n\t\ty: '⠽',\n\t\tz: '⠵',\n\t\t0: '⠼⠚',\n\t\t1: '⠼⠁',\n\t\t2: '⠼⠃',\n\t\t3: '⠼⠉',\n\t\t4: '⠼⠙',\n\t\t5: '⠼⠑',\n\t\t6: '⠼⠋',\n\t\t7: '⠼⠛',\n\t\t8: '⠼⠓',\n\t\t9: '⠼⠊'\n\t};\n\n\treturn map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n\toninit({ state }) {\n\t\tstate.input = m.prop('');\n\t\tstate.output = state.input.map(function(text) {\n\t\t\treturn text\n\t\t\t\t.toLowerCase()\n\t\t\t\t.split('')\n\t\t\t\t.map(mapAsciiToBraille)\n\t\t\t\t.join('');\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<div>Enter ascii text:</div>\n\t\t\t\t<input\n\t\t\t\t\ttype='text'\n\t\t\t\t\tvalue={state.input()}\n\t\t\t\t\toninput={m.withAttr('value', state.input)}/>\n\t\t\t\t<hr/>\n\t\t\t\t<div>Braille:</div>\n\t\t\t\t<div>{state.output()}</div>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"function mapAsciiToBraille(character) {\n\n  const map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n  oninit({ state }) {\n    state.input = m.prop('');\n    state.output = state.input.map(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view({ state }) {\n    return (\n      <div>\n        <div>Enter ascii text:</div>\n        <input\n          type='text'\n          value={state.input()}\n          oninput={m.withAttr('value', state.input)}/>\n        <hr/>\n        <div>Braille:</div>\n        <div>{state.output()}</div>\n      </div>\n    );\n  }\n};");
 
 var code$12 = [
-	{ id: 'es5', code: es5$12 },
-	{ id: 'es6', code: es6$12 },
-	{ id: 'jsx', code: jsx$12 }
+  { id: 'es5', code: es5$12 },
+  { id: 'es6', code: es6$12 },
+  { id: 'jsx', code: jsx$12 }
 ];
 
 
 function mapAsciiToBraille(character) {
 
-	var map = {
-		a: '⠁',
-		b: '⠃',
-		c: '⠉',
-		d: '⠙',
-		e: '⠑',
-		f: '⠋',
-		g: '⠛',
-		h: '⠓',
-		i: '⠊',
-		j: '⠚',
-		k: '⠅',
-		l: '⠇',
-		m: '⠍',
-		n: '⠝',
-		o: '⠕',
-		p: '⠏',
-		q: '⠟',
-		r: '⠗',
-		s: '⠎',
-		t: '⠞',
-		u: '⠥',
-		v: '⠧',
-		w: '⠺',
-		x: '⠭',
-		y: '⠽',
-		z: '⠵',
-		0: '⠼⠚',
-		1: '⠼⠁',
-		2: '⠼⠃',
-		3: '⠼⠉',
-		4: '⠼⠙',
-		5: '⠼⠑',
-		6: '⠼⠋',
-		7: '⠼⠛',
-		8: '⠼⠓',
-		9: '⠼⠊'
-	};
+  var map = {
+    a: '⠁',
+    b: '⠃',
+    c: '⠉',
+    d: '⠙',
+    e: '⠑',
+    f: '⠋',
+    g: '⠛',
+    h: '⠓',
+    i: '⠊',
+    j: '⠚',
+    k: '⠅',
+    l: '⠇',
+    m: '⠍',
+    n: '⠝',
+    o: '⠕',
+    p: '⠏',
+    q: '⠟',
+    r: '⠗',
+    s: '⠎',
+    t: '⠞',
+    u: '⠥',
+    v: '⠧',
+    w: '⠺',
+    x: '⠭',
+    y: '⠽',
+    z: '⠵',
+    0: '⠼⠚',
+    1: '⠼⠁',
+    2: '⠼⠃',
+    3: '⠼⠉',
+    4: '⠼⠙',
+    5: '⠼⠑',
+    6: '⠼⠋',
+    7: '⠼⠛',
+    8: '⠼⠓',
+    9: '⠼⠊'
+  };
 
-	return map[character] || character;
+  return map[character] || character;
 
 }
 
 var Component$12 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.input = index.prop('');
-		state.output = state.input.map(function(text) {
-			return text
-				.toLowerCase()
-				.split('')
-				.map(mapAsciiToBraille)
-				.join('');
-		});
-	},
-	view: function view(ref) {
-		var state = ref.state;
+    state.input = index.prop('');
+    state.output = state.input.map(function(text) {
+      return text
+        .toLowerCase()
+        .split('')
+        .map(mapAsciiToBraille)
+        .join('');
+    });
+  },
+  view: function view(ref) {
+    var state = ref.state;
 
-		return (
-			index('div',
-				index('div', 'Enter ascii text:'),
-				index('input[type=text]', {
-					placeholder: 'input',
-					value: state.input(),
-					oninput: index.withAttr('value', state.input)
-				}),
-				index('hr'),
-				index('div', 'Braille:'),
-				index('div', state.output())
-			)
-		);
-	}
+    return (
+      index('div',
+        index('div', 'Enter ascii text:'),
+        index('input[type=text]', {
+          placeholder: 'input',
+          value: state.input(),
+          oninput: index.withAttr('value', state.input)
+        }),
+        index('hr'),
+        index('div', 'Braille:'),
+        index('div', state.output())
+      )
+    );
+  }
 };
 
 function view$6() {
@@ -3181,85 +3181,85 @@ var Applications = {
 };
 
 var es5$13 = codeString(
-"var BookView = {\n\toninit: function(vnode) {\n\t\tvnode.state.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tvnode.state.books().map(function(book, i) {\n\t\t\t\t\t\treturn m('li', { key: i }, book.name);\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"var BookView = {\n  oninit: function(vnode) {\n    vnode.state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          vnode.state.books().map(function(book, i) {\n            return m('li', { key: i }, book.name);\n          })\n        )\n      )\n    );\n  }\n};");
 
 var es6$13 = codeString(
-"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i }, book.name)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"const BookView = {\n  oninit({ state }) {\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          state.books().map((book, i) =>\n            m('li', { key: i }, book.name)\n          )\n        )\n      )\n    );\n  }\n};");
 
 var jsx$13 = codeString(
-"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Books</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\t\t<li key={i}>{book.name}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const BookView = {\n  oninit({ state }) {\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Books</h3>\n        <ul>\n          {\n            state.books().map((book, i) =>\n              <li key={i}>{book.name}</li>\n            )\n          }\n        </ul>\n      </div>\n    );\n  }\n};");
 
 var code$13 = [
-	{ id: 'es5', code: es5$13 },
-	{ id: 'es6', code: es6$13 },
-	{ id: 'jsx', code: jsx$13 }
+  { id: 'es5', code: es5$13 },
+  { id: 'es6', code: es6$13 },
+  { id: 'jsx', code: jsx$13 }
 ];
 
 // Fetches an array of books objects of the form:
 // { name: String, price: Number }
 var Component$13 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.books = index.request({
-			method: 'GET',
-			url: 'https://mithril-examples.firebaseio.com/books.json',
-			initialValue: []
-		});
-	},
-	view: function view(ref) {
-		var state = ref.state;
+    state.books = index.request({
+      method: 'GET',
+      url: 'https://mithril-examples.firebaseio.com/books.json',
+      initialValue: []
+    });
+  },
+  view: function view(ref) {
+    var state = ref.state;
 
-		return (
-			index('div',
-				index('h3', 'Books'),
-				index('ul',
-					state.books().map(function (book, i) { return index('li', { key: i }, book.name); }
-					)
-				)
-			)
-		);
-	}
+    return (
+      index('div',
+        index('h3', 'Books'),
+        index('ul',
+          state.books().map(function (book, i) { return index('li', { key: i }, book.name); }
+          )
+        )
+      )
+    );
+  }
 };
 
 var es5$14 = codeString(
-"var BookView = {\n\toninit: function(vnode) {\n\t\tvnode.state.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then(function(response) {\n\t\t\t\treturn response.json();\n\t\t\t})\n\t\t\t.then(vnode.state.books)\n\t\t\t.then(function() {\n\t\t\t\tm.redraw();\n\t\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tvnode.state.books().map(function(book, i) {\n\t\t\t\t\t\treturn m('li', { key: i }, book.name);\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"var BookView = {\n  oninit: function(vnode) {\n    vnode.state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then(function(response) {\n        return response.json();\n      })\n      .then(vnode.state.books)\n      .then(function() {\n        m.redraw();\n      });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          vnode.state.books().map(function(book, i) {\n            return m('li', { key: i }, book.name);\n          })\n        )\n      )\n    );\n  }\n};");
 
 var es6$14 = codeString(
-"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then((response) => response.json())\n\t\t\t.then(state.books)\n\t\t\t.then(() => m.redraw());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i }, book.name)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"const BookView = {\n  oninit({ state }) {\n    state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then((response) => response.json())\n      .then(state.books)\n      .then(() => m.redraw());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          state.books().map((book, i) =>\n            m('li', { key: i }, book.name)\n          )\n        )\n      )\n    );\n  }\n};");
 
 var jsx$14 = codeString(
-"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then((response) => response.json())\n\t\t\t.then(state.books)\n\t\t\t.then(() => m.redraw());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Books</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\t\t<li key={i}>{book.name}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const BookView = {\n  oninit({ state }) {\n    state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then((response) => response.json())\n      .then(state.books)\n      .then(() => m.redraw());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Books</h3>\n        <ul>\n          {\n            state.books().map((book, i) =>\n              <li key={i}>{book.name}</li>\n            )\n          }\n        </ul>\n      </div>\n    );\n  }\n};");
 
 var code$14 = [
-	{ id: 'es5', code: es5$14 },
-	{ id: 'es6', code: es6$14 },
-	{ id: 'jsx', code: jsx$14 }
+  { id: 'es5', code: es5$14 },
+  { id: 'es6', code: es6$14 },
+  { id: 'jsx', code: jsx$14 }
 ];
 
 var Component$14 = {
-	oninit: function oninit(ref) {
-		var state = ref.state;
+  oninit: function oninit(ref) {
+    var state = ref.state;
 
-		state.books = index.prop([]);
-		fetch('https://mithril-examples.firebaseio.com/books.json')
-			.then(function (response) { return response.json(); })
-			.then(state.books)
-			.then(function () { return index.redraw(); });
-	},
-	view: function view(ref) {
-		var state = ref.state;
+    state.books = index.prop([]);
+    fetch('https://mithril-examples.firebaseio.com/books.json')
+      .then(function (response) { return response.json(); })
+      .then(state.books)
+      .then(function () { return index.redraw(); });
+  },
+  view: function view(ref) {
+    var state = ref.state;
 
-		return (
-			index('div',
-				index('h3', 'Books'),
-				index('ul',
-					state.books().map(function (book, i) { return index('li', { key: i }, book.name); }
-					)
-				)
-			)
-		);
-	}
+    return (
+      index('div',
+        index('h3', 'Books'),
+        index('ul',
+          state.books().map(function (book, i) { return index('li', { key: i }, book.name); }
+          )
+        )
+      )
+    );
+  }
 };
 
 function view$7() {
@@ -3310,102 +3310,102 @@ var Requests = {
 };
 
 var es5$15 = codeString(
-"var RouteView = {\n\tview: function() {\n\t\treturn m('div', 'Current route: ', m.route.get());\n\t}\n};");
+"var RouteView = {\n  view: function() {\n    return m('div', 'Current route: ', m.route.get());\n  }\n};");
 
 var es6$15 = codeString(
-"const RouteView = {\n\tview() {\n\t\treturn m('div', 'Current route: ', m.route.get());\n\t}\n};");
+"const RouteView = {\n  view() {\n    return m('div', 'Current route: ', m.route.get());\n  }\n};");
 
 var jsx$15 = codeString(
-"const RouteView = {\n\tview() {\n\t\treturn <div>Current route: {m.route.get()}</div>;\n\t}\n};");
+"const RouteView = {\n  view() {\n    return <div>Current route: {m.route.get()}</div>;\n  }\n};");
 
 var code$15 = [
-	{ id: 'es5', code: es5$15 },
-	{ id: 'es6', code: es6$15 },
-	{ id: 'jsx', code: jsx$15 }
+  { id: 'es5', code: es5$15 },
+  { id: 'es6', code: es6$15 },
+  { id: 'jsx', code: jsx$15 }
 ];
 
 var Component$15 = {
-	view: function view() {
-		return index('div', 'Current route: ', index.route.get());
-	}
+  view: function view() {
+    return index('div', 'Current route: ', index.route.get());
+  }
 };
 
 var es5$16 = codeString(
-"var LinkView = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"var LinkView = {\n  view: function() {\n    return (\n      m('ul',\n        m('li',\n          m('a[href=/routing]', {\n            oncreate: m.route.link\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('a[href=/routing/foo]', {\n            oncreate: m.route.link\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('a[href=/routing/bar]', {\n            oncreate: m.route.link\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};");
 
 var es6$16 = codeString(
-"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"const LinkView = {\n  view() {\n    return (\n      m('ul',\n        m('li',\n          m('a[href=/routing]', {\n            oncreate: m.route.link\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('a[href=/routing/foo]', {\n            oncreate: m.route.link\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('a[href=/routing/bar]', {\n            oncreate: m.route.link\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};");
 
 var jsx$16 = codeString(
-"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing' oncreate={m.route.link}>\n\t\t\t\t\t\tRouting page (root)\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/foo' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/foo\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/bar' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/bar\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t);\n\t}\n};");
+"const LinkView = {\n  view() {\n    return (\n      <ul>\n        <li>\n          <a href='/routing' oncreate={m.route.link}>\n            Routing page (root)\n          </a>\n        </li>\n        <li>\n          <a href='/routing/foo' oncreate={m.route.link}>\n            /routing/foo\n          </a>\n        </li>\n        <li>\n          <a href='/routing/bar' oncreate={m.route.link}>\n            /routing/bar\n          </a>\n        </li>\n      </ul>\n    );\n  }\n};");
 
 var code$16 = [
-	{ id: 'es5', code: es5$16 },
-	{ id: 'es6', code: es6$16 },
-	{ id: 'jsx', code: jsx$16 }
+  { id: 'es5', code: es5$16 },
+  { id: 'es6', code: es6$16 },
+  { id: 'jsx', code: jsx$16 }
 ];
 
 var Component$16 = {
-	view: function view() {
-		return (
-			index('ul',
-				index('li',
-					index('a[href=/routing]', {
-						oncreate: index.route.link
-					}, 'Routing page (root)')
-				),
-				index('li',
-					index('a[href=/routing/foo]', {
-						oncreate: index.route.link
-					}, '/routing/foo')
-				),
-				index('li',
-					index('a[href=/routing/bar]', {
-						oncreate: index.route.link
-					}, '/routing/bar')
-				)
-			)
-		);
-	}
+  view: function view() {
+    return (
+      index('ul',
+        index('li',
+          index('a[href=/routing]', {
+            oncreate: index.route.link
+          }, 'Routing page (root)')
+        ),
+        index('li',
+          index('a[href=/routing/foo]', {
+            oncreate: index.route.link
+          }, '/routing/foo')
+        ),
+        index('li',
+          index('a[href=/routing/bar]', {
+            oncreate: index.route.link
+          }, '/routing/bar')
+        )
+      )
+    );
+  }
 };
 
 var es5$17 = codeString(
-"var ButtonView = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing') }\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing/foo') }\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing/bar') }\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"var ButtonView = {\n  view: function() {\n    return (\n      m('ul',\n        m('li',\n          m('button', {\n            onclick: function() { m.route.set('/routing') }\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('button', {\n            onclick: function() { m.route.set('/routing/foo') }\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('button', {\n            onclick: function() { m.route.set('/routing/bar') }\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};");
 
 var es6$17 = codeString(
-"const ButtonView = {\n\tview() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing')\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing/foo')\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing/bar')\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"const ButtonView = {\n  view() {\n    return (\n      m('ul',\n        m('li',\n          m('button', {\n            onclick: () => m.route.set('/routing')\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('button', {\n            onclick: () => m.route.set('/routing/foo')\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('button', {\n            onclick: () => m.route.set('/routing/bar')\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};");
 
 var jsx$17 = codeString(
-"const ButtonView = {\n\tview() {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing')}>\n\t\t\t\t\t\tRouting page (root)\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing/foo')}>\n\t\t\t\t\t\t/routing/foo\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing/bar')}>\n\t\t\t\t\t\t/routing/bar\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t);\n\t}\n};");
+"const ButtonView = {\n  view() {\n    return (\n      <ul>\n        <li>\n          <button onclick={() => m.route.set('/routing')}>\n            Routing page (root)\n          </button>\n        </li>\n        <li>\n          <button onclick={() => m.route.set('/routing/foo')}>\n            /routing/foo\n          </button>\n        </li>\n        <li>\n          <button onclick={() => m.route.set('/routing/bar')}>\n            /routing/bar\n          </button>\n        </li>\n      </ul>\n    );\n  }\n};");
 
 var code$17 = [
-	{ id: 'es5', code: es5$17 },
-	{ id: 'es6', code: es6$17 },
-	{ id: 'jsx', code: jsx$17 }
+  { id: 'es5', code: es5$17 },
+  { id: 'es6', code: es6$17 },
+  { id: 'jsx', code: jsx$17 }
 ];
 
 var Component$17 = {
-	view: function view() {
-		return (
-			index('ul',
-				index('li',
-					index('button', {
-						onclick: function () { return index.route.set('/routing'); }
-					}, 'Routing page (root)')
-				),
-				index('li',
-					index('button', {
-						onclick: function () { return index.route.set('/routing/foo'); }
-					}, '/routing/foo')
-				),
-				index('li',
-					index('button', {
-						onclick: function () { return index.route.set('/routing/bar'); }
-					}, '/routing/bar')
-				)
-			)
-		);
-	}
+  view: function view() {
+    return (
+      index('ul',
+        index('li',
+          index('button', {
+            onclick: function () { return index.route.set('/routing'); }
+          }, 'Routing page (root)')
+        ),
+        index('li',
+          index('button', {
+            onclick: function () { return index.route.set('/routing/foo'); }
+          }, '/routing/foo')
+        ),
+        index('li',
+          index('button', {
+            onclick: function () { return index.route.set('/routing/bar'); }
+          }, '/routing/bar')
+        )
+      )
+    );
+  }
 };
 
 function view$8(ref) {

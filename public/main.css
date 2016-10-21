@@ -73,12 +73,13 @@ ul {
 	color: #fff;
 	font-weight: 400;
 	margin: 0 15px;
+	opacity: 0.8;
 	text-decoration: none;
 }
 
 .Nav-link.active {
 	border-bottom: 1px solid #8d8;
-	font-weight: 600;
+	opacity: 1;
 }
 
 /* ---------------------- TABS ---------------------- */
