@@ -189,7 +189,7 @@ function view() {
 					'When rendering a list of data, it is a good idea to supply Mithril with a ',
 					m('code.inline', 'key'),
 					' attribute for each element in that list. ',
-					m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/keys.md]', 'keys'),
+					m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/keys.md]', 'Keys'),
 					' help Mithril maintain references to each element and should be unique for each item in the list.'
 				),
 				m('.Demo',
@@ -218,7 +218,7 @@ function view() {
 					'In some cases it is necessary to interact directly with the rendered dom node, not ',
 					'just mithril virtual dom nodes. For those cases, certain lifecycle methods (including ',
 					m('code.inline', 'oncreate'),
-					' provide access to the actual node through the ',
+					') provide access to the actual node through the ',
 					m('code.inline', 'dom'),
 					' property. This example uses it to set the height of the textarea.'
 				),
@@ -244,9 +244,9 @@ function view() {
 				m('h2', 'Tabs'),
 				m('p',
 					'The only state that tabs need to keep internally is the index of the active tab. The example components ',
-					'store this state in each instance of the tabs, whereas the ',
-					m('a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2]', 'tabs on this site'),
-					' keep that state globally so that all instances stay synced to the same active index.'
+					'store this state in each instance of the tabs. The implementation of the tabs on this site can be viewed ',
+					m('a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2]', 'on github'),
+					'.'
 				),
 				m('.Demo',
 					m('.Demo-left',

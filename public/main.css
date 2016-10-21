@@ -28,6 +28,10 @@ body {
 	margin-top: 20px;
 }
 
+ul {
+	margin: 0;
+}
+
 /* ---------------------- DEMO ---------------------- */
 
 .Demo {
@@ -116,6 +120,13 @@ h2 {
 	font-size: 20px;
 	font-weight: 600;
 	margin: 0 0 10px 0;
+}
+
+h3 {
+	color: #34495e;
+	font-size: 18px;
+	font-weight: 400;
+	margin: 0;
 }
 
 p {

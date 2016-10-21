@@ -31,9 +31,7 @@ const es5 = codeString(
 		return (
 			m('div',
 				m('span', 'Timer: ' + vnode.state.seconds),
-				m('button', {
-					onclick: vnode.state.reset
-				}, 'Reset'),
+				m('button', { onclick: vnode.state.reset }, 'Reset'),
 				m('button', {
 					onclick: vnode.state.toggle
 				}, state.isPaused ? 'Start' : 'Pause')
