@@ -32,9 +32,6 @@ function view() {
 			),
 			m('.Section',
 				m('h2', 'Shopping cart'),
-				m('p',
-					'...'
-				),
 				m('.Demo',
 					m('.Demo-left',
 						m(Tabs, { tabs: cart1 })

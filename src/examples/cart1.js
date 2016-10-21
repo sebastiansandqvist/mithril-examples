@@ -228,7 +228,7 @@ const jsx = codeString(
 					}
 				</ul>
 				<strong>Total: </strong>
-				<span>$/{state.total()}</span>
+				<span>$\{state.total()}</span>
 			</div>
 		);
 	}
