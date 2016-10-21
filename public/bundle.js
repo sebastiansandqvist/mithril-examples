@@ -2875,13 +2875,13 @@ var Components = {
 };
 
 var es5$10 = codeString(
-"var TodoList = {\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tvnode.attrs.items.map(function(item, i) {\n\t\t\t\t\treturn m('li', { key: i }, item);\n\t\t\t\t})\n\t\t\t)\n\t\t);\n\t}\n};\n\nvar TodoApp = {\n\toninit: function(vnode) {\n\t\tvnode.state.items = [];\n\t\tvnode.state.text = m.prop('');\n\t\tvnode.state.handleSubmit = function(event) {\n\t\t\tevent.preventDefault();\n\t\t\tvnode.state.items.push(vnode.state.text());\n\t\t\tvnode.state.text('');\n\t\t};\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Todo'),\n\t\t\t\tm(TodoList, { items: vnode.state.items }),\n\t\t\t\tm('form', { onsubmit: vnode.state.handleSubmit },\n\t\t\t\t\tm('input[type=text]', {\n\t\t\t\t\t\toninput: m.withAttr('value', vnode.state.text),\n\t\t\t\t\t\tvalue: vnode.state.text()\n\t\t\t\t\t}),\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\ttype: 'submit'\n\t\t\t\t\t}, `Add #${vnode.state.items.length + 1}`)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"var TodoList = {\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tvnode.attrs.items.map(function(item, i) {\n\t\t\t\t\treturn m('li', { key: i }, item);\n\t\t\t\t})\n\t\t\t)\n\t\t);\n\t}\n};\n\nvar TodoApp = {\n\toninit: function(vnode) {\n\t\tvnode.state.items = [];\n\t\tvnode.state.text = m.prop('');\n\t\tvnode.state.handleSubmit = function(event) {\n\t\t\tevent.preventDefault();\n\t\t\tvnode.state.items.push(vnode.state.text());\n\t\t\tvnode.state.text('');\n\t\t};\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'To-do'),\n\t\t\t\tm(TodoList, { items: vnode.state.items }),\n\t\t\t\tm('form', { onsubmit: vnode.state.handleSubmit },\n\t\t\t\t\tm('input[type=text]', {\n\t\t\t\t\t\toninput: m.withAttr('value', vnode.state.text),\n\t\t\t\t\t\tvalue: vnode.state.text()\n\t\t\t\t\t}),\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\ttype: 'submit'\n\t\t\t\t\t}, `Add #${vnode.state.items.length + 1}`)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var es6$10 = codeString(
-"const TodoList = {\n\tview({ attrs }) {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tattrs.items.map((item, i) =>\n\t\t\t\t\tm('li', { key: i }, item)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};\n\nconst TodoApp = {\n\toninit({ state }) {\n\t\tstate.items = [];\n\t\tstate.text = m.prop('');\n\t\tstate.handleSubmit = function(event) {\n\t\t\tevent.preventDefault();\n\t\t\tstate.items.push(state.text());\n\t\t\tstate.text('');\n\t\t};\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Todo'),\n\t\t\t\tm(TodoList, { items: state.items }),\n\t\t\t\tm('form', { onsubmit: state.handleSubmit },\n\t\t\t\t\tm('input[type=text]', {\n\t\t\t\t\t\toninput: m.withAttr('value', state.text),\n\t\t\t\t\t\tvalue: state.text()\n\t\t\t\t\t}),\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\ttype: 'submit'\n\t\t\t\t\t}, `Add #${state.items.length + 1}`)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"const TodoList = {\n\tview({ attrs }) {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tattrs.items.map((item, i) =>\n\t\t\t\t\tm('li', { key: i }, item)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};\n\nconst TodoApp = {\n\toninit({ state }) {\n\t\tstate.items = [];\n\t\tstate.text = m.prop('');\n\t\tstate.handleSubmit = function(event) {\n\t\t\tevent.preventDefault();\n\t\t\tstate.items.push(state.text());\n\t\t\tstate.text('');\n\t\t};\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'To-do'),\n\t\t\t\tm(TodoList, { items: state.items }),\n\t\t\t\tm('form', { onsubmit: state.handleSubmit },\n\t\t\t\t\tm('input[type=text]', {\n\t\t\t\t\t\toninput: m.withAttr('value', state.text),\n\t\t\t\t\t\tvalue: state.text()\n\t\t\t\t\t}),\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\ttype: 'submit'\n\t\t\t\t\t}, `Add #${state.items.length + 1}`)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var jsx$10 = codeString(
-"const TodoList = {\n\tview({ attrs }) {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t{\n\t\t\t\t\tattrs.items.map((item, i) => <li key={i}>{item}</li>)\n\t\t\t\t}\n\t\t\t</ul>\n\t\t);\n\t}\n};\n\nconst TodoApp = {\n\toninit({ state }) {\n\t\tstate.items = [];\n\t\tstate.text = m.prop('');\n\t\tstate.handleSubmit = function(event) {\n\t\t\tevent.preventDefault();\n\t\t\tstate.items.push(state.text());\n\t\t\tstate.text('');\n\t\t};\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Todo</h3>\n\t\t\t\t<TodoList items={state.items}/>\n\t\t\t\t<form onsubmit={state.handleSubmit}>\n\t\t\t\t\t<input\n\t\t\t\t\t\ttype='text'\n\t\t\t\t\t\toninput={m.withAttr('value', state.text)}/>\n\t\t\t\t\t<button type='submit'>\n\t\t\t\t\t\tAdd #{state.items.length + 1}\n\t\t\t\t\t</button>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const TodoList = {\n\tview({ attrs }) {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t{\n\t\t\t\t\tattrs.items.map((item, i) => <li key={i}>{item}</li>)\n\t\t\t\t}\n\t\t\t</ul>\n\t\t);\n\t}\n};\n\nconst TodoApp = {\n\toninit({ state }) {\n\t\tstate.items = [];\n\t\tstate.text = m.prop('');\n\t\tstate.handleSubmit = function(event) {\n\t\t\tevent.preventDefault();\n\t\t\tstate.items.push(state.text());\n\t\t\tstate.text('');\n\t\t};\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>To-do</h3>\n\t\t\t\t<TodoList items={state.items}/>\n\t\t\t\t<form onsubmit={state.handleSubmit}>\n\t\t\t\t\t<input\n\t\t\t\t\t\ttype='text'\n\t\t\t\t\t\toninput={m.withAttr('value', state.text)}/>\n\t\t\t\t\t<button type='submit'>\n\t\t\t\t\t\tAdd #{state.items.length + 1}\n\t\t\t\t\t</button>\n\t\t\t\t</form>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
 var code$10 = [
 	{ id: 'es5', code: es5$10 },
@@ -2919,7 +2919,7 @@ var Component$10 = {
 
 		return (
 			index('div',
-				index('h3', 'Todo'),
+				index('h3', 'To-do'),
 				index(TodoList, { items: state.items }),
 				index('form', { onsubmit: state.handleSubmit },
 					index('input[type=text]', {
@@ -2934,19 +2934,40 @@ var Component$10 = {
 };
 
 var es5$11 = codeString(
-"var BookShop = {\n\toninit: function(vnode) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tvnode.state.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tvnode.state.cart = m.prop([]);\n\t\tvnode.state.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tvnode.state.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase()\n\t\t\t\t\t.indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [vnode.state.text, vnode.state.books, vnode.state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tvnode.state.total = vnode.state.cart.map(function(cart) {\n\t\t\treturn cart.reduce(function(prev, next) {\n\t\t\t\tprev + next.price;\n\t\t\t}, 0);\n\t\t});\n\n\t},\n\tview: function(vnode) {\n\t\tvar shop = vnode.state.shop();\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Book Shop'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'Filter',\n\t\t\t\t\tvalue: vnode.state.text(),\n\t\t\t\t\toninput: m.withAttr('value', vnode.state.text)\n\t\t\t\t}),\n\t\t\t\tm('ul',\n\t\t\t\t\t shop ? shop.map(function(book, i) {\n\t\t\t\t\t\treturn m('li', { key: i },\n\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\tonclick: function() {\n\t\t\t\t\t\t\t\t\tvnode.state.cart(\n\t\t\t\t\t\t\t\t\t\tvnode.state.cart().concat(book)\n\t\t\t\t\t\t\t\t\t);\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}, 'Add')\n\t\t\t\t\t\t)\n\t\t\t\t\t}) : m('div', 'Loading...')\n\t\t\t\t),\n\t\t\t\tm('hr'),\n\t\t\t\tm('h3', 'Cart'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.cart().map(function(book, i) {\n\t\t\t\t\t\treturn m('li', { key: i },\n\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\tonclick() {\n\t\t\t\t\t\t\t\t\tstate.cart(\n\t\t\t\t\t\t\t\t\t\tstate.cart().filter(function(item) {\n\t\t\t\t\t\t\t\t\t\t\treturn item !== book;\n\t\t\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t\t\t);\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}, 'Remove')\n\t\t\t\t\t\t)\n\t\t\t\t\t})\n\t\t\t\t),\n\t\t\t\tm('strong', 'Total: '),\n\t\t\t\tm('span', '$', state.total())\n\t\t\t)\n\t\t);\n\t}\n};");
+"var ListView = {\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\t\tvnode.attrs.items ?\n\t\t\t\t\t\tvnode.attrs.items.map(function(book, i) {\n\t\t\t\t\t\t\treturn m('li', { key: i },\n\t\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\t\tonclick: function() {\n\t\t\t\t\t\t\t\t\t\tvnode.attrs.action(book);\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t}, vnode.attrs.actionLabel)\n\t\t\t\t\t\t\t)\n\t\t\t\t\t}) : m('div', 'Loading...')\n\t\t\t)\n\t\t);\n\t}\n};\n\nvar BookShop = {\n\toninit: function(vnode) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tvnode.state.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tvnode.state.cart = m.prop([]);\n\t\tvnode.state.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tvnode.state.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase()\n\t\t\t\t\t.indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [vnode.state.text, vnode.state.books, vnode.state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tvnode.state.total = vnode.state.cart.map(function(cart) {\n\t\t\treturn cart.reduce(function(prev, next) {\n\t\t\t\treturn prev + next.price;\n\t\t\t}, 0);\n\t\t});\n\n\t\tvnode.state.addToCart = function(book) {\n\t\t\tvnode.state.cart(vnode.state.cart().concat(book));\n\t\t};\n\n\t\tvnode.state.removeFromCart = function(book) {\n\t\t\tvnode.state.cart(\n\t\t\t\tvnode.state.cart().filter((item) => item !== book)\n\t\t\t);\n\t\t};\n\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Book Shop'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'Filter',\n\t\t\t\t\tvalue: vnode.state.text(),\n\t\t\t\t\toninput: m.withAttr('value', vnode.state.text)\n\t\t\t\t}),\n\t\t\t\tm(ListView, {\n\t\t\t\t\titems: vnode.state.shop(),\n\t\t\t\t\taction: vnode.state.addToCart,\n\t\t\t\t\tactionLabel: 'Add'\n\t\t\t\t}),\n\t\t\t\tm('hr'),\n\t\t\t\tm('h3', 'Cart'),\n\t\t\t\tm(ListView, {\n\t\t\t\t\titems: vnode.state.cart(),\n\t\t\t\t\taction: vnode.state.removeFromCart,\n\t\t\t\t\tactionLabel: 'Remove'\n\t\t\t\t}),\n\t\t\t\tm('strong', 'Total: '),\n\t\t\t\tm('span', '$', vnode.state.total())\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var es6$11 = codeString(
-"const BookShop = {\n\toninit({ state }) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tstate.cart = m.prop([]);\n\t\tstate.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tstate.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase()\n\t\t\t\t\t.indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [state.text, state.books, state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tstate.total = state.cart.map(function(cart) {\n\t\t\treturn cart.reduce((prev, next) => prev + next.price, 0);\n\t\t});\n\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Book Shop'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'Filter',\n\t\t\t\t\tvalue: state.text(),\n\t\t\t\t\toninput: m.withAttr('value', state.text)\n\t\t\t\t}),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.shop() ? state.shop().map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i },\n\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\tonclick() {\n\t\t\t\t\t\t\t\t\tstate.cart(state.cart().concat(book));\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}, 'Add')\n\t\t\t\t\t\t)\n\t\t\t\t\t) : m('div', 'Loading...')\n\t\t\t\t),\n\t\t\t\tm('hr'),\n\t\t\t\tm('h3', 'Cart'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.cart().map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i },\n\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\tonclick() {\n\t\t\t\t\t\t\t\t\tstate.cart(\n\t\t\t\t\t\t\t\t\t\tstate.cart().filter((item) => item !== book)\n\t\t\t\t\t\t\t\t\t);\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}, 'Remove')\n\t\t\t\t\t\t)\n\t\t\t\t\t)\n\t\t\t\t),\n\t\t\t\tm('strong', 'Total: '),\n\t\t\t\tm('span', '$', state.total())\n\t\t\t)\n\t\t);\n\t}\n};");
+"const ListView = {\n\tview({ attrs }) {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\t\tattrs.items ? attrs.items.map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i },\n\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\tonclick() {\n\t\t\t\t\t\t\t\t\tattrs.action(book);\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}, attrs.actionLabel)\n\t\t\t\t\t\t)\n\t\t\t\t\t) : m('div', 'Loading...')\n\n\t\t\t)\n\t\t);\n\t}\n};\n\nconst BookShop = {\n\toninit({ state }) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tstate.cart = m.prop([]);\n\t\tstate.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tstate.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [state.text, state.books, state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tstate.total = state.cart.map(function(cart) {\n\t\t\treturn cart.reduce((prev, next) => prev + next.price, 0);\n\t\t});\n\n\t\tstate.addToCart = function(book) {\n\t\t\tstate.cart(state.cart().concat(book));\n\t\t};\n\n\t\tstate.removeFromCart = function(book) {\n\t\t\tstate.cart(\n\t\t\t\tstate.cart().filter((item) => item !== book)\n\t\t\t);\n\t\t};\n\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Book Shop'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'Filter',\n\t\t\t\t\tvalue: state.text(),\n\t\t\t\t\toninput: m.withAttr('value', state.text)\n\t\t\t\t}),\n\t\t\t\tm(ListView, {\n\t\t\t\t\titems: state.shop(),\n\t\t\t\t\taction: state.addToCart,\n\t\t\t\t\tactionLabel: 'Add'\n\t\t\t\t}),\n\t\t\t\tm('hr'),\n\t\t\t\tm('h3', 'Cart'),\n\t\t\t\tm(ListView, {\n\t\t\t\t\titems: state.cart(),\n\t\t\t\t\taction: state.removeFromCart,\n\t\t\t\t\tactionLabel: 'Remove'\n\t\t\t\t}),\n\t\t\t\tm('strong', 'Total: '),\n\t\t\t\tm('span', '$', state.total())\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var jsx$11 = codeString(
-"const BookShop = {\n\toninit({ state }) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tstate.cart = m.prop([]);\n\t\tstate.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tstate.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase()\n\t\t\t\t\t.indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [state.text, state.books, state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tstate.total = state.cart.map(function(cart) {\n\t\t\treturn cart.reduce((prev, next) => prev + next.price, 0);\n\t\t});\n\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Book Shop</h3>\n\t\t\t\t<input\n\t\t\t\t\ttype='text'\n\t\t\t\t\tplaceholder='Filter'\n\t\t\t\t\tvalue={state.text()}\n\t\t\t\t\toninput={m.withAttr('value', state.text)}/>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.shop() ? state.shop().map((book, i) =>\n\t\t\t\t\t\t\t<li key={i}>\n\t\t\t\t\t\t\t\t<span>{book.name} ${book.price}</span>\n\t\t\t\t\t\t\t\t<button\n\t\t\t\t\t\t\t\t\tclassName='right'\n\t\t\t\t\t\t\t\t\tonclick={() => state.cart(state.cart().concat(book))}>\n\t\t\t\t\t\t\t\t\tAdd\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t) : <div>Loading...</div>\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t\t<hr/>\n\t\t\t\t<h3>Cart</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.cart().map((book, i) =>\n\t\t\t\t\t\t\t<li key={i}>\n\t\t\t\t\t\t\t\t<span>{book.name} ${book.price}</span>\n\t\t\t\t\t\t\t\t<button\n\t\t\t\t\t\t\t\t\tclassName='right'\n\t\t\t\t\t\t\t\t\tonclick={() => state.cart(\n\t\t\t\t\t\t\t\t\t\tstate.cart().filter((item) => item !== book)\n\t\t\t\t\t\t\t\t\t)}>\n\t\t\t\t\t\t\t\t\tRemove\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t\t<strong>Total: </strong>\n\t\t\t\t<span>${state.total()}</span>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const ListView = {\n\tview({ attrs }) {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t{\n\t\t\t\t\tattrs.items ? attrs.items.map((book, i) =>\n\t\t\t\t\t\t<li key={i}>\n\t\t\t\t\t\t\t<span>{book.name} ${book.price}</span>\n\t\t\t\t\t\t\t<button className='right' onclick={() => attrs.action(book)}>\n\t\t\t\t\t\t\t\t{attrs.actionLabel}\n\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t) : <div>Loading...</div>\n\t\t\t\t}\n\t\t\t</ul>\n\t\t);\n\t}\n};\n\nconst BookShop = {\n\toninit({ state }) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tstate.cart = m.prop([]);\n\t\tstate.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tstate.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [state.text, state.books, state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tstate.total = state.cart.map(function(cart) {\n\t\t\treturn cart.reduce((prev, next) => prev + next.price, 0);\n\t\t});\n\n\t\tstate.addToCart = function(book) {\n\t\t\tstate.cart(state.cart().concat(book));\n\t\t};\n\n\t\tstate.removeFromCart = function(book) {\n\t\t\tstate.cart(\n\t\t\t\tstate.cart().filter((item) => item !== book)\n\t\t\t);\n\t\t};\n\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Book shop</h3>\n\t\t\t\t<input\n\t\t\t\t\ttype='text'\n\t\t\t\t\tplaceholder='filter'\n\t\t\t\t\tvalue={state.text()}\n\t\t\t\t\toninput={m.withAttr('value', state.text)}/>\n\t\t\t\t<ListView\n\t\t\t\t\titems={state.shop()}\n\t\t\t\t\taction={state.addToCart}\n\t\t\t\t\tactionLabel='Add'/>\n\t\t\t\t<hr/>\n\t\t\t\t<h3>Cart</h3>\n\t\t\t\t<ListView\n\t\t\t\t\titems={state.cart()}\n\t\t\t\t\taction={state.removeFromCart}\n\t\t\t\t\tactionLabel='Remove'/>\n\t\t\t\t<strong>Total: </strong>\n\t\t\t\t<span>${state.total()}</span>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
 var code$11 = [
 	{ id: 'es5', code: es5$11 },
 	{ id: 'es6', code: es6$11 },
 	{ id: 'jsx', code: jsx$11 }
 ];
+
+var ListView = {
+	view: function view(ref) {
+		var attrs = ref.attrs;
+
+		return (
+			index('ul',
+					attrs.items ? attrs.items.map(function (book, i) { return index('li', { key: i },
+							index('span', book.name, ' $', book.price),
+							index('button.right', {
+								onclick: function onclick() {
+									attrs.action(book);
+								}
+							}, attrs.actionLabel)
+						); }
+					) : index('div', 'Loading...')
+
+			)
+		);
+	}
+};
 
 var Component$11 = {
 	oninit: function oninit(ref) {
@@ -2977,8 +2998,18 @@ var Component$11 = {
 			return cart.reduce(function (prev, next) { return prev + next.price; }, 0);
 		});
 
+		state.addToCart = function(book) {
+			state.cart(state.cart().concat(book));
+		};
+
+		state.removeFromCart = function(book) {
+			state.cart(
+				state.cart().filter(function (item) { return item !== book; })
+			);
+		};
+
 	},
-	view: function view(ref) {
+	view: function view$1(ref) {
 		var state = ref.state;
 
 		return (
@@ -2989,32 +3020,18 @@ var Component$11 = {
 					value: state.text(),
 					oninput: index.withAttr('value', state.text)
 				}),
-				index('ul',
-					state.shop() ? state.shop().map(function (book, i) { return index('li', { key: i },
-							index('span', book.name, ' $', book.price),
-							index('button.right', {
-								onclick: function onclick() {
-									state.cart(state.cart().concat(book));
-								}
-							}, 'Add')
-						); }
-					) : index('div', 'Loading...')
-				),
+				index(ListView, {
+					items: state.shop(),
+					action: state.addToCart,
+					actionLabel: 'Add'
+				}),
 				index('hr'),
 				index('h3', 'Cart'),
-				index('ul',
-					state.cart().map(function (book, i) { return index('li', { key: i },
-							index('span', book.name, ' $', book.price),
-							index('button.right', {
-								onclick: function onclick() {
-									state.cart(
-										state.cart().filter(function (item) { return item !== book; })
-									);
-								}
-							}, 'Remove')
-						); }
-					)
-				),
+				index(ListView, {
+					items: state.cart(),
+					action: state.removeFromCart,
+					actionLabel: 'Remove'
+				}),
 				index('strong', 'Total: '),
 				index('span', '$', state.total())
 			)

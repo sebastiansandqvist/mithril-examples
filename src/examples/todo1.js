@@ -27,7 +27,7 @@ var TodoApp = {
 	view: function(vnode) {
 		return (
 			m('div',
-				m('h3', 'Todo'),
+				m('h3', 'To-do'),
 				m(TodoList, { items: vnode.state.items }),
 				m('form', { onsubmit: vnode.state.handleSubmit },
 					m('input[type=text]', {
@@ -69,7 +69,7 @@ const TodoApp = {
 	view({ state }) {
 		return (
 			m('div',
-				m('h3', 'Todo'),
+				m('h3', 'To-do'),
 				m(TodoList, { items: state.items }),
 				m('form', { onsubmit: state.handleSubmit },
 					m('input[type=text]', {
@@ -111,7 +111,7 @@ const TodoApp = {
 	view({ state }) {
 		return (
 			<div>
-				<h3>Todo</h3>
+				<h3>To-do</h3>
 				<TodoList items={state.items}/>
 				<form onsubmit={state.handleSubmit}>
 					<input
@@ -157,7 +157,7 @@ export const Component = {
 	view({ state }) {
 		return (
 			m('div',
-				m('h3', 'Todo'),
+				m('h3', 'To-do'),
 				m(TodoList, { items: state.items }),
 				m('form', { onsubmit: state.handleSubmit },
 					m('input[type=text]', {
