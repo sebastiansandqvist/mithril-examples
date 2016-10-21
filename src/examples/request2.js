@@ -19,8 +19,8 @@ const es5 = codeString(
 			m('div',
 				m('h3', 'Books'),
 				m('ul',
-					vnode.state.books().map(function(book) {
-						return m('li', book.name + ' $' + book.price);
+					vnode.state.books().map(function(book, i) {
+						return m('li', { key: i }, book.name);
 					})
 				)
 			)
@@ -42,8 +42,8 @@ const es6 = codeString(
 			m('div',
 				m('h3', 'Books'),
 				m('ul',
-					state.books().map((book) =>
-						m('li', book.name, \` $$\{book.price}\`)
+					state.books().map((book, i) =>
+						m('li', { key: i }, book.name)
 					)
 				)
 			)
@@ -66,8 +66,8 @@ const jsx = codeString(
 				<h3>Books</h3>
 				<ul>
 					{
-						state.books().map((book) =>
-							<li>{book.name} $\{book.price}</li>
+						state.books().map((book, i) =>
+							<li key={i}>{book.name}</li>
 						)
 					}
 				</ul>
@@ -95,8 +95,8 @@ export const Component = {
 			m('div',
 				m('h3', 'Books'),
 				m('ul',
-					state.books().map((book) =>
-						m('li', book.name, ` $${book.price}`)
+					state.books().map((book, i) =>
+						m('li', { key: i }, book.name)
 					)
 				)
 			)

@@ -1,6 +1,5 @@
 # Ideas
 
-- Applications: shopping cart
 - Applications: chat app
 - Applications: calculator
 - Request: loading indicator & error state

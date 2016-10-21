@@ -1337,11 +1337,11 @@ m.version = "bleeding-edge";
 var index = m;
 
 var pages = [
+	'Getting started',
 	'Components',
 	'Requests',
 	'Applications',
 	'Routing'
-	// 'm.prop'
 ];
 
 var Link = {
@@ -1350,7 +1350,7 @@ var Link = {
 
 		return (
 			index('a.Nav-link', {
-				href: ("/" + (attrs.page.replace('.', '').toLowerCase())),
+				href: ("/" + (attrs.page.replace(' ', '').toLowerCase())),
 				oncreate: index.route.link,
 				className: attrs.active === attrs.page ? 'active' : ''
 			}, attrs.page)
@@ -2372,6 +2372,111 @@ var Component$3 = {
 	}
 };
 
+function view$1$1() {
+	return (
+		index(Page, { id: 'Getting started' },
+			index('.Section',
+				index('h2', 'Overview'),
+				index('p', 'Mithril is a client-side MVC framework. You can read more about it at the ',
+					index('a[href=http://mithril.js.org]', 'official website'), '. ',
+					'This is an unofficial guide and collection of examples using the upcoming ',
+					index('a[href=https://github.com/lhorie/mithril.js/tree/rewrite/docs]', '1.0 rewrite'),
+					' of Mithril.js.'
+				)
+			),
+			index('.Section',
+				index('h2', 'Basic components'),
+				index('p',
+					'Every component is at minimum an object with a ',
+					index('code.inline', 'view'),
+					' method that returns a mithril virtual dom node.'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component))
+					)
+				),
+				index('p',
+					'The first argument to ',
+					index('code.inline', 'm'),
+					' is the element (as a css selector-like string) or component that should be rendered, and the optional last argument(s)',
+					' are the children of that component.'
+				),
+				index('p',
+					'Components can pass properties down to their children by passing in an object as the second argument in the call to ',
+					index('code.inline', 'm'),
+					'. Those properties become available to the component through the ',
+					index('code.inline', 'attrs'),
+					' object in the mithril virtual dom node.'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$1 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$1))
+					)
+				),
+				index('p',
+					'In addition to the ',
+					index('code.inline', 'view'),
+					' method, Mithril components have a variety of ',
+					index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/lifecycle-methods.renderToStaticMarkup]', 'lifecycle hooks'),
+					'. Using the ',
+					index('code.inline', 'oninit'),
+					' lifecycle hook, which runs once immediately before rendering the component, ',
+					' we can set the initial state. At this point it is worth noting that the ',
+					index('code.inline', 'vnode'),
+					' object that is passed to the ',
+					index('code.inline', 'view'),
+					' method contains, in addition to ',
+					index('code.inline', 'attrs'),
+					', a ',
+					index('code.inline', 'state'),
+					' object that can be used to store the state of that specific component.'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$2 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$2))
+					)
+				),
+				index('p',
+					'Mithril provides two utilities ',
+					index('code.inline', 'm.withAttr'),
+					' and ',
+					index('code.inline', 'm.prop'),
+					' that help simplify this process.'
+				),
+				index('p',
+					index('code.inline', index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/prop.md]', 'm.prop')),
+					' is, at its simplest, a getter-setter function, while ',
+					index('code.inline', index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/withAttr.md]', 'm.withAttr')),
+					' creates an event handler that uses a specified dom element property as the argument to a provided callback. ',
+					'We can use them both to simplify the previous code. All together, this is the final version of this example:'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$3 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$3))
+					)
+				)
+			)
+		)
+	);
+}
+
+var GettingStarted = {
+	view: view$1$1
+};
+
 var es5$4 = codeString(
 "var Stopwatch = {\n\toninit: function(vnode) {\n\t\tvnode.state.seconds = 0;\n\t\tvnode.state.count = () => {\n\t\t\tvnode.state.seconds++;\n\t\t\tm.redraw();\n\t\t};\n\t\tvnode.state.interval = setInterval(vnode.state.count, 1000);\n\t},\n\tonremove: function(vnode) {\n\t\tclearInterval(vnode.state.interval);\n\t},\n\tview: function(vnode) {\n\t\treturn m('span', 'Timer: ' + vnode.state.seconds);\n\t}\n};");
 
@@ -2648,109 +2753,17 @@ var Component$9 = {
 	}
 };
 
-function view$1$1() {
+function view$5() {
 	return (
 		index(Page, { id: 'Components' },
 			index('.Section',
-				index('h2', 'Overview'),
-				index('p', 'Mithril is a client-side MVC framework. You can read more about it at the ',
-					index('a[href=http://mithril.js.org]', 'official website'), '. ',
-					'This is an unofficial guide and collection of examples using the upcoming ',
-					index('a[href=https://github.com/lhorie/mithril.js/tree/rewrite/docs]', '1.0 rewrite'),
-					' of Mithril.js.'
-				)
-			),
-			index('.Section',
-				index('h2', 'Basic components'),
-				index('p',
-					'Every component is at minimum an object with a ',
-					index('code.inline', 'view'),
-					' method that returns a mithril virtual dom node.'
-				),
-				index('.Demo',
-					index('.Demo-left',
-						index(Tabs, { tabs: code })
-					),
-					index('.Demo-right',
-						index('.Demo-result', index(Component))
-					)
-				),
-				index('p',
-					'The first argument to ',
-					index('code.inline', 'm'),
-					' is the element (as a css selector-like string) or component that should be rendered, and the optional last argument(s)',
-					' are the children of that component.'
-				),
-				index('p',
-					'Components can pass properties down to their children by passing in an object as the second argument in the call to ',
-					index('code.inline', 'm'),
-					'. Those properties become available to the component through the ',
-					index('code.inline', 'attrs'),
-					' object in the mithril virtual dom node.'
-				),
-				index('.Demo',
-					index('.Demo-left',
-						index(Tabs, { tabs: code$1 })
-					),
-					index('.Demo-right',
-						index('.Demo-result', index(Component$1))
-					)
-				),
-				index('p',
-					'In addition to the ',
-					index('code.inline', 'view'),
-					' method, Mithril components have a variety of ',
-					index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/lifecycle-methods.renderToStaticMarkup]', 'lifecycle hooks'),
-					'. Using the ',
-					index('code.inline', 'oninit'),
-					' lifecycle hook, which runs once immediately before rendering the component, ',
-					' we can set the initial state. At this point it is worth noting that the ',
-					index('code.inline', 'vnode'),
-					' object that is passed to the ',
-					index('code.inline', 'view'),
-					' method contains, in addition to ',
-					index('code.inline', 'attrs'),
-					', a ',
-					index('code.inline', 'state'),
-					' object that can be used to store the state of that specific component.'
-				),
-				index('.Demo',
-					index('.Demo-left',
-						index(Tabs, { tabs: code$2 })
-					),
-					index('.Demo-right',
-						index('.Demo-result', index(Component$2))
-					)
-				),
-				index('p',
-					'Mithril provides two utilities ',
-					index('code.inline', 'm.withAttr'),
-					' and ',
-					index('code.inline', 'm.prop'),
-					' that help simplify this process.'
-				),
-				index('p',
-					index('code.inline', index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/prop.md]', 'm.prop')),
-					' is, at its simplest, a getter-setter function, while ',
-					index('code.inline', index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/withAttr.md]', 'm.withAttr')),
-					' creates an event handler that uses a specified dom element property as the argument to a provided callback. ',
-					'We can use them both to simplify the previous code. All together, this is the final version of this example:'
-				),
-				index('.Demo',
-					index('.Demo-left',
-						index(Tabs, { tabs: code$3 })
-					),
-					index('.Demo-right',
-						index('.Demo-result', index(Component$3))
-					)
-				)
-			),
-			index('.Section',
 				index('h2', 'Stopwatch'),
 				index('p',
-					'In the previous example there was no need to manually tell mithril to update the view when ',
+					'In the ',
+					index('a[href=/]', { oncreate: index.route.link }, 'Getting started'),
+					' example there was no need to manually tell mithril to update the view when ',
 					'the contents of the input changed, because mithril automatically redraws after event handlers ',
-					'are called. In this example there are no events that trigger an update, so we tell mithril to update via',
+					'are called. In this example there are no events that trigger an update, so we tell mithril to update via ',
 					index('code.inline', 'm.redraw'),
 					'.'
 				),
@@ -2857,8 +2870,8 @@ function view$1$1() {
 	);
 }
 
-var GettingStarted = {
-	view: view$1$1
+var Components = {
+	view: view$5
 };
 
 var es5$10 = codeString(
@@ -3009,7 +3022,7 @@ var Component$11 = {
 	}
 };
 
-function view$5() {
+function view$6() {
 	return (
 		index(Page, { id: 'Applications' },
 			index('.Section',
@@ -3043,17 +3056,17 @@ function view$5() {
 }
 
 var Applications = {
-	view: view$5
+	view: view$6
 };
 
 var es5$12 = codeString(
-"var BookView = {\n\toninit: function(vnode) {\n\t\tvnode.state.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tvnode.state.books().map(function(book) {\n\t\t\t\t\t\treturn m('li', book.name, ` $${book.price}`);\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"var BookView = {\n\toninit: function(vnode) {\n\t\tvnode.state.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tvnode.state.books().map(function(book, i) {\n\t\t\t\t\t\treturn m('li', { key: i }, book.name);\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var es6$12 = codeString(
-"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.books().map((book) =>\n\t\t\t\t\t\tm('li', book.name, ` $${book.price}`)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i }, book.name)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var jsx$12 = codeString(
-"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Books</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.books().map((book) =>\n\t\t\t\t\t\t\t<li>{book.name} ${book.price}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Books</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\t\t<li key={i}>{book.name}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
 var code$12 = [
 	{ id: 'es5', code: es5$12 },
@@ -3061,6 +3074,8 @@ var code$12 = [
 	{ id: 'jsx', code: jsx$12 }
 ];
 
+// Fetches an array of books objects of the form:
+// { name: String, price: Number }
 var Component$12 = {
 	oninit: function oninit(ref) {
 		var state = ref.state;
@@ -3078,7 +3093,7 @@ var Component$12 = {
 			index('div',
 				index('h3', 'Books'),
 				index('ul',
-					state.books().map(function (book) { return index('li', book.name, (" $" + (book.price))); }
+					state.books().map(function (book, i) { return index('li', { key: i }, book.name); }
 					)
 				)
 			)
@@ -3087,13 +3102,13 @@ var Component$12 = {
 };
 
 var es5$13 = codeString(
-"var BookView = {\n\toninit: function(vnode) {\n\t\tvnode.state.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then(function(response) {\n\t\t\t\treturn response.json();\n\t\t\t})\n\t\t\t.then(vnode.state.books)\n\t\t\t.then(function() {\n\t\t\t\tm.redraw();\n\t\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tvnode.state.books().map(function(book) {\n\t\t\t\t\t\treturn m('li', book.name + ' $' + book.price);\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"var BookView = {\n\toninit: function(vnode) {\n\t\tvnode.state.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then(function(response) {\n\t\t\t\treturn response.json();\n\t\t\t})\n\t\t\t.then(vnode.state.books)\n\t\t\t.then(function() {\n\t\t\t\tm.redraw();\n\t\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tvnode.state.books().map(function(book, i) {\n\t\t\t\t\t\treturn m('li', { key: i }, book.name);\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var es6$13 = codeString(
-"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then((response) => response.json())\n\t\t\t.then(state.books)\n\t\t\t.then(() => m.redraw());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.books().map((book) =>\n\t\t\t\t\t\tm('li', book.name, ` $${book.price}`)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then((response) => response.json())\n\t\t\t.then(state.books)\n\t\t\t.then(() => m.redraw());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i }, book.name)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var jsx$13 = codeString(
-"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then((response) => response.json())\n\t\t\t.then(state.books)\n\t\t\t.then(() => m.redraw());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Books</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.books().map((book) =>\n\t\t\t\t\t\t\t<li>{book.name} ${book.price}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+"const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then((response) => response.json())\n\t\t\t.then(state.books)\n\t\t\t.then(() => m.redraw());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Books</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\t\t<li key={i}>{book.name}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
 var code$13 = [
 	{ id: 'es5', code: es5$13 },
@@ -3118,7 +3133,7 @@ var Component$13 = {
 			index('div',
 				index('h3', 'Books'),
 				index('ul',
-					state.books().map(function (book) { return index('li', book.name, (" $" + (book.price))); }
+					state.books().map(function (book, i) { return index('li', { key: i }, book.name); }
 					)
 				)
 			)
@@ -3126,7 +3141,7 @@ var Component$13 = {
 	}
 };
 
-function view$6() {
+function view$7() {
 	return (
 		index(Page, { id: 'Requests' },
 			index('.Section',
@@ -3170,7 +3185,7 @@ function view$6() {
 }
 
 var Requests = {
-	view: view$6
+	view: view$7
 };
 
 var es5$14 = codeString(
@@ -3272,7 +3287,7 @@ var Component$16 = {
 	}
 };
 
-function view$7(ref) {
+function view$8(ref) {
 	var attrs = ref.attrs;
 
 	return (
@@ -3338,22 +3353,23 @@ function view$7(ref) {
 }
 
 var Routing = {
-	view: view$7
+	view: view$8
 };
 
-function view$8() {
+function view$9() {
 	return (
 		index(Page, { id: 'm.prop' })
 	);
 }
 
 var Prop = {
-	view: view$8
+	view: view$9
 };
 
 var routes = {
 	'/': GettingStarted,
-	'/components': GettingStarted,
+	'/gettingstarted': GettingStarted,
+	'/components': Components,
 	'/applications': Applications,
 	'/requests': Requests,
 	'/routing': Routing,
