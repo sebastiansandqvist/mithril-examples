@@ -12,8 +12,8 @@ var Component = {
 	view: function() {
 		return (
 			m('div',
-				m(HelloButton, { title: 'world'})
-				m(HelloButton, { title: 'everyone'})
+				m(HelloButton, { title: 'world'}),
+				m(HelloButton, { title: 'everyone'}),
 				m(HelloButton, { title: 'darkness my old friend'})
 			)
 		);
@@ -31,8 +31,8 @@ const Component = {
 	view() {
 		return (
 			m('div',
-				m(HelloButton, { title: 'world'})
-				m(HelloButton, { title: 'everyone'})
+				m(HelloButton, { title: 'world'}),
+				m(HelloButton, { title: 'everyone'}),
 				m(HelloButton, { title: 'darkness my old friend'})
 			)
 		);
