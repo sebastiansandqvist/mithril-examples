@@ -2,10 +2,10 @@ import m from 'mithril';
 
 const pages = [
 	'Components',
-	'Applications',
 	'Requests',
-	'Routing',
-	'm.prop'
+	'Applications',
+	'Routing'
+	// 'm.prop'
 ];
 
 const Link = {

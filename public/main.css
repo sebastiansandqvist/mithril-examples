@@ -28,6 +28,10 @@ body {
 	margin-top: 20px;
 }
 
+.right {
+	float: right;
+}
+
 ul {
 	margin: 0;
 }

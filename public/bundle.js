@@ -1338,10 +1338,10 @@ var index = m;
 
 var pages = [
 	'Components',
-	'Applications',
 	'Requests',
-	'Routing',
-	'm.prop'
+	'Applications',
+	'Routing'
+	// 'm.prop'
 ];
 
 var Link = {
@@ -2920,13 +2920,102 @@ var Component$10 = {
 	}
 };
 
+var es5$11 = codeString(
+"var BookShop = {\n\toninit: function(vnode) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tvnode.state.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tvnode.state.cart = m.prop([]);\n\t\tvnode.state.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tvnode.state.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase()\n\t\t\t\t\t.indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [vnode.state.text, vnode.state.books, vnode.state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tvnode.state.total = vnode.state.cart.map(function(cart) {\n\t\t\treturn cart.reduce(function(prev, next) {\n\t\t\t\tprev + next.price;\n\t\t\t}, 0);\n\t\t});\n\n\t},\n\tview: function(vnode) {\n\t\tvar shop = vnode.state.shop();\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Book Shop'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'Filter',\n\t\t\t\t\tvalue: vnode.state.text(),\n\t\t\t\t\toninput: m.withAttr('value', vnode.state.text)\n\t\t\t\t}),\n\t\t\t\tm('ul',\n\t\t\t\t\t shop ? shop.map(function(book, i) {\n\t\t\t\t\t\treturn m('li', { key: i },\n\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\tonclick: function() {\n\t\t\t\t\t\t\t\t\tvnode.state.cart(\n\t\t\t\t\t\t\t\t\t\tvnode.state.cart().concat(book)\n\t\t\t\t\t\t\t\t\t);\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}, 'Add')\n\t\t\t\t\t\t)\n\t\t\t\t\t}) : m('div', 'Loading...')\n\t\t\t\t),\n\t\t\t\tm('hr'),\n\t\t\t\tm('h3', 'Cart'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.cart().map(function(book, i) {\n\t\t\t\t\t\treturn m('li', { key: i },\n\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\tonclick() {\n\t\t\t\t\t\t\t\t\tstate.cart(\n\t\t\t\t\t\t\t\t\t\tstate.cart().filter(function(item) {\n\t\t\t\t\t\t\t\t\t\t\treturn item !== book;\n\t\t\t\t\t\t\t\t\t\t})\n\t\t\t\t\t\t\t\t\t);\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}, 'Remove')\n\t\t\t\t\t\t)\n\t\t\t\t\t})\n\t\t\t\t),\n\t\t\t\tm('strong', 'Total: '),\n\t\t\t\tm('span', '$', state.total())\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var es6$11 = codeString(
+"const BookShop = {\n\toninit({ state }) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tstate.cart = m.prop([]);\n\t\tstate.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tstate.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase()\n\t\t\t\t\t.indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [state.text, state.books, state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tstate.total = state.cart.map(function(cart) {\n\t\t\treturn cart.reduce((prev, next) => prev + next.price, 0);\n\t\t});\n\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Book Shop'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'Filter',\n\t\t\t\t\tvalue: state.text(),\n\t\t\t\t\toninput: m.withAttr('value', state.text)\n\t\t\t\t}),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.shop() ? state.shop().map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i },\n\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\tonclick() {\n\t\t\t\t\t\t\t\t\tstate.cart(state.cart().concat(book));\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}, 'Add')\n\t\t\t\t\t\t)\n\t\t\t\t\t) : m('div', 'Loading...')\n\t\t\t\t),\n\t\t\t\tm('hr'),\n\t\t\t\tm('h3', 'Cart'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.cart().map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i },\n\t\t\t\t\t\t\tm('span', book.name, ' $', book.price),\n\t\t\t\t\t\t\tm('button.right', {\n\t\t\t\t\t\t\t\tonclick() {\n\t\t\t\t\t\t\t\t\tstate.cart(\n\t\t\t\t\t\t\t\t\t\tstate.cart().filter((item) => item !== book)\n\t\t\t\t\t\t\t\t\t);\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}, 'Remove')\n\t\t\t\t\t\t)\n\t\t\t\t\t)\n\t\t\t\t),\n\t\t\t\tm('strong', 'Total: '),\n\t\t\t\tm('span', '$', state.total())\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var jsx$11 = codeString(
+"const BookShop = {\n\toninit({ state }) {\n\n\t\t// fetch array of book objects from server of form:\n\t\t// { name: 'The Iliad', price: 12 }\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json'\n\t\t});\n\n\t\tstate.cart = m.prop([]);\n\t\tstate.text = m.prop('');\n\n\t\t// once books have loaded, filter by title and prevent\n\t\t// items in cart from showing up in the shop\n\t\tstate.shop = m.prop.combine(function(text, books, cart) {\n\t\t\treturn books().filter(function(book) {\n\t\t\t\treturn book.name.toLowerCase()\n\t\t\t\t\t.indexOf(text().toLowerCase()) > -1 &&\n\t\t\t\t\t\tcart().indexOf(book) === -1;\n\t\t\t});\n\t\t}, [state.text, state.books, state.cart]);\n\n\t\t// when the cart updates, state.total = price of books in cart\n\t\tstate.total = state.cart.map(function(cart) {\n\t\t\treturn cart.reduce((prev, next) => prev + next.price, 0);\n\t\t});\n\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Book Shop</h3>\n\t\t\t\t<input\n\t\t\t\t\ttype='text'\n\t\t\t\t\tplaceholder='Filter'\n\t\t\t\t\tvalue={state.text()}\n\t\t\t\t\toninput={m.withAttr('value', state.text)}/>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.shop() ? state.shop().map((book, i) =>\n\t\t\t\t\t\t\t<li key={i}>\n\t\t\t\t\t\t\t\t<span>{book.name} ${book.price}</span>\n\t\t\t\t\t\t\t\t<button\n\t\t\t\t\t\t\t\t\tclassName='right'\n\t\t\t\t\t\t\t\t\tonclick={() => state.cart(state.cart().concat(book))}>\n\t\t\t\t\t\t\t\t\tAdd\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t) : <div>Loading...</div>\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t\t<hr/>\n\t\t\t\t<h3>Cart</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.cart().map((book, i) =>\n\t\t\t\t\t\t\t<li key={i}>\n\t\t\t\t\t\t\t\t<span>{book.name} ${book.price}</span>\n\t\t\t\t\t\t\t\t<button\n\t\t\t\t\t\t\t\t\tclassName='right'\n\t\t\t\t\t\t\t\t\tonclick={() => state.cart(\n\t\t\t\t\t\t\t\t\t\tstate.cart().filter((item) => item !== book)\n\t\t\t\t\t\t\t\t\t)}>\n\t\t\t\t\t\t\t\t\tRemove\n\t\t\t\t\t\t\t\t</button>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t\t<strong>Total: </strong>\n\t\t\t\t<span>$/{state.total()}</span>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+
+var code$11 = [
+	{ id: 'es5', code: es5$11 },
+	{ id: 'es6', code: es6$11 },
+	{ id: 'jsx', code: jsx$11 }
+];
+
+var Component$11 = {
+	oninit: function oninit(ref) {
+		var state = ref.state;
+
+
+		// fetch array of book objects from server of form:
+		// { name: 'The Iliad', price: 12 }
+		state.books = index.request({
+			method: 'GET',
+			url: 'https://mithril-examples.firebaseio.com/books.json'
+		});
+
+		state.cart = index.prop([]);
+		state.text = index.prop('');
+
+		// once books have loaded, filter by title and prevent
+		// items in cart from showing up in the shop
+		state.shop = index.prop.combine(function(text, books, cart) {
+			return books().filter(function(book) {
+				return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
+					cart().indexOf(book) === -1;
+			});
+		}, [state.text, state.books, state.cart]);
+
+		// when the cart updates, state.total = price of books in cart
+		state.total = state.cart.map(function(cart) {
+			return cart.reduce(function (prev, next) { return prev + next.price; }, 0);
+		});
+
+	},
+	view: function view(ref) {
+		var state = ref.state;
+
+		return (
+			index('div',
+				index('h3', 'Book Shop'),
+				index('input[type=text]', {
+					placeholder: 'Filter',
+					value: state.text(),
+					oninput: index.withAttr('value', state.text)
+				}),
+				index('ul',
+					state.shop() ? state.shop().map(function (book, i) { return index('li', { key: i },
+							index('span', book.name, ' $', book.price),
+							index('button.right', {
+								onclick: function onclick() {
+									state.cart(state.cart().concat(book));
+								}
+							}, 'Add')
+						); }
+					) : index('div', 'Loading...')
+				),
+				index('hr'),
+				index('h3', 'Cart'),
+				index('ul',
+					state.cart().map(function (book, i) { return index('li', { key: i },
+							index('span', book.name, ' $', book.price),
+							index('button.right', {
+								onclick: function onclick() {
+									state.cart(
+										state.cart().filter(function (item) { return item !== book; })
+									);
+								}
+							}, 'Remove')
+						); }
+					)
+				),
+				index('strong', 'Total: '),
+				index('span', '$', state.total())
+			)
+		);
+	}
+};
+
 function view$5() {
 	return (
 		index(Page, { id: 'Applications' },
 			index('.Section',
 				index('h2', 'Todo list'),
 				index('p',
-					'This example is ported over from the React.js documentation in order to demontrate ',
+					'This example is ported over from the React.js documentation in order to demonstrate ',
 					'some of the differences between Mithril\'s syntax and React\'s.'
 				),
 				index('.Demo',
@@ -2935,6 +3024,20 @@ function view$5() {
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$10))
+					)
+				)
+			),
+			index('.Section',
+				index('h2', 'Shopping cart'),
+				index('p',
+					'...'
+				),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$11 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$11))
 					)
 				)
 			)
@@ -2946,22 +3049,22 @@ var Applications = {
 	view: view$5
 };
 
-var es5$11 = codeString(
+var es5$12 = codeString(
 "var BookView = {\n\toninit: function(vnode) {\n\t\tvnode.state.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tvnode.state.books().map(function(book) {\n\t\t\t\t\t\treturn m('li', book.name, ` $${book.price}`);\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var es6$11 = codeString(
+var es6$12 = codeString(
 "const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.books().map((book) =>\n\t\t\t\t\t\tm('li', book.name, ` $${book.price}`)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var jsx$11 = codeString(
+var jsx$12 = codeString(
 "const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Books</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.books().map((book) =>\n\t\t\t\t\t\t\t<li>{book.name} ${book.price}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
-var code$11 = [
-	{ id: 'es5', code: es5$11 },
-	{ id: 'es6', code: es6$11 },
-	{ id: 'jsx', code: jsx$11 }
+var code$12 = [
+	{ id: 'es5', code: es5$12 },
+	{ id: 'es6', code: es6$12 },
+	{ id: 'jsx', code: jsx$12 }
 ];
 
-var Component$11 = {
+var Component$12 = {
 	oninit: function oninit(ref) {
 		var state = ref.state;
 
@@ -2986,22 +3089,22 @@ var Component$11 = {
 	}
 };
 
-var es5$12 = codeString(
+var es5$13 = codeString(
 "var BookView = {\n\toninit: function(vnode) {\n\t\tvnode.state.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then(function(response) {\n\t\t\t\treturn response.json();\n\t\t\t})\n\t\t\t.then(vnode.state.books)\n\t\t\t.then(function() {\n\t\t\t\tm.redraw();\n\t\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tvnode.state.books().map(function(book) {\n\t\t\t\t\t\treturn m('li', book.name + ' $' + book.price);\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var es6$12 = codeString(
+var es6$13 = codeString(
 "const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then((response) => response.json())\n\t\t\t.then(state.books)\n\t\t\t.then(() => m.redraw());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.books().map((book) =>\n\t\t\t\t\t\tm('li', book.name, ` $${book.price}`)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var jsx$12 = codeString(
+var jsx$13 = codeString(
 "const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then((response) => response.json())\n\t\t\t.then(state.books)\n\t\t\t.then(() => m.redraw());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Books</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.books().map((book) =>\n\t\t\t\t\t\t\t<li>{book.name} ${book.price}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
-var code$12 = [
-	{ id: 'es5', code: es5$12 },
-	{ id: 'es6', code: es6$12 },
-	{ id: 'jsx', code: jsx$12 }
+var code$13 = [
+	{ id: 'es5', code: es5$13 },
+	{ id: 'es6', code: es6$13 },
+	{ id: 'jsx', code: jsx$13 }
 ];
 
-var Component$12 = {
+var Component$13 = {
 	oninit: function oninit(ref) {
 		var state = ref.state;
 
@@ -3041,10 +3144,10 @@ function view$6() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$11 })
+						index(Tabs, { tabs: code$12 })
 					),
 					index('.Demo-right',
-						index('.Demo-result', index(Component$11))
+						index('.Demo-result', index(Component$12))
 					)
 				)
 			),
@@ -3058,10 +3161,10 @@ function view$6() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$12 })
+						index(Tabs, { tabs: code$13 })
 					),
 					index('.Demo-right',
-						index('.Demo-result', index(Component$12))
+						index('.Demo-result', index(Component$13))
 					)
 				)
 			)
@@ -3073,35 +3176,14 @@ var Requests = {
 	view: view$6
 };
 
-var es5$13 = codeString(
+var es5$14 = codeString(
 "var RouteView = {\n\tview: function() {\n\t\treturn m('div', 'Current route: ', m.route.get());\n\t}\n};");
 
-var es6$13 = codeString(
+var es6$14 = codeString(
 "const RouteView = {\n\tview() {\n\t\treturn m('div', 'Current route: ', m.route.get());\n\t}\n};");
 
-var jsx$13 = codeString(
-"const RouteView = {\n\tview() {\n\t\treturn <div>Current route: {m.route.get()}</div>;\n\t}\n};");
-
-var code$13 = [
-	{ id: 'es5', code: es5$13 },
-	{ id: 'es6', code: es6$13 },
-	{ id: 'jsx', code: jsx$13 }
-];
-
-var Component$13 = {
-	view: function view() {
-		return index('div', 'Current route: ', index.route.get());
-	}
-};
-
-var es5$14 = codeString(
-"var LinkView = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
-
-var es6$14 = codeString(
-"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
-
 var jsx$14 = codeString(
-"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing' oncreate={m.route.link}>\n\t\t\t\t\t\tRouting page (root)\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/foo' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/foo\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/bar' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/bar\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t);\n\t}\n};");
+"const RouteView = {\n\tview() {\n\t\treturn <div>Current route: {m.route.get()}</div>;\n\t}\n};");
 
 var code$14 = [
 	{ id: 'es5', code: es5$14 },
@@ -3110,6 +3192,27 @@ var code$14 = [
 ];
 
 var Component$14 = {
+	view: function view() {
+		return index('div', 'Current route: ', index.route.get());
+	}
+};
+
+var es5$15 = codeString(
+"var LinkView = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var es6$15 = codeString(
+"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var jsx$15 = codeString(
+"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing' oncreate={m.route.link}>\n\t\t\t\t\t\tRouting page (root)\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/foo' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/foo\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/bar' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/bar\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t);\n\t}\n};");
+
+var code$15 = [
+	{ id: 'es5', code: es5$15 },
+	{ id: 'es6', code: es6$15 },
+	{ id: 'jsx', code: jsx$15 }
+];
+
+var Component$15 = {
 	view: function view() {
 		return (
 			index('ul',
@@ -3133,22 +3236,22 @@ var Component$14 = {
 	}
 };
 
-var es5$15 = codeString(
+var es5$16 = codeString(
 "var ButtonView = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing') }\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing/foo') }\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing/bar') }\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var es6$15 = codeString(
+var es6$16 = codeString(
 "const ButtonView = {\n\tview() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing')\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing/foo')\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing/bar')\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var jsx$15 = codeString(
+var jsx$16 = codeString(
 "const ButtonView = {\n\tview() {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing')}>\n\t\t\t\t\t\tRouting page (root)\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing/foo')}>\n\t\t\t\t\t\t/routing/foo\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing/bar')}>\n\t\t\t\t\t\t/routing/bar\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t);\n\t}\n};");
 
-var code$15 = [
-	{ id: 'es5', code: es5$15 },
-	{ id: 'es6', code: es6$15 },
-	{ id: 'jsx', code: jsx$15 }
+var code$16 = [
+	{ id: 'es5', code: es5$16 },
+	{ id: 'es6', code: es6$16 },
+	{ id: 'jsx', code: jsx$16 }
 ];
 
-var Component$15 = {
+var Component$16 = {
 	view: function view() {
 		return (
 			index('ul',
@@ -3181,10 +3284,10 @@ function view$7(ref) {
 				index('h2', 'Getting the current route'),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$13 })
+						index(Tabs, { tabs: code$14 })
 					),
 					index('.Demo-right',
-						index('.Demo-result', index(Component$13))
+						index('.Demo-result', index(Component$14))
 					)
 				)
 			),
@@ -3204,10 +3307,10 @@ function view$7(ref) {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$14 })
+						index(Tabs, { tabs: code$15 })
 					),
 					index('.Demo-right',
-						index('.Demo-result', index(Component$14))
+						index('.Demo-result', index(Component$15))
 					)
 				)
 			),
@@ -3215,10 +3318,10 @@ function view$7(ref) {
 				index('h2', 'Setting the current route programmatically'),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$15 })
+						index(Tabs, { tabs: code$16 })
 					),
 					index('.Demo-right',
-						index('.Demo-result', index(Component$15))
+						index('.Demo-result', index(Component$16))
 					)
 				)
 			),
