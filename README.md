@@ -4,6 +4,7 @@ https://mithril-examples.firebaseapp.com/
 
 - Applications: chat app
 - Applications: calculator
+- Applications: markdown or code editor (to show m.trust)
 - Request: loading indicator & error state
 - Request: file upload progress (simulate)
 - Components: form validation
@@ -12,4 +13,4 @@ https://mithril-examples.firebaseapp.com/
 
 # Todo
 
-- Change static text to markdown, parse at load and set component to never update.
+- Change static text to markdown, parse immediately and set component to never update.
