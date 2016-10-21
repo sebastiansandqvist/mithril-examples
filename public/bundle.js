@@ -3039,6 +3039,97 @@ var Component$11 = {
 	}
 };
 
+var es5$12 = codeString(
+"function mapAsciiToBraille(character) {\n\n\tvar map = {\n\t\ta: '⠁',\n\t\tb: '⠃',\n\t\tc: '⠉',\n\t\td: '⠙',\n\t\te: '⠑',\n\t\tf: '⠋',\n\t\tg: '⠛',\n\t\th: '⠓',\n\t\ti: '⠊',\n\t\tj: '⠚',\n\t\tk: '⠅',\n\t\tl: '⠇',\n\t\tm: '⠍',\n\t\tn: '⠝',\n\t\to: '⠕',\n\t\tp: '⠏',\n\t\tq: '⠟',\n\t\tr: '⠗',\n\t\ts: '⠎',\n\t\tt: '⠞',\n\t\tu: '⠥',\n\t\tv: '⠧',\n\t\tw: '⠺',\n\t\tx: '⠭',\n\t\ty: '⠽',\n\t\tz: '⠵',\n\t\t0: '⠼⠚',\n\t\t1: '⠼⠁',\n\t\t2: '⠼⠃',\n\t\t3: '⠼⠉',\n\t\t4: '⠼⠙',\n\t\t5: '⠼⠑',\n\t\t6: '⠼⠋',\n\t\t7: '⠼⠛',\n\t\t8: '⠼⠓',\n\t\t9: '⠼⠊'\n\t};\n\n\treturn map[character] || character;\n\n}\n\nvar BrailleTranslator = {\n\toninit: function(vnode) {\n\t\tvnode.state.input = m.prop('');\n\t\tvnode.state.output = vnode.state.input.map(function(text) {\n\t\t\treturn text.toLowerCase().split('')\n\t\t\t\t.map(mapAsciiToBraille)\n\t\t\t\t.join('');\n\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('div', 'Enter ascii text:'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'input',\n\t\t\t\t\tvalue: vnode.state.input(),\n\t\t\t\t\toninput: m.withAttr('value', vnode.state.input)\n\t\t\t\t}),\n\t\t\t\tm('hr'),\n\t\t\t\tm('div', 'Braille:'),\n\t\t\t\tm('div', vnode.state.output())\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var es6$12 = codeString(
+"function mapAsciiToBraille(character) {\n\n\tconst map = {\n\t\ta: '⠁',\n\t\tb: '⠃',\n\t\tc: '⠉',\n\t\td: '⠙',\n\t\te: '⠑',\n\t\tf: '⠋',\n\t\tg: '⠛',\n\t\th: '⠓',\n\t\ti: '⠊',\n\t\tj: '⠚',\n\t\tk: '⠅',\n\t\tl: '⠇',\n\t\tm: '⠍',\n\t\tn: '⠝',\n\t\to: '⠕',\n\t\tp: '⠏',\n\t\tq: '⠟',\n\t\tr: '⠗',\n\t\ts: '⠎',\n\t\tt: '⠞',\n\t\tu: '⠥',\n\t\tv: '⠧',\n\t\tw: '⠺',\n\t\tx: '⠭',\n\t\ty: '⠽',\n\t\tz: '⠵',\n\t\t0: '⠼⠚',\n\t\t1: '⠼⠁',\n\t\t2: '⠼⠃',\n\t\t3: '⠼⠉',\n\t\t4: '⠼⠙',\n\t\t5: '⠼⠑',\n\t\t6: '⠼⠋',\n\t\t7: '⠼⠛',\n\t\t8: '⠼⠓',\n\t\t9: '⠼⠊'\n\t};\n\n\treturn map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n\toninit({ state }) {\n\t\tstate.input = m.prop('');\n\t\tstate.output = state.input.map(function(text) {\n\t\t\treturn text.split('')\n\t\t\t\t.map(mapAsciiToBraille)\n\t\t\t\t.join('');\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('div', 'Enter ascii text:'),\n\t\t\t\tm('input[type=text]', {\n\t\t\t\t\tplaceholder: 'input',\n\t\t\t\t\tvalue: state.input(),\n\t\t\t\t\toninput: m.withAttr('value', state.input)\n\t\t\t\t}),\n\t\t\t\tm('hr'),\n\t\t\t\tm('div', 'Braille:'),\n\t\t\t\tm('div', state.output())\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var jsx$12 = codeString(
+"function mapAsciiToBraille(character) {\n\n\tconst map = {\n\t\ta: '⠁',\n\t\tb: '⠃',\n\t\tc: '⠉',\n\t\td: '⠙',\n\t\te: '⠑',\n\t\tf: '⠋',\n\t\tg: '⠛',\n\t\th: '⠓',\n\t\ti: '⠊',\n\t\tj: '⠚',\n\t\tk: '⠅',\n\t\tl: '⠇',\n\t\tm: '⠍',\n\t\tn: '⠝',\n\t\to: '⠕',\n\t\tp: '⠏',\n\t\tq: '⠟',\n\t\tr: '⠗',\n\t\ts: '⠎',\n\t\tt: '⠞',\n\t\tu: '⠥',\n\t\tv: '⠧',\n\t\tw: '⠺',\n\t\tx: '⠭',\n\t\ty: '⠽',\n\t\tz: '⠵',\n\t\t0: '⠼⠚',\n\t\t1: '⠼⠁',\n\t\t2: '⠼⠃',\n\t\t3: '⠼⠉',\n\t\t4: '⠼⠙',\n\t\t5: '⠼⠑',\n\t\t6: '⠼⠋',\n\t\t7: '⠼⠛',\n\t\t8: '⠼⠓',\n\t\t9: '⠼⠊'\n\t};\n\n\treturn map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n\toninit({ state }) {\n\t\tstate.input = m.prop('');\n\t\tstate.output = state.input.map(function(text) {\n\t\t\treturn text.split('')\n\t\t\t\t.map(mapAsciiToBraille)\n\t\t\t\t.join('');\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<div>Enter ascii text:</div>\n\t\t\t\t<input\n\t\t\t\t\ttype='text'\n\t\t\t\t\tvalue={state.input()}\n\t\t\t\t\toninput={m.withAttr('value', state.input)}/>\n\t\t\t\t<hr/>\n\t\t\t\t<div>Braille:</div>\n\t\t\t\t<div>{state.output()}</div>\n\t\t\t</div>\n\t\t);\n\t}\n};");
+
+var code$12 = [
+	{ id: 'es5', code: es5$12 },
+	{ id: 'es6', code: es6$12 },
+	{ id: 'jsx', code: jsx$12 }
+];
+
+
+function mapAsciiToBraille(character) {
+
+	var map = {
+		a: '⠁',
+		b: '⠃',
+		c: '⠉',
+		d: '⠙',
+		e: '⠑',
+		f: '⠋',
+		g: '⠛',
+		h: '⠓',
+		i: '⠊',
+		j: '⠚',
+		k: '⠅',
+		l: '⠇',
+		m: '⠍',
+		n: '⠝',
+		o: '⠕',
+		p: '⠏',
+		q: '⠟',
+		r: '⠗',
+		s: '⠎',
+		t: '⠞',
+		u: '⠥',
+		v: '⠧',
+		w: '⠺',
+		x: '⠭',
+		y: '⠽',
+		z: '⠵',
+		0: '⠼⠚',
+		1: '⠼⠁',
+		2: '⠼⠃',
+		3: '⠼⠉',
+		4: '⠼⠙',
+		5: '⠼⠑',
+		6: '⠼⠋',
+		7: '⠼⠛',
+		8: '⠼⠓',
+		9: '⠼⠊'
+	};
+
+	return map[character] || character;
+
+}
+
+var Component$12 = {
+	oninit: function oninit(ref) {
+		var state = ref.state;
+
+		state.input = index.prop('');
+		state.output = state.input.map(function(text) {
+			return text.split('')
+				.map(mapAsciiToBraille)
+				.join('');
+		});
+	},
+	view: function view(ref) {
+		var state = ref.state;
+
+		return (
+			index('div',
+				index('div', 'Enter ascii text:'),
+				index('input[type=text]', {
+					placeholder: 'input',
+					value: state.input(),
+					oninput: index.withAttr('value', state.input)
+				}),
+				index('hr'),
+				index('div', 'Braille:'),
+				index('div', state.output())
+			)
+		);
+	}
+};
+
 function view$6() {
 	return (
 		index(Page, { id: 'Applications' },
@@ -3067,6 +3158,17 @@ function view$6() {
 						index('.Demo-result', index(Component$11))
 					)
 				)
+			),
+			index('.Section',
+				index('h2', 'Braille Translator'),
+				index('.Demo',
+					index('.Demo-left',
+						index(Tabs, { tabs: code$12 })
+					),
+					index('.Demo-right',
+						index('.Demo-result', index(Component$12))
+					)
+				)
 			)
 		)
 	);
@@ -3076,24 +3178,24 @@ var Applications = {
 	view: view$6
 };
 
-var es5$12 = codeString(
+var es5$13 = codeString(
 "var BookView = {\n\toninit: function(vnode) {\n\t\tvnode.state.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tvnode.state.books().map(function(book, i) {\n\t\t\t\t\t\treturn m('li', { key: i }, book.name);\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var es6$12 = codeString(
+var es6$13 = codeString(
 "const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i }, book.name)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var jsx$12 = codeString(
+var jsx$13 = codeString(
 "const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.request({\n\t\t\tmethod: 'GET',\n\t\t\turl: 'https://mithril-examples.firebaseio.com/books.json',\n\t\t\tinitialValue: []\n\t\t});\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Books</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\t\t<li key={i}>{book.name}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
-var code$12 = [
-	{ id: 'es5', code: es5$12 },
-	{ id: 'es6', code: es6$12 },
-	{ id: 'jsx', code: jsx$12 }
+var code$13 = [
+	{ id: 'es5', code: es5$13 },
+	{ id: 'es6', code: es6$13 },
+	{ id: 'jsx', code: jsx$13 }
 ];
 
 // Fetches an array of books objects of the form:
 // { name: String, price: Number }
-var Component$12 = {
+var Component$13 = {
 	oninit: function oninit(ref) {
 		var state = ref.state;
 
@@ -3118,22 +3220,22 @@ var Component$12 = {
 	}
 };
 
-var es5$13 = codeString(
+var es5$14 = codeString(
 "var BookView = {\n\toninit: function(vnode) {\n\t\tvnode.state.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then(function(response) {\n\t\t\t\treturn response.json();\n\t\t\t})\n\t\t\t.then(vnode.state.books)\n\t\t\t.then(function() {\n\t\t\t\tm.redraw();\n\t\t\t});\n\t},\n\tview: function(vnode) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tvnode.state.books().map(function(book, i) {\n\t\t\t\t\t\treturn m('li', { key: i }, book.name);\n\t\t\t\t\t})\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var es6$13 = codeString(
+var es6$14 = codeString(
 "const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then((response) => response.json())\n\t\t\t.then(state.books)\n\t\t\t.then(() => m.redraw());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm('h3', 'Books'),\n\t\t\t\tm('ul',\n\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\tm('li', { key: i }, book.name)\n\t\t\t\t\t)\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var jsx$13 = codeString(
+var jsx$14 = codeString(
 "const BookView = {\n\toninit({ state }) {\n\t\tstate.books = m.prop([]);\n\t\tfetch('https://mithril-examples.firebaseio.com/books.json')\n\t\t\t.then((response) => response.json())\n\t\t\t.then(state.books)\n\t\t\t.then(() => m.redraw());\n\t},\n\tview({ state }) {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<h3>Books</h3>\n\t\t\t\t<ul>\n\t\t\t\t\t{\n\t\t\t\t\t\tstate.books().map((book, i) =>\n\t\t\t\t\t\t\t<li key={i}>{book.name}</li>\n\t\t\t\t\t\t)\n\t\t\t\t\t}\n\t\t\t\t</ul>\n\t\t\t</div>\n\t\t);\n\t}\n};");
 
-var code$13 = [
-	{ id: 'es5', code: es5$13 },
-	{ id: 'es6', code: es6$13 },
-	{ id: 'jsx', code: jsx$13 }
+var code$14 = [
+	{ id: 'es5', code: es5$14 },
+	{ id: 'es6', code: es6$14 },
+	{ id: 'jsx', code: jsx$14 }
 ];
 
-var Component$13 = {
+var Component$14 = {
 	oninit: function oninit(ref) {
 		var state = ref.state;
 
@@ -3173,10 +3275,10 @@ function view$7() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$12 })
+						index(Tabs, { tabs: code$13 })
 					),
 					index('.Demo-right',
-						index('.Demo-result', index(Component$12))
+						index('.Demo-result', index(Component$13))
 					)
 				)
 			),
@@ -3190,10 +3292,10 @@ function view$7() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$13 })
+						index(Tabs, { tabs: code$14 })
 					),
 					index('.Demo-right',
-						index('.Demo-result', index(Component$13))
+						index('.Demo-result', index(Component$14))
 					)
 				)
 			)
@@ -3205,35 +3307,14 @@ var Requests = {
 	view: view$7
 };
 
-var es5$14 = codeString(
+var es5$15 = codeString(
 "var RouteView = {\n\tview: function() {\n\t\treturn m('div', 'Current route: ', m.route.get());\n\t}\n};");
 
-var es6$14 = codeString(
+var es6$15 = codeString(
 "const RouteView = {\n\tview() {\n\t\treturn m('div', 'Current route: ', m.route.get());\n\t}\n};");
 
-var jsx$14 = codeString(
-"const RouteView = {\n\tview() {\n\t\treturn <div>Current route: {m.route.get()}</div>;\n\t}\n};");
-
-var code$14 = [
-	{ id: 'es5', code: es5$14 },
-	{ id: 'es6', code: es6$14 },
-	{ id: 'jsx', code: jsx$14 }
-];
-
-var Component$14 = {
-	view: function view() {
-		return index('div', 'Current route: ', index.route.get());
-	}
-};
-
-var es5$15 = codeString(
-"var LinkView = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
-
-var es6$15 = codeString(
-"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
-
 var jsx$15 = codeString(
-"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing' oncreate={m.route.link}>\n\t\t\t\t\t\tRouting page (root)\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/foo' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/foo\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/bar' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/bar\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t);\n\t}\n};");
+"const RouteView = {\n\tview() {\n\t\treturn <div>Current route: {m.route.get()}</div>;\n\t}\n};");
 
 var code$15 = [
 	{ id: 'es5', code: es5$15 },
@@ -3242,6 +3323,27 @@ var code$15 = [
 ];
 
 var Component$15 = {
+	view: function view() {
+		return index('div', 'Current route: ', index.route.get());
+	}
+};
+
+var es5$16 = codeString(
+"var LinkView = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var es6$16 = codeString(
+"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/foo]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('a[href=/routing/bar]', {\n\t\t\t\t\t\toncreate: m.route.link\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
+
+var jsx$16 = codeString(
+"const LinkView = {\n\tview() {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing' oncreate={m.route.link}>\n\t\t\t\t\t\tRouting page (root)\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/foo' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/foo\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<a href='/routing/bar' oncreate={m.route.link}>\n\t\t\t\t\t\t/routing/bar\n\t\t\t\t\t</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t);\n\t}\n};");
+
+var code$16 = [
+	{ id: 'es5', code: es5$16 },
+	{ id: 'es6', code: es6$16 },
+	{ id: 'jsx', code: jsx$16 }
+];
+
+var Component$16 = {
 	view: function view() {
 		return (
 			index('ul',
@@ -3265,22 +3367,22 @@ var Component$15 = {
 	}
 };
 
-var es5$16 = codeString(
+var es5$17 = codeString(
 "var ButtonView = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing') }\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing/foo') }\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: function() { m.route.set('/routing/bar') }\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var es6$16 = codeString(
+var es6$17 = codeString(
 "const ButtonView = {\n\tview() {\n\t\treturn (\n\t\t\tm('ul',\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing')\n\t\t\t\t\t}, 'Routing page (root)')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing/foo')\n\t\t\t\t\t}, '/routing/foo')\n\t\t\t\t),\n\t\t\t\tm('li',\n\t\t\t\t\tm('button', {\n\t\t\t\t\t\tonclick: () => m.route.set('/routing/bar')\n\t\t\t\t\t}, '/routing/bar')\n\t\t\t\t)\n\t\t\t)\n\t\t);\n\t}\n};");
 
-var jsx$16 = codeString(
+var jsx$17 = codeString(
 "const ButtonView = {\n\tview() {\n\t\treturn (\n\t\t\t<ul>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing')}>\n\t\t\t\t\t\tRouting page (root)\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing/foo')}>\n\t\t\t\t\t\t/routing/foo\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t\t<li>\n\t\t\t\t\t<button onclick={() => m.route.set('/routing/bar')}>\n\t\t\t\t\t\t/routing/bar\n\t\t\t\t\t</button>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t);\n\t}\n};");
 
-var code$16 = [
-	{ id: 'es5', code: es5$16 },
-	{ id: 'es6', code: es6$16 },
-	{ id: 'jsx', code: jsx$16 }
+var code$17 = [
+	{ id: 'es5', code: es5$17 },
+	{ id: 'es6', code: es6$17 },
+	{ id: 'jsx', code: jsx$17 }
 ];
 
-var Component$16 = {
+var Component$17 = {
 	view: function view() {
 		return (
 			index('ul',
@@ -3313,10 +3415,10 @@ function view$8(ref) {
 				index('h2', 'Getting the current route'),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$14 })
+						index(Tabs, { tabs: code$15 })
 					),
 					index('.Demo-right',
-						index('.Demo-result', index(Component$14))
+						index('.Demo-result', index(Component$15))
 					)
 				)
 			),
@@ -3336,10 +3438,10 @@ function view$8(ref) {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$15 })
+						index(Tabs, { tabs: code$16 })
 					),
 					index('.Demo-right',
-						index('.Demo-result', index(Component$15))
+						index('.Demo-result', index(Component$16))
 					)
 				)
 			),
@@ -3347,10 +3449,10 @@ function view$8(ref) {
 				index('h2', 'Setting the current route programmatically'),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$16 })
+						index(Tabs, { tabs: code$17 })
 					),
 					index('.Demo-right',
-						index('.Demo-result', index(Component$16))
+						index('.Demo-result', index(Component$17))
 					)
 				)
 			),

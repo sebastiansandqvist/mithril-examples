@@ -12,6 +12,11 @@ import {
 	Component as CartComponent1
 } from '../examples/cart1.js';
 
+import {
+	code as translate1,
+	Component as TranslateComponent1
+} from '../examples/translate1.js';
+
 function view() {
 	return (
 		m(Page, { id: 'Applications' },
@@ -38,6 +43,17 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(CartComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Braille Translator'),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: translate1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(TranslateComponent1))
 					)
 				)
 			)
