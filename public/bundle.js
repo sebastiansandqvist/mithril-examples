@@ -2248,10 +2248,10 @@ var Component = {
 };
 
 var es5$1 = codeString(
-"var HelloButton = {\n\tview: function(vnode) {\n\t\treturn m('button', 'Hello ' + vnode.attrs.title);\n\t}\n};\n\nvar Component = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(HelloButton, { title: 'world'})\n\t\t\t\tm(HelloButton, { title: 'everyone'})\n\t\t\t\tm(HelloButton, { title: 'darkness my old friend'})\n\t\t\t)\n\t\t);\n\t}\n};");
+"var HelloButton = {\n\tview: function(vnode) {\n\t\treturn m('button', 'Hello ' + vnode.attrs.title);\n\t}\n};\n\nvar Component = {\n\tview: function() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(HelloButton, { title: 'world' }),\n\t\t\t\tm(HelloButton, { title: 'everyone' }),\n\t\t\t\tm(HelloButton, { title: 'darkness my old friend' })\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var es6$1 = codeString(
-"const HelloButton = {\n\tview({ attrs }) {\n\t\treturn m('button', `Hello ${attrs.title}`);\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(HelloButton, { title: 'world'})\n\t\t\t\tm(HelloButton, { title: 'everyone'})\n\t\t\t\tm(HelloButton, { title: 'darkness my old friend'})\n\t\t\t)\n\t\t);\n\t}\n};");
+"const HelloButton = {\n\tview({ attrs }) {\n\t\treturn m('button', `Hello ${attrs.title}`);\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\tm('div',\n\t\t\t\tm(HelloButton, { title: 'world' }),\n\t\t\t\tm(HelloButton, { title: 'everyone' }),\n\t\t\t\tm(HelloButton, { title: 'darkness my old friend' })\n\t\t\t)\n\t\t);\n\t}\n};");
 
 var jsx$1 = codeString(
 "const HelloButton = {\n\tview({ attrs }) {\n\t\treturn <button>Hello {attrs.title}</button>;\n\t}\n};\n\nconst Component = {\n\tview() {\n\t\treturn (\n\t\t\t<div>\n\t\t\t\t<HelloButton title='world'/>\n\t\t\t\t<HelloButton title='everyone'/>\n\t\t\t\t<HelloButton title='darkness my old friend'/>\n\t\t\t</div>\n\t\t);\n\t}\n};");
