@@ -3,7 +3,11 @@ import Page from './Page.js';
 
 function view() {
 	return (
-		m(Page, { id: 'm.prop' })
+		m(Page, { id: 'Streams' },
+			m('.Section',
+				m('h2', '...')
+			)
+		)
 	);
 }
 

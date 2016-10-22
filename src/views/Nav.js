@@ -6,6 +6,7 @@ const pages = [
 	'Requests',
 	'Applications',
 	'Routing'
+	// 'Streams'
 ];
 
 const Link = {
