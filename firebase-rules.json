@@ -1,6 +1,8 @@
-{
-	"books": {
-		".read": true,
-		".write": false
+{	
+	"rules": {
+		"books": {
+			".read": true,
+			".write": false
+		}
 	}
 }
