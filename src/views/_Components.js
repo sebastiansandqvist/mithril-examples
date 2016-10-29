@@ -48,7 +48,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: stopwatch1 })
+						m(Tabs, { tabs: stopwatch1, fiddle: 'ckap5y2g' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(StopwatchComponent1))
@@ -64,7 +64,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: stopwatch2 })
+						m(Tabs, { tabs: stopwatch2, fiddle: 'nkuc6rbk' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(StopwatchComponent2))
