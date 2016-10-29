@@ -87,7 +87,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: rotator1 })
+						m(Tabs, { tabs: rotator1, fiddle: '5ek60qfs' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(RotatorComponent1))

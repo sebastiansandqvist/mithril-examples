@@ -3284,7 +3284,7 @@ function view$5() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$6 })
+						index(Tabs, { tabs: code$6, fiddle: '5ek60qfs' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$6))
@@ -3295,7 +3295,7 @@ function view$5() {
 				index('h2', 'Password input'),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$7 })
+						index(Tabs, { tabs: code$7, fiddle: '256kx8sy' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$7))
