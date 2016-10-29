@@ -3197,7 +3197,7 @@ function view$5() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$4 })
+						index(Tabs, { tabs: code$4, fiddle: 'ckap5y2g' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$4))
@@ -3213,7 +3213,7 @@ function view$5() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$5 })
+						index(Tabs, { tabs: code$5, fiddle: 'nkuc6rbk' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$5))
