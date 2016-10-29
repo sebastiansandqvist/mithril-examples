@@ -131,6 +131,39 @@ ul {
 	width: 15px;
 }
 
+/* ---------------------- TOOLTIP ---------------------- */
+
+.Tooltip-wrap {
+	display: inline-block;
+	position: relative;
+	transform: translateZ(0);
+}
+
+.Tooltip-wrap:hover .Tooltip {
+		opacity: 1;
+		transform: translateX(-50%) translateY(5px);
+		transition: all .3s ease .5s;
+		visibility: visible;
+}
+
+.Tooltip {
+	background: rgba(0, 0, 0, .8);
+	border-radius: 2px;
+	bottom: -30px;
+	color: white;
+	font-size: 12px;
+	left: 50%;
+	opacity: 0;
+	padding: 5px 10px;
+	position: absolute;
+	transition: all .2s ease;
+	transform: translateX(-50%) translateY(0);
+	user-select: none;
+	visibility: hidden;
+	white-space: nowrap;
+}
+
+
 /* ---------------------- TYPOGRAPHY ---------------------- */
 
 h1 {
@@ -179,6 +212,7 @@ code.inline {
 	padding: 0 5px;
 }
 
+.property,
 .keyword {
 	color: #93ddf5;
 }
@@ -188,6 +222,7 @@ code.inline {
 	color: #ae81ff;
 }
 
+.selector,
 .string {
 	color: #a7e040;
 }

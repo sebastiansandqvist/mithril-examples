@@ -32,6 +32,11 @@ import {
 	Component as TabsComponent1
 } from '../examples/tabs1.js';
 
+import {
+	code as tooltip1,
+	Component as TooltipComponent1
+} from '../examples/tooltip1.js';
+
 function view() {
 	return (
 		m(Page, { id: 'Components' },
@@ -142,6 +147,25 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(TabsComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Tooltips'),
+				m('p',
+					'There are a lot of ways to implement tooltips. This implementation relies more on CSS than mithril, ',
+					'but mithril makes it easy to reuse the component. The code that defines the tooltip component just wraps ',
+					'arbitrary child components in the correct css class names, and allows the value of the tooltip to be ',
+					'dynamically set using ',
+					m('code.inline', 'attrs.value'),
+					'.'
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: tooltip1, fiddle: '181vwbL8' })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(TooltipComponent1))
 					)
 				)
 			)
