@@ -3234,19 +3234,71 @@ var Component$10 = {
   }
 };
 
+function generateCode(fullString) {
+	var output = [];
+	var codeRegex = /(`(.*?)`)/gm;
+	var split = fullString.split(codeRegex);
+	var isCodeRaw = false;
+	var isCode = false;
+	for (var i = 0; i < split.length; i++) {
+		isCodeRaw = codeRegex.test(split[i]);
+		isCode = codeRegex.test(split[i - 1] || '');
+		if (isCode) {
+			output.push(index('code.inline', split[i]));
+		}
+		else if (!isCodeRaw) {
+			output.push(index('span', split[i]));
+		}
+	}
+	return output;
+}
+
+function generateLink(title, fullString) {
+	var parenRegex = /\(([^)]+)\)/;
+	var url = fullString.match(parenRegex)[1];
+	if (url[0] === '/') {
+		return index('a', { href: url, oncreate: index.route.link }, title);
+	}
+	return index('a', { href: url }, title);
+}
+
+function markup(str) {
+	var codeRegex = /`(.*?)`/gm;
+	var linkRegex = /(\[(.*?)\]\(.*?\))/gm;
+	var output = [];
+	var rawContents = str.split(linkRegex);
+	var hasCode = false;
+	var isLinkRaw = false;
+	var isLink = false;
+	for (var i = 0; i < rawContents.length; i++) {
+		hasCode = codeRegex.test(rawContents[i]);
+		isLinkRaw = linkRegex.test(rawContents[i]);
+		isLink = linkRegex.test(rawContents[i - 1] || '');
+		if (hasCode) {
+			output.push(generateCode(rawContents[i]));
+		}
+		else if (isLink) {
+			output.push(generateLink(rawContents[i], rawContents[i - 1])); // previous item is context with url
+		}
+		else if (!isLinkRaw) {
+			output.push(rawContents[i]);
+		}
+	}
+	return output;
+}
+
 function view$5() {
 	return (
 		index(Page, { id: 'Components' },
 			index('.Section',
 				index('h2', 'Stopwatch'),
 				index('p',
-					'In the ',
-					index('a[href=/]', { oncreate: index.route.link }, 'Getting started'),
-					' example there was no need to manually tell mithril to update the view when ',
-					'the contents of the input changed, because mithril automatically redraws after event handlers ',
-					'are called. In this example there are no events that trigger an update, so we tell mithril to update via ',
-					index('code.inline', 'm.redraw'),
-					'.'
+					markup(
+						'In the [Getting started](/) example there was no need to manually tell mithril to update the view when ' +
+						'the contents of the input changed, because mithril automatically redraws after event handlers are ' +
+						'called. In this example there are no events that trigger an update, so we tell mithril to update via ' +
+						'`m.redraw`.'
+					)
 				),
 				index('.Demo',
 					index('.Demo-left',
@@ -3257,12 +3309,11 @@ function view$5() {
 					)
 				),
 				index('p',
-					'Adding a reset button is as simple as creating the button element in the ',
-					index('code.inline', 'view'),
-					' function and setting its ',
-					index('code.inline', 'onclick'),
-					' handler to a function that changes the count to 0. Similarly, the Start/Pause toggle',
-					' is just a button that either clears or starts a new counter.'
+					markup(
+						'Adding a reset button is as simple as creating the button element in the `view` function and setting ' +
+						'its `onclick` handler to a function that changes the count to 0. Similarly, the Start/Pause toggle ' +
+						'is just a button that either clears or starts a new counter.'
+					)
 				),
 				index('.Demo',
 					index('.Demo-left',
@@ -3434,13 +3485,13 @@ var Component$11 = {
 };
 
 var es5$12 = codeString(
-"var ListView = {\n  view: function(vnode) {\n    return (\n      m('ul',\n          vnode.attrs.items ?\n            vnode.attrs.items.map(function(book, i) {\n              return m('li', { key: i },\n                m('span', book.name, ' $', book.price),\n                m('button.right', {\n                  onclick: function() {\n                    vnode.attrs.action(book);\n                  }\n                }, vnode.attrs.actionLabel)\n              )\n          }) : m('div', 'Loading...')\n      )\n    );\n  }\n};\n\nvar BookShop = {\n  oninit: function(vnode) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    vnode.state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    vnode.state.cart = m.prop([]);\n    vnode.state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    vnode.state.shop = m.prop.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase()\n          .indexOf(text().toLowerCase()) > -1 &&\n            cart().indexOf(book) === -1;\n      });\n    }, [vnode.state.text, vnode.state.books, vnode.state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    vnode.state.total = vnode.state.cart.map(function(cart) {\n      return cart.reduce(function(prev, next) {\n        return prev + next.price;\n      }, 0);\n    });\n\n    vnode.state.addToCart = function(book) {\n      vnode.state.cart(vnode.state.cart().concat(book));\n    };\n\n    vnode.state.removeFromCart = function(book) {\n      vnode.state.cart(\n        vnode.state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Book Shop'),\n        m('input[type=text]', {\n          placeholder: 'Filter',\n          value: vnode.state.text(),\n          oninput: m.withAttr('value', vnode.state.text)\n        }),\n        m(ListView, {\n          items: vnode.state.shop(),\n          action: vnode.state.addToCart,\n          actionLabel: 'Add'\n        }),\n        m('hr'),\n        m('h3', 'Cart'),\n        m(ListView, {\n          items: vnode.state.cart(),\n          action: vnode.state.removeFromCart,\n          actionLabel: 'Remove'\n        }),\n        m('strong', 'Total: '),\n        m('span', '$', vnode.state.total())\n      )\n    );\n  }\n};");
+"var ListView = {\n  view: function(vnode) {\n    return (\n      m('ul',\n          vnode.attrs.items ?\n            vnode.attrs.items.map(function(book, i) {\n              return m('li', { key: i },\n                m('span', book.name, ' $', book.price),\n                m('button.right', {\n                  onclick: function() {\n                    vnode.attrs.action(book);\n                  }\n                }, vnode.attrs.actionLabel)\n              )\n          }) : m('div', 'Loading...')\n      )\n    );\n  }\n};\n\nvar BookShop = {\n  oninit: function(vnode) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    vnode.state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    vnode.state.cart = m.prop([]);\n    vnode.state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    vnode.state.shop = m.prop.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase()\n          .indexOf(text().toLowerCase()) > -1 &&\n            cart().indexOf(book) === -1;\n      });\n    }, [vnode.state.text, vnode.state.books, vnode.state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    vnode.state.total = vnode.state.cart.run(function(cart) {\n      return cart.reduce(function(prev, next) {\n        return prev + next.price;\n      }, 0);\n    });\n\n    vnode.state.addToCart = function(book) {\n      vnode.state.cart(vnode.state.cart().concat(book));\n    };\n\n    vnode.state.removeFromCart = function(book) {\n      vnode.state.cart(\n        vnode.state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Book Shop'),\n        m('input[type=text]', {\n          placeholder: 'Filter',\n          value: vnode.state.text(),\n          oninput: m.withAttr('value', vnode.state.text)\n        }),\n        m(ListView, {\n          items: vnode.state.shop(),\n          action: vnode.state.addToCart,\n          actionLabel: 'Add'\n        }),\n        m('hr'),\n        m('h3', 'Cart'),\n        m(ListView, {\n          items: vnode.state.cart(),\n          action: vnode.state.removeFromCart,\n          actionLabel: 'Remove'\n        }),\n        m('strong', 'Total: '),\n        m('span', '$', vnode.state.total())\n      )\n    );\n  }\n};");
 
 var es6$12 = codeString(
-"const ListView = {\n  view({ attrs }) {\n    return (\n      m('ul',\n          attrs.items ? attrs.items.map((book, i) =>\n            m('li', { key: i },\n              m('span', book.name, ' $', book.price),\n              m('button.right', {\n                onclick() {\n                  attrs.action(book);\n                }\n              }, attrs.actionLabel)\n            )\n          ) : m('div', 'Loading...')\n\n      )\n    );\n  }\n};\n\nconst BookShop = {\n  oninit({ state }) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    state.cart = m.prop([]);\n    state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    state.shop = m.prop.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n          cart().indexOf(book) === -1;\n      });\n    }, [state.text, state.books, state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    state.total = state.cart.map(function(cart) {\n      return cart.reduce((prev, next) => prev + next.price, 0);\n    });\n\n    state.addToCart = function(book) {\n      state.cart(state.cart().concat(book));\n    };\n\n    state.removeFromCart = function(book) {\n      state.cart(\n        state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Book Shop'),\n        m('input[type=text]', {\n          placeholder: 'Filter',\n          value: state.text(),\n          oninput: m.withAttr('value', state.text)\n        }),\n        m(ListView, {\n          items: state.shop(),\n          action: state.addToCart,\n          actionLabel: 'Add'\n        }),\n        m('hr'),\n        m('h3', 'Cart'),\n        m(ListView, {\n          items: state.cart(),\n          action: state.removeFromCart,\n          actionLabel: 'Remove'\n        }),\n        m('strong', 'Total: '),\n        m('span', '$', state.total())\n      )\n    );\n  }\n};");
+"const ListView = {\n  view({ attrs }) {\n    return (\n      m('ul',\n          attrs.items ? attrs.items.map((book, i) =>\n            m('li', { key: i },\n              m('span', book.name, ' $', book.price),\n              m('button.right', {\n                onclick() {\n                  attrs.action(book);\n                }\n              }, attrs.actionLabel)\n            )\n          ) : m('div', 'Loading...')\n\n      )\n    );\n  }\n};\n\nconst BookShop = {\n  oninit({ state }) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    state.cart = m.prop([]);\n    state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    state.shop = m.prop.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n          cart().indexOf(book) === -1;\n      });\n    }, [state.text, state.books, state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    state.total = state.cart.run(function(cart) {\n      return cart.reduce((prev, next) => prev + next.price, 0);\n    });\n\n    state.addToCart = function(book) {\n      state.cart(state.cart().concat(book));\n    };\n\n    state.removeFromCart = function(book) {\n      state.cart(\n        state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Book Shop'),\n        m('input[type=text]', {\n          placeholder: 'Filter',\n          value: state.text(),\n          oninput: m.withAttr('value', state.text)\n        }),\n        m(ListView, {\n          items: state.shop(),\n          action: state.addToCart,\n          actionLabel: 'Add'\n        }),\n        m('hr'),\n        m('h3', 'Cart'),\n        m(ListView, {\n          items: state.cart(),\n          action: state.removeFromCart,\n          actionLabel: 'Remove'\n        }),\n        m('strong', 'Total: '),\n        m('span', '$', state.total())\n      )\n    );\n  }\n};");
 
 var jsx$12 = codeString(
-"const ListView = {\n  view({ attrs }) {\n    return (\n      <ul>\n        {\n          attrs.items ? attrs.items.map((book, i) =>\n            <li key={i}>\n              <span>{book.name} ${book.price}</span>\n              <button className='right' onclick={() => attrs.action(book)}>\n                {attrs.actionLabel}\n              </button>\n            </li>\n          ) : <div>Loading...</div>\n        }\n      </ul>\n    );\n  }\n};\n\nconst BookShop = {\n  oninit({ state }) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    state.cart = m.prop([]);\n    state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    state.shop = m.prop.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n          cart().indexOf(book) === -1;\n      });\n    }, [state.text, state.books, state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    state.total = state.cart.map(function(cart) {\n      return cart.reduce((prev, next) => prev + next.price, 0);\n    });\n\n    state.addToCart = function(book) {\n      state.cart(state.cart().concat(book));\n    };\n\n    state.removeFromCart = function(book) {\n      state.cart(\n        state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Book shop</h3>\n        <input\n          type='text'\n          placeholder='filter'\n          value={state.text()}\n          oninput={m.withAttr('value', state.text)}/>\n        <ListView\n          items={state.shop()}\n          action={state.addToCart}\n          actionLabel='Add'/>\n        <hr/>\n        <h3>Cart</h3>\n        <ListView\n          items={state.cart()}\n          action={state.removeFromCart}\n          actionLabel='Remove'/>\n        <strong>Total: </strong>\n        <span>${state.total()}</span>\n      </div>\n    );\n  }\n};");
+"const ListView = {\n  view({ attrs }) {\n    return (\n      <ul>\n        {\n          attrs.items ? attrs.items.map((book, i) =>\n            <li key={i}>\n              <span>{book.name} ${book.price}</span>\n              <button className='right' onclick={() => attrs.action(book)}>\n                {attrs.actionLabel}\n              </button>\n            </li>\n          ) : <div>Loading...</div>\n        }\n      </ul>\n    );\n  }\n};\n\nconst BookShop = {\n  oninit({ state }) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    state.cart = m.prop([]);\n    state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    state.shop = m.prop.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n          cart().indexOf(book) === -1;\n      });\n    }, [state.text, state.books, state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    state.total = state.cart.run(function(cart) {\n      return cart.reduce((prev, next) => prev + next.price, 0);\n    });\n\n    state.addToCart = function(book) {\n      state.cart(state.cart().concat(book));\n    };\n\n    state.removeFromCart = function(book) {\n      state.cart(\n        state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Book shop</h3>\n        <input\n          type='text'\n          placeholder='filter'\n          value={state.text()}\n          oninput={m.withAttr('value', state.text)}/>\n        <ListView\n          items={state.shop()}\n          action={state.addToCart}\n          actionLabel='Add'/>\n        <hr/>\n        <h3>Cart</h3>\n        <ListView\n          items={state.cart()}\n          action={state.removeFromCart}\n          actionLabel='Remove'/>\n        <strong>Total: </strong>\n        <span>${state.total()}</span>\n      </div>\n    );\n  }\n};");
 
 var code$12 = [
   { id: 'es5', code: es5$12 },
@@ -3494,7 +3545,7 @@ var Component$12 = {
     }, [state.text, state.books, state.cart]);
 
     // when the cart updates, state.total = price of books in cart
-    state.total = state.cart.map(function(cart) {
+    state.total = state.cart.run(function(cart) {
       return cart.reduce(function (prev, next) { return prev + next.price; }, 0);
     });
 
@@ -3540,13 +3591,13 @@ var Component$12 = {
 };
 
 var es5$13 = codeString(
-"function mapAsciiToBraille(character) {\n\n  var map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nvar BrailleTranslator = {\n  oninit: function(vnode) {\n    vnode.state.input = m.prop('');\n    vnode.state.output = vnode.state.input.map(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('div', 'Enter ascii text:'),\n        m('input[type=text]', {\n          placeholder: 'input',\n          value: vnode.state.input(),\n          oninput: m.withAttr('value', vnode.state.input)\n        }),\n        m('hr'),\n        m('div', 'Braille:'),\n        m('div', vnode.state.output())\n      )\n    );\n  }\n};");
+"function mapAsciiToBraille(character) {\n\n  var map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nvar BrailleTranslator = {\n  oninit: function(vnode) {\n    vnode.state.input = m.prop('');\n    vnode.state.output = vnode.state.input.run(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('div', 'Enter ascii text:'),\n        m('input[type=text]', {\n          placeholder: 'input',\n          value: vnode.state.input(),\n          oninput: m.withAttr('value', vnode.state.input)\n        }),\n        m('hr'),\n        m('div', 'Braille:'),\n        m('div', vnode.state.output())\n      )\n    );\n  }\n};");
 
 var es6$13 = codeString(
-"function mapAsciiToBraille(character) {\n\n  const map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n  oninit({ state }) {\n    state.input = m.prop('');\n    state.output = state.input.map(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('div', 'Enter ascii text:'),\n        m('input[type=text]', {\n          placeholder: 'input',\n          value: state.input(),\n          oninput: m.withAttr('value', state.input)\n        }),\n        m('hr'),\n        m('div', 'Braille:'),\n        m('div', state.output())\n      )\n    );\n  }\n};");
+"function mapAsciiToBraille(character) {\n\n  const map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n  oninit({ state }) {\n    state.input = m.prop('');\n    state.output = state.input.run(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('div', 'Enter ascii text:'),\n        m('input[type=text]', {\n          placeholder: 'input',\n          value: state.input(),\n          oninput: m.withAttr('value', state.input)\n        }),\n        m('hr'),\n        m('div', 'Braille:'),\n        m('div', state.output())\n      )\n    );\n  }\n};");
 
 var jsx$13 = codeString(
-"function mapAsciiToBraille(character) {\n\n  const map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n  oninit({ state }) {\n    state.input = m.prop('');\n    state.output = state.input.map(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view({ state }) {\n    return (\n      <div>\n        <div>Enter ascii text:</div>\n        <input\n          type='text'\n          value={state.input()}\n          oninput={m.withAttr('value', state.input)}/>\n        <hr/>\n        <div>Braille:</div>\n        <div>{state.output()}</div>\n      </div>\n    );\n  }\n};");
+"function mapAsciiToBraille(character) {\n\n  const map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n  oninit({ state }) {\n    state.input = m.prop('');\n    state.output = state.input.run(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view({ state }) {\n    return (\n      <div>\n        <div>Enter ascii text:</div>\n        <input\n          type='text'\n          value={state.input()}\n          oninput={m.withAttr('value', state.input)}/>\n        <hr/>\n        <div>Braille:</div>\n        <div>{state.output()}</div>\n      </div>\n    );\n  }\n};");
 
 var code$13 = [
   { id: 'es5', code: es5$13 },
@@ -3605,7 +3656,7 @@ var Component$13 = {
     var state = ref.state;
 
     state.input = index.prop('');
-    state.output = state.input.map(function(text) {
+    state.output = state.input.run(function(text) {
       return text
         .toLowerCase()
         .split('')
@@ -3643,7 +3694,7 @@ function view$6() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$11 })
+						index(Tabs, { tabs: code$11, fiddle: 'vqqfvjb6' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$11))
@@ -3654,7 +3705,7 @@ function view$6() {
 				index('h2', 'Shopping cart'),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$12 })
+						index(Tabs, { tabs: code$12, fiddle: 'mbyqewny' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$12))
@@ -3665,7 +3716,7 @@ function view$6() {
 				index('h2', 'Braille Translator'),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$13 })
+						index(Tabs, { tabs: code$13, fiddle: '53xrgmxq' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$13))

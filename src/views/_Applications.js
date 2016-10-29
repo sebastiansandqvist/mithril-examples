@@ -28,7 +28,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: todo1 })
+						m(Tabs, { tabs: todo1, fiddle: 'vqqfvjb6' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(TodoComponent1))
@@ -39,7 +39,7 @@ function view() {
 				m('h2', 'Shopping cart'),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: cart1 })
+						m(Tabs, { tabs: cart1, fiddle: 'mbyqewny' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(CartComponent1))
@@ -50,7 +50,7 @@ function view() {
 				m('h2', 'Braille Translator'),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: translate1 })
+						m(Tabs, { tabs: translate1, fiddle: '53xrgmxq' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(TranslateComponent1))

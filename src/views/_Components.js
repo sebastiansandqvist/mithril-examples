@@ -37,19 +37,71 @@ import {
 	Component as TooltipComponent1
 } from '../examples/tooltip1.js';
 
+function generateCode(fullString) {
+	const output = [];
+	const codeRegex = /(`(.*?)`)/gm;
+	const split = fullString.split(codeRegex);
+	let isCodeRaw = false;
+	let isCode = false;
+	for (let i = 0; i < split.length; i++) {
+		isCodeRaw = codeRegex.test(split[i]);
+		isCode = codeRegex.test(split[i - 1] || '');
+		if (isCode) {
+			output.push(m('code.inline', split[i]));
+		}
+		else if (!isCodeRaw) {
+			output.push(m('span', split[i]));
+		}
+	}
+	return output;
+}
+
+function generateLink(title, fullString) {
+	const parenRegex = /\(([^)]+)\)/;
+	const url = fullString.match(parenRegex)[1];
+	if (url[0] === '/') {
+		return m('a', { href: url, oncreate: m.route.link }, title);
+	}
+	return m('a', { href: url }, title);
+}
+
+function markup(str) {
+	const codeRegex = /`(.*?)`/gm;
+	const linkRegex = /(\[(.*?)\]\(.*?\))/gm;
+	const output = [];
+	const rawContents = str.split(linkRegex);
+	let hasCode = false;
+	let isLinkRaw = false;
+	let isLink = false;
+	for (let i = 0; i < rawContents.length; i++) {
+		hasCode = codeRegex.test(rawContents[i]);
+		isLinkRaw = linkRegex.test(rawContents[i]);
+		isLink = linkRegex.test(rawContents[i - 1] || '');
+		if (hasCode) {
+			output.push(generateCode(rawContents[i]));
+		}
+		else if (isLink) {
+			output.push(generateLink(rawContents[i], rawContents[i - 1])); // previous item is context with url
+		}
+		else if (!isLinkRaw) {
+			output.push(rawContents[i]);
+		}
+	}
+	return output;
+}
+
 function view() {
 	return (
 		m(Page, { id: 'Components' },
 			m('.Section',
 				m('h2', 'Stopwatch'),
 				m('p',
-					'In the ',
-					m('a[href=/]', { oncreate: m.route.link }, 'Getting started'),
-					' example there was no need to manually tell mithril to update the view when ',
-					'the contents of the input changed, because mithril automatically redraws after event handlers ',
-					'are called. In this example there are no events that trigger an update, so we tell mithril to update via ',
-					m('code.inline', 'm.redraw'),
-					'.'
+					markup(
+						'In the [Getting started](/) example there was no need to manually tell mithril to update the view when ' +
+						'the contents of the input changed, because mithril automatically redraws after event handlers are ' +
+						'called. In this example there are no events that trigger an update, so we tell mithril to update via ' +
+						'`m.redraw`.'
+					)
 				),
 				m('.Demo',
 					m('.Demo-left',
@@ -60,12 +112,11 @@ function view() {
 					)
 				),
 				m('p',
-					'Adding a reset button is as simple as creating the button element in the ',
-					m('code.inline', 'view'),
-					' function and setting its ',
-					m('code.inline', 'onclick'),
-					' handler to a function that changes the count to 0. Similarly, the Start/Pause toggle',
-					' is just a button that either clears or starts a new counter.'
+					markup(
+						'Adding a reset button is as simple as creating the button element in the `view` function and setting ' +
+						'its `onclick` handler to a function that changes the count to 0. Similarly, the Start/Pause toggle ' +
+						'is just a button that either clears or starts a new counter.'
+					)
 				),
 				m('.Demo',
 					m('.Demo-left',

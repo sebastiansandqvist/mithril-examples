@@ -50,7 +50,7 @@ const es5 = codeString(
 var BrailleTranslator = {
   oninit: function(vnode) {
     vnode.state.input = m.prop('');
-    vnode.state.output = vnode.state.input.map(function(text) {
+    vnode.state.output = vnode.state.input.run(function(text) {
       return text
         .toLowerCase()
         .split('')
@@ -124,7 +124,7 @@ const es6 = codeString(
 const BrailleTranslator = {
   oninit({ state }) {
     state.input = m.prop('');
-    state.output = state.input.map(function(text) {
+    state.output = state.input.run(function(text) {
       return text
         .toLowerCase()
         .split('')
@@ -198,7 +198,7 @@ const jsx = codeString(
 const BrailleTranslator = {
   oninit({ state }) {
     state.input = m.prop('');
-    state.output = state.input.map(function(text) {
+    state.output = state.input.run(function(text) {
       return text
         .toLowerCase()
         .split('')
@@ -277,7 +277,7 @@ function mapAsciiToBraille(character) {
 export const Component = {
   oninit({ state }) {
     state.input = m.prop('');
-    state.output = state.input.map(function(text) {
+    state.output = state.input.run(function(text) {
       return text
         .toLowerCase()
         .split('')

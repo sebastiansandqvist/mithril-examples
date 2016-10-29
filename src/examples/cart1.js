@@ -46,7 +46,7 @@ var BookShop = {
     }, [vnode.state.text, vnode.state.books, vnode.state.cart]);
 
     // when the cart updates, state.total = price of books in cart
-    vnode.state.total = vnode.state.cart.map(function(cart) {
+    vnode.state.total = vnode.state.cart.run(function(cart) {
       return cart.reduce(function(prev, next) {
         return prev + next.price;
       }, 0);
@@ -135,7 +135,7 @@ const BookShop = {
     }, [state.text, state.books, state.cart]);
 
     // when the cart updates, state.total = price of books in cart
-    state.total = state.cart.map(function(cart) {
+    state.total = state.cart.run(function(cart) {
       return cart.reduce((prev, next) => prev + next.price, 0);
     });
 
@@ -221,7 +221,7 @@ const BookShop = {
     }, [state.text, state.books, state.cart]);
 
     // when the cart updates, state.total = price of books in cart
-    state.total = state.cart.map(function(cart) {
+    state.total = state.cart.run(function(cart) {
       return cart.reduce((prev, next) => prev + next.price, 0);
     });
 
@@ -311,7 +311,7 @@ export const Component = {
     }, [state.text, state.books, state.cart]);
 
     // when the cart updates, state.total = price of books in cart
-    state.total = state.cart.map(function(cart) {
+    state.total = state.cart.run(function(cart) {
       return cart.reduce((prev, next) => prev + next.price, 0);
     });
 
