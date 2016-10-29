@@ -110,6 +110,27 @@ ul {
 	padding: 10px 20px;
 }
 
+.FiddleLink {
+	background: #6b6;
+	color: #fff;
+	font-size: 12px;
+	cursor: pointer;
+	float: right;
+	margin: 10px 10px 0 0;
+	padding: 2px 10px;
+	text-decoration: none;
+}
+
+.FiddleLink::after {
+	background: url(images/jsfiddle-logo.png);
+	background-size: 100% 100%;
+	content: '';
+	display: inline-block;
+	height: 10px;
+	margin-left:5px;
+	width: 15px;
+}
+
 /* ---------------------- TYPOGRAPHY ---------------------- */
 
 h1 {

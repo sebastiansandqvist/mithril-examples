@@ -1342,6 +1342,7 @@ var pages = [
 	'Requests',
 	'Applications',
 	'Routing'
+	// 'Streams'
 ];
 
 var Link = {
@@ -1407,15 +1408,21 @@ function view$4(ref) {
 	var attrs = ref.attrs;
 	var state = ref.state;
 
+	var fiddleButton = attrs.fiddle ? (
+		index('a.FiddleLink', { href: ("https://jsfiddle.net/" + (attrs.fiddle) + "/") }, 'jsFiddle')
+	) : null;
 	return (
 		index('.Tabs.drop20',
 			index('.TabBar',
-				attrs.tabs.map(function (tab, i) { return index('.Tab', {
-						key: i,
-						className: state.activeIndex() === i ? 'active' : '',
-						onclick: function () { return state.activeIndex(i); }
-					}, attrs.tabs[i].id); }
-				)
+				index('div',
+					attrs.tabs.map(function (tab, i) { return index('.Tab', {
+							key: i,
+							className: state.activeIndex() === i ? 'active' : '',
+							onclick: function () { return state.activeIndex(i); }
+						}, attrs.tabs[i].id); }
+					)
+				),
+				fiddleButton
 			),
 			index('pre.TabContent',
 				index('code', index.trust(attrs.tabs[state.activeIndex()].code))
@@ -2393,7 +2400,7 @@ function view$1$1() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code })
+						index(Tabs, { tabs: code, fiddle: '69b1624v' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component))
@@ -2414,7 +2421,7 @@ function view$1$1() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$1 })
+						index(Tabs, { tabs: code$1, fiddle: 'amw7q2bv' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$1))
@@ -2440,7 +2447,7 @@ function view$1$1() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$2 })
+						index(Tabs, { tabs: code$2, fiddle: 'ezh0f7sd' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$2))
@@ -2462,7 +2469,7 @@ function view$1$1() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$3 })
+						index(Tabs, { tabs: code$3, fiddle: 'morgz8m0' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$3))
@@ -3479,7 +3486,11 @@ var Routing = {
 
 function view$9() {
 	return (
-		index(Page, { id: 'm.prop' })
+		index(Page, { id: 'Streams' },
+			index('.Section',
+				index('h2', '...')
+			)
+		)
 	);
 }
 
@@ -3495,7 +3506,7 @@ var routes = {
 	'/requests': Requests,
 	'/routing': Routing,
 	'/routing/:param': Routing,
-	'/mprop': Prop
+	'/streams': Prop
 };
 
 index.route.prefix('');

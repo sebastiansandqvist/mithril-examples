@@ -14,3 +14,4 @@ https://mithril-examples.firebaseapp.com/
 # Todo
 
 - Change static text to markdown, parse immediately and set component to never update.
+- Polyfill fetch

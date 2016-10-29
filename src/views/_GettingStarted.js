@@ -43,7 +43,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: helloWorld1 })
+						m(Tabs, { tabs: helloWorld1, fiddle: '69b1624v' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(HelloWorldComponent1))
@@ -64,7 +64,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: helloWorld2 })
+						m(Tabs, { tabs: helloWorld2, fiddle: 'amw7q2bv' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(HelloWorldComponent2))
@@ -90,7 +90,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: helloWorld3 })
+						m(Tabs, { tabs: helloWorld3, fiddle: 'ezh0f7sd' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(HelloWorldComponent3))
@@ -112,7 +112,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: helloWorld4 })
+						m(Tabs, { tabs: helloWorld4, fiddle: 'morgz8m0' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(HelloWorldComponent4))
