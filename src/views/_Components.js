@@ -138,7 +138,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: tabs1 })
+						m(Tabs, { tabs: tabs1, fiddle: 'h2vftbr8' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(TabsComponent1))
