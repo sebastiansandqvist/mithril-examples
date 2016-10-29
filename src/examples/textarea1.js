@@ -12,7 +12,7 @@ var Textarea = {
     vnode.state.value = m.prop();
   },
   oncreate: function(vnode) {
-    vnode.state.value.map(function() {
+    vnode.state.value.run(function() {
       setHeight(vnode.dom);
     )};
   },
@@ -35,7 +35,7 @@ const Textarea = {
     state.value = m.prop();
   },
   oncreate({ dom, state }) {
-    state.value.map(() => setHeight(dom));
+    state.value.run(() => setHeight(dom));
   },
   view({ state }) {
     return m('textarea', {
@@ -56,7 +56,7 @@ const Textarea = {
     state.value = m.prop();
   },
   oncreate({ dom, state }) {
-    state.value.map(() => setHeight(dom));
+    state.value.run(() => setHeight(dom));
   },
   view({ state }) {
     return <textarea

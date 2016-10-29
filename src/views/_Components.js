@@ -120,13 +120,13 @@ function view() {
 					'any variable set to ',
 					m('code.inline', 'm.prop()'),
 					' can be observed for changes. Whenever the value is updated, its ',
-					m('code.inline', 'map'),
+					m('code.inline', 'run'),
 					' function calls its callback with the new value. (In this case, we just ignore the ',
 					' new value since the height is set regardless of the specific contents).'
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: textarea1 })
+						m(Tabs, { tabs: textarea1, fiddle: 'n9rLg94u' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(TextareaComponent1))

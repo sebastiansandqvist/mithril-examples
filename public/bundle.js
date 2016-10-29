@@ -3080,13 +3080,13 @@ var Component$7 = {
 };
 
 var es5$8 = codeString(
-"function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = domNode.scrollHeight + 'px';\n}\n\nvar Textarea = {\n  oninit: function(vnode) {\n    vnode.state.value = m.prop();\n  },\n  oncreate: function(vnode) {\n    vnode.state.value.map(function() {\n      setHeight(vnode.dom);\n    )};\n  },\n  view: function(vnode) {\n    return m('textarea', {\n      value: vnode.state.value(),\n      oninput: m.withAttr('value', vnode.state.value)\n    });\n  }\n};");
+"function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = domNode.scrollHeight + 'px';\n}\n\nvar Textarea = {\n  oninit: function(vnode) {\n    vnode.state.value = m.prop();\n  },\n  oncreate: function(vnode) {\n    vnode.state.value.run(function() {\n      setHeight(vnode.dom);\n    )};\n  },\n  view: function(vnode) {\n    return m('textarea', {\n      value: vnode.state.value(),\n      oninput: m.withAttr('value', vnode.state.value)\n    });\n  }\n};");
 
 var es6$8 = codeString(
-"function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n  oninit({ state }) {\n    state.value = m.prop();\n  },\n  oncreate({ dom, state }) {\n    state.value.map(() => setHeight(dom));\n  },\n  view({ state }) {\n    return m('textarea', {\n      value: state.value(),\n      oninput: m.withAttr('value', state.value)\n    });\n  }\n};");
+"function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n  oninit({ state }) {\n    state.value = m.prop();\n  },\n  oncreate({ dom, state }) {\n    state.value.run(() => setHeight(dom));\n  },\n  view({ state }) {\n    return m('textarea', {\n      value: state.value(),\n      oninput: m.withAttr('value', state.value)\n    });\n  }\n};");
 
 var jsx$8 = codeString(
-"function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n  oninit({ state }) {\n    state.value = m.prop();\n  },\n  oncreate({ dom, state }) {\n    state.value.map(() => setHeight(dom));\n  },\n  view({ state }) {\n    return <textarea\n      value={state.value()}\n      oninput={m.withAttr('value', state.value)}/>;\n  }\n};");
+"function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n  oninit({ state }) {\n    state.value = m.prop();\n  },\n  oncreate({ dom, state }) {\n    state.value.run(() => setHeight(dom));\n  },\n  view({ state }) {\n    return <textarea\n      value={state.value()}\n      oninput={m.withAttr('value', state.value)}/>;\n  }\n};");
 
 var code$8 = [
   { id: 'es5', code: es5$8 },
@@ -3317,13 +3317,13 @@ function view$5() {
 					'any variable set to ',
 					index('code.inline', 'm.prop()'),
 					' can be observed for changes. Whenever the value is updated, its ',
-					index('code.inline', 'map'),
+					index('code.inline', 'run'),
 					' function calls its callback with the new value. (In this case, we just ignore the ',
 					' new value since the height is set regardless of the specific contents).'
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$8 })
+						index(Tabs, { tabs: code$8, fiddle: 'n9rLg94u' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$8))
