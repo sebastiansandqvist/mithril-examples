@@ -29,6 +29,7 @@
     "rollup-watch": "2.5.0"
   },
   "dependencies": {
+    "fetch-ie8": "1.4.3",
     "mithril": "git://github.com/lhorie/mithril.js.git#664888d151092c186a036467b7210b80410ba534",
     "prismjs": "1.5.1"
   },

@@ -1,3 +1,4 @@
+import 'fetch-ie8';
 import m from 'mithril';
 import GettingStarted from './views/_GettingStarted.js';
 import Components from './views/_Components.js';
