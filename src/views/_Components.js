@@ -153,9 +153,9 @@ function view() {
 			m('.Section',
 				m('h2', 'Tooltips'),
 				m('p',
-					'There are a lot of ways to implement tooltips. This implementation relies more on CSS than mithril, ',
+					'There are a lot of ways to implement tooltips. This implementation relies more on CSS than javascript, ',
 					'but mithril makes it easy to reuse the component. The code that defines the tooltip component just wraps ',
-					'arbitrary child components in the correct css class names, and allows the value of the tooltip to be ',
+					'arbitrary child components in the correct CSS class names, and allows the value of the tooltip to be ',
 					'dynamically set using ',
 					m('code.inline', 'attrs.value'),
 					'.'
