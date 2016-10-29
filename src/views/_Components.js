@@ -98,7 +98,7 @@ function view() {
 				m('h2', 'Password input'),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: password1 })
+						m(Tabs, { tabs: password1, fiddle: '256kx8sy' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(PasswordComponent1))
