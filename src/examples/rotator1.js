@@ -13,8 +13,8 @@ const es5 = codeString(
     return (
       m('div',
         m('ul',
-          state.list.map(function(item, i) {
-            return m('li', { key: i }, item)
+          state.list.map(function(item) {
+            return m('li', { key: item }, item)
           }
         ),
         m('button', { onclick: state.rotate }, 'Rotate')
@@ -33,8 +33,8 @@ const es6 = codeString(
     return (
       m('div',
         m('ul',
-          state.list.map((item, i) =>
-            m('li', { key: i }, item)
+          state.list.map((item) =>
+            m('li', { key: item }, item)
           )
         ),
         m('button', { onclick: state.rotate }, 'Rotate')
@@ -54,8 +54,8 @@ const jsx = codeString(
       <div>
         <ul>
           {
-            state.list.map((item, i) =>
-              <li key={i}>{item}</li>
+            state.list.map((item) =>
+              <li key={item}>{item}</li>
             )
           }
         </ul>
@@ -80,8 +80,8 @@ export const Component = {
     return (
       m('div',
         m('ul',
-          state.list.map((item, i) =>
-            m('li', { key: i }, item)
+          state.list.map((item) =>
+            m('li', { key: item }, item)
           )
         ),
         m('button', { onclick: state.rotate }, 'Rotate')

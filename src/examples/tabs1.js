@@ -24,7 +24,7 @@ var Tabs = {
         m('.TabBar',
           vnode.attrs.tabs.map(function(tab, i) {
             return m('.Tab', {
-              key: i,
+              key: tab.id,
               className: i === active ? 'active' : '',
               onclick: function() {
                 vnode.state.activeTab(i);
@@ -72,7 +72,7 @@ const Tabs = {
         m('.TabBar',
           attrs.tabs.map((tab, i) =>
             m('.Tab', {
-              key: i,
+              key: tab.id,
               className: state.activeTab() === i ? 'active' : '',
               onclick() { state.activeTab(i); }
             }, tab.id)
@@ -120,7 +120,7 @@ const Tabs = {
           {
             attrs.tabs.map((tab, i) =>
               <div
-                key={i}
+                key={tab.id}
                 className={\`Tab $\{active === i ? 'active' : ''}\`}
                 onclick={() => state.activeTab(i) }>
                 {tab.id}

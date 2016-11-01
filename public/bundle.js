@@ -1839,18 +1839,20 @@ function view$4(ref) {
 	var attrs = ref.attrs;
 	var state = ref.state;
 
+
 	var fiddleButton = attrs.fiddle ? (
 		index('a.FiddleLink', { href: ("https://jsfiddle.net/" + (attrs.fiddle) + "/") }, 'jsFiddle')
 	) : null;
+
 	return (
 		index('.Tabs.drop20',
 			index('.TabBar',
 				index('div',
 					attrs.tabs.map(function (tab, i) { return index('.Tab', {
-							key: i,
+							key: tab.id,
 							className: state.activeIndex() === i ? 'active' : '',
 							onclick: function () { return state.activeIndex(i); }
-						}, attrs.tabs[i].id); }
+						}, tab.id); }
 					)
 				),
 				fiddleButton
@@ -2909,6 +2911,59 @@ var GettingStarted = {
 	view: view$1$1
 };
 
+function generateCode(fullString) {
+	var output = [];
+	var codeRegex = /(`(.*?)`)/gm;
+	var split = fullString.split(codeRegex);
+	var isCodeRaw = false;
+	var isCode = false;
+	for (var i = 0; i < split.length; i++) {
+		isCodeRaw = codeRegex.test(split[i]);
+		isCode = codeRegex.test(split[i - 1] || '');
+		if (isCode) {
+			output.push(index('code.inline', split[i]));
+		}
+		else if (!isCodeRaw) {
+			output.push(index('span', split[i]));
+		}
+	}
+	return output;
+}
+
+function generateLink(title, fullString) {
+	var parenRegex = /\(([^)]+)\)/;
+	var url = fullString.match(parenRegex)[1];
+	if (url[0] === '/') {
+		return index('a', { href: url, oncreate: index.route.link }, title);
+	}
+	return index('a', { href: url }, title);
+}
+
+function markup(str) {
+	var codeRegex = /`(.*?)`/gm;
+	var linkRegex = /(\[(.*?)\]\(.*?\))/gm;
+	var output = [];
+	var rawContents = str.split(linkRegex);
+	var hasCode = false;
+	var isLinkRaw = false;
+	var isLink = false;
+	for (var i = 0; i < rawContents.length; i++) {
+		hasCode = codeRegex.test(rawContents[i]);
+		isLinkRaw = linkRegex.test(rawContents[i]);
+		isLink = linkRegex.test(rawContents[i - 1] || '');
+		if (hasCode) {
+			output.push(generateCode(rawContents[i]));
+		}
+		else if (isLink) {
+			output.push(generateLink(rawContents[i], rawContents[i - 1])); // previous item is context with url
+		}
+		else if (!isLinkRaw) {
+			output.push(rawContents[i]);
+		}
+	}
+	return output;
+}
+
 var es5$4 = codeString(
 "var Stopwatch = {\n  oninit: function(vnode) {\n    vnode.state.seconds = 0;\n    vnode.state.count = () => {\n      vnode.state.seconds++;\n      m.redraw();\n    };\n    vnode.state.interval = setInterval(vnode.state.count, 1000);\n  },\n  onremove: function(vnode) {\n    clearInterval(vnode.state.interval);\n  },\n  view: function(vnode) {\n    return m('span', 'Timer: ' + vnode.state.seconds);\n  }\n};");
 
@@ -3001,13 +3056,13 @@ var Component$5 = {
 };
 
 var es5$6 = codeString(
-"var Rotator = {\n  oninit: function(vnode) {\n    vnode.state.list = ['One', 'Two', 'Three', 'Four'];\n    vnode.state.rotate = function() {\n      vnode.state.list.push(vnode.state.list.shift());\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('ul',\n          state.list.map(function(item, i) {\n            return m('li', { key: i }, item)\n          }\n        ),\n        m('button', { onclick: state.rotate }, 'Rotate')\n      )\n    );\n  }\n};");
+"var Rotator = {\n  oninit: function(vnode) {\n    vnode.state.list = ['One', 'Two', 'Three', 'Four'];\n    vnode.state.rotate = function() {\n      vnode.state.list.push(vnode.state.list.shift());\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('ul',\n          state.list.map(function(item) {\n            return m('li', { key: item }, item)\n          }\n        ),\n        m('button', { onclick: state.rotate }, 'Rotate')\n      )\n    );\n  }\n};");
 
 var es6$6 = codeString(
-"const Rotator = {\n  oninit({ state }) {\n    state.list = ['One', 'Two', 'Three', 'Four'];\n    state.rotate = () => state.list.push(state.list.shift());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('ul',\n          state.list.map((item, i) =>\n            m('li', { key: i }, item)\n          )\n        ),\n        m('button', { onclick: state.rotate }, 'Rotate')\n      )\n    );\n  }\n};");
+"const Rotator = {\n  oninit({ state }) {\n    state.list = ['One', 'Two', 'Three', 'Four'];\n    state.rotate = () => state.list.push(state.list.shift());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('ul',\n          state.list.map((item) =>\n            m('li', { key: item }, item)\n          )\n        ),\n        m('button', { onclick: state.rotate }, 'Rotate')\n      )\n    );\n  }\n};");
 
 var jsx$6 = codeString(
-"const Rotator = {\n  oninit({ state }) {\n    state.list = ['One', 'Two', 'Three', 'Four'];\n    state.rotate = () => state.list.push(state.list.shift());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <ul>\n          {\n            state.list.map((item, i) =>\n              <li key={i}>{item}</li>\n            )\n          }\n        </ul>\n        <button onclick={state.rotate}>Rotate</button>\n      </div>\n    );\n  }\n};");
+"const Rotator = {\n  oninit({ state }) {\n    state.list = ['One', 'Two', 'Three', 'Four'];\n    state.rotate = () => state.list.push(state.list.shift());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <ul>\n          {\n            state.list.map((item) =>\n              <li key={item}>{item}</li>\n            )\n          }\n        </ul>\n        <button onclick={state.rotate}>Rotate</button>\n      </div>\n    );\n  }\n};");
 
 var code$6 = [
   { id: 'es5', code: es5$6 },
@@ -3028,7 +3083,7 @@ var Component$6 = {
     return (
       index('div',
         index('ul',
-          state.list.map(function (item, i) { return index('li', { key: i }, item); }
+          state.list.map(function (item) { return index('li', { key: item }, item); }
           )
         ),
         index('button', { onclick: state.rotate }, 'Rotate')
@@ -3122,13 +3177,13 @@ var Component$8 = {
 };
 
 var es5$9 = codeString(
-"var tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nvar tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nvar Tabs = {\n  oninit: function(vnode) {\n    vnode.state.activeTab = m.prop(0);\n  },\n  view: function(vnode) {\n    var active = vnode.state.activeTab();\n    return (\n      m('.Tabs',\n        m('.TabBar',\n          vnode.attrs.tabs.map(function(tab, i) {\n            return m('.Tab', {\n              key: i,\n              className: i === active ? 'active' : '',\n              onclick: function() {\n                vnode.state.activeTab(i);\n              }\n            }, tab.id)\n          })\n        ),\n        m('.TabContent', vnode.attrs.tabs[active].content)\n      )\n    );\n  }\n};\n\nvar Component = {\n  view: function() {\n    return (\n      m('div',\n        m(Tabs, { tabs: tabContent1 }),\n        m('br'),\n        m(Tabs, { tabs: tabContent2 })\n      )\n    );\n  }\n};");
+"var tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nvar tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nvar Tabs = {\n  oninit: function(vnode) {\n    vnode.state.activeTab = m.prop(0);\n  },\n  view: function(vnode) {\n    var active = vnode.state.activeTab();\n    return (\n      m('.Tabs',\n        m('.TabBar',\n          vnode.attrs.tabs.map(function(tab, i) {\n            return m('.Tab', {\n              key: tab.id,\n              className: i === active ? 'active' : '',\n              onclick: function() {\n                vnode.state.activeTab(i);\n              }\n            }, tab.id)\n          })\n        ),\n        m('.TabContent', vnode.attrs.tabs[active].content)\n      )\n    );\n  }\n};\n\nvar Component = {\n  view: function() {\n    return (\n      m('div',\n        m(Tabs, { tabs: tabContent1 }),\n        m('br'),\n        m(Tabs, { tabs: tabContent2 })\n      )\n    );\n  }\n};");
 
 var es6$9 = codeString(
-"const tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n  oninit({ state }) {\n    state.activeTab = m.prop(0);\n  },\n  view({ attrs, state }) {\n    return (\n      m('.Tabs',\n        m('.TabBar',\n          attrs.tabs.map((tab, i) =>\n            m('.Tab', {\n              key: i,\n              className: state.activeTab() === i ? 'active' : '',\n              onclick() { state.activeTab(i); }\n            }, tab.id)\n          )\n        ),\n        m('.TabContent', attrs.tabs[state.activeTab()].content)\n      )\n    );\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      m('div',\n        m(Tabs, { tabs: tabContent1 }),\n        m('br'),\n        m(Tabs, { tabs: tabContent2 })\n      )\n    );\n  }\n};");
+"const tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n  oninit({ state }) {\n    state.activeTab = m.prop(0);\n  },\n  view({ attrs, state }) {\n    return (\n      m('.Tabs',\n        m('.TabBar',\n          attrs.tabs.map((tab, i) =>\n            m('.Tab', {\n              key: tab.id,\n              className: state.activeTab() === i ? 'active' : '',\n              onclick() { state.activeTab(i); }\n            }, tab.id)\n          )\n        ),\n        m('.TabContent', attrs.tabs[state.activeTab()].content)\n      )\n    );\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      m('div',\n        m(Tabs, { tabs: tabContent1 }),\n        m('br'),\n        m(Tabs, { tabs: tabContent2 })\n      )\n    );\n  }\n};");
 
 var jsx$9 = codeString(
-"const tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n  oninit({ state }) {\n    state.activeTab = m.prop(0);\n  },\n  view({ attrs, state }) {\n    const active = state.activeTab();\n    return (\n      <div className='Tabs'>\n        <div className='TabBar'>\n          {\n            attrs.tabs.map((tab, i) =>\n              <div\n                key={i}\n                className={`Tab ${active === i ? 'active' : ''}`}\n                onclick={() => state.activeTab(i) }>\n                {tab.id}\n              </div>\n            )\n          }\n        </div>\n        <div className='TabContent'>\n          {attrs.tabs[state.activeTab()].content}\n        </div>\n      </div>\n    );\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      <div>\n        <Tabs tabs={tabContent1}/>\n        <br/>\n        <Tabs tabs={tabContent2}/>\n      </div>\n    );\n  }\n};");
+"const tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n  oninit({ state }) {\n    state.activeTab = m.prop(0);\n  },\n  view({ attrs, state }) {\n    const active = state.activeTab();\n    return (\n      <div className='Tabs'>\n        <div className='TabBar'>\n          {\n            attrs.tabs.map((tab, i) =>\n              <div\n                key={tab.id}\n                className={`Tab ${active === i ? 'active' : ''}`}\n                onclick={() => state.activeTab(i) }>\n                {tab.id}\n              </div>\n            )\n          }\n        </div>\n        <div className='TabContent'>\n          {attrs.tabs[state.activeTab()].content}\n        </div>\n      </div>\n    );\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      <div>\n        <Tabs tabs={tabContent1}/>\n        <br/>\n        <Tabs tabs={tabContent2}/>\n      </div>\n    );\n  }\n};");
 
 var code$9 = [
   { id: 'es5', code: es5$9 },
@@ -3195,7 +3250,7 @@ var jsx$10 = codeString(
 "// define the Tooltip component\nconst Tooltip = {\n  view({ attrs, children }) {\n    return (\n      <div className='Tooltip-wrap'>\n        {children}\n        <div className='Tooltip'>{attrs.value}</div>\n      </div>\n    );\n  }\n};\n\n// elsewhere, use the Tooltip component\nconst Component = {\n  view() {\n    return (\n      <div>\n        <Tooltip value='Foo'>\n          <button>Hover over this button</button>\n        </Tooltip>\n        <Tooltip value='Bar'>\n          <span>or hover here</span>\n        </Tooltip>\n      </div>\n    );\n  }\n};");
 
 var css = codeString.css(
-".Tooltip-wrap {\n  display: inline-block;\n  position: relative;\n  transform: translateZ(0);\n}\n\n.Tooltip-wrap:hover .Tooltip {\n    opacity: 1;\n    transform: translateX(-50%) translateY(5px);\n    transition: all .3s ease .5s;\n    visibility: visible;\n}\n\n.Tooltip {\n  background: rgba(0, 0, 0, .8);\n  border-radius: 2px;\n  bottom: -30px;\n  color: white;\n  font-size: 12px;\n  left: 50%;\n  opacity: 0;\n  padding: 5px 10px;\n  position: absolute;\n  transition: all .2s ease;\n  transform: translateX(-50%) translateY(0);\n  user-select: none;\n  visibility: hidden;\n  white-space: nowrap;\n}");
+".Tooltip-wrap {\n  display: inline-block;\n  position: relative;\n  transform: translateZ(0);\n}\n\n.Tooltip-wrap:hover .Tooltip {\n  opacity: 1;\n  transform: translateX(-50%) translateY(5px);\n  transition: all .3s ease .5s;\n  visibility: visible;\n}\n\n.Tooltip {\n  background: rgba(0, 0, 0, .8);\n  border-radius: 2px;\n  bottom: -30px;\n  color: white;\n  font-size: 12px;\n  left: 50%;\n  opacity: 0;\n  padding: 5px 10px;\n  position: absolute;\n  transform: translateX(-50%) translateY(0);\n  transition: all .2s ease;\n  user-select: none;\n  visibility: hidden;\n  white-space: nowrap;\n}");
 
 var code$10 = [
   { id: 'es5', code: es5$10 },
@@ -3233,59 +3288,6 @@ var Component$10 = {
     );
   }
 };
-
-function generateCode(fullString) {
-	var output = [];
-	var codeRegex = /(`(.*?)`)/gm;
-	var split = fullString.split(codeRegex);
-	var isCodeRaw = false;
-	var isCode = false;
-	for (var i = 0; i < split.length; i++) {
-		isCodeRaw = codeRegex.test(split[i]);
-		isCode = codeRegex.test(split[i - 1] || '');
-		if (isCode) {
-			output.push(index('code.inline', split[i]));
-		}
-		else if (!isCodeRaw) {
-			output.push(index('span', split[i]));
-		}
-	}
-	return output;
-}
-
-function generateLink(title, fullString) {
-	var parenRegex = /\(([^)]+)\)/;
-	var url = fullString.match(parenRegex)[1];
-	if (url[0] === '/') {
-		return index('a', { href: url, oncreate: index.route.link }, title);
-	}
-	return index('a', { href: url }, title);
-}
-
-function markup(str) {
-	var codeRegex = /`(.*?)`/gm;
-	var linkRegex = /(\[(.*?)\]\(.*?\))/gm;
-	var output = [];
-	var rawContents = str.split(linkRegex);
-	var hasCode = false;
-	var isLinkRaw = false;
-	var isLink = false;
-	for (var i = 0; i < rawContents.length; i++) {
-		hasCode = codeRegex.test(rawContents[i]);
-		isLinkRaw = linkRegex.test(rawContents[i]);
-		isLink = linkRegex.test(rawContents[i - 1] || '');
-		if (hasCode) {
-			output.push(generateCode(rawContents[i]));
-		}
-		else if (isLink) {
-			output.push(generateLink(rawContents[i], rawContents[i - 1])); // previous item is context with url
-		}
-		else if (!isLinkRaw) {
-			output.push(rawContents[i]);
-		}
-	}
-	return output;
-}
 
 function view$5() {
 	return (
@@ -3327,11 +3329,11 @@ function view$5() {
 			index('.Section',
 				index('h2', 'List rotator'),
 				index('p',
-					'When rendering a list of data, it is a good idea to supply Mithril with a ',
-					index('code.inline', 'key'),
-					' attribute for each element in that list. ',
-					index('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/keys.md]', 'Keys'),
-					' help Mithril maintain references to each element and should be unique for each item in the list.'
+					markup(
+						'When rendering a list of data, it is a good idea to supply Mithril with a `key` attribute for each ' +
+						'element in that list. [Keys](https://github.com/lhorie/mithril.js/blob/rewrite/docs/keys.md) help maintain ' +
+						'references to each element and should be unique for each item in the list.'
+					)
 				),
 				index('.Demo',
 					index('.Demo-left',
@@ -3356,21 +3358,20 @@ function view$5() {
 			index('.Section',
 				index('h2', 'Autogrow textarea'),
 				index('p',
-					'In some cases it is necessary to interact directly with the rendered dom node, not ',
-					'just mithril virtual dom nodes. For those cases, certain lifecycle methods (including ',
-					index('code.inline', 'oncreate'),
-					') provide access to the actual node through the ',
-					index('code.inline', 'dom'),
-					' property. This example uses it to set the height of the textarea.'
+					markup(
+						'In some cases it is necessary to interact directly with the rendered dom node, not ' +
+						'just mithril virtual dom nodes. For those cases, certain lifecycle methods (including ' +
+						'`oncreate`) provide access to the actual node through the `dom` property. This example ' +
+						'uses it to set the height of the textarea.'
+					)
 				),
 				index('p',
-					'This example also relies on the fact that, in addition to being a getter-setter, ',
-					'any variable set to ',
-					index('code.inline', 'm.prop()'),
-					' can be observed for changes. Whenever the value is updated, its ',
-					index('code.inline', 'run'),
-					' function calls its callback with the new value. (In this case, we just ignore the ',
-					' new value since the height is set regardless of the specific contents).'
+					markup(
+						'This example also relies on the fact that, in addition to being a getter-setter, ' +
+						'any variable set to `m.prop()`  can be observed for changes. Whenever the value is ' +
+						'updated, its `run` function calls its callback with the new value. (In this case, ' +
+						'we just ignore the new value since the height is set regardless of the specific contents).'
+					)
 				),
 				index('.Demo',
 					index('.Demo-left',
@@ -3384,10 +3385,11 @@ function view$5() {
 			index('.Section',
 				index('h2', 'Tabs'),
 				index('p',
-					'The only state that tabs need to keep internally is the index of the active tab. The example components ',
-					'store this state in each instance of the tabs. The implementation of the tabs on this site can be viewed ',
-					index('a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2]', 'on github'),
-					'.'
+					markup(
+						'The only state that tabs need to keep internally is the index of the active tab. ' +
+						'The example components store this state in each instance of the tabs. The implementation ' +
+						'of the tabs on this site can be viewed [on github](https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2).'
+					)
 				),
 				index('.Demo',
 					index('.Demo-left',
@@ -3401,12 +3403,12 @@ function view$5() {
 			index('.Section',
 				index('h2', 'Tooltips'),
 				index('p',
-					'There are a lot of ways to implement tooltips. This implementation relies more on CSS than javascript, ',
-					'but mithril makes it easy to reuse the component. The code that defines the tooltip component just wraps ',
-					'arbitrary child components in the correct CSS class names, and allows the value of the tooltip to be ',
-					'dynamically set using ',
-					index('code.inline', 'attrs.value'),
-					'.'
+					markup(
+						'There are a lot of ways to implement tooltips. This implementation relies more on CSS than javascript, ' +
+						'but mithril makes it easy to reuse the component. The code that defines the tooltip component just wraps ' +
+						'arbitrary child components in the correct CSS class names, and allows the value of the tooltip to be ' +
+						'dynamically set using `attrs.value`.'
+					)
 				),
 				index('.Demo',
 					index('.Demo-left',
@@ -3732,13 +3734,13 @@ var Applications = {
 };
 
 var es5$14 = codeString(
-"var BookView = {\n  oninit: function(vnode) {\n    vnode.state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          vnode.state.books().map(function(book, i) {\n            return m('li', { key: i }, book.name);\n          })\n        )\n      )\n    );\n  }\n};");
+"var BookView = {\n  oninit: function(vnode) {\n    vnode.state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          vnode.state.books().map(function(book) {\n            return m('li', { key: book.id }, book.name);\n          })\n        )\n      )\n    );\n  }\n};");
 
 var es6$14 = codeString(
-"const BookView = {\n  oninit({ state }) {\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          state.books().map((book, i) =>\n            m('li', { key: i }, book.name)\n          )\n        )\n      )\n    );\n  }\n};");
+"const BookView = {\n  oninit({ state }) {\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          state.books().map((book) =>\n            m('li', { key: book.id }, book.name)\n          )\n        )\n      )\n    );\n  }\n};");
 
 var jsx$14 = codeString(
-"const BookView = {\n  oninit({ state }) {\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Books</h3>\n        <ul>\n          {\n            state.books().map((book, i) =>\n              <li key={i}>{book.name}</li>\n            )\n          }\n        </ul>\n      </div>\n    );\n  }\n};");
+"const BookView = {\n  oninit({ state }) {\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Books</h3>\n        <ul>\n          {\n            state.books().map((book) =>\n              <li key={book.id}>{book.name}</li>\n            )\n          }\n        </ul>\n      </div>\n    );\n  }\n};");
 
 var code$14 = [
   { id: 'es5', code: es5$14 },
@@ -3747,7 +3749,7 @@ var code$14 = [
 ];
 
 // Fetches an array of books objects of the form:
-// { name: String, price: Number }
+// { name: String, price: Number, id: Number }
 var Component$14 = {
   oninit: function oninit(ref) {
     var state = ref.state;
@@ -3765,7 +3767,7 @@ var Component$14 = {
       index('div',
         index('h3', 'Books'),
         index('ul',
-          state.books().map(function (book, i) { return index('li', { key: i }, book.name); }
+          state.books().map(function (book) { return index('li', { key: book.id }, book.name); }
           )
         )
       )
@@ -3774,13 +3776,13 @@ var Component$14 = {
 };
 
 var es5$15 = codeString(
-"var BookView = {\n  oninit: function(vnode) {\n    vnode.state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then(function(response) {\n        return response.json();\n      })\n      .then(vnode.state.books)\n      .then(function() {\n        m.redraw();\n      });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          vnode.state.books().map(function(book, i) {\n            return m('li', { key: i }, book.name);\n          })\n        )\n      )\n    );\n  }\n};");
+"var BookView = {\n  oninit: function(vnode) {\n    vnode.state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then(function(response) {\n        return response.json();\n      })\n      .then(vnode.state.books)\n      .then(function() {\n        m.redraw();\n      });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          vnode.state.books().map(function(book) {\n            return m('li', { key: book.id }, book.name);\n          })\n        )\n      )\n    );\n  }\n};");
 
 var es6$15 = codeString(
-"const BookView = {\n  oninit({ state }) {\n    state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then((response) => response.json())\n      .then(state.books)\n      .then(() => m.redraw());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          state.books().map((book, i) =>\n            m('li', { key: i }, book.name)\n          )\n        )\n      )\n    );\n  }\n};");
+"const BookView = {\n  oninit({ state }) {\n    state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then((response) => response.json())\n      .then(state.books)\n      .then(() => m.redraw());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          state.books().map((book) =>\n            m('li', { key: book.id }, book.name)\n          )\n        )\n      )\n    );\n  }\n};");
 
 var jsx$15 = codeString(
-"const BookView = {\n  oninit({ state }) {\n    state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then((response) => response.json())\n      .then(state.books)\n      .then(() => m.redraw());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Books</h3>\n        <ul>\n          {\n            state.books().map((book, i) =>\n              <li key={i}>{book.name}</li>\n            )\n          }\n        </ul>\n      </div>\n    );\n  }\n};");
+"const BookView = {\n  oninit({ state }) {\n    state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then((response) => response.json())\n      .then(state.books)\n      .then(() => m.redraw());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Books</h3>\n        <ul>\n          {\n            state.books().map((book) =>\n              <li key={book.id}>{book.name}</li>\n            )\n          }\n        </ul>\n      </div>\n    );\n  }\n};");
 
 var code$15 = [
   { id: 'es5', code: es5$15 },
@@ -3805,7 +3807,7 @@ var Component$15 = {
       index('div',
         index('h3', 'Books'),
         index('ul',
-          state.books().map(function (book, i) { return index('li', { key: i }, book.name); }
+          state.books().map(function (book) { return index('li', { key: book.id }, book.name); }
           )
         )
       )
@@ -3828,7 +3830,7 @@ function view$7() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$14 })
+						index(Tabs, { tabs: code$14, fiddle: 'rd54g0f4' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$14))
@@ -3845,7 +3847,7 @@ function view$7() {
 				),
 				index('.Demo',
 					index('.Demo-left',
-						index(Tabs, { tabs: code$15 })
+						index(Tabs, { tabs: code$15, fiddle: '5b1wn90n' })
 					),
 					index('.Demo-right',
 						index('.Demo-result', index(Component$15))

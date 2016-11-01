@@ -15,8 +15,8 @@ const es5 = codeString(
       m('div',
         m('h3', 'Books'),
         m('ul',
-          vnode.state.books().map(function(book, i) {
-            return m('li', { key: i }, book.name);
+          vnode.state.books().map(function(book) {
+            return m('li', { key: book.id }, book.name);
           })
         )
       )
@@ -38,8 +38,8 @@ const es6 = codeString(
       m('div',
         m('h3', 'Books'),
         m('ul',
-          state.books().map((book, i) =>
-            m('li', { key: i }, book.name)
+          state.books().map((book) =>
+            m('li', { key: book.id }, book.name)
           )
         )
       )
@@ -62,8 +62,8 @@ const jsx = codeString(
         <h3>Books</h3>
         <ul>
           {
-            state.books().map((book, i) =>
-              <li key={i}>{book.name}</li>
+            state.books().map((book) =>
+              <li key={book.id}>{book.name}</li>
             )
           }
         </ul>
@@ -79,7 +79,7 @@ export const code = [
 ];
 
 // Fetches an array of books objects of the form:
-// { name: String, price: Number }
+// { name: String, price: Number, id: Number }
 export const Component = {
   oninit({ state }) {
     state.books = m.request({
@@ -93,8 +93,8 @@ export const Component = {
       m('div',
         m('h3', 'Books'),
         m('ul',
-          state.books().map((book, i) =>
-            m('li', { key: i }, book.name)
+          state.books().map((book) =>
+            m('li', { key: book.id }, book.name)
           )
         )
       )

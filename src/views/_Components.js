@@ -1,4 +1,5 @@
 import m from 'mithril';
+import markup from '../util/markup.js';
 import Page from './Page.js';
 import Tabs from './Tabs.js';
 
@@ -36,59 +37,6 @@ import {
 	code as tooltip1,
 	Component as TooltipComponent1
 } from '../examples/tooltip1.js';
-
-function generateCode(fullString) {
-	const output = [];
-	const codeRegex = /(`(.*?)`)/gm;
-	const split = fullString.split(codeRegex);
-	let isCodeRaw = false;
-	let isCode = false;
-	for (let i = 0; i < split.length; i++) {
-		isCodeRaw = codeRegex.test(split[i]);
-		isCode = codeRegex.test(split[i - 1] || '');
-		if (isCode) {
-			output.push(m('code.inline', split[i]));
-		}
-		else if (!isCodeRaw) {
-			output.push(m('span', split[i]));
-		}
-	}
-	return output;
-}
-
-function generateLink(title, fullString) {
-	const parenRegex = /\(([^)]+)\)/;
-	const url = fullString.match(parenRegex)[1];
-	if (url[0] === '/') {
-		return m('a', { href: url, oncreate: m.route.link }, title);
-	}
-	return m('a', { href: url }, title);
-}
-
-function markup(str) {
-	const codeRegex = /`(.*?)`/gm;
-	const linkRegex = /(\[(.*?)\]\(.*?\))/gm;
-	const output = [];
-	const rawContents = str.split(linkRegex);
-	let hasCode = false;
-	let isLinkRaw = false;
-	let isLink = false;
-	for (let i = 0; i < rawContents.length; i++) {
-		hasCode = codeRegex.test(rawContents[i]);
-		isLinkRaw = linkRegex.test(rawContents[i]);
-		isLink = linkRegex.test(rawContents[i - 1] || '');
-		if (hasCode) {
-			output.push(generateCode(rawContents[i]));
-		}
-		else if (isLink) {
-			output.push(generateLink(rawContents[i], rawContents[i - 1])); // previous item is context with url
-		}
-		else if (!isLinkRaw) {
-			output.push(rawContents[i]);
-		}
-	}
-	return output;
-}
 
 function view() {
 	return (
@@ -130,11 +78,11 @@ function view() {
 			m('.Section',
 				m('h2', 'List rotator'),
 				m('p',
-					'When rendering a list of data, it is a good idea to supply Mithril with a ',
-					m('code.inline', 'key'),
-					' attribute for each element in that list. ',
-					m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/keys.md]', 'Keys'),
-					' help Mithril maintain references to each element and should be unique for each item in the list.'
+					markup(
+						'When rendering a list of data, it is a good idea to supply Mithril with a `key` attribute for each ' +
+						'element in that list. [Keys](https://github.com/lhorie/mithril.js/blob/rewrite/docs/keys.md) help maintain ' +
+						'references to each element and should be unique for each item in the list.'
+					)
 				),
 				m('.Demo',
 					m('.Demo-left',
@@ -159,21 +107,20 @@ function view() {
 			m('.Section',
 				m('h2', 'Autogrow textarea'),
 				m('p',
-					'In some cases it is necessary to interact directly with the rendered dom node, not ',
-					'just mithril virtual dom nodes. For those cases, certain lifecycle methods (including ',
-					m('code.inline', 'oncreate'),
-					') provide access to the actual node through the ',
-					m('code.inline', 'dom'),
-					' property. This example uses it to set the height of the textarea.'
+					markup(
+						'In some cases it is necessary to interact directly with the rendered dom node, not ' +
+						'just mithril virtual dom nodes. For those cases, certain lifecycle methods (including ' +
+						'`oncreate`) provide access to the actual node through the `dom` property. This example ' +
+						'uses it to set the height of the textarea.'
+					)
 				),
 				m('p',
-					'This example also relies on the fact that, in addition to being a getter-setter, ',
-					'any variable set to ',
-					m('code.inline', 'm.prop()'),
-					' can be observed for changes. Whenever the value is updated, its ',
-					m('code.inline', 'run'),
-					' function calls its callback with the new value. (In this case, we just ignore the ',
-					' new value since the height is set regardless of the specific contents).'
+					markup(
+						'This example also relies on the fact that, in addition to being a getter-setter, ' +
+						'any variable set to `m.prop()`  can be observed for changes. Whenever the value is ' +
+						'updated, its `run` function calls its callback with the new value. (In this case, ' +
+						'we just ignore the new value since the height is set regardless of the specific contents).'
+					)
 				),
 				m('.Demo',
 					m('.Demo-left',
@@ -187,10 +134,11 @@ function view() {
 			m('.Section',
 				m('h2', 'Tabs'),
 				m('p',
-					'The only state that tabs need to keep internally is the index of the active tab. The example components ',
-					'store this state in each instance of the tabs. The implementation of the tabs on this site can be viewed ',
-					m('a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2]', 'on github'),
-					'.'
+					markup(
+						'The only state that tabs need to keep internally is the index of the active tab. ' +
+						'The example components store this state in each instance of the tabs. The implementation ' +
+						'of the tabs on this site can be viewed [on github](https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2).'
+					)
 				),
 				m('.Demo',
 					m('.Demo-left',
@@ -204,12 +152,12 @@ function view() {
 			m('.Section',
 				m('h2', 'Tooltips'),
 				m('p',
-					'There are a lot of ways to implement tooltips. This implementation relies more on CSS than javascript, ',
-					'but mithril makes it easy to reuse the component. The code that defines the tooltip component just wraps ',
-					'arbitrary child components in the correct CSS class names, and allows the value of the tooltip to be ',
-					'dynamically set using ',
-					m('code.inline', 'attrs.value'),
-					'.'
+					markup(
+						'There are a lot of ways to implement tooltips. This implementation relies more on CSS than javascript, ' +
+						'but mithril makes it easy to reuse the component. The code that defines the tooltip component just wraps ' +
+						'arbitrary child components in the correct CSS class names, and allows the value of the tooltip to be ' +
+						'dynamically set using `attrs.value`.'
+					)
 				),
 				m('.Demo',
 					m('.Demo-left',

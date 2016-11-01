@@ -27,7 +27,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: request1 })
+						m(Tabs, { tabs: request1, fiddle: 'rd54g0f4' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(RequestComponent1))
@@ -44,7 +44,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: request2 })
+						m(Tabs, { tabs: request2, fiddle: '5b1wn90n' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(RequestComponent2))

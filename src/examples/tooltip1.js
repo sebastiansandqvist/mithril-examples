@@ -96,10 +96,10 @@ const css = codeString.css(
 }
 
 .Tooltip-wrap:hover .Tooltip {
-    opacity: 1;
-    transform: translateX(-50%) translateY(5px);
-    transition: all .3s ease .5s;
-    visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(5px);
+  transition: all .3s ease .5s;
+  visibility: visible;
 }
 
 .Tooltip {
@@ -112,8 +112,8 @@ const css = codeString.css(
   opacity: 0;
   padding: 5px 10px;
   position: absolute;
-  transition: all .2s ease;
   transform: translateX(-50%) translateY(0);
+  transition: all .2s ease;
   user-select: none;
   visibility: hidden;
   white-space: nowrap;
