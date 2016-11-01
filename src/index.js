@@ -7,6 +7,8 @@ import Requests from './views/_Requests.js';
 import Routing from './views/_Routing.js';
 import Streams from './views/_Streams.js';
 
+window.__DEV__ = window.location.hostname === 'localhost';
+
 const routes = {
 	'/': GettingStarted,
 	'/gettingstarted': GettingStarted,

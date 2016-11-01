@@ -1,10 +1,21 @@
 import m from 'mithril';
+import T from 's-types';
 
 function oninit({ state }) {
 	state.activeIndex = m.prop(0);
 }
 
 function view({ attrs, state }) {
+
+	if (window.__DEV__) {
+		T({
+			fiddle: [T.string, T.optional],
+			tabs: T.arrayOf(T.schema({
+				id: T.string,
+				code: T.string
+			}))
+		})(attrs, 'Tabs');
+	}
 
 	const fiddleButton = attrs.fiddle ? (
 		m('a.FiddleLink', { href: `https://jsfiddle.net/${attrs.fiddle}/` }, 'jsFiddle')

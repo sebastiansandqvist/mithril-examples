@@ -1,4 +1,5 @@
 import m from 'mithril';
+import T from 's-types';
 
 const pages = [
 	'Getting started',
@@ -11,6 +12,14 @@ const pages = [
 
 const Link = {
 	view({ attrs }) {
+
+		if (window.__DEV__) {
+			T({
+				page: T.string,
+				active: T.string
+			})(attrs, 'Link');
+		}
+
 		return (
 			m('a.Nav-link', {
 				href: `/${attrs.page.replace(' ', '').toLowerCase()}`,
@@ -22,6 +31,11 @@ const Link = {
 };
 
 function view({ attrs }) {
+
+	if (window.__DEV__) {
+		T({ active: T.string })(attrs, 'Nav');
+	}
+
 	return (
 		m('.Nav',
 			m('.Container',
