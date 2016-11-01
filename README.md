@@ -7,12 +7,14 @@ https://mithril-examples.firebaseapp.com/
 - Applications: markdown or code editor (to show m.trust)
 - Request: loading indicator & error state
 - Request: file upload progress (simulate)
-- Components: tooltip
+- Components: custom checkbox
+- Components: collapser
+- Components: notification (trigger with function)
+- Components: SVG
+- Components: slider
 - Components: form validation
 - Components: list filtering using input
 - Components: debounced typing indicator
 
 # Todo
 
-- Change static text to markdown, parse immediately and set component to never update.
-- Polyfill fetch

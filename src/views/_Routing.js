@@ -1,4 +1,5 @@
 import m from 'mithril';
+import markup from '../util/markup.js';
 import Page from './Page.js';
 import Tabs from './Tabs.js';
 
@@ -75,6 +76,9 @@ function view({ attrs }) {
 					'The implementation of the router used for this website can be found ',
 					m('a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/index.js?ts=2]', 'on github'),
 					'.'
+				),
+				m('p',
+					markup('See also: interactive [mithril router usage on JSFiddle](https://jsfiddle.net/qproodwf/).')
 				)
 			)
 		)

@@ -4226,6 +4226,9 @@ function view$8(ref) {
 					'The implementation of the router used for this website can be found ',
 					index('a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/index.js?ts=2]', 'on github'),
 					'.'
+				),
+				index('p',
+					markup('See also: interactive [mithril router usage on JSFiddle](https://jsfiddle.net/qproodwf/).')
 				)
 			)
 		)
