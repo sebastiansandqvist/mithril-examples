@@ -127,12 +127,12 @@ const BookShop = {
 
     // once books have loaded, filter by title and prevent
     // items in cart from showing up in the shop
-    state.shop = m.prop.combine(function(text, books, cart) {
-      return books().filter(function(book) {
-        return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
-          cart().indexOf(book) === -1;
-      });
-    }, [state.text, state.books, state.cart]);
+    state.shop = m.prop.combine((text, books, cart) =>
+      books().filter((book) =>
+        book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
+          cart().indexOf(book) === -1
+      ), [state.text, state.books, state.cart]
+    );
 
     // when the cart updates, state.total = price of books in cart
     state.total = state.cart.run(function(cart) {
@@ -213,12 +213,12 @@ const BookShop = {
 
     // once books have loaded, filter by title and prevent
     // items in cart from showing up in the shop
-    state.shop = m.prop.combine(function(text, books, cart) {
-      return books().filter(function(book) {
-        return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
-          cart().indexOf(book) === -1;
-      });
-    }, [state.text, state.books, state.cart]);
+    state.shop = m.prop.combine((text, books, cart) =>
+      books().filter((book) =>
+        book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
+          cart().indexOf(book) === -1
+      ), [state.text, state.books, state.cart]
+    );
 
     // when the cart updates, state.total = price of books in cart
     state.total = state.cart.run(function(cart) {
@@ -303,12 +303,12 @@ export const Component = {
 
     // once books have loaded, filter by title and prevent
     // items in cart from showing up in the shop
-    state.shop = m.prop.combine(function(text, books, cart) {
-      return books().filter(function(book) {
-        return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
-          cart().indexOf(book) === -1;
-      });
-    }, [state.text, state.books, state.cart]);
+    state.shop = m.prop.combine((text, books, cart) =>
+      books().filter((book) =>
+        book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
+          cart().indexOf(book) === -1
+      ), [state.text, state.books, state.cart]
+    );
 
     // when the cart updates, state.total = price of books in cart
     state.total = state.cart.run(function(cart) {
