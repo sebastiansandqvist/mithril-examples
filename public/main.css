@@ -32,6 +32,10 @@ body {
 	float: right;
 }
 
+.fullWidth {
+	width: 100%;
+}
+
 ul {
 	margin: 0;
 }
@@ -172,6 +176,11 @@ h1 {
 	font-size: 24;
 	margin: 0;
 	text-align: center;
+}
+
+.Demo h1 {
+	color: #34495e;
+	text-align: left;
 }
 
 h2 {
