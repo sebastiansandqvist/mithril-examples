@@ -19,7 +19,7 @@ import {
 } from '../examples/route3.js';
 
 
-function view({ attrs }) {
+function view() {
 	return (
 		m(Page, { id: 'Routing' },
 			m('.Section',

@@ -10,14 +10,16 @@ const pages = [
 	// 'Streams'
 ];
 
+const linkType = T({
+	page: T.string,
+	active: T.string
+});
+
 const Link = {
 	view({ attrs }) {
 
 		if (window.__DEV__) {
-			T({
-				page: T.string,
-				active: T.string
-			})(attrs, 'Link');
+			linkType(attrs, 'Link');
 		}
 
 		return (
@@ -30,10 +32,12 @@ const Link = {
 	}
 };
 
+const navType = T({ active: T.string });
+
 function view({ attrs }) {
 
 	if (window.__DEV__) {
-		T({ active: T.string })(attrs, 'Nav');
+		navType(attrs, 'Nav');
 	}
 
 	return (

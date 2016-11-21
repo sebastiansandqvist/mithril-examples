@@ -2,10 +2,12 @@ import m from 'mithril';
 import T from 's-types';
 import Nav from './Nav.js';
 
+const pageType = T({ id: T.string });
+
 function view({ attrs, children }) {
 
 	if (window.__DEV__) {
-		T({ id: T.string })(attrs, 'Page');
+		pageType(attrs, 'Page');
 	}
 
 	return (
