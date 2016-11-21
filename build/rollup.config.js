@@ -1,6 +1,7 @@
 import buble from 'rollup-plugin-buble';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
+import uglify from 'rollup-plugin-uglify';
 
 module.exports = {
 	entry: 'src/index.js',
@@ -9,6 +10,7 @@ module.exports = {
 	plugins: [
 		nodeResolve({ browser: true }),
 		commonjs(),
-		buble()
+		buble(),
+		uglify()
 	]
-}
+};
