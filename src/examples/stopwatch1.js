@@ -5,7 +5,7 @@ const es5 = codeString(
 `var Stopwatch = {
   oninit: function(vnode) {
     vnode.state.seconds = 0;
-    vnode.state.count = () => {
+    vnode.state.count = function() {
       vnode.state.seconds++;
       m.redraw();
     };
