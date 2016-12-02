@@ -1,6 +1,7 @@
 import m from 'mithril';
 import Page from './Page.js';
 import Tabs from './Tabs.js';
+import markup from '../util/markup.js';
 
 import {
 	code as helloWorld1,
@@ -25,6 +26,12 @@ import {
 function view() {
 	return (
 		m(Page, { id: 'Getting started' },
+			m('.Section',
+				m('p.alert',
+					m('strong', 'Disclaimer: '),
+					markup('the `m.prop` stream API and `m.request` AJAX API have changed. The examples here that rely on those APIs may be out of date until this disclaimer is removed.')
+				)
+			),
 			m('.Section',
 				m('h2', 'Overview'),
 				m('p', 'Mithril is a client-side MVC framework. You can read more about it at the ',
