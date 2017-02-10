@@ -19,6 +19,11 @@ import {
 } from '../examples/stopwatch3.js';
 
 import {
+	code as stopwatch4,
+	Component as StopwatchComponent4
+} from '../examples/stopwatch4.js';
+
+import {
 	code as rotator1,
 	Component as RotatorComponent1
 } from '../examples/rotator1.js';
@@ -80,7 +85,8 @@ function view() {
 					)
 				),
 				m('p',
-					'Because of the increased complexity this adds to the component, it is a good idea to refactor it to decouple the view logic from the data.'
+					'Because of the increased complexity this adds to the component, ',
+					'it is a good idea to refactor it to decouple the view logic from the data.'
 				),
 				m('.Demo',
 					m('.Demo-left',
@@ -88,6 +94,21 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(StopwatchComponent3))
+					)
+				),
+				m('p',
+					markup(
+						'However, this approach limits you to a single instance of the `Stopwatch` component. ' +
+						'There are many ways to instantiate new instances of a model in order to avoid this problem. ' +
+						'You could use classes, prototypes, or, as we will use in this example, factories.'
+					)
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: stopwatch4 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(StopwatchComponent4))
 					)
 				)
 			),
