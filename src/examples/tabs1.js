@@ -1,8 +1,11 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`var tabContent1 = [
+`var stream = require('mithril/stream');
+
+var tabContent1 = [
   { id: 'One', content: 'First tab' },
   { id: 'Two', content: 'Second tab' },
   { id: 'Three', content: 'Third tab' }
@@ -15,7 +18,7 @@ var tabContent2 = [
 
 var Tabs = {
   oninit: function(vnode) {
-    vnode.state.activeTab = m.prop(0);
+    vnode.state.activeTab = stream(0);
   },
   view: function(vnode) {
     var active = vnode.state.activeTab();
@@ -51,7 +54,9 @@ var Component = {
 };`);
 
 const es6 = codeString(
-`const tabContent1 = [
+`import stream from 'mithril/stream';
+
+const tabContent1 = [
   { id: 'One', content: 'First tab' },
   { id: 'Two', content: 'Second tab' },
   { id: 'Three', content: 'Third tab' }
@@ -64,7 +69,7 @@ const tabContent2 = [
 
 const Tabs = {
   oninit({ state }) {
-    state.activeTab = m.prop(0);
+    state.activeTab = stream(0);
   },
   view({ attrs, state }) {
     return (
@@ -97,7 +102,9 @@ const Component = {
 };`);
 
 const jsx = codeString(
-`const tabContent1 = [
+`import stream from 'mithril/stream';
+
+const tabContent1 = [
   { id: 'One', content: 'First tab' },
   { id: 'Two', content: 'Second tab' },
   { id: 'Three', content: 'Third tab' }
@@ -110,7 +117,7 @@ const tabContent2 = [
 
 const Tabs = {
   oninit({ state }) {
-    state.activeTab = m.prop(0);
+    state.activeTab = stream(0);
   },
   view({ attrs, state }) {
     const active = state.activeTab();
@@ -167,7 +174,7 @@ const tabContent2 = [
 
 const Tabs = {
   oninit({ state }) {
-    state.activeTab = m.prop(0);
+    state.activeTab = stream(0);
   },
   view({ attrs, state }) {
     return (

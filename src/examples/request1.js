@@ -1,14 +1,17 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`var BookView = {
+`var stream = require('mithril/stream');
+
+var BookView = {
   oninit: function(vnode) {
-    vnode.state.books = m.request({
+    vnode.state.books = stream([]);
+    m.request({
       method: 'GET',
-      url: 'https://mithril-examples.firebaseio.com/books.json',
-      initialValue: []
-    });
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    }).then(vnode.state.books);
   },
   view: function(vnode) {
     return (
@@ -25,13 +28,15 @@ const es5 = codeString(
 };`);
 
 const es6 = codeString(
-`const BookView = {
+`import stream from 'mithril/stream';
+
+const BookView = {
   oninit({ state }) {
-    state.books = m.request({
+    state.books = stream([]);
+    m.request({
       method: 'GET',
-      url: 'https://mithril-examples.firebaseio.com/books.json',
-      initialValue: []
-    });
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    }).then(state.books);
   },
   view({ state }) {
     return (
@@ -48,13 +53,15 @@ const es6 = codeString(
 };`);
 
 const jsx = codeString(
-`const BookView = {
+`import stream from 'mithril/stream';
+
+const BookView = {
   oninit({ state }) {
-    state.books = m.request({
+    state.books = stream([]);
+    m.request({
       method: 'GET',
-      url: 'https://mithril-examples.firebaseio.com/books.json',
-      initialValue: []
-    });
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    }).then(state.books);
   },
   view({ state }) {
     return (
@@ -82,11 +89,11 @@ export const code = [
 // { name: String, price: Number, id: Number }
 export const Component = {
   oninit({ state }) {
-    state.books = m.request({
+    state.books = stream([]);
+    m.request({
       method: 'GET',
-      url: 'https://mithril-examples.firebaseio.com/books.json',
-      initialValue: []
-    });
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    }).then(state.books);
   },
   view({ state }) {
     return (

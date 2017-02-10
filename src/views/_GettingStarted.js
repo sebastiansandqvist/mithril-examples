@@ -23,21 +23,20 @@ import {
 	Component as HelloWorldComponent4
 } from '../examples/helloWorld4.js';
 
+import {
+	code as helloWorldFn,
+	Component as HelloWorldFnComponent
+} from '../examples/helloWorld-functions.js';
+
 function view() {
 	return (
 		m(Page, { id: 'Getting started' },
 			m('.Section',
-				m('p.alert',
-					m('strong', 'Disclaimer: '),
-					markup('the `m.prop` stream API and `m.request` AJAX API have changed. The examples here that rely on those APIs may be out of date until this disclaimer is removed.')
-				)
-			),
-			m('.Section',
 				m('h2', 'Overview'),
 				m('p', 'Mithril is a client-side MVC framework. You can read more about it at the ',
 					m('a[href=http://mithril.js.org]', 'official website'), '. ',
-					'This is an unofficial guide and collection of examples using the upcoming ',
-					m('a[href=https://github.com/lhorie/mithril.js/tree/rewrite/docs]', '1.0 rewrite'),
+					'This is an unofficial guide and collection of examples using the ',
+					m('a[href=https://github.com/lhorie/mithril.js/tree/rewrite/docs]', '1.0 version'),
 					' of Mithril.js.'
 				)
 			),
@@ -107,11 +106,12 @@ function view() {
 					'Mithril provides two utilities ',
 					m('code.inline', 'm.withAttr'),
 					' and ',
-					m('code.inline', 'm.prop'),
-					' that help simplify this process.'
+					m('code.inline', 'stream'),
+					' (not included by default with mithril) that help simplify this process.'
 				),
 				m('p',
-					m('code.inline', m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/prop.md]', 'm.prop')),
+					'A ',
+					m('code.inline', m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/stream.md]', 'stream')),
 					' is, at its simplest, a getter-setter function, while ',
 					m('code.inline', m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/withAttr.md]', 'm.withAttr')),
 					' creates an event handler that uses a specified dom element property as the argument to a provided callback. ',
@@ -123,6 +123,21 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(HelloWorldComponent4))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Stateless functional components'),
+				m('p',
+					'With mithril, it is also possible to create components in a more functional style. ',
+					'The following is another acceptable way to write mithril components:'
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: helloWorldFn })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(HelloWorldFnComponent))
 					)
 				)
 			)

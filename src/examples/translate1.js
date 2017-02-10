@@ -1,8 +1,11 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`function mapAsciiToBraille(character) {
+`var stream = require('mithril/stream');
+
+function mapAsciiToBraille(character) {
 
   var map = {
     a: '⠁',
@@ -49,8 +52,8 @@ const es5 = codeString(
 
 var BrailleTranslator = {
   oninit: function(vnode) {
-    vnode.state.input = m.prop('');
-    vnode.state.output = vnode.state.input.run(function(text) {
+    vnode.state.input = stream('');
+    vnode.state.output = vnode.state.input.map(function(text) {
       return text
         .toLowerCase()
         .split('')
@@ -76,7 +79,9 @@ var BrailleTranslator = {
 };`);
 
 const es6 = codeString(
-`function mapAsciiToBraille(character) {
+`import stream from 'mithril/stream';
+
+function mapAsciiToBraille(character) {
 
   const map = {
     a: '⠁',
@@ -123,8 +128,8 @@ const es6 = codeString(
 
 const BrailleTranslator = {
   oninit({ state }) {
-    state.input = m.prop('');
-    state.output = state.input.run(function(text) {
+    state.input = stream('');
+    state.output = state.input.map(function(text) {
       return text
         .toLowerCase()
         .split('')
@@ -150,7 +155,9 @@ const BrailleTranslator = {
 };`);
 
 const jsx = codeString(
-`function mapAsciiToBraille(character) {
+`import stream from 'mithril/stream';
+
+function mapAsciiToBraille(character) {
 
   const map = {
     a: '⠁',
@@ -197,8 +204,8 @@ const jsx = codeString(
 
 const BrailleTranslator = {
   oninit({ state }) {
-    state.input = m.prop('');
-    state.output = state.input.run(function(text) {
+    state.input = stream('');
+    state.output = state.input.map(function(text) {
       return text
         .toLowerCase()
         .split('')
@@ -276,8 +283,8 @@ function mapAsciiToBraille(character) {
 
 export const Component = {
   oninit({ state }) {
-    state.input = m.prop('');
-    state.output = state.input.run(function(text) {
+    state.input = stream('');
+    state.output = state.input.map(function(text) {
       return text
         .toLowerCase()
         .split('')

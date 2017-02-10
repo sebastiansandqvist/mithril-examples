@@ -1,8 +1,11 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`var HelloWorldButton = {
+`var stream = require('mithril/stream');
+
+var HelloWorldButton = {
   view: function(vnode) {
     return m('button', 'Hello ' + vnode.attrs.title);
   }
@@ -10,7 +13,7 @@ const es5 = codeString(
 
 var Component = {
   oninit: function(vnode) {
-    vnode.state.inputValue = m.prop('');
+    vnode.state.inputValue = stream('');
   },
   view: function(vnode) {
     return (
@@ -28,7 +31,9 @@ var Component = {
 };`);
 
 const es6 = codeString(
-`const HelloWorldButton = {
+`import stream from 'mithril/stream';
+
+const HelloWorldButton = {
   view({ attrs }) {
     return m('button', \`Hello $\{attrs.title}\`);
   }
@@ -36,7 +41,7 @@ const es6 = codeString(
 
 const Component = {
   oninit({ state }) {
-    state.inputValue = m.prop('');
+    state.inputValue = stream('');
   },
   view({ state }) {
     return (
@@ -52,7 +57,9 @@ const Component = {
 };`);
 
 const jsx = codeString(
-`const HelloWorldButton = {
+`import stream from 'mithril/stream';
+
+const HelloWorldButton = {
   view({ attrs }) {
     return <button>Hello {attrs.title}</button>;
   }
@@ -60,7 +67,7 @@ const jsx = codeString(
 
 const Component = {
   oninit({ state }) {
-    state.inputValue = m.prop('');
+    state.inputValue = stream('');
   },
   view({ state }) {
     return (
@@ -89,7 +96,7 @@ const HelloWorldButton = {
 
 export const Component = {
   oninit({ state }) {
-    state.inputValue = m.prop('');
+    state.inputValue = stream('');
   },
   view({ state }) {
     return (

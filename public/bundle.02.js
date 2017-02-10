@@ -1,4 +1,5650 @@
-!function(){"use strict";function t(t,e){return e={exports:{}},t(e,e.exports),e.exports}function e(t,e,n,o,r,i){return{tag:t,key:e,attrs:n,children:o,text:r,dom:i,domSize:void 0,state:{},events:void 0,instance:void 0,skip:!1}}function n(t){var e=arguments;if(null==t||"string"!=typeof t&&null==t.view)throw Error("The selector must be either a string or a component.");if("string"==typeof t&&void 0===C[t]){for(var n,o,r=[],i={};n=S.exec(t);){var a=n[1],s=n[2];if(""===a&&""!==s)o=s;else if("#"===a)i.id=s;else if("."===a)r.push(s);else if("["===n[3][0]){var l=n[6];l&&(l=l.replace(/\\(["'])/g,"$1").replace(/\\\\/g,"\\")),i[n[4]]=l||!0}}r.length>0&&(i.className=r.join(" ")),C[t]=function(t,e){var n,r,a=!1,s=t.className||t.class;for(var l in i)t[l]=i[l];void 0!==s&&(void 0!==t.class&&(t.class=void 0,t.className=s),void 0!==i.className&&(t.className=i.className+" "+s));for(var l in t)if("key"!==l){a=!0;break}return e instanceof Array&&1==e.length&&null!=e[0]&&"#"===e[0].tag?r=e[0].children:n=e,_(o||"div",t.key,a?t:void 0,n,r,void 0)}}var u,c,d;if(null!=arguments[1]&&("object"!=typeof arguments[1]||void 0!==arguments[1].tag||arguments[1]instanceof Array)?d=1:(u=arguments[1],d=2),arguments.length===d+1)c=arguments[d]instanceof Array?arguments[d]:[arguments[d]];else{c=[];for(var p=d;p<arguments.length;p++)c.push(e[p])}return"string"==typeof t?C[t](u||{},_.normalizeChildren(c)):_(t,u&&u.key,u||{},_.normalizeChildren(c),void 0,void 0)}function o(t){var e=Object.prototype.toString.call(t).slice(8,-1).toLowerCase();return"array"===e&&t.length>0?"[array of "+o(t[0])+"s]":e}function r(t){return 1===t.length?t[0].type:t.map(function(t){return t.type}).join(" || ")}function i(t){return function(e,n){var i=function(i){if(t.hasOwnProperty(i)){var a=Array.isArray(t[i])?t[i]:[t[i]],s=a.reduce(function(t,n){return t||n(e[i])},!1);if(!s){if(r(a).indexOf("interface")>-1)return;var l="Failed type check in "+(n||"unknown object")+"\nExpected prop '"+i+"' of type "+r(a)+"\nYou provided '"+i+"' of type "+o(e[i]);return console.error(l),{v:l}}}};for(var a in t){var s=i(a);if(s)return s.v}for(var l in e)if(e.hasOwnProperty(l)&&!t.hasOwnProperty(l)){var u="Did not expect to find prop '"+l+"' in "+n;return console.error(u),u}return null}}function a(t){var e=t.attrs;return window.__DEV__&&wt(e,"Nav"),ft(".Nav",ft(".Container",vt.map(function(t){return ft(bt,{page:t,active:e.active})})))}function s(t){var e=t.attrs,n=t.children;return window.__DEV__&&kt(e,"Page"),ft("div",ft(".Display",ft(".Container",ft("h1","Mithril.js examples"))),ft(yt,{active:e.id}),ft(".Content",ft(".Container",n)))}function l(t){var e=t.state;e.activeIndex=ft.prop(0)}function u(t){var e=t.attrs,n=t.state;window.__DEV__&&Tt(e,"Tabs");var o=e.fiddle?ft("a.FiddleLink",{href:"https://jsfiddle.net/"+e.fiddle+"/"},"jsFiddle"):null;return ft(".Tabs.drop20",ft(".TabBar",ft("div",e.tabs.map(function(t,e){return ft(".Tab",{key:t.id,className:n.activeIndex()===e?"active":"",onclick:function(){return n.activeIndex(e)}},t.id)})),o),ft("pre.TabContent",ft("code",ft.trust(e.tabs[n.activeIndex()].code))))}function c(t){for(var e=[],n=/(`(.*?)`)/gm,o=t.split(n),r=!1,i=!1,a=0;a<o.length;a++)r=n.test(o[a]),i=n.test(o[a-1]||""),i?e.push(ft("code.inline",o[a])):r||e.push(ft("span",o[a]));return e}function d(t,e){var n=/\(([^)]+)\)/,o=e.match(n)[1];return"/"===o[0]?ft("a",{href:o,oncreate:ft.route.link},t):ft("a",{href:o},t)}function p(t){for(var e=/`(.*?)`/gm,n=/(\[(.*?)\]\(.*?\))/gm,o=[],r=t.split(n),i=!1,a=!1,s=!1,l=0;l<r.length;l++)i=e.test(r[l]),a=n.test(r[l]),s=n.test(r[l-1]||""),i?o.push(c(r[l])):s?o.push(d(r[l],r[l-1])):a||o.push(r[l]);return o}function h(t){return St.highlight(t,St.languages.javascript)}function f(){return ft(xt,{id:"Getting started"},ft(".Section",ft("p.alert",ft("strong","Disclaimer: "),p("the `m.prop` stream API and `m.request` AJAX API have changed. The examples here that rely on those APIs may be out of date until this disclaimer is removed."))),ft(".Section",ft("h2","Overview"),ft("p","Mithril is a client-side MVC framework. You can read more about it at the ",ft("a[href=http://mithril.js.org]","official website"),". ","This is an unofficial guide and collection of examples using the upcoming ",ft("a[href=https://github.com/lhorie/mithril.js/tree/rewrite/docs]","1.0 rewrite")," of Mithril.js.")),ft(".Section",ft("h2","Basic components"),ft("p","Every component is at minimum an object with a ",ft("code.inline","view")," method that returns a mithril virtual dom node."),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:Dt,fiddle:"69b1624v"})),ft(".Demo-right",ft(".Demo-result",ft(Lt)))),ft("p","The first argument to ",ft("code.inline","m")," is the element (as a css selector-like string) or component that should be rendered, and the optional last argument(s)"," are the children of that component."),ft("p","Components can pass properties down to their children by passing in an object as the second argument in the call to ",ft("code.inline","m"),". Those properties become available to the component through the ",ft("code.inline","attrs")," object in the mithril virtual dom node."),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:It,fiddle:"amw7q2bv"})),ft(".Demo-right",ft(".Demo-result",ft(Pt)))),ft("p","In addition to the ",ft("code.inline","view")," method, Mithril components have a variety of ",ft("a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/lifecycle-methods.renderToStaticMarkup]","lifecycle hooks"),". Using the ",ft("code.inline","oninit")," lifecycle hook, which runs once immediately before rendering the component, "," we can set the initial state. At this point it is worth noting that the ",ft("code.inline","vnode")," object that is passed to the ",ft("code.inline","view")," method contains, in addition to ",ft("code.inline","attrs"),", a ",ft("code.inline","state")," object that can be used to store the state of that specific component."),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:Rt,fiddle:"ezh0f7sd"})),ft(".Demo-right",ft(".Demo-result",ft(zt)))),ft("p","Mithril provides two utilities ",ft("code.inline","m.withAttr")," and ",ft("code.inline","m.prop")," that help simplify this process."),ft("p",ft("code.inline",ft("a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/prop.md]","m.prop"))," is, at its simplest, a getter-setter function, while ",ft("code.inline",ft("a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/withAttr.md]","m.withAttr"))," creates an event handler that uses a specified dom element property as the argument to a provided callback. ","We can use them both to simplify the previous code. All together, this is the final version of this example:"),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:Ut,fiddle:"morgz8m0"})),ft(".Demo-right",ft(".Demo-result",ft(Jt))))))}function m(t){t.style.height="",t.style.height=t.scrollHeight+"px"}function v(){return ft(xt,{id:"Components"},ft(".Section",ft("h2","Stopwatch"),ft("p",p("In the [Getting started](/) example there was no need to manually tell mithril to update the view when the contents of the input changed, because mithril automatically redraws after event handlers are called. In this example there are no events that trigger an update, so we tell mithril to update via `m.redraw`.")),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:Qt,fiddle:"ckap5y2g"})),ft(".Demo-right",ft(".Demo-result",ft(te)))),ft("p",p("Adding a reset button is as simple as creating the button element in the `view` function and setting its `onclick` handler to a function that changes the count to 0. Similarly, the Start/Pause toggle is just a button that either clears or starts a new counter.")),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:re,fiddle:"nkuc6rbk"})),ft(".Demo-right",ft(".Demo-result",ft(ie))))),ft(".Section",ft("h2","List rotator"),ft("p",p("When rendering a list of data, it is a good idea to supply Mithril with a `key` attribute for each element in that list. [Keys](https://github.com/lhorie/mithril.js/blob/rewrite/docs/keys.md) help maintain references to each element and should be unique for each item in the list.")),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:ue,fiddle:"5ek60qfs"})),ft(".Demo-right",ft(".Demo-result",ft(ce))))),ft(".Section",ft("h2","Password input"),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:fe,fiddle:"256kx8sy"})),ft(".Demo-right",ft(".Demo-result",ft(me))))),ft(".Section",ft("h2","Autogrow textarea"),ft("p",p("In some cases it is necessary to interact directly with the rendered dom node, not just mithril virtual dom nodes. For those cases, certain lifecycle methods (including `oncreate`) provide access to the actual node through the `dom` property. This example uses it to set the height of the textarea.")),ft("p",p("This example also relies on the fact that, in addition to being a getter-setter, any variable set to `m.prop()`  can be observed for changes. Whenever the value is updated, its `run` function calls its callback with the new value. (In this case, we just ignore the new value since the height is set regardless of the specific contents).")),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:we,fiddle:"n9rLg94u"})),ft(".Demo-right",ft(".Demo-result",ft(ye))))),ft(".Section",ft("h2","Tabs"),ft("p",p("The only state that tabs need to keep internally is the index of the active tab. The example components store this state in each instance of the tabs. The implementation of the tabs on this site can be viewed [on github](https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2).")),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:_e,fiddle:"h2vftbr8"})),ft(".Demo-right",ft(".Demo-result",ft(Ae))))),ft(".Section",ft("h2","Tooltips"),ft("p",p("There are a lot of ways to implement tooltips. This implementation relies more on CSS than javascript, but mithril makes it easy to reuse the component. The code that defines the tooltip component just wraps arbitrary child components in the correct CSS class names, and allows the value of the tooltip to be dynamically set using `attrs.value`.")),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:Oe,fiddle:"181vwbL8"})),ft(".Demo-right",ft(".Demo-result",ft(Ne))))))}function g(t){var e={a:"⠁",b:"⠃",c:"⠉",d:"⠙",e:"⠑",f:"⠋",g:"⠛",h:"⠓",i:"⠊",j:"⠚",k:"⠅",l:"⠇",m:"⠍",n:"⠝",o:"⠕",p:"⠏",q:"⠟",r:"⠗",s:"⠎",t:"⠞",u:"⠥",v:"⠧",w:"⠺",x:"⠭",y:"⠽",z:"⠵",0:"⠼⠚",1:"⠼⠁",2:"⠼⠃",3:"⠼⠉",4:"⠼⠙",5:"⠼⠑",6:"⠼⠋",7:"⠼⠛",8:"⠼⠓",9:"⠼⠊"};return e[t]||t}function b(){return ft(xt,{id:"Applications"},ft(".Section",ft("h2","Todo list"),ft("p","This example is ported over from the React.js documentation in order to demonstrate ","some of the differences between Mithril's syntax and React's."),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:Re,fiddle:"vqqfvjb6"})),ft(".Demo-right",ft(".Demo-result",ft(ze))))),ft(".Section",ft("h2","Shopping cart"),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:Ue,fiddle:"mbyqewny"})),ft(".Demo-right",ft(".Demo-result",ft(Je))))),ft(".Section",ft("h2","Braille Translator"),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:Ke,fiddle:"53xrgmxq"})),ft(".Demo-right",ft(".Demo-result",ft(Qe))))),ft(".Section",ft("h2","Markdown editor"),ft("p",p("Like the to-do example, this example that closely mirrors a demo application on the react.js site. We are using the [marked](https://github.com/chjj/marked) library to transform the input string into a raw html string. In the view, `m.trust` is used to bypass the input sanitation provided by default with mithril.")),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:rn,fiddle:"ozjtms1q"})),ft(".Demo-right",ft(".Demo-result",ft(an))))))}function w(){return ft(xt,{id:"Requests"},ft(".Section",ft("h2","Render fetched list"),ft("p",ft("a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/request.md]",ft("code.inline","m.request"))," performs an AJAX request against a specified url and returns a ",ft("a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/prop.md]","stream")," whose value becomes the data fetched from the server."),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:dn,fiddle:"rd54g0f4"})),ft(".Demo-right",ft(".Demo-result",ft(pn))))),ft(".Section",ft("h2","Equivalent using fetch api"),ft("p",ft("code.inline","m.request")," is similar to the native fetch api, but adds automatic redrawing upon completion, ","converts the response to JSON, and resolves to a stream. For comparison, the following ","code is the equivalent of the first example, using the native fetch api instead."),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:vn,fiddle:"5b1wn90n"})),ft(".Demo-right",ft(".Demo-result",ft(gn))))))}function y(){return ft(xt,{id:"Routing"},ft(".Section",ft("h2","Getting the current route"),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:xn})),ft(".Demo-right",ft(".Demo-result",ft(Tn))))),ft(".Section",ft("h2","Setting the current route (with links)"),ft("p","When using links (",ft("code.inline","a")," elements), Mithril provides a method that prevents the default behavior of links ","(which would refresh the page unnecessarily) and ensures that those links adhere to the ","current routing mode, whether it's hash based, query string based, or pathname based. ","For any links that do not route away from the current site, use ",ft("code.inline","m.route.link")," in that link's ",ft("code.inline","oncreate")," lifecycle method."),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:jn})),ft(".Demo-right",ft(".Demo-result",ft(An))))),ft(".Section",ft("h2","Setting the current route programmatically"),ft(".Demo",ft(".Demo-left",ft(_t,{tabs:En})),ft(".Demo-right",ft(".Demo-result",ft(On))))),ft(".Section",ft("h2","Further reading"),ft("p","Take a look at the ",ft("a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/route.md]","official router documentation")," for more information on how routing works in Mithril. ","The implementation of the router used for this website can be found ",ft("a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/index.js?ts=2]","on github"),"."),ft("p",p("See also: interactive [mithril router usage on JSFiddle](https://jsfiddle.net/qproodwf/)."))))}function k(){return ft(xt,{id:"Streams"},ft(".Section",ft("h2","...")))}var x="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};t(function(t){!function(){function e(t){if("string"!=typeof t&&(t=String(t)),/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(t))throw new TypeError("Invalid character in header field name");return t.toLowerCase()}function n(t){return"string"!=typeof t&&(t=String(t)),t}function o(t){this.map={},t instanceof o?t.forEach(function(t,e){this.append(e,t)},this):t&&Object.getOwnPropertyNames(t).forEach(function(e){this.append(e,t[e])},this)}function r(t){return t.bodyUsed?Promise.reject(new TypeError("Already read")):void(t.bodyUsed=!0)}function i(t){return new Promise(function(e,n){t.onload=function(){e(t.result)},t.onerror=function(){n(t.error)}})}function a(t){var e=new FileReader;return e.readAsArrayBuffer(t),i(e)}function s(t,e){var n=new FileReader,o=e.headers.map["content-type"]?e.headers.map["content-type"].toString():"",r=/charset\=[0-9a-zA-Z\-\_]*;?/,a=t.type.match(r)||o.match(r),s=[t];return a&&s.push(a[0].replace(/^charset\=/,"").replace(/;$/,"")),n.readAsText.apply(n,s),i(n)}function l(){return this.bodyUsed=!1,this._initBody=function(t,e){if(this._bodyInit=t,"string"==typeof t)this._bodyText=t;else if(f.blob&&Blob.prototype.isPrototypeOf(t))this._bodyBlob=t,this._options=e;else if(f.formData&&FormData.prototype.isPrototypeOf(t))this._bodyFormData=t;else if(t){if(!f.arrayBuffer||!ArrayBuffer.prototype.isPrototypeOf(t))throw new Error("unsupported BodyInit type")}else this._bodyText=""},f.blob?(this.blob=function(){var t=r(this);if(t)return t;if(this._bodyBlob)return Promise.resolve(this._bodyBlob);if(this._bodyFormData)throw new Error("could not read FormData body as blob");return Promise.resolve(new Blob([this._bodyText]))},this.arrayBuffer=function(){return this.blob().then(a)},this.text=function(){var t=r(this);if(t)return t;if(this._bodyBlob)return s(this._bodyBlob,this._options);if(this._bodyFormData)throw new Error("could not read FormData body as text");return Promise.resolve(this._bodyText)}):this.text=function(){var t=r(this);return t?t:Promise.resolve(this._bodyText)},f.formData&&(this.formData=function(){return this.text().then(d)}),this.json=function(){return this.text().then(JSON.parse)},this}function u(t){var e=t.toUpperCase();return m.indexOf(e)>-1?e:t}function c(t,e){e=e||{};var n=e.body;if(c.prototype.isPrototypeOf(t)){if(t.bodyUsed)throw new TypeError("Already read");this.url=t.url,this.credentials=t.credentials,e.headers||(this.headers=new o(t.headers)),this.method=t.method,this.mode=t.mode,n||(n=t._bodyInit,t.bodyUsed=!0)}else this.url=t;if(this.credentials=e.credentials||this.credentials||"omit",!e.headers&&this.headers||(this.headers=new o(e.headers)),this.method=u(e.method||this.method||"GET"),this.mode=e.mode||this.mode||null,this.referrer=null,("GET"===this.method||"HEAD"===this.method)&&n)throw new TypeError("Body not allowed for GET or HEAD requests");this._initBody(n,e)}function d(t){var e=new FormData;return t.trim().split("&").forEach(function(t){if(t){var n=t.split("="),o=n.shift().replace(/\+/g," "),r=n.join("=").replace(/\+/g," ");e.append(decodeURIComponent(o),decodeURIComponent(r))}}),e}function p(t){var e=new o,n=t.getAllResponseHeaders().trim().split("\n");return n.forEach(function(t){var n=t.trim().split(":"),o=n.shift().trim(),r=n.join(":").trim();e.append(o,r)}),e}function h(t,e){e||(e={}),this._initBody(t,e),this.type="default",this.status=e.status,this.ok=this.status>=200&&this.status<300,this.statusText=e.statusText,this.headers=e.headers instanceof o?e.headers:new o(e.headers),this.url=e.url||""}if(self.__disableNativeFetch||!self.fetch){o.prototype.append=function(t,o){t=e(t),o=n(o);var r=this.map[t];r||(r=[],this.map[t]=r),r.push(o)},o.prototype.delete=function(t){delete this.map[e(t)]},o.prototype.get=function(t){var n=this.map[e(t)];return n?n[0]:null},o.prototype.getAll=function(t){return this.map[e(t)]||[]},o.prototype.has=function(t){return this.map.hasOwnProperty(e(t))},o.prototype.set=function(t,o){this.map[e(t)]=[n(o)]},o.prototype.forEach=function(t,e){Object.getOwnPropertyNames(this.map).forEach(function(n){this.map[n].forEach(function(o){t.call(e,o,n,this)},this)},this)};var f={blob:"FileReader"in self&&"Blob"in self&&function(){try{return new Blob,!0}catch(t){return!1}}(),formData:"FormData"in self,arrayBuffer:"ArrayBuffer"in self},m=["DELETE","GET","HEAD","OPTIONS","POST","PUT"];c.prototype.clone=function(){return new c(this)},l.call(c.prototype),l.call(h.prototype),h.prototype.clone=function(){return new h(this._bodyInit,{status:this.status,statusText:this.statusText,headers:new o(this.headers),url:this.url})},h.error=function(){var t=new h(null,{status:0,statusText:""});return t.type="error",t};var v=[301,302,303,307,308];h.redirect=function(t,e){if(v.indexOf(e)===-1)throw new RangeError("Invalid status code");return new h(null,{status:e,headers:{location:t}})},self.Headers=o,self.Request=c,self.Response=h,self.fetch=function(t,e){return new Promise(function(n,o){function r(){return"responseURL"in s?s.responseURL:/^X-Request-URL:/m.test(s.getAllResponseHeaders())?s.getResponseHeader("X-Request-URL"):void 0}function i(){if(4===s.readyState){var t=1223===s.status?204:s.status;if(t<100||t>599){if(l)return;return l=!0,void o(new TypeError("Network request failed"))}var e={status:t,statusText:s.statusText,headers:p(s),url:r()},i="response"in s?s.response:s.responseText;l||(l=!0,n(new h(i,e)))}}var a;a=c.prototype.isPrototypeOf(t)&&!e?t:new c(t,e);var s=new XMLHttpRequest,l=!1;s.onreadystatechange=i,s.onload=i,s.onerror=function(){l||(l=!0,o(new TypeError("Network request failed")))},s.open(a.method,a.url,!0);try{"include"===a.credentials&&("withCredentials"in s?s.withCredentials=!0:console&&console.warn&&console.warn("withCredentials is not supported, you can ignore this warning"))}catch(t){console&&console.warn&&console.warn("set withCredentials error:"+t)}"responseType"in s&&f.blob&&(s.responseType="blob"),a.headers.forEach(function(t,e){s.setRequestHeader(e,t)}),s.send("undefined"==typeof a._bodyInit?null:a._bodyInit)})},self.fetch.polyfill=!0,"undefined"!=typeof t&&t.exports&&(t.exports=self.fetch)}}()});e.normalize=function(t){return t instanceof Array?e("[",void 0,void 0,e.normalizeChildren(t),void 0,void 0):null!=t&&"object"!=typeof t?e("#",void 0,void 0,t,void 0,void 0):t},e.normalizeChildren=function(t){for(var n=0;n<t.length;n++)t[n]=e.normalize(t[n]);return t};var T=e,_=T,S=/(?:(^|#|\.)([^#\.\[\]]+))|(\[(.+?)(?:\s*=\s*("|'|)((?:\\["'\]]|.)*?)\5)?\])/g,C={},j=n,A=T,D=function(t){return A("<",void 0,void 0,t,void 0,void 0)},L=T,B=function(t,e){return L("[",t.key,t,L.normalizeChildren(e),void 0,void 0)},E=j;E.trust=D,E.fragment=B;var O=E,I=function(t){function e(){function t(){return arguments.length>0&&arguments[0]!==B&&o(t,arguments[0],void 0),t._state.value}return n(t),arguments.length>0&&arguments[0]!==B&&o(t,arguments[0],void 0),t}function n(t){t.constructor=e,t._state={id:D++,value:void 0,error:void 0,state:0,derive:void 0,recover:void 0,deps:{},parents:[],errorStream:void 0,endStream:void 0},t.map=b,t.ap=w,t.of=e,t.valueOf=y,t.toJSON=k,t.toString=y,t.run=d,t.catch=p,Object.defineProperties(t,{error:{get:function(){if(!t._state.errorStream){var e=function(){return arguments.length>0&&arguments[0]!==B&&o(t,void 0,arguments[0]),t._state.error};n(e),m(e,[t],L,L),t._state.errorStream=e}return t._state.errorStream}},end:{get:function(){if(!t._state.endStream){var n=e();n.map(function(e){return e===!0&&(g(t),g(n)),e}),t._state.endStream=n}return t._state.endStream}}})}function o(t,e,n){r(t,e,n);for(var o in t._state.deps)a(t._state.deps[o],!1);u(t)}function r(t,e,n){if(n=l(e,n),void 0!==n&&"function"==typeof t._state.recover){if(!s(t,i,!0))return}else i(t,e,n);t._state.changed=!0,2!==t._state.state&&(t._state.state=1)}function i(t,e,n){t._state.value=e,t._state.error=n}function a(t,e){var n=t._state,o=n.parents;if(o.length>0&&o.filter(T).length===o.length&&(e||o.filter(_).length>0)){var i=o.filter(C);i.length>0?r(t,void 0,i[0]._state.error):s(t,r,!1)}}function s(t,e,n){try{var o=n?t._state.recover():t._state.derive();if(o===B)return!1;e(t,o,void 0)}catch(n){e(t,void 0,null!=n.__error?n.__error:n),null==n.__error&&c(t,n)}return!0}function l(t,n){return null!=t&&t.constructor===e&&(n=void 0!==t._state.error?t._state.error:l(t._state.value,t._state.error)),n}function u(t){t._state.changed=!1;for(var e in t._state.deps)t._state.deps[e]._state.changed=!1}function c(e,n){0===Object.keys(e._state.deps).length&&setTimeout(function(){0===Object.keys(e._state.deps).length&&t(n)},0)}function d(t){var n=e(),o=this;return m(n,[o],function(){return f(n,t(o()))},void 0)}function p(t){var n=e(),o=this,r=function(){return o._state.value},i=function(){return f(n,t(o._state.error))};return m(n,[o],r,i)}function h(t,n){if(n.length>n.filter(x).length)throw new Error("Ensure that each item passed to m.prop.combine/m.prop.merge is a stream");return m(e(),n,function(){var e=n.filter(C);if(e.length>0)throw{__error:e[0]._state.error};return t.apply(this,n.concat([n.filter(_)]))},void 0)}function f(t,n){if(null!=n&&n.constructor===e){var o=n,i=function(){r(t,o._state.value,o._state.error);for(var e in t._state.deps)a(t._state.deps[e],!1)};if(o.map(i).catch(function(t){throw i(),{__error:t}}),0===o._state.state)return B;if(o._state.error)throw{__error:o._state.error};n=o._state.value}return n}function m(t,e,n,o){var r=t._state;return r.derive=n,r.recover=o,r.parents=e.filter(S),v(t,r.parents),a(t,!0),t}function v(t,e){for(var n=0;n<e.length;n++)e[n]._state.deps[t._state.id]=t,v(t,e[n]._state.parents)}function g(t){for(var e=0;e<t._state.parents.length;e++){var n=t._state.parents[e];delete n._state.deps[t._state.id]}for(var o in t._state.deps){var r=t._state.deps[o],i=r._state.parents.indexOf(t);i>-1&&r._state.parents.splice(i,1)}t._state.state=2,t._state.deps={}}function b(t){return h(function(e){return t(e())},[this])}function w(t){return h(function(t,e){return t()(e())},[this,t])}function y(){return this._state.value}function k(){return null!=this._state.value&&"function"==typeof this._state.value.toJSON?this._state.value.toJSON():this._state.value}function x(t){return t._state}function T(t){return 1===t._state.state}function _(t){return t._state.changed}function S(t){return 2!==t._state.state}function C(t){return t._state.error}function j(t){var n=e();return n.error(t),n}function A(t){return h(function(){return t.map(function(t){return t()})},t)}var D=0,L=function(){},B={};return e.merge=A,e.combine=h,e.reject=j,e.HALT=B,e},N=I(console.log.bind(console)),P=function(t){function e(t,o){if(o instanceof Array)for(var r=0;r<o.length;r++)e(t+"["+r+"]",o[r]);else if("[object Object]"===Object.prototype.toString.call(o))for(var r in o)e(t+"["+r+"]",o[r]);else n.push(encodeURIComponent(t)+(null!=o&&""!==o?"="+encodeURIComponent(o):""))}if("[object Object]"!==Object.prototype.toString.call(t))return"";var n=[];for(var o in t)e(o,t[o]);return n.join("&")},H=P,q=function(t,e){function n(t){c=t}function o(n){var o=e();void 0!==n.initialValue&&o(n.initialValue);var r="boolean"==typeof n.useBody?n.useBody:"GET"!==n.method&&"TRACE"!==n.method;"function"!=typeof n.serialize&&(n.serialize="undefined"!=typeof FormData&&n.data instanceof FormData?function(t){return t}:JSON.stringify),"function"!=typeof n.deserialize&&(n.deserialize=s),"function"!=typeof n.extract&&(n.extract=l),n.url=i(n.url,n.data),r?n.data=n.serialize(n.data):n.url=a(n.url,n.data);var d=new t.XMLHttpRequest;return d.open(n.method,n.url,"boolean"!=typeof n.async||n.async,"string"==typeof n.user?n.user:void 0,"string"==typeof n.password?n.password:void 0),n.serialize===JSON.stringify&&r&&d.setRequestHeader("Content-Type","application/json; charset=utf-8"),n.deserialize===s&&d.setRequestHeader("Accept","application/json, text/*"),"function"==typeof n.config&&(d=n.config(d,n)||d),d.onreadystatechange=function(){if(4===d.readyState){try{var t=n.extract!==l?n.extract(d,n):n.deserialize(n.extract(d,n));if(d.status>=200&&d.status<300||304===d.status)o(u(n.type,t));else{var e=new Error(d.responseText);for(var r in t)e[r]=t[r];o.error(e)}}catch(t){o.error(t)}"function"==typeof c&&c()}},r?d.send(n.data):d.send(),o}function r(n){var o=e();void 0!==n.initialValue&&o(n.initialValue);var r=n.callbackName||"_mithril_"+Math.round(1e16*Math.random())+"_"+d++,s=t.document.createElement("script");return t[r]=function(e){s.parentNode.removeChild(s),o(u(n.type,e)),"function"==typeof c&&c(),delete t[r]},s.onerror=function(){s.parentNode.removeChild(s),o.error(new Error("JSONP request failed")),"function"==typeof c&&c(),delete t[r]},null==n.data&&(n.data={}),n.url=i(n.url,n.data),n.data[n.callbackKey||"callback"]=r,s.src=a(n.url,n.data),t.document.documentElement.appendChild(s),o}function i(t,e){if(null==e)return t;for(var n=t.match(/:[^\/]+/gi)||[],o=0;o<n.length;o++){var r=n[o].slice(1);null!=e[r]&&(t=t.replace(n[o],e[r]),delete e[r])}return t}function a(t,e){var n=H(e);if(""!==n){var o=t.indexOf("?")<0?"?":"&";t+=o+n}return t}function s(t){try{return""!==t?JSON.parse(t):null}catch(e){throw new Error(t)}}function l(t){return t.responseText}function u(t,e){if("function"==typeof t){if(!(e instanceof Array))return new t(e);for(var n=0;n<e.length;n++)e[n]=new t(e[n])}return e}var c,d=0;return{request:o,jsonp:r,setCompletionCallback:n}},V=N,R=q(window,V),F=function(){function t(t){var e=n.indexOf(t);e>-1&&n.splice(e,1)}function e(){for(var t=arguments,e=this,o=0;o<n.length;o++)n[o].apply(e,t)}var n=[];return{subscribe:n.push.bind(n),unsubscribe:t,publish:e}},z=F(),$=T,M=function(t){function e(t){return R=t}function n(t,e,n,r,i,a,s){for(var l=n;l<r;l++){var u=e[l];null!=u&&y(t,o(u,i,s),a)}}function o(t,e,n){var o=t.tag;if(null!=t.attrs&&N(t.attrs,t,e),"string"!=typeof o)return l(t,e,n);switch(o){case"#":return r(t);case"<":return i(t);case"[":return a(t,e,n);default:return s(t,e,n)}}function r(t){return t.dom=F.createTextNode(t.children)}function i(t){var e=t.children.match(/^\s*?<(\w+)/im)||[],n={caption:"table",thead:"table",tbody:"table",tfoot:"table",tr:"tbody",th:"tr",td:"tr",colgroup:"table",col:"colgroup"}[e[1]]||"div",o=F.createElement(n);o.innerHTML=t.children,t.dom=o.firstChild,t.domSize=o.childNodes.length;for(var r,i=F.createDocumentFragment();r=o.firstChild;)i.appendChild(r);return i}function a(t,e,o){var r=F.createDocumentFragment();if(null!=t.children){var i=t.children;n(r,i,0,i.length,e,null,o)}return t.dom=r.firstChild,t.domSize=r.childNodes.length,r}function s(t,e,o){var r=t.tag;switch(t.tag){case"svg":o="http://www.w3.org/2000/svg";break;case"math":o="http://www.w3.org/1998/Math/MathML"}var i=t.attrs,a=i&&i.is,s=o?a?F.createElementNS(o,r,{is:a}):F.createElementNS(o,r):a?F.createElement(r,{is:a}):F.createElement(r);if(t.dom=s,null!=i&&S(t,i,o),null!=t.text&&(""!==t.text?s.textContent=t.text:t.children=[$("#",void 0,void 0,t.text,void 0,void 0)]),null!=t.children){var l=t.children;n(s,l,0,l.length,e,null,o),j(t)}return s}function l(t,e,n){if(t.state||(t.state={}),q(t.state,t.tag),N(t.tag,t,e),t.instance=$.normalize(t.tag.view.call(t.state,t)),null!=t.instance){if(t.instance===t)throw Error("A view cannot return the vnode it received as arguments");var r=o(t.instance,e,n);return t.dom=t.instance.dom,t.domSize=null!=t.dom?t.instance.domSize:0,r}return t.domSize=0,z}function u(t,e,r,i,a,s){if(e!==r&&(null!=e||null!=r))if(null==e)n(t,r,0,r.length,i,a,void 0);else if(null==r)k(t,e,0,e.length,r);else{var l=v(e,r);if(l&&(e=e.concat(e.pool)),e.length===r.length&&null!=r[0]&&null==r[0].key)for(var u=0;u<e.length;u++)e[u]===r[u]||null==e[u]&&null==r[u]||(null==e[u]?y(t,o(r[u],i,s),w(e,u+1,a)):null==r[u]?k(t,e,u,u+1,r):c(t,e[u],r[u],i,w(e,u+1,a),l,s),l&&e[u].tag===r[u].tag&&y(t,b(e[u]),w(e,u+1,a)));else{for(var d,p=0,h=0,f=e.length-1,m=r.length-1;f>=p&&m>=h;){var x=e[p],T=r[h];if(x!==T||l)if(null!=x&&null!=T&&x.key===T.key)p++,h++,c(t,x,T,i,w(e,p,a),l,s),l&&x.tag===T.tag&&y(t,b(x),a);else{var x=e[f];if(x!==T||l){if(null==x||null==T||x.key!==T.key)break;c(t,x,T,i,w(e,f+1,a),l,s),(l||h<m)&&y(t,b(x),w(e,p,a)),f--,h++}else f--,h++}else p++,h++}for(;f>=p&&m>=h;){var x=e[f],T=r[m];if(x!==T||l)if(null!=x&&null!=T&&x.key===T.key)c(t,x,T,i,w(e,f+1,a),l,s),l&&x.tag===T.tag&&y(t,b(x),a),null!=x.dom&&(a=x.dom),f--,m--;else{if(d||(d=g(e,f)),null!=T){var _=d[T.key];if(null!=_){var S=e[_];c(t,S,T,i,w(e,f+1,a),l,s),y(t,b(S),a),e[_].skip=!0,null!=S.dom&&(a=S.dom)}else{var C=o(T,i,void 0);y(t,C,a),a=C}}m--}else f--,m--;if(m<h)break}n(t,r,h,m+1,i,a,s),k(t,e,p,f+1,r)}}}function c(t,e,n,r,i,a,s){var l=e.tag,u=n.tag;if(l===u){if(n.state=e.state,n.events=e.events,H(n,e))return;if(null!=n.attrs&&P(n.attrs,n,r,a),"string"==typeof l)switch(l){case"#":d(e,n);break;case"<":p(t,e,n,i);break;case"[":h(t,e,n,r,i,s);break;default:f(e,n,r,s)}else m(t,e,n,r,i,a,s)}else T(t,e,null),y(t,o(n,r,void 0),i)}function d(t,e){t.children.toString()!==e.children.toString()&&(t.dom.nodeValue=e.children),e.dom=t.dom}function p(t,e,n,o){e.children!==n.children?(b(e),y(t,i(n),o)):(n.dom=e.dom,n.domSize=e.domSize)}function h(t,e,n,o,r,i){u(t,e.children,n.children,o,r,i);var a=0,s=n.children;if(n.dom=null,null!=s){for(var l=0;l<s.length;l++){var c=s[l];null!=c&&null!=c.dom&&(null==n.dom&&(n.dom=c.dom),a+=c.domSize||1)}1!==a&&(n.domSize=a)}}function f(t,e,n,o){var r=e.dom=t.dom;switch(e.tag){case"svg":o="http://www.w3.org/2000/svg";break;case"math":o="http://www.w3.org/1998/Math/MathML"}"textarea"===e.tag&&(null==e.attrs&&(e.attrs={}),null!=e.text&&(e.attrs.value=e.text)),A(e,t.attrs,e.attrs,o),null!=t.text&&null!=e.text&&""!==e.text?t.text.toString()!==e.text.toString()&&(t.dom.firstChild.nodeValue=e.text):(null!=t.text&&(t.children=[$("#",void 0,void 0,t.text,void 0,t.dom.firstChild)]),null!=e.text&&(e.children=[$("#",void 0,void 0,e.text,void 0,void 0)]),u(r,t.children,e.children,n,null,o))}function m(t,e,n,r,i,a,s){n.instance=$.normalize(n.tag.view.call(n.state,n)),P(n.tag,n,r,a),
-null!=n.instance?(null==e.instance?y(t,o(n.instance,r,s),i):c(t,e.instance,n.instance,r,i,a,s),n.dom=n.instance.dom,n.domSize=n.instance.domSize):null!=e.instance?(T(t,e.instance,null),n.dom=void 0,n.domSize=0):(n.dom=e.dom,n.domSize=e.domSize)}function v(t,e){if(null!=t.pool&&Math.abs(t.pool.length-e.length)<=Math.abs(t.length-e.length)){var n=t[0]&&t[0].children&&t[0].children.length||0,o=t.pool[0]&&t.pool[0].children&&t.pool[0].children.length||0,r=e[0]&&e[0].children&&e[0].children.length||0;if(Math.abs(o-r)<=Math.abs(n-r))return!0}return!1}function g(t,e){for(var n={},o=0,o=0;o<e;o++){var r=t[o];if(null!=r){var i=r.key;null!=i&&(n[i]=o)}}return n}function b(t){var e=t.domSize;if(null!=e||null==t.dom){var n=F.createDocumentFragment();if(e>0){for(var o=t.dom;--e;)n.appendChild(o.nextSibling);n.insertBefore(o,n.firstChild)}return n}return t.dom}function w(t,e,n){for(;e<t.length;e++)if(null!=t[e]&&null!=t[e].dom)return t[e].dom;return n}function y(t,e,n){n&&n.parentNode?t.insertBefore(e,n):t.appendChild(e)}function k(t,e,n,o,r){for(var i=n;i<o;i++){var a=e[i];null!=a&&(a.skip?a.skip=!1:T(t,a,r))}}function x(t){var e=!1;return function(){e||(e=!0,t())}}function T(t,e,n){function o(){if(++i===r&&(_(e),e.dom)){var o=e.domSize||1;if(o>1)for(var a=e.dom;--o;)t.removeChild(a.nextSibling);null!=e.dom.parentNode&&t.removeChild(e.dom),null==n||null!=e.domSize||E(e.attrs)||"string"!=typeof e.tag||(n.pool?n.pool.push(e):n.pool=[e])}}var r=1,i=0;e.attrs&&e.attrs.onbeforeremove&&(r++,e.attrs.onbeforeremove.call(e.state,e,x(o))),"string"!=typeof e.tag&&e.tag.onbeforeremove&&(r++,e.tag.onbeforeremove.call(e.state,e,x(o))),o()}function _(t){if(t.attrs&&t.attrs.onremove&&t.attrs.onremove.call(t.state,t),"string"!=typeof t.tag&&t.tag.onremove&&t.tag.onremove.call(t.state,t),null!=t.instance)_(t.instance);else{var e=t.children;if(e instanceof Array)for(var n=0;n<e.length;n++){var o=e[n];null!=o&&_(o)}}}function S(t,e,n){for(var o in e)C(t,o,null,e[o],n)}function C(t,e,n,o,r){var i=t.dom;if("key"!==e&&(n!==o||D(t,e)||"object"==typeof o)&&"undefined"!=typeof o&&!L(e)){var a=e.indexOf(":");if(a>-1&&"xlink"===e.substr(0,a))i.setAttributeNS("http://www.w3.org/1999/xlink",e.slice(a+1),o);else if("o"===e[0]&&"n"===e[1]&&"function"==typeof o)I(t,e,o);else if("style"===e)O(i,n,o);else if(e in i&&!B(e)&&void 0===r){if("input"===t.tag&&"value"===e&&t.dom.value===o&&t.dom===F.activeElement)return;i[e]=o}else"boolean"==typeof o?o?i.setAttribute(e,""):i.removeAttribute(e):i.setAttribute("className"===e?"class":e,o)}}function j(t){var e=t.attrs;"select"===t.tag&&null!=e&&("value"in e&&C(t,"value",null,e.value,void 0),"selectedIndex"in e&&C(t,"selectedIndex",null,e.selectedIndex,void 0))}function A(t,e,n,o){if(null!=n)for(var r in n)C(t,r,e&&e[r],n[r],o);if(null!=e)for(var r in e)null!=n&&r in n||("className"===r&&(r="class"),"o"!==r[0]||"n"!==r[1]||L(r)?"key"!==r&&t.dom.removeAttribute(r):I(t,r,void 0))}function D(t,e){return"value"===e||"checked"===e||"selectedIndex"===e||"selected"===e&&t.dom===F.activeElement}function L(t){return"oninit"===t||"oncreate"===t||"onupdate"===t||"onremove"===t||"onbeforeremove"===t||"onbeforeupdate"===t}function B(t){return"href"===t||"list"===t||"form"===t||"width"===t||"height"===t}function E(t){return null!=t&&(t.oncreate||t.onupdate||t.onbeforeremove||t.onremove)}function O(t,e,n){if(e===n&&(t.style.cssText="",e=null),null==n)t.style.cssText="";else if("string"==typeof n)t.style.cssText=n;else{"string"==typeof e&&(t.style.cssText="");for(var o in n)t.style[o]=n[o];if(null!=e&&"string"!=typeof e)for(var o in e)o in n||(t.style[o]="")}}function I(t,e,n){var o=t.dom,r=function(t){var e=n.call(o,t);return"function"==typeof R&&R.call(o,t),e};if(e in o)o[e]=r;else{var i=e.slice(2);void 0===t.events&&(t.events={}),null!=t.events[e]&&o.removeEventListener(i,t.events[e],!1),"function"==typeof n&&(t.events[e]=r,o.addEventListener(i,t.events[e],!1))}}function N(t,e,n){"function"==typeof t.oninit&&t.oninit.call(e.state,e),"function"==typeof t.oncreate&&n.push(t.oncreate.bind(e.state,e))}function P(t,e,n,o){o?N(t,e,n):"function"==typeof t.onupdate&&n.push(t.onupdate.bind(e.state,e))}function H(t,e){var n,o;return null!=t.attrs&&"function"==typeof t.attrs.onbeforeupdate&&(n=t.attrs.onbeforeupdate.call(t.state,t,e)),"string"!=typeof t.tag&&"function"==typeof t.tag.onbeforeupdate&&(o=t.tag.onbeforeupdate.call(t.state,t,e)),!(void 0===n&&void 0===o||n||o)&&(t.dom=e.dom,t.domSize=e.domSize,t.instance=e.instance,!0)}function q(t,e){Object.keys(e).forEach(function(n){t[n]=e[n]})}function V(t,e){if(!t)throw new Error("Ensure the DOM element being passed to m.route/m.mount/m.render is not undefined.");var n=[],o=F.activeElement;null==t.vnodes&&(t.textContent=""),e instanceof Array||(e=[e]),u(t,t.vnodes,$.normalizeChildren(e),n,null,void 0),t.vnodes=e;for(var r=0;r<n.length;r++)n[r]();F.activeElement!==o&&o.focus()}var R,F=t.document,z=F.createDocumentFragment();return{render:V,setEventCallback:e}},W=M(window),U=function(t){var e=16,n=0,o=null,r="function"==typeof requestAnimationFrame?requestAnimationFrame:setTimeout;return function(i){var a=Date.now();i===!0||0===n||a-n>=e?(n=a,t()):null===o&&(o=r(function(){o=null,t(),n=Date.now()},e-(a-n)))}},G=U,J=function(t,e,n,o){var r=G(o);return null!=e&&e.setEventCallback(function(t){t.redraw!==!1&&n.publish()}),null!=n&&(t.redraw&&n.unsubscribe(t.redraw),n.subscribe(r)),t.redraw=r},X=T,Y=J,Z=function(t,e){return function(n,o){if(null===o)return t.render(n,[]),e.unsubscribe(n.redraw),void delete n.redraw;var r=Y(n,t,e,function(){t.render(n,X(o,void 0,void 0,void 0,void 0,void 0))});r()}},K=W,Q=z,tt=Z(K,Q),et=function(t){if(""===t||null==t)return{};"?"===t.charAt(0)&&(t=t.slice(1));for(var e=t.split("&"),n={},o={},r=0;r<e.length;r++){var i=e[r].split("="),a=decodeURIComponent(i[0]),s=2===i.length?decodeURIComponent(i[1]):"",l=Number(s);""!==s&&!isNaN(l)||"NaN"===s?s=l:"true"===s?s=!0:"false"===s&&(s=!1);var u=a.split(/\]\[?|\[/),c=n;a.indexOf("[")>-1&&u.pop();for(var d=0;d<u.length;d++){var p=u[d],h=u[d+1],f=""==h||!isNaN(parseInt(h,10)),m=d===u.length-1;if(""===p){var a=u.slice(0,d).join();null==o[a]&&(o[a]=0),p=o[a]++}null==c[p]&&(c[p]=m?s:f?[]:{}),c=c[p]}}return n},nt=P,ot=et,rt=function(t){function e(t){p=t}function n(e){var n=t.location[e].replace(/(?:%[a-f89][a-f0-9])+/gim,decodeURIComponent);return"pathname"===e&&"/"!==n[0]&&(n="/"+n),n}function o(t){return function(){null==u&&(u=d(function(){u=null,t()}))}}function r(t,e,n){var o=t.indexOf("?"),r=t.indexOf("#"),i=o>-1?o:r>-1?r:t.length;if(o>-1){var a=r>-1?r:t.length,s=ot(t.slice(o+1,a));for(var l in s)e[l]=s[l]}if(r>-1){var u=ot(t.slice(r+1));for(var l in u)n[l]=u[l]}return t.slice(0,i)}function i(){var t=p.charAt(0);switch(t){case"#":return n("hash").slice(p.length);case"?":return n("search").slice(p.length)+n("hash");default:return n("pathname").slice(p.length)+n("search")+n("hash")}}function a(e,n,o){var i={},a={};if(e=r(e,i,a),null!=n){for(var s in n)i[s]=n[s];e=e.replace(/:([^\/]+)/g,function(t,e){return delete i[e],n[e]})}var l=nt(i);l&&(e+="?"+l);var u=nt(a);u&&(e+="#"+u),c?(o&&o.replace?t.history.replaceState(null,null,p+e):t.history.pushState(null,null,p+e),t.onpopstate()):t.location.href=p+e}function s(e,n,a){function s(){var t=i(),o={},s=r(t,o,o);for(var l in e){var u=new RegExp("^"+l.replace(/:[^\/]+?\.{3}/g,"(.*?)").replace(/:[^\/]+/g,"([^\\/]+)")+"/?$");if(u.test(s))return void s.replace(u,function(){for(var r=l.match(/:[^\/]+/g)||[],i=[].slice.call(arguments,1,-2),a=0;a<r.length;a++)o[r[a].replace(/:|\./g,"")]=decodeURIComponent(i[a]);n(e[l],o,t,l)})}a(t,o)}return c?t.onpopstate=o(s):"#"===p.charAt(0)&&(t.onhashchange=s),s(),s}function l(t){t.dom.setAttribute("href",p+t.attrs.href),t.dom.onclick=function(t){t.preventDefault(),t.redraw=!1;var e=this.getAttribute("href");0===e.indexOf(p)&&(e=e.slice(p.length)),a(e,void 0,void 0)}}var u,c="function"==typeof t.history.pushState,d="function"==typeof setImmediate?setImmediate:setTimeout,p="#!";return{setPrefix:e,getPath:i,setPath:a,defineRoutes:s,link:l}},it=T,at=rt,st=function(t,e){function n(t){return t}var o,r,i,a,s,l=at(t),u={view:function(){return[i(it(r,null,a,void 0,void 0,void 0))]}},c=function(t,c,d){r="div",i=n,a=null,e(t,u),l.defineRoutes(d,function(e,l,u){var c="function"!=typeof e.view,d=n,p=o=function(n){p===o&&(o=null,r=null!=n?n:c?"div":e,i=d,a=l,s=u,t.redraw(!0))},h=function(){p()};c&&("function"==typeof e.render&&(d=e.render.bind(e)),"function"==typeof e.onmatch&&(h=e.onmatch)),h.call(e,p,l,u)},function(){l.setPath(c,null,{replace:!0})})};return c.link=l.link,c.prefix=l.setPrefix,c.set=l.setPath,c.get=function(){return s},c},lt=tt,ut=st(window,lt),ct=function(t,e,n){return function(o){return e.call(n||this,t in o.currentTarget?o.currentTarget[t]:o.currentTarget.getAttribute(t))}},dt=O,pt=R,ht=z;pt.setCompletionCallback(ht.publish),dt.mount=tt,dt.route=ut,dt.withAttr=ct,dt.prop=N,dt.render=W.render,dt.redraw=ht.publish,dt.request=pt.request,dt.jsonp=pt.jsonp,dt.parseQueryString=et,dt.buildQueryString=P,dt.version="bleeding-edge";var ft=dt;i.fn=i.function=function(t){return"function"==typeof t},i.fn.type="function",i.str=i.string=function(t){return"string"==typeof t},i.str.type="string",i.num=i.number=function(t){return"number"==typeof t},i.num.type="number",i.date=function(t){return"date"===o(t)},i.date.type="date",i.NULL=i.null=function(t){return"null"===o(t)},i.NULL.type="null",i.nil=function(t){return"undefined"==typeof t||"null"===o(t)},i.nil.type="nil",i.obj=i.object=function(t){return"object"===o(t)},i.obj.type="object",i.arr=i.array=function(t){return Array.isArray(t)},i.arr.type="array",i.arrayOf=function(t){var e=function(e){if(!Array.isArray(e))return!1;for(var n=0;n<e.length;n++)if(!t(e[n]))return!1;return!0};return e.type="[array of "+t.type+"s]",e},i.int=i.integer=function(t){return"number"==typeof t&&isFinite(t)&&Math.floor(t)===t},i.integer.type="integer",i.optional=i.undefined=function(t){return"undefined"==typeof t},i.optional.type="undefined",i.bool=i.boolean=function(t){return"boolean"==typeof t},i.bool.type="boolean",i.any=function(){return!0},i.any.type="any",i.schema=i.interface=function(t){var e=function(e){return!i(t)(e,"nested interface")};return e.type="interface",e};var mt=i,vt=["Getting started","Components","Requests","Applications","Routing"],gt=mt({page:mt.string,active:mt.string}),bt={view:function(t){var e=t.attrs;return window.__DEV__&&gt(e,"Link"),ft("a.Nav-link",{href:"/"+e.page.replace(" ","").toLowerCase(),oncreate:ft.route.link,className:e.active===e.page?"active":""},e.page)}},wt=mt({active:mt.string}),yt={view:a},kt=mt({id:mt.string}),xt={view:s},Tt=mt({fiddle:[mt.string,mt.optional],tabs:mt.arrayOf(mt.schema({id:mt.string,code:mt.string}))}),_t={oninit:l,view:u},St=t(function(t){var e="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},n=function(){var t=/\blang(?:uage)?-(\w+)\b/i,n=0,o=e.Prism={util:{encode:function(t){return t instanceof r?new r(t.type,o.util.encode(t.content),t.alias):"Array"===o.util.type(t)?t.map(o.util.encode):t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(t){return Object.prototype.toString.call(t).match(/\[object (\w+)\]/)[1]},objId:function(t){return t.__id||Object.defineProperty(t,"__id",{value:++n}),t.__id},clone:function(t){var e=o.util.type(t);switch(e){case"Object":var n={};for(var r in t)t.hasOwnProperty(r)&&(n[r]=o.util.clone(t[r]));return n;case"Array":return t.map&&t.map(function(t){return o.util.clone(t)})}return t}},languages:{extend:function(t,e){var n=o.util.clone(o.languages[t]);for(var r in e)n[r]=e[r];return n},insertBefore:function(t,e,n,r){r=r||o.languages;var i=r[t];if(2==arguments.length){n=arguments[1];for(var a in n)n.hasOwnProperty(a)&&(i[a]=n[a]);return i}var s={};for(var l in i)if(i.hasOwnProperty(l)){if(l==e)for(var a in n)n.hasOwnProperty(a)&&(s[a]=n[a]);s[l]=i[l]}return o.languages.DFS(o.languages,function(e,n){n===r[t]&&e!=t&&(this[e]=s)}),r[t]=s},DFS:function(t,e,n,r){r=r||{};for(var i in t)t.hasOwnProperty(i)&&(e.call(t,i,t[i],n||i),"Object"!==o.util.type(t[i])||r[o.util.objId(t[i])]?"Array"!==o.util.type(t[i])||r[o.util.objId(t[i])]||(r[o.util.objId(t[i])]=!0,o.languages.DFS(t[i],e,i,r)):(r[o.util.objId(t[i])]=!0,o.languages.DFS(t[i],e,null,r)))}},plugins:{},highlightAll:function(t,e){var n={callback:e,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};o.hooks.run("before-highlightall",n);for(var r,i=n.elements||document.querySelectorAll(n.selector),a=0;r=i[a++];)o.highlightElement(r,t===!0,n.callback)},highlightElement:function(n,r,i){for(var a,s,l=n;l&&!t.test(l.className);)l=l.parentNode;l&&(a=(l.className.match(t)||[,""])[1].toLowerCase(),s=o.languages[a]),n.className=n.className.replace(t,"").replace(/\s+/g," ")+" language-"+a,l=n.parentNode,/pre/i.test(l.nodeName)&&(l.className=l.className.replace(t,"").replace(/\s+/g," ")+" language-"+a);var u=n.textContent,c={element:n,language:a,grammar:s,code:u};if(o.hooks.run("before-sanity-check",c),!c.code||!c.grammar)return void o.hooks.run("complete",c);if(o.hooks.run("before-highlight",c),r&&e.Worker){var d=new Worker(o.filename);d.onmessage=function(t){c.highlightedCode=t.data,o.hooks.run("before-insert",c),c.element.innerHTML=c.highlightedCode,i&&i.call(c.element),o.hooks.run("after-highlight",c),o.hooks.run("complete",c)},d.postMessage(JSON.stringify({language:c.language,code:c.code,immediateClose:!0}))}else c.highlightedCode=o.highlight(c.code,c.grammar,c.language),o.hooks.run("before-insert",c),c.element.innerHTML=c.highlightedCode,i&&i.call(n),o.hooks.run("after-highlight",c),o.hooks.run("complete",c)},highlight:function(t,e,n){var i=o.tokenize(t,e);return r.stringify(o.util.encode(i),n)},tokenize:function(t,e,n){var r=o.Token,i=[t],a=e.rest;if(a){for(var s in a)e[s]=a[s];delete e.rest}t:for(var s in e)if(e.hasOwnProperty(s)&&e[s]){var l=e[s];l="Array"===o.util.type(l)?l:[l];for(var u=0;u<l.length;++u){var c=l[u],d=c.inside,p=!!c.lookbehind,h=!!c.greedy,f=0,m=c.alias;c=c.pattern||c;for(var v=0;v<i.length;v++){var g=i[v];if(i.length>t.length)break t;if(!(g instanceof r)){c.lastIndex=0;var b=c.exec(g),w=1;if(!b&&h&&v!=i.length-1){var y=i[v+1].matchedStr||i[v+1],k=g+y;if(v<i.length-2&&(k+=i[v+2].matchedStr||i[v+2]),c.lastIndex=0,b=c.exec(k),!b)continue;var x=b.index+(p?b[1].length:0);if(x>=g.length)continue;var T=b.index+b[0].length,_=g.length+y.length;if(w=3,T<=_){if(i[v+1].greedy)continue;w=2,k=k.slice(0,_)}g=k}if(b){p&&(f=b[1].length);var x=b.index+f,b=b[0].slice(f),T=x+b.length,S=g.slice(0,x),C=g.slice(T),j=[v,w];S&&j.push(S);var A=new r(s,d?o.tokenize(b,d):b,m,b,h);j.push(A),C&&j.push(C),Array.prototype.splice.apply(i,j)}}}}}return i},hooks:{all:{},add:function(t,e){var n=o.hooks.all;n[t]=n[t]||[],n[t].push(e)},run:function(t,e){var n=o.hooks.all[t];if(n&&n.length)for(var r,i=0;r=n[i++];)r(e)}}},r=o.Token=function(t,e,n,o,r){this.type=t,this.content=e,this.alias=n,this.matchedStr=o||null,this.greedy=!!r};if(r.stringify=function(t,e,n){if("string"==typeof t)return t;if("Array"===o.util.type(t))return t.map(function(n){return r.stringify(n,e,t)}).join("");var i={type:t.type,content:r.stringify(t.content,e,n),tag:"span",classes:["token",t.type],attributes:{},language:e,parent:n};if("comment"==i.type&&(i.attributes.spellcheck="true"),t.alias){var a="Array"===o.util.type(t.alias)?t.alias:[t.alias];Array.prototype.push.apply(i.classes,a)}o.hooks.run("wrap",i);var s="";for(var l in i.attributes)s+=(s?" ":"")+l+'="'+(i.attributes[l]||"")+'"';return"<"+i.tag+' class="'+i.classes.join(" ")+'" '+s+">"+i.content+"</"+i.tag+">"},!e.document)return e.addEventListener?(e.addEventListener("message",function(t){var n=JSON.parse(t.data),r=n.language,i=n.code,a=n.immediateClose;e.postMessage(o.highlight(i,o.languages[r],r)),a&&e.close()},!1),e.Prism):e.Prism;var i=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return i&&(o.filename=i.src,document.addEventListener&&!i.hasAttribute("data-manual")&&("loading"!==document.readyState?requestAnimationFrame(o.highlightAll,0):document.addEventListener("DOMContentLoaded",o.highlightAll))),e.Prism}();"undefined"!=typeof t&&t.exports&&(t.exports=n),"undefined"!=typeof x&&(x.Prism=n),n.languages.markup={comment:/<!--[\w\W]*?-->/,prolog:/<\?[\w\W]+?\?>/,doctype:/<!DOCTYPE[\w\W]+?>/,cdata:/<!\[CDATA\[[\w\W]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=.$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,inside:{tag:{pattern:/^<\/?[^\s>\/]+/i,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,inside:{punctuation:/[=>"']/}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:/&#?[\da-z]{1,8};/i},n.hooks.add("wrap",function(t){"entity"===t.type&&(t.attributes.title=t.content.replace(/&amp;/,"&"))}),n.languages.xml=n.languages.markup,n.languages.html=n.languages.markup,n.languages.mathml=n.languages.markup,n.languages.svg=n.languages.markup,n.languages.css={comment:/\/\*[\w\W]*?\*\//,atrule:{pattern:/@[\w-]+?.*?(;|(?=\s*\{))/i,inside:{rule:/@[\w-]+/}},url:/url\((?:(["'])(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,selector:/[^\{\}\s][^\{\};]*?(?=\s*\{)/,string:/("|')(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1/,property:/(\b|\B)[\w-]+(?=\s*:)/i,important:/\B!important\b/i,function:/[-a-z0-9]+(?=\()/i,punctuation:/[(){};:]/},n.languages.css.atrule.inside.rest=n.util.clone(n.languages.css),n.languages.markup&&(n.languages.insertBefore("markup","tag",{style:{pattern:/(<style[\w\W]*?>)[\w\W]*?(?=<\/style>)/i,lookbehind:!0,inside:n.languages.css,alias:"language-css"}}),n.languages.insertBefore("inside","attr-value",{"style-attr":{pattern:/\s*style=("|').*?\1/i,inside:{"attr-name":{pattern:/^\s*style/i,inside:n.languages.markup.tag.inside},punctuation:/^\s*=\s*['"]|['"]\s*$/,"attr-value":{pattern:/.+/i,inside:n.languages.css}},alias:"language-css"}},n.languages.markup.tag)),n.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//,lookbehind:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0}],string:{pattern:/(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,lookbehind:!0,inside:{punctuation:/(\.|\\)/}},keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,boolean:/\b(true|false)\b/,function:/[a-z0-9_]+(?=\()/i,number:/\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,operator:/--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,punctuation:/[{}[\];(),.:]/},n.languages.javascript=n.languages.extend("clike",{keyword:/\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/,number:/\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,function:/[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i}),n.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^\/])\/(?!\/)(\[.+?]|\\.|[^\/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,lookbehind:!0,greedy:!0}}),n.languages.insertBefore("javascript","string",{"template-string":{pattern:/`(?:\\\\|\\?[^\\])*?`/,greedy:!0,inside:{interpolation:{pattern:/\$\{[^}]+\}/,inside:{"interpolation-punctuation":{pattern:/^\$\{|\}$/,alias:"punctuation"},rest:n.languages.javascript}},string:/[\s\S]+/}}}),n.languages.markup&&n.languages.insertBefore("markup","tag",{script:{pattern:/(<script[\w\W]*?>)[\w\W]*?(?=<\/script>)/i,lookbehind:!0,inside:n.languages.javascript,alias:"language-javascript"}}),n.languages.js=n.languages.javascript,function(){"undefined"!=typeof self&&self.Prism&&self.document&&document.querySelector&&(self.Prism.fileHighlight=function(){var t={js:"javascript",py:"python",rb:"ruby",ps1:"powershell",psm1:"powershell",sh:"bash",bat:"batch",h:"c",tex:"latex"};Array.prototype.forEach&&Array.prototype.slice.call(document.querySelectorAll("pre[data-src]")).forEach(function(e){for(var o,r=e.getAttribute("data-src"),i=e,a=/\blang(?:uage)?-(?!\*)(\w+)\b/i;i&&!a.test(i.className);)i=i.parentNode;if(i&&(o=(e.className.match(a)||[,""])[1]),!o){var s=(r.match(/\.(\w+)$/)||[,""])[1];o=t[s]||s}var l=document.createElement("code");l.className="language-"+o,e.textContent="",l.textContent="Loading…",e.appendChild(l);var u=new XMLHttpRequest;u.open("GET",r,!0),u.onreadystatechange=function(){4==u.readyState&&(u.status<400&&u.responseText?(l.textContent=u.responseText,n.highlightElement(l)):u.status>=400?l.textContent="✖ Error "+u.status+" while fetching file: "+u.statusText:l.textContent="✖ Error: File does not exist or is empty")},u.send(null)})},document.addEventListener("DOMContentLoaded",self.Prism.fileHighlight))}()});h.css=function(t){return St.highlight(t,St.languages.css)};var Ct=h("var HelloButton = {\n  view: function() {\n    return m('button', 'Hello world!');\n  }\n};"),jt=h("const HelloButton = {\n  view() {\n    return m('button', 'Hello world!');\n  }\n};"),At=h("const HelloButton = {\n  view() {\n    return <button>Hello world!</button>;\n  }\n};"),Dt=[{id:"es5",code:Ct},{id:"es6",code:jt},{id:"jsx",code:At}],Lt={view:function(){return ft("button","Hello world!")}},Bt=h("var HelloButton = {\n  view: function(vnode) {\n    return m('button', 'Hello ' + vnode.attrs.title);\n  }\n};\n\nvar Component = {\n  view: function() {\n    return (\n      m('div',\n        m(HelloButton, { title: 'world' }),\n        m(HelloButton, { title: 'everyone' }),\n        m(HelloButton, { title: 'darkness my old friend' })\n      )\n    );\n  }\n};"),Et=h("const HelloButton = {\n  view({ attrs }) {\n    return m('button', `Hello ${attrs.title}`);\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      m('div',\n        m(HelloButton, { title: 'world' }),\n        m(HelloButton, { title: 'everyone' }),\n        m(HelloButton, { title: 'darkness my old friend' })\n      )\n    );\n  }\n};"),Ot=h("const HelloButton = {\n  view({ attrs }) {\n    return <button>Hello {attrs.title}</button>;\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      <div>\n        <HelloButton title='world'/>\n        <HelloButton title='everyone'/>\n        <HelloButton title='darkness my old friend'/>\n      </div>\n    );\n  }\n};"),It=[{id:"es5",code:Bt},{id:"es6",code:Et},{id:"jsx",code:Ot}],Nt={view:function(t){var e=t.attrs;return ft("button","Hello "+e.title)}},Pt={view:function(){return ft("div",ft(Nt,{title:"world"}),ft(Nt,{title:"everyone"}),ft(Nt,{title:"darkness my old friend"}))}},Ht=h("const HelloButton = {\n  view: function(vnode) {\n    return m('button', 'Hello ' + vnode.attrs.title);\n  }\n};\n\nvar Component = {\n  oninit: function(vnode) {\n    vnode.state.inputValue = ''; // initial state\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: vnode.state.inputValue, // read from state\n          oninput: function(event) {\n            vnode.state.inputValue = event.target.value;\n          }\n        }),\n        m(HelloButton, {\n          title: vnode.state.inputValue\n        })\n      )\n    );\n  }\n};"),qt=h("const HelloButton = {\n  view({ attrs }) {\n    return m('button', `Hello ${attrs.title}`);\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = ''; // initial state\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: state.inputValue, // read from state\n          oninput(event) {\n            state.inputValue = event.target.value;\n          }\n        }),\n        m(HelloButton, { title: state.inputValue })\n      )\n    );\n  }\n};"),Vt=h("const HelloButton = {\n  view({ attrs }) {\n    return <button>Hello {attrs.title}</button>;\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = ''; // initial state\n  },\n  view({ state }) {\n    return (\n      <div>\n        <input\n          type='text'\n          value={state.inputValue}\n          oninput={\n            (event) => { state.inputValue = event.target.value }\n          }/>\n        <HelloButton title={state.inputValue}/>\n      </div>\n    );\n  }\n};"),Rt=[{id:"es5",code:Ht},{id:"es6",code:qt},{id:"jsx",code:Vt}],Ft={view:function(t){var e=t.attrs;return ft("button","Hello "+e.title)}},zt={oninit:function(t){var e=t.state;e.inputValue=""},view:function(t){var e=t.state;return ft("div",ft("input[type=text]",{value:e.inputValue,oninput:function(t){e.inputValue=t.target.value}}),ft(Ft,{title:e.inputValue}))}},$t=h("var HelloWorldButton = {\n  view: function(vnode) {\n    return m('button', 'Hello ' + vnode.attrs.title);\n  }\n};\n\nvar Component = {\n  oninit: function(vnode) {\n    vnode.state.inputValue = m.prop('');\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: vnode.state.inputValue(),\n          oninput: m.withAttr('value', vnode.state.inputValue)\n        }),\n        m(HelloWorldButton, {\n          title: vnode.state.inputValue()\n        })\n      )\n    );\n  }\n};"),Mt=h("const HelloWorldButton = {\n  view({ attrs }) {\n    return m('button', `Hello ${attrs.title}`);\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = m.prop('');\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: state.inputValue(),\n          oninput: m.withAttr('value', state.inputValue)\n        }),\n        m(HelloWorldButton, { title: state.inputValue() })\n      )\n    );\n  }\n};"),Wt=h("const HelloWorldButton = {\n  view({ attrs }) {\n    return <button>Hello {attrs.title}</button>;\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = m.prop('');\n  },\n  view({ state }) {\n    return (\n      <div>\n        <input\n          type='text'\n          value={state.inputValue()}\n          oninput={m.withAttr('value', state.inputValue)}/>\n        <HelloWorldButton title={state.inputValue()}/>\n      </div>\n    );\n  }\n}"),Ut=[{id:"es5",code:$t},{id:"es6",code:Mt},{id:"jsx",code:Wt}],Gt={view:function(t){var e=t.attrs;return ft("button","Hello "+e.title)}},Jt={oninit:function(t){var e=t.state;e.inputValue=ft.prop("")},view:function(t){var e=t.state;return ft("div",ft("input[type=text]",{value:e.inputValue(),oninput:ft.withAttr("value",e.inputValue)}),ft(Gt,{title:e.inputValue()}))}},Xt={view:f},Yt=h("var Stopwatch = {\n  oninit: function(vnode) {\n    vnode.state.seconds = 0;\n    vnode.state.count = function() {\n      vnode.state.seconds++;\n      m.redraw();\n    };\n    vnode.state.interval = setInterval(vnode.state.count, 1000);\n  },\n  onremove: function(vnode) {\n    clearInterval(vnode.state.interval);\n  },\n  view: function(vnode) {\n    return m('span', 'Timer: ' + vnode.state.seconds);\n  }\n};"),Zt=h("const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return m('span', `Timer: ${state.seconds}`);\n  }\n};"),Kt=h("const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return <span>Timer: {state.seconds}</span>;\n  }\n};"),Qt=[{id:"es5",code:Yt},{id:"es6",code:Zt},{id:"jsx",code:Kt}],te={oninit:function(t){var e=t.state;e.seconds=0,e.count=function(){e.seconds++,ft.redraw()},e.interval=setInterval(e.count,1e3)},onremove:function(t){var e=t.state;clearInterval(e.interval)},view:function(t){var e=t.state;return ft("span","Timer: "+e.seconds)}},ee=h("var Stopwatch = {\n  oninit: function(vnode) {\n    vnode.state.seconds = 0;\n    vnode.state.isPaused = false;\n    vnode.state.reset = function() {\n      vnode.state.seconds = 0;\n    };\n    vnode.state.toggle = function() {\n      vnode.state.isPaused = !vnode.state.isPaused;\n      clearInterval(vnode.state.interval);\n      if (!vnode.state.isPaused) {\n        vnode.state.interval =\n          setInterval(vnode.state.count, 1000);\n      }\n    };\n    vnode.state.count = function() {\n      vnode.state.seconds++;\n      m.redraw();\n    };\n    vnode.state.interval =\n      setInterval(vnode.state.count, 1000);\n  },\n  onremove: function(vnode) {\n    clearInterval(vnode.state.interval);\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('span', 'Timer: ' + vnode.state.seconds),\n        m('button', { onclick: vnode.state.reset }, 'Reset'),\n        m('button', {\n          onclick: vnode.state.toggle\n        }, state.isPaused ? 'Start' : 'Pause')\n      )\n    );\n  }\n};"),ne=h("const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.isPaused = false;\n    state.reset = () => { state.seconds = 0; };\n    state.toggle = () => {\n      state.isPaused = !state.isPaused;\n      clearInterval(state.interval);\n      if (!state.isPaused) {\n        state.interval = setInterval(state.count, 1000);\n      }\n    };\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('span', `Timer: ${state.seconds}`),\n        m('button', { onclick: state.reset }, 'Reset'),\n        m('button', {\n          onclick: state.toggle\n        }, state.isPaused ? 'Start' : 'Pause')\n      )\n    );\n  }\n};"),oe=h("const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.isPaused = false;\n    state.reset = () => { state.seconds = 0; };\n    state.toggle = () => {\n      state.isPaused = !state.isPaused;\n      clearInterval(state.interval);\n      if (!state.isPaused) {\n        state.interval = setInterval(state.count, 1000);\n      }\n    };\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return (\n      <div>\n        <span>Timer: {state.seconds}</span>\n        <button onclick={state.reset}>Reset</button>\n        <button onclick={state.toggle}>\n          {state.isPaused ? 'Start' : 'Pause'}\n        </button>\n      )\n    );\n  }\n};"),re=[{id:"es5",code:ee},{id:"es6",code:ne},{id:"jsx",code:oe}],ie={oninit:function(t){var e=t.state;e.seconds=0,e.isPaused=!1,e.reset=function(){e.seconds=0},e.toggle=function(){e.isPaused=!e.isPaused,clearInterval(e.interval),e.isPaused||(e.interval=setInterval(e.count,1e3))},e.count=function(){e.seconds++,ft.redraw()},e.interval=setInterval(e.count,1e3)},onremove:function(t){var e=t.state;clearInterval(e.interval)},view:function(t){var e=t.state;return ft("div",ft("span","Timer: "+e.seconds),ft("button",{onclick:e.reset},"Reset"),ft("button",{onclick:e.toggle},e.isPaused?"Start":"Pause"))}},ae=h("var Rotator = {\n  oninit: function(vnode) {\n    vnode.state.list = ['One', 'Two', 'Three', 'Four'];\n    vnode.state.rotate = function() {\n      vnode.state.list.push(vnode.state.list.shift());\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('ul',\n          state.list.map(function(item) {\n            return m('li', { key: item }, item)\n          }\n        ),\n        m('button', { onclick: state.rotate }, 'Rotate')\n      )\n    );\n  }\n};"),se=h("const Rotator = {\n  oninit({ state }) {\n    state.list = ['One', 'Two', 'Three', 'Four'];\n    state.rotate = () => state.list.push(state.list.shift());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('ul',\n          state.list.map((item) =>\n            m('li', { key: item }, item)\n          )\n        ),\n        m('button', { onclick: state.rotate }, 'Rotate')\n      )\n    );\n  }\n};"),le=h("const Rotator = {\n  oninit({ state }) {\n    state.list = ['One', 'Two', 'Three', 'Four'];\n    state.rotate = () => state.list.push(state.list.shift());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <ul>\n          {\n            state.list.map((item) =>\n              <li key={item}>{item}</li>\n            )\n          }\n        </ul>\n        <button onclick={state.rotate}>Rotate</button>\n      </div>\n    );\n  }\n};"),ue=[{
-id:"es5",code:ae},{id:"es6",code:se},{id:"jsx",code:le}],ce={oninit:function(t){var e=t.state;e.list=["One","Two","Three","Four"],e.rotate=function(){return e.list.push(e.list.shift())}},view:function(t){var e=t.state;return ft("div",ft("ul",e.list.map(function(t){return ft("li",{key:t},t)})),ft("button",{onclick:e.rotate},"Rotate"))}},de=h("var PasswordInput = {\n  oninit: function(vnode) {\n    vnode.state.visible = m.prop(false);\n    vnode.state.value = m.prop('');\n    vnode.state.toggle = function() {\n      vnode.state.visible(!vnode.state.visible());\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('input', {\n          type: vnode.state.visible() ? 'text' : 'password',\n          placeholder: vnode.state.visible() ?\n            'password' : '••••••••',\n          value: vnode.state.value(),\n          oninput: m.withAttr('value', vnode.state.value)\n        }),\n        m('button', {\n          onclick: vnode.state.toggle\n        }, vnode.state.visible() ? 'Hide' : 'Show')\n      )\n    );\n  }\n};"),pe=h("const PasswordInput = {\n  oninit({ state }) {\n    state.visible = m.prop(false);\n    state.value = m.prop('');\n    state.toggle = () => state.visible(!state.visible());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('input', {\n          type: state.visible() ? 'text' : 'password',\n          placeholder: state.visible() ? 'password' : '••••••••',\n          value: state.value(),\n          oninput: m.withAttr('value', state.value)\n        }),\n        m('button', {\n          onclick: state.toggle\n        }, state.visible() ? 'Hide' : 'Show')\n      )\n    );\n  }\n};"),he=h("const PasswordInput = {\n  oninit({ state }) {\n    state.visible = m.prop(false);\n    state.value = m.prop('');\n    state.toggle = () => state.visible(!state.visible());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <input\n          type={state.visible() ? 'text' : 'password'}\n          placeholder={state.visible() ? 'password' : '••••••••'}\n          value={state.value()}\n          oninput={m.withAttr('value', state.value)}/>\n        <button onclick={state.toggle}>\n          {state.visible() ? 'Hide' : 'Show'}\n        </button>\n      </div>\n    );\n  }\n};"),fe=[{id:"es5",code:de},{id:"es6",code:pe},{id:"jsx",code:he}],me={oninit:function(t){var e=t.state;e.visible=ft.prop(!1),e.value=ft.prop(""),e.toggle=function(){return e.visible(!e.visible())}},view:function(t){var e=t.state;return ft("div",ft("input",{type:e.visible()?"text":"password",placeholder:e.visible()?"password":"••••••••",value:e.value(),oninput:ft.withAttr("value",e.value)}),ft("button",{onclick:e.toggle},e.visible()?"Hide":"Show"))}},ve=h("function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = domNode.scrollHeight + 'px';\n}\n\nvar Textarea = {\n  oninit: function(vnode) {\n    vnode.state.value = m.prop();\n  },\n  oncreate: function(vnode) {\n    vnode.state.value.run(function() {\n      setHeight(vnode.dom);\n    )};\n  },\n  view: function(vnode) {\n    return m('textarea', {\n      value: vnode.state.value(),\n      oninput: m.withAttr('value', vnode.state.value)\n    });\n  }\n};"),ge=h("function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n  oninit({ state }) {\n    state.value = m.prop();\n  },\n  oncreate({ dom, state }) {\n    state.value.run(() => setHeight(dom));\n  },\n  view({ state }) {\n    return m('textarea', {\n      value: state.value(),\n      oninput: m.withAttr('value', state.value)\n    });\n  }\n};"),be=h("function setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n  oninit({ state }) {\n    state.value = m.prop();\n  },\n  oncreate({ dom, state }) {\n    state.value.run(() => setHeight(dom));\n  },\n  view({ state }) {\n    return <textarea\n      value={state.value()}\n      oninput={m.withAttr('value', state.value)}/>;\n  }\n};"),we=[{id:"es5",code:ve},{id:"es6",code:ge},{id:"jsx",code:be}],ye={oninit:function(t){var e=t.state;e.value=ft.prop()},oncreate:function(t){var e=t.dom,n=t.state;n.value.map(function(){return m(e)})},view:function(t){var e=t.state;return ft("textarea",{value:e.value(),oninput:ft.withAttr("value",e.value)})}},ke=h("var tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nvar tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nvar Tabs = {\n  oninit: function(vnode) {\n    vnode.state.activeTab = m.prop(0);\n  },\n  view: function(vnode) {\n    var active = vnode.state.activeTab();\n    return (\n      m('.Tabs',\n        m('.TabBar',\n          vnode.attrs.tabs.map(function(tab, i) {\n            return m('.Tab', {\n              key: tab.id,\n              className: i === active ? 'active' : '',\n              onclick: function() {\n                vnode.state.activeTab(i);\n              }\n            }, tab.id)\n          })\n        ),\n        m('.TabContent', vnode.attrs.tabs[active].content)\n      )\n    );\n  }\n};\n\nvar Component = {\n  view: function() {\n    return (\n      m('div',\n        m(Tabs, { tabs: tabContent1 }),\n        m('br'),\n        m(Tabs, { tabs: tabContent2 })\n      )\n    );\n  }\n};"),xe=h("const tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n  oninit({ state }) {\n    state.activeTab = m.prop(0);\n  },\n  view({ attrs, state }) {\n    return (\n      m('.Tabs',\n        m('.TabBar',\n          attrs.tabs.map((tab, i) =>\n            m('.Tab', {\n              key: tab.id,\n              className: state.activeTab() === i ? 'active' : '',\n              onclick() { state.activeTab(i); }\n            }, tab.id)\n          )\n        ),\n        m('.TabContent', attrs.tabs[state.activeTab()].content)\n      )\n    );\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      m('div',\n        m(Tabs, { tabs: tabContent1 }),\n        m('br'),\n        m(Tabs, { tabs: tabContent2 })\n      )\n    );\n  }\n};"),Te=h("const tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n  oninit({ state }) {\n    state.activeTab = m.prop(0);\n  },\n  view({ attrs, state }) {\n    const active = state.activeTab();\n    return (\n      <div className='Tabs'>\n        <div className='TabBar'>\n          {\n            attrs.tabs.map((tab, i) =>\n              <div\n                key={tab.id}\n                className={`Tab ${active === i ? 'active' : ''}`}\n                onclick={() => state.activeTab(i) }>\n                {tab.id}\n              </div>\n            )\n          }\n        </div>\n        <div className='TabContent'>\n          {attrs.tabs[state.activeTab()].content}\n        </div>\n      </div>\n    );\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      <div>\n        <Tabs tabs={tabContent1}/>\n        <br/>\n        <Tabs tabs={tabContent2}/>\n      </div>\n    );\n  }\n};"),_e=[{id:"es5",code:ke},{id:"es6",code:xe},{id:"jsx",code:Te}],Se=[{id:"One",content:"First tab"},{id:"Two",content:"Second tab"},{id:"Three",content:"Third tab"}],Ce=[{id:"Lorem",content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit"},{id:"Ipsum",content:"Duis aute irure dolor in reprehenderit in voluptate velit"}],je={oninit:function(t){var e=t.state;e.activeTab=ft.prop(0)},view:function(t){var e=t.attrs,n=t.state;return ft(".Tabs",ft(".TabBar",e.tabs.map(function(t,e){return ft(".Tab",{key:e,className:n.activeTab()===e?"active":"",onclick:function(){n.activeTab(e)}},t.id)})),ft(".TabContent",e.tabs[n.activeTab()].content))}},Ae={view:function(){return ft("div",ft(je,{tabs:Se}),ft("br"),ft(je,{tabs:Ce}))}},De=h("// define the Tooltip component\nvar Tooltip = {\n  view: function(vnode) {\n    return (\n      m('.Tooltip-wrap',\n        vnode.children,\n        m('.Tooltip', vnode.attrs.value)\n      )\n    );\n  }\n};\n\n// elsewhere, use the Tooltip component\nvar Component = {\n  view: function() {\n    return (\n      m('div',\n        m(Tooltip, { value: 'Foo' },\n          m('button', 'Hover over this button')\n        ),\n        m(Tooltip, { value: 'Bar' },\n          m('span', 'or hover here')\n        )\n      )\n    );\n  }\n};"),Le=h("// define the Tooltip component\nconst Tooltip = {\n  view({ attrs, children }) {\n    return (\n      m('.Tooltip-wrap',\n        children,\n        m('.Tooltip', attrs.value)\n      )\n    );\n  }\n};\n\n// elsewhere, use the Tooltip component\nconst Component = {\n  view() {\n    return (\n      m('div',\n        m(Tooltip, { value: 'Foo' },\n          m('button', 'Hover over this button')\n        ),\n        m(Tooltip, { value: 'Bar' },\n          m('span', 'or hover here')\n        )\n      )\n    );\n  }\n};"),Be=h("// define the Tooltip component\nconst Tooltip = {\n  view({ attrs, children }) {\n    return (\n      <div className='Tooltip-wrap'>\n        {children}\n        <div className='Tooltip'>{attrs.value}</div>\n      </div>\n    );\n  }\n};\n\n// elsewhere, use the Tooltip component\nconst Component = {\n  view() {\n    return (\n      <div>\n        <Tooltip value='Foo'>\n          <button>Hover over this button</button>\n        </Tooltip>\n        <Tooltip value='Bar'>\n          <span>or hover here</span>\n        </Tooltip>\n      </div>\n    );\n  }\n};"),Ee=h.css(".Tooltip-wrap {\n  display: inline-block;\n  position: relative;\n  transform: translateZ(0);\n}\n\n.Tooltip-wrap:hover .Tooltip {\n  opacity: 1;\n  transform: translateX(-50%) translateY(5px);\n  transition: all .3s ease .5s;\n  visibility: visible;\n}\n\n.Tooltip {\n  background: rgba(0, 0, 0, .8);\n  border-radius: 2px;\n  bottom: -30px;\n  color: white;\n  font-size: 12px;\n  left: 50%;\n  opacity: 0;\n  padding: 5px 10px;\n  position: absolute;\n  transform: translateX(-50%) translateY(0);\n  transition: all .2s ease;\n  user-select: none;\n  visibility: hidden;\n  white-space: nowrap;\n}"),Oe=[{id:"es5",code:De},{id:"es6",code:Le},{id:"jsx",code:Be},{id:"css",code:Ee}],Ie={view:function(t){var e=t.attrs,n=t.children;return ft(".Tooltip-wrap",n,ft(".Tooltip",e.value))}},Ne={view:function(){return ft("div",ft(Ie,{value:"Foo"},ft("button","Hover over this button")),ft(Ie,{value:"Bar"},ft("span","or hover here")))}},Pe={view:v},He=h("var TodoList = {\n  view: function(vnode) {\n    return (\n      m('ul',\n        vnode.attrs.items.map(function(item, i) {\n          return m('li', { key: i }, item);\n        })\n      )\n    );\n  }\n};\n\nvar TodoApp = {\n  oninit: function(vnode) {\n    vnode.state.items = [];\n    vnode.state.text = m.prop('');\n    vnode.state.handleSubmit = function(event) {\n      event.preventDefault();\n      vnode.state.items.push(vnode.state.text());\n      vnode.state.text('');\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'To-do'),\n        m(TodoList, { items: vnode.state.items }),\n        m('form', { onsubmit: vnode.state.handleSubmit },\n          m('input[type=text]', {\n            oninput: m.withAttr('value', vnode.state.text),\n            value: vnode.state.text()\n          }),\n          m('button', {\n            type: 'submit'\n          }, `Add #${vnode.state.items.length + 1}`)\n        )\n      )\n    );\n  }\n};"),qe=h("const TodoList = {\n  view({ attrs }) {\n    return (\n      m('ul',\n        attrs.items.map((item, i) =>\n          m('li', { key: i }, item)\n        )\n      )\n    );\n  }\n};\n\nconst TodoApp = {\n  oninit({ state }) {\n    state.items = [];\n    state.text = m.prop('');\n    state.handleSubmit = function(event) {\n      event.preventDefault();\n      state.items.push(state.text());\n      state.text('');\n    };\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'To-do'),\n        m(TodoList, { items: state.items }),\n        m('form', { onsubmit: state.handleSubmit },\n          m('input[type=text]', {\n            oninput: m.withAttr('value', state.text),\n            value: state.text()\n          }),\n          m('button', {\n            type: 'submit'\n          }, `Add #${state.items.length + 1}`)\n        )\n      )\n    );\n  }\n};"),Ve=h("const TodoList = {\n  view({ attrs }) {\n    return (\n      <ul>\n        {\n          attrs.items.map((item, i) => <li key={i}>{item}</li>)\n        }\n      </ul>\n    );\n  }\n};\n\nconst TodoApp = {\n  oninit({ state }) {\n    state.items = [];\n    state.text = m.prop('');\n    state.handleSubmit = function(event) {\n      event.preventDefault();\n      state.items.push(state.text());\n      state.text('');\n    };\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>To-do</h3>\n        <TodoList items={state.items}/>\n        <form onsubmit={state.handleSubmit}>\n          <input\n            type='text'\n            oninput={m.withAttr('value', state.text)}/>\n          <button type='submit'>\n            Add #{state.items.length + 1}\n          </button>\n        </form>\n      </div>\n    );\n  }\n};"),Re=[{id:"es5",code:He},{id:"es6",code:qe},{id:"jsx",code:Ve}],Fe={view:function(t){var e=t.attrs;return ft("ul",e.items.map(function(t,e){return ft("li",{key:e},t)}))}},ze={oninit:function(t){var e=t.state;e.items=[],e.text=ft.prop(""),e.handleSubmit=function(t){t.preventDefault(),e.items.push(e.text()),e.text("")}},view:function(t){var e=t.state;return ft("div",ft("h3","To-do"),ft(Fe,{items:e.items}),ft("form",{onsubmit:e.handleSubmit},ft("input[type=text]",{oninput:ft.withAttr("value",e.text),value:e.text()}),ft("button",{type:"submit"},"Add #"+(e.items.length+1))))}},$e=h("var ListView = {\n  view: function(vnode) {\n    return (\n      m('ul',\n          vnode.attrs.items ?\n            vnode.attrs.items.map(function(book, i) {\n              return m('li', { key: i },\n                m('span', book.name, ' $', book.price),\n                m('button.right', {\n                  onclick: function() {\n                    vnode.attrs.action(book);\n                  }\n                }, vnode.attrs.actionLabel)\n              )\n          }) : m('div', 'Loading...')\n      )\n    );\n  }\n};\n\nvar BookShop = {\n  oninit: function(vnode) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    vnode.state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    vnode.state.cart = m.prop([]);\n    vnode.state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    vnode.state.shop = m.prop.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase()\n          .indexOf(text().toLowerCase()) > -1 &&\n            cart().indexOf(book) === -1;\n      });\n    }, [vnode.state.text, vnode.state.books, vnode.state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    vnode.state.total = vnode.state.cart.run(function(cart) {\n      return cart.reduce(function(prev, next) {\n        return prev + next.price;\n      }, 0);\n    });\n\n    vnode.state.addToCart = function(book) {\n      vnode.state.cart(vnode.state.cart().concat(book));\n    };\n\n    vnode.state.removeFromCart = function(book) {\n      vnode.state.cart(\n        vnode.state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Book Shop'),\n        m('input[type=text]', {\n          placeholder: 'Filter',\n          value: vnode.state.text(),\n          oninput: m.withAttr('value', vnode.state.text)\n        }),\n        m(ListView, {\n          items: vnode.state.shop(),\n          action: vnode.state.addToCart,\n          actionLabel: 'Add'\n        }),\n        m('hr'),\n        m('h3', 'Cart'),\n        m(ListView, {\n          items: vnode.state.cart(),\n          action: vnode.state.removeFromCart,\n          actionLabel: 'Remove'\n        }),\n        m('strong', 'Total: '),\n        m('span', '$', vnode.state.total())\n      )\n    );\n  }\n};"),Me=h("const ListView = {\n  view({ attrs }) {\n    return (\n      m('ul',\n          attrs.items ? attrs.items.map((book, i) =>\n            m('li', { key: i },\n              m('span', book.name, ' $', book.price),\n              m('button.right', {\n                onclick() {\n                  attrs.action(book);\n                }\n              }, attrs.actionLabel)\n            )\n          ) : m('div', 'Loading...')\n\n      )\n    );\n  }\n};\n\nconst BookShop = {\n  oninit({ state }) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    state.cart = m.prop([]);\n    state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    state.shop = m.prop.combine((text, books, cart) =>\n      books().filter((book) =>\n        book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n          cart().indexOf(book) === -1\n      ), [state.text, state.books, state.cart]\n    );\n\n    // when the cart updates, state.total = price of books in cart\n    state.total = state.cart.run(function(cart) {\n      return cart.reduce((prev, next) => prev + next.price, 0);\n    });\n\n    state.addToCart = function(book) {\n      state.cart(state.cart().concat(book));\n    };\n\n    state.removeFromCart = function(book) {\n      state.cart(\n        state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Book Shop'),\n        m('input[type=text]', {\n          placeholder: 'Filter',\n          value: state.text(),\n          oninput: m.withAttr('value', state.text)\n        }),\n        m(ListView, {\n          items: state.shop(),\n          action: state.addToCart,\n          actionLabel: 'Add'\n        }),\n        m('hr'),\n        m('h3', 'Cart'),\n        m(ListView, {\n          items: state.cart(),\n          action: state.removeFromCart,\n          actionLabel: 'Remove'\n        }),\n        m('strong', 'Total: '),\n        m('span', '$', state.total())\n      )\n    );\n  }\n};"),We=h("const ListView = {\n  view({ attrs }) {\n    return (\n      <ul>\n        {\n          attrs.items ? attrs.items.map((book, i) =>\n            <li key={i}>\n              <span>{book.name} ${book.price}</span>\n              <button className='right' onclick={() => attrs.action(book)}>\n                {attrs.actionLabel}\n              </button>\n            </li>\n          ) : <div>Loading...</div>\n        }\n      </ul>\n    );\n  }\n};\n\nconst BookShop = {\n  oninit({ state }) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    });\n\n    state.cart = m.prop([]);\n    state.text = m.prop('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    state.shop = m.prop.combine((text, books, cart) =>\n      books().filter((book) =>\n        book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n          cart().indexOf(book) === -1\n      ), [state.text, state.books, state.cart]\n    );\n\n    // when the cart updates, state.total = price of books in cart\n    state.total = state.cart.run(function(cart) {\n      return cart.reduce((prev, next) => prev + next.price, 0);\n    });\n\n    state.addToCart = function(book) {\n      state.cart(state.cart().concat(book));\n    };\n\n    state.removeFromCart = function(book) {\n      state.cart(\n        state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Book shop</h3>\n        <input\n          type='text'\n          placeholder='filter'\n          value={state.text()}\n          oninput={m.withAttr('value', state.text)}/>\n        <ListView\n          items={state.shop()}\n          action={state.addToCart}\n          actionLabel='Add'/>\n        <hr/>\n        <h3>Cart</h3>\n        <ListView\n          items={state.cart()}\n          action={state.removeFromCart}\n          actionLabel='Remove'/>\n        <strong>Total: </strong>\n        <span>${state.total()}</span>\n      </div>\n    );\n  }\n};"),Ue=[{id:"es5",code:$e},{id:"es6",code:Me},{id:"jsx",code:We}],Ge={view:function(t){var e=t.attrs;return ft("ul",e.items?e.items.map(function(t,n){return ft("li",{key:n},ft("span",t.name," $",t.price),ft("button.right",{onclick:function(){e.action(t)}},e.actionLabel))}):ft("div","Loading..."))}},Je={oninit:function(t){var e=t.state;e.books=ft.request({method:"GET",url:"https://mithril-examples.firebaseio.com/books.json"}),e.cart=ft.prop([]),e.text=ft.prop(""),e.shop=ft.prop.combine(function(t,e,n){return e().filter(function(e){return e.name.toLowerCase().indexOf(t().toLowerCase())>-1&&n().indexOf(e)===-1})},[e.text,e.books,e.cart]),e.total=e.cart.run(function(t){return t.reduce(function(t,e){return t+e.price},0)}),e.addToCart=function(t){e.cart(e.cart().concat(t))},e.removeFromCart=function(t){e.cart(e.cart().filter(function(e){return e!==t}))}},view:function(t){var e=t.state;return ft("div",ft("h3","Book Shop"),ft("input[type=text]",{placeholder:"Filter",value:e.text(),oninput:ft.withAttr("value",e.text)}),ft(Ge,{items:e.shop(),action:e.addToCart,actionLabel:"Add"}),ft("hr"),ft("h3","Cart"),ft(Ge,{items:e.cart(),action:e.removeFromCart,actionLabel:"Remove"}),ft("strong","Total: "),ft("span","$",e.total()))}},Xe=h("function mapAsciiToBraille(character) {\n\n  var map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nvar BrailleTranslator = {\n  oninit: function(vnode) {\n    vnode.state.input = m.prop('');\n    vnode.state.output = vnode.state.input.run(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('div', 'Enter ascii text:'),\n        m('input[type=text]', {\n          placeholder: 'input',\n          value: vnode.state.input(),\n          oninput: m.withAttr('value', vnode.state.input)\n        }),\n        m('hr'),\n        m('div', 'Braille:'),\n        m('div', vnode.state.output())\n      )\n    );\n  }\n};"),Ye=h("function mapAsciiToBraille(character) {\n\n  const map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n  oninit({ state }) {\n    state.input = m.prop('');\n    state.output = state.input.run(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('div', 'Enter ascii text:'),\n        m('input[type=text]', {\n          placeholder: 'input',\n          value: state.input(),\n          oninput: m.withAttr('value', state.input)\n        }),\n        m('hr'),\n        m('div', 'Braille:'),\n        m('div', state.output())\n      )\n    );\n  }\n};"),Ze=h("function mapAsciiToBraille(character) {\n\n  const map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n  oninit({ state }) {\n    state.input = m.prop('');\n    state.output = state.input.run(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view({ state }) {\n    return (\n      <div>\n        <div>Enter ascii text:</div>\n        <input\n          type='text'\n          value={state.input()}\n          oninput={m.withAttr('value', state.input)}/>\n        <hr/>\n        <div>Braille:</div>\n        <div>{state.output()}</div>\n      </div>\n    );\n  }\n};"),Ke=[{id:"es5",code:Xe},{id:"es6",code:Ye},{id:"jsx",code:Ze}],Qe={oninit:function(t){var e=t.state;e.input=ft.prop(""),e.output=e.input.run(function(t){return t.toLowerCase().split("").map(g).join("")})},view:function(t){var e=t.state;return ft("div",ft("div","Enter ascii text:"),ft("input[type=text]",{placeholder:"input",value:e.input(),oninput:ft.withAttr("value",e.input)}),ft("hr"),ft("div","Braille:"),ft("div",e.output()))}},tn=t(function(t,e){(function(){function n(t){this.tokens=[],this.tokens.links={},this.options=t||d.defaults,this.rules=p.normal,this.options.gfm&&(this.options.tables?this.rules=p.tables:this.rules=p.gfm)}function o(t,e){if(this.options=e||d.defaults,this.links=t,this.rules=h.normal,this.renderer=this.options.renderer||new r,this.renderer.options=this.options,!this.links)throw new Error("Tokens array requires a `links` property.");this.options.gfm?this.options.breaks?this.rules=h.breaks:this.rules=h.gfm:this.options.pedantic&&(this.rules=h.pedantic)}function r(t){this.options=t||{}}function i(t){this.tokens=[],this.token=null,this.options=t||d.defaults,this.options.renderer=this.options.renderer||new r,this.renderer=this.options.renderer,this.renderer.options=this.options}function a(t,e){return t.replace(e?/&/g:/&(?!#?\w+;)/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}function s(t){return t.replace(/&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/g,function(t,e){return e=e.toLowerCase(),"colon"===e?":":"#"===e.charAt(0)?"x"===e.charAt(1)?String.fromCharCode(parseInt(e.substring(2),16)):String.fromCharCode(+e.substring(1)):""})}function l(t,e){return t=t.source,e=e||"",function n(o,r){return o?(r=r.source||r,r=r.replace(/(^|[^\[])\^/g,"$1"),t=t.replace(o,r),n):new RegExp(t,e)}}function u(){}function c(t){for(var e,n,o=arguments,r=1;r<arguments.length;r++){e=o[r];for(n in e)Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n])}return t}function d(t,e,o){if(o||"function"==typeof e){o||(o=e,e=null),e=c({},d.defaults,e||{});var r,s,l=e.highlight,u=0;try{r=n.lex(t,e)}catch(t){return o(t)}s=r.length;var p=function(t){if(t)return e.highlight=l,o(t);var n;try{n=i.parse(r,e)}catch(e){t=e}return e.highlight=l,t?o(t):o(null,n)};if(!l||l.length<3)return p();if(delete e.highlight,!s)return p();for(;u<r.length;u++)!function(t){return"code"!==t.type?--s||p():l(t.text,t.lang,function(e,n){return e?p(e):null==n||n===t.text?--s||p():(t.text=n,t.escaped=!0,void(--s||p()))})}(r[u])}else try{return e&&(e=c({},d.defaults,e)),i.parse(n.lex(t,e),e)}catch(t){if(t.message+="\nPlease report this to https://github.com/chjj/marked.",(e||d.defaults).silent)return"<p>An error occured:</p><pre>"+a(t.message+"",!0)+"</pre>";throw t}}var p={newline:/^\n+/,code:/^( {4}[^\n]+\n*)+/,fences:u,hr:/^( *[-*_]){3,} *(?:\n+|$)/,heading:/^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/,nptable:u,lheading:/^([^\n]+)\n *(=|-){2,} *(?:\n+|$)/,blockquote:/^( *>[^\n]+(\n(?!def)[^\n]+)*\n*)+/,list:/^( *)(bull) [\s\S]+?(?:hr|def|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,html:/^ *(?:comment *(?:\n|\s*$)|closed *(?:\n{2,}|\s*$)|closing *(?:\n{2,}|\s*$))/,def:/^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,table:u,paragraph:/^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,text:/^[^\n]+/};p.bullet=/(?:[*+-]|\d+\.)/,p.item=/^( *)(bull) [^\n]*(?:\n(?!\1bull )[^\n]*)*/,p.item=l(p.item,"gm")(/bull/g,p.bullet)(),p.list=l(p.list)(/bull/g,p.bullet)("hr","\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))")("def","\\n+(?="+p.def.source+")")(),p.blockquote=l(p.blockquote)("def",p.def)(),p._tag="(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b",p.html=l(p.html)("comment",/<!--[\s\S]*?-->/)("closed",/<(tag)[\s\S]+?<\/\1>/)("closing",/<tag(?:"[^"]*"|'[^']*'|[^'">])*?>/)(/tag/g,p._tag)(),p.paragraph=l(p.paragraph)("hr",p.hr)("heading",p.heading)("lheading",p.lheading)("blockquote",p.blockquote)("tag","<"+p._tag)("def",p.def)(),p.normal=c({},p),p.gfm=c({},p.normal,{fences:/^ *(`{3,}|~{3,})[ \.]*(\S+)? *\n([\s\S]*?)\s*\1 *(?:\n+|$)/,paragraph:/^/,heading:/^ *(#{1,6}) +([^\n]+?) *#* *(?:\n+|$)/}),p.gfm.paragraph=l(p.paragraph)("(?!","(?!"+p.gfm.fences.source.replace("\\1","\\2")+"|"+p.list.source.replace("\\1","\\3")+"|")(),p.tables=c({},p.gfm,{nptable:/^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,table:/^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/}),n.rules=p,n.lex=function(t,e){var o=new n(e);return o.lex(t)},n.prototype.lex=function(t){return t=t.replace(/\r\n|\r/g,"\n").replace(/\t/g,"    ").replace(/\u00a0/g," ").replace(/\u2424/g,"\n"),this.token(t,!0)},n.prototype.token=function(t,e,n){for(var o,r,i,a,s,l,u,c,d,h=this,t=t.replace(/^ +$/gm,"");t;)if((i=h.rules.newline.exec(t))&&(t=t.substring(i[0].length),i[0].length>1&&h.tokens.push({type:"space"})),i=h.rules.code.exec(t))t=t.substring(i[0].length),i=i[0].replace(/^ {4}/gm,""),h.tokens.push({type:"code",text:h.options.pedantic?i:i.replace(/\n+$/,"")});else if(i=h.rules.fences.exec(t))t=t.substring(i[0].length),h.tokens.push({type:"code",lang:i[2],text:i[3]||""});else if(i=h.rules.heading.exec(t))t=t.substring(i[0].length),h.tokens.push({type:"heading",depth:i[1].length,text:i[2]});else if(e&&(i=h.rules.nptable.exec(t))){for(t=t.substring(i[0].length),l={type:"table",header:i[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:i[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:i[3].replace(/\n$/,"").split("\n")},c=0;c<l.align.length;c++)/^ *-+: *$/.test(l.align[c])?l.align[c]="right":/^ *:-+: *$/.test(l.align[c])?l.align[c]="center":/^ *:-+ *$/.test(l.align[c])?l.align[c]="left":l.align[c]=null;for(c=0;c<l.cells.length;c++)l.cells[c]=l.cells[c].split(/ *\| */);
-h.tokens.push(l)}else if(i=h.rules.lheading.exec(t))t=t.substring(i[0].length),h.tokens.push({type:"heading",depth:"="===i[2]?1:2,text:i[1]});else if(i=h.rules.hr.exec(t))t=t.substring(i[0].length),h.tokens.push({type:"hr"});else if(i=h.rules.blockquote.exec(t))t=t.substring(i[0].length),h.tokens.push({type:"blockquote_start"}),i=i[0].replace(/^ *> ?/gm,""),h.token(i,e,!0),h.tokens.push({type:"blockquote_end"});else if(i=h.rules.list.exec(t)){for(t=t.substring(i[0].length),a=i[2],h.tokens.push({type:"list_start",ordered:a.length>1}),i=i[0].match(h.rules.item),o=!1,d=i.length,c=0;c<d;c++)l=i[c],u=l.length,l=l.replace(/^ *([*+-]|\d+\.) +/,""),~l.indexOf("\n ")&&(u-=l.length,l=h.options.pedantic?l.replace(/^ {1,4}/gm,""):l.replace(new RegExp("^ {1,"+u+"}","gm"),"")),h.options.smartLists&&c!==d-1&&(s=p.bullet.exec(i[c+1])[0],a===s||a.length>1&&s.length>1||(t=i.slice(c+1).join("\n")+t,c=d-1)),r=o||/\n\n(?!\s*$)/.test(l),c!==d-1&&(o="\n"===l.charAt(l.length-1),r||(r=o)),h.tokens.push({type:r?"loose_item_start":"list_item_start"}),h.token(l,!1,n),h.tokens.push({type:"list_item_end"});h.tokens.push({type:"list_end"})}else if(i=h.rules.html.exec(t))t=t.substring(i[0].length),h.tokens.push({type:h.options.sanitize?"paragraph":"html",pre:!h.options.sanitizer&&("pre"===i[1]||"script"===i[1]||"style"===i[1]),text:i[0]});else if(!n&&e&&(i=h.rules.def.exec(t)))t=t.substring(i[0].length),h.tokens.links[i[1].toLowerCase()]={href:i[2],title:i[3]};else if(e&&(i=h.rules.table.exec(t))){for(t=t.substring(i[0].length),l={type:"table",header:i[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:i[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:i[3].replace(/(?: *\| *)?\n$/,"").split("\n")},c=0;c<l.align.length;c++)/^ *-+: *$/.test(l.align[c])?l.align[c]="right":/^ *:-+: *$/.test(l.align[c])?l.align[c]="center":/^ *:-+ *$/.test(l.align[c])?l.align[c]="left":l.align[c]=null;for(c=0;c<l.cells.length;c++)l.cells[c]=l.cells[c].replace(/^ *\| *| *\| *$/g,"").split(/ *\| */);h.tokens.push(l)}else if(e&&(i=h.rules.paragraph.exec(t)))t=t.substring(i[0].length),h.tokens.push({type:"paragraph",text:"\n"===i[1].charAt(i[1].length-1)?i[1].slice(0,-1):i[1]});else if(i=h.rules.text.exec(t))t=t.substring(i[0].length),h.tokens.push({type:"text",text:i[0]});else if(t)throw new Error("Infinite loop on byte: "+t.charCodeAt(0));return this.tokens};var h={escape:/^\\([\\`*{}\[\]()#+\-.!_>])/,autolink:/^<([^ >]+(@|:\/)[^ >]+)>/,url:u,tag:/^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,link:/^!?\[(inside)\]\(href\)/,reflink:/^!?\[(inside)\]\s*\[([^\]]*)\]/,nolink:/^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,strong:/^__([\s\S]+?)__(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/,em:/^\b_((?:[^_]|__)+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,code:/^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,br:/^ {2,}\n(?!\s*$)/,del:u,text:/^[\s\S]+?(?=[\\<!\[_*`]| {2,}\n|$)/};h._inside=/(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/,h._href=/\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/,h.link=l(h.link)("inside",h._inside)("href",h._href)(),h.reflink=l(h.reflink)("inside",h._inside)(),h.normal=c({},h),h.pedantic=c({},h.normal,{strong:/^__(?=\S)([\s\S]*?\S)__(?!_)|^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/,em:/^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/}),h.gfm=c({},h.normal,{escape:l(h.escape)("])","~|])")(),url:/^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,del:/^~~(?=\S)([\s\S]*?\S)~~/,text:l(h.text)("]|","~]|")("|","|https?://|")()}),h.breaks=c({},h.gfm,{br:l(h.br)("{2,}","*")(),text:l(h.gfm.text)("{2,}","*")()}),o.rules=h,o.output=function(t,e,n){var r=new o(e,n);return r.output(t)},o.prototype.output=function(t){for(var e,n,o,r,i=this,s="";t;)if(r=i.rules.escape.exec(t))t=t.substring(r[0].length),s+=r[1];else if(r=i.rules.autolink.exec(t))t=t.substring(r[0].length),"@"===r[2]?(n=":"===r[1].charAt(6)?i.mangle(r[1].substring(7)):i.mangle(r[1]),o=i.mangle("mailto:")+n):(n=a(r[1]),o=n),s+=i.renderer.link(o,null,n);else if(i.inLink||!(r=i.rules.url.exec(t))){if(r=i.rules.tag.exec(t))!i.inLink&&/^<a /i.test(r[0])?i.inLink=!0:i.inLink&&/^<\/a>/i.test(r[0])&&(i.inLink=!1),t=t.substring(r[0].length),s+=i.options.sanitize?i.options.sanitizer?i.options.sanitizer(r[0]):a(r[0]):r[0];else if(r=i.rules.link.exec(t))t=t.substring(r[0].length),i.inLink=!0,s+=i.outputLink(r,{href:r[2],title:r[3]}),i.inLink=!1;else if((r=i.rules.reflink.exec(t))||(r=i.rules.nolink.exec(t))){if(t=t.substring(r[0].length),e=(r[2]||r[1]).replace(/\s+/g," "),e=i.links[e.toLowerCase()],!e||!e.href){s+=r[0].charAt(0),t=r[0].substring(1)+t;continue}i.inLink=!0,s+=i.outputLink(r,e),i.inLink=!1}else if(r=i.rules.strong.exec(t))t=t.substring(r[0].length),s+=i.renderer.strong(i.output(r[2]||r[1]));else if(r=i.rules.em.exec(t))t=t.substring(r[0].length),s+=i.renderer.em(i.output(r[2]||r[1]));else if(r=i.rules.code.exec(t))t=t.substring(r[0].length),s+=i.renderer.codespan(a(r[2],!0));else if(r=i.rules.br.exec(t))t=t.substring(r[0].length),s+=i.renderer.br();else if(r=i.rules.del.exec(t))t=t.substring(r[0].length),s+=i.renderer.del(i.output(r[1]));else if(r=i.rules.text.exec(t))t=t.substring(r[0].length),s+=i.renderer.text(a(i.smartypants(r[0])));else if(t)throw new Error("Infinite loop on byte: "+t.charCodeAt(0))}else t=t.substring(r[0].length),n=a(r[1]),o=n,s+=i.renderer.link(o,null,n);return s},o.prototype.outputLink=function(t,e){var n=a(e.href),o=e.title?a(e.title):null;return"!"!==t[0].charAt(0)?this.renderer.link(n,o,this.output(t[1])):this.renderer.image(n,o,a(t[1]))},o.prototype.smartypants=function(t){return this.options.smartypants?t.replace(/---/g,"—").replace(/--/g,"–").replace(/(^|[-\u2014\/(\[{"\s])'/g,"$1‘").replace(/'/g,"’").replace(/(^|[-\u2014\/(\[{\u2018\s])"/g,"$1“").replace(/"/g,"”").replace(/\.{3}/g,"…"):t},o.prototype.mangle=function(t){if(!this.options.mangle)return t;for(var e,n="",o=t.length,r=0;r<o;r++)e=t.charCodeAt(r),Math.random()>.5&&(e="x"+e.toString(16)),n+="&#"+e+";";return n},r.prototype.code=function(t,e,n){if(this.options.highlight){var o=this.options.highlight(t,e);null!=o&&o!==t&&(n=!0,t=o)}return e?'<pre><code class="'+this.options.langPrefix+a(e,!0)+'">'+(n?t:a(t,!0))+"\n</code></pre>\n":"<pre><code>"+(n?t:a(t,!0))+"\n</code></pre>"},r.prototype.blockquote=function(t){return"<blockquote>\n"+t+"</blockquote>\n"},r.prototype.html=function(t){return t},r.prototype.heading=function(t,e,n){return"<h"+e+' id="'+this.options.headerPrefix+n.toLowerCase().replace(/[^\w]+/g,"-")+'">'+t+"</h"+e+">\n"},r.prototype.hr=function(){return this.options.xhtml?"<hr/>\n":"<hr>\n"},r.prototype.list=function(t,e){var n=e?"ol":"ul";return"<"+n+">\n"+t+"</"+n+">\n"},r.prototype.listitem=function(t){return"<li>"+t+"</li>\n"},r.prototype.paragraph=function(t){return"<p>"+t+"</p>\n"},r.prototype.table=function(t,e){return"<table>\n<thead>\n"+t+"</thead>\n<tbody>\n"+e+"</tbody>\n</table>\n"},r.prototype.tablerow=function(t){return"<tr>\n"+t+"</tr>\n"},r.prototype.tablecell=function(t,e){var n=e.header?"th":"td",o=e.align?"<"+n+' style="text-align:'+e.align+'">':"<"+n+">";return o+t+"</"+n+">\n"},r.prototype.strong=function(t){return"<strong>"+t+"</strong>"},r.prototype.em=function(t){return"<em>"+t+"</em>"},r.prototype.codespan=function(t){return"<code>"+t+"</code>"},r.prototype.br=function(){return this.options.xhtml?"<br/>":"<br>"},r.prototype.del=function(t){return"<del>"+t+"</del>"},r.prototype.link=function(t,e,n){if(this.options.sanitize){try{var o=decodeURIComponent(s(t)).replace(/[^\w:]/g,"").toLowerCase()}catch(t){return""}if(0===o.indexOf("javascript:")||0===o.indexOf("vbscript:"))return""}var r='<a href="'+t+'"';return e&&(r+=' title="'+e+'"'),r+=">"+n+"</a>"},r.prototype.image=function(t,e,n){var o='<img src="'+t+'" alt="'+n+'"';return e&&(o+=' title="'+e+'"'),o+=this.options.xhtml?"/>":">"},r.prototype.text=function(t){return t},i.parse=function(t,e,n){var o=new i(e,n);return o.parse(t)},i.prototype.parse=function(t){var e=this;this.inline=new o(t.links,this.options,this.renderer),this.tokens=t.reverse();for(var n="";this.next();)n+=e.tok();return n},i.prototype.next=function(){return this.token=this.tokens.pop()},i.prototype.peek=function(){return this.tokens[this.tokens.length-1]||0},i.prototype.parseText=function(){for(var t=this,e=this.token.text;"text"===this.peek().type;)e+="\n"+t.next().text;return this.inline.output(e)},i.prototype.tok=function(){var t=this;switch(this.token.type){case"space":return"";case"hr":return this.renderer.hr();case"heading":return this.renderer.heading(this.inline.output(this.token.text),this.token.depth,this.token.text);case"code":return this.renderer.code(this.token.text,this.token.lang,this.token.escaped);case"table":var e,n,o,r,i,a="",s="";for(o="",e=0;e<this.token.header.length;e++)r={header:!0,align:t.token.align[e]},o+=t.renderer.tablecell(t.inline.output(t.token.header[e]),{header:!0,align:t.token.align[e]});for(a+=this.renderer.tablerow(o),e=0;e<this.token.cells.length;e++){for(n=t.token.cells[e],o="",i=0;i<n.length;i++)o+=t.renderer.tablecell(t.inline.output(n[i]),{header:!1,align:t.token.align[i]});s+=t.renderer.tablerow(o)}return this.renderer.table(a,s);case"blockquote_start":for(var s="";"blockquote_end"!==this.next().type;)s+=t.tok();return this.renderer.blockquote(s);case"list_start":for(var s="",l=this.token.ordered;"list_end"!==this.next().type;)s+=t.tok();return this.renderer.list(s,l);case"list_item_start":for(var s="";"list_item_end"!==this.next().type;)s+="text"===t.token.type?t.parseText():t.tok();return this.renderer.listitem(s);case"loose_item_start":for(var s="";"list_item_end"!==this.next().type;)s+=t.tok();return this.renderer.listitem(s);case"html":var u=this.token.pre||this.options.pedantic?this.token.text:this.inline.output(this.token.text);return this.renderer.html(u);case"paragraph":return this.renderer.paragraph(this.inline.output(this.token.text));case"text":return this.renderer.paragraph(this.parseText())}},u.exec=u,d.options=d.setOptions=function(t){return c(d.defaults,t),d},d.defaults={gfm:!0,tables:!0,breaks:!1,pedantic:!1,sanitize:!1,sanitizer:null,mangle:!0,smartLists:!1,silent:!1,highlight:null,langPrefix:"lang-",smartypants:!1,headerPrefix:"",renderer:new r,xhtml:!1},d.Parser=i,d.parser=i.parse,d.Renderer=r,d.Lexer=n,d.lexer=n.lex,d.InlineLexer=o,d.inlineLexer=o.output,d.parse=d,"undefined"!=typeof t&&"object"==typeof e?t.exports=d:"function"==typeof define&&define.amd?define(function(){return d}):this.marked=d}).call(function(){return this||("undefined"!=typeof window?window:x)}())}),en=h("var MarkdownEditor = {\n  oninit: function(vnode) {\n    vnode.state.value = m.prop('Type some *markdown* here!');\n    vnode.state.markdown = vnode.state.value.run(marked);\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Input'),\n        m('textarea.fullWidth', {\n          oninput: m.withAttr('value', vnode.state.value),\n          value: vnode.state.value()\n        }),\n        m('h3', 'Output'),\n        m('div', m.trust(vnode.state.markdown()))\n      )\n    );\n  }\n};"),nn=h("const MarkdownEditor = {\n  oninit({ state }) {\n    state.value = m.prop('Type some *markdown* here!');\n    state.markdown = state.value.run(marked);\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Input'),\n        m('textarea.fullWidth', {\n          oninput: m.withAttr('value', state.value),\n          value: state.value()\n        }),\n        m('h3', 'Output'),\n        m('div', m.trust(state.markdown()))\n      )\n    );\n  }\n};"),on=h("const MarkdownEditor = {\n  oninit({ state }) {\n    state.value = m.prop('Type some *markdown* here!');\n    state.markdown = state.value.run(marked);\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Input</h3>\n        <textarea\n          className='fullWidth'\n          oninput={m.withAttr('value', state.value)}\n          value{state.value()}/>\n        <h3>Output</h3>\n        <div>{m.trust(state.markdown())}</div>\n      </div>\n    );\n  }\n};"),rn=[{id:"es5",code:en},{id:"es6",code:nn},{id:"jsx",code:on}],an={oninit:function(t){var e=t.state;e.value=ft.prop("Type some *markdown* here!"),e.markdown=e.value.run(tn)},view:function(t){var e=t.state;return ft("div",ft("h3","Input"),ft("textarea.fullWidth",{oninput:ft.withAttr("value",e.value),value:e.value()}),ft("h3","Output"),ft("div",ft.trust(e.markdown())))}},sn={view:b},ln=h("var BookView = {\n  oninit: function(vnode) {\n    vnode.state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          vnode.state.books().map(function(book) {\n            return m('li', { key: book.id }, book.name);\n          })\n        )\n      )\n    );\n  }\n};"),un=h("const BookView = {\n  oninit({ state }) {\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          state.books().map((book) =>\n            m('li', { key: book.id }, book.name)\n          )\n        )\n      )\n    );\n  }\n};"),cn=h("const BookView = {\n  oninit({ state }) {\n    state.books = m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json',\n      initialValue: []\n    });\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Books</h3>\n        <ul>\n          {\n            state.books().map((book) =>\n              <li key={book.id}>{book.name}</li>\n            )\n          }\n        </ul>\n      </div>\n    );\n  }\n};"),dn=[{id:"es5",code:ln},{id:"es6",code:un},{id:"jsx",code:cn}],pn={oninit:function(t){var e=t.state;e.books=ft.request({method:"GET",url:"https://mithril-examples.firebaseio.com/books.json",initialValue:[]})},view:function(t){var e=t.state;return ft("div",ft("h3","Books"),ft("ul",e.books().map(function(t){return ft("li",{key:t.id},t.name)})))}},hn=h("var BookView = {\n  oninit: function(vnode) {\n    vnode.state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then(function(response) {\n        return response.json();\n      })\n      .then(vnode.state.books)\n      .then(function() {\n        m.redraw();\n      });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          vnode.state.books().map(function(book) {\n            return m('li', { key: book.id }, book.name);\n          })\n        )\n      )\n    );\n  }\n};"),fn=h("const BookView = {\n  oninit({ state }) {\n    state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then((response) => response.json())\n      .then(state.books)\n      .then(() => m.redraw());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          state.books().map((book) =>\n            m('li', { key: book.id }, book.name)\n          )\n        )\n      )\n    );\n  }\n};"),mn=h("const BookView = {\n  oninit({ state }) {\n    state.books = m.prop([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then((response) => response.json())\n      .then(state.books)\n      .then(() => m.redraw());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Books</h3>\n        <ul>\n          {\n            state.books().map((book) =>\n              <li key={book.id}>{book.name}</li>\n            )\n          }\n        </ul>\n      </div>\n    );\n  }\n};"),vn=[{id:"es5",code:hn},{id:"es6",code:fn},{id:"jsx",code:mn}],gn={oninit:function(t){var e=t.state;e.books=ft.prop([]),fetch("https://mithril-examples.firebaseio.com/books.json").then(function(t){return t.json()}).then(e.books).then(function(){return ft.redraw()})},view:function(t){var e=t.state;return ft("div",ft("h3","Books"),ft("ul",e.books().map(function(t){return ft("li",{key:t.id},t.name)})))}},bn={view:w},wn=h("var RouteView = {\n  view: function() {\n    return m('div', 'Current route: ', m.route.get());\n  }\n};"),yn=h("const RouteView = {\n  view() {\n    return m('div', 'Current route: ', m.route.get());\n  }\n};"),kn=h("const RouteView = {\n  view() {\n    return <div>Current route: {m.route.get()}</div>;\n  }\n};"),xn=[{id:"es5",code:wn},{id:"es6",code:yn},{id:"jsx",code:kn}],Tn={view:function(){return ft("div","Current route: ",ft.route.get())}},_n=h("var LinkView = {\n  view: function() {\n    return (\n      m('ul',\n        m('li',\n          m('a[href=/routing]', {\n            oncreate: m.route.link\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('a[href=/routing/foo]', {\n            oncreate: m.route.link\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('a[href=/routing/bar]', {\n            oncreate: m.route.link\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};"),Sn=h("const LinkView = {\n  view() {\n    return (\n      m('ul',\n        m('li',\n          m('a[href=/routing]', {\n            oncreate: m.route.link\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('a[href=/routing/foo]', {\n            oncreate: m.route.link\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('a[href=/routing/bar]', {\n            oncreate: m.route.link\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};"),Cn=h("const LinkView = {\n  view() {\n    return (\n      <ul>\n        <li>\n          <a href='/routing' oncreate={m.route.link}>\n            Routing page (root)\n          </a>\n        </li>\n        <li>\n          <a href='/routing/foo' oncreate={m.route.link}>\n            /routing/foo\n          </a>\n        </li>\n        <li>\n          <a href='/routing/bar' oncreate={m.route.link}>\n            /routing/bar\n          </a>\n        </li>\n      </ul>\n    );\n  }\n};"),jn=[{id:"es5",code:_n},{id:"es6",code:Sn},{id:"jsx",code:Cn}],An={view:function(){return ft("ul",ft("li",ft("a[href=/routing]",{oncreate:ft.route.link},"Routing page (root)")),ft("li",ft("a[href=/routing/foo]",{oncreate:ft.route.link},"/routing/foo")),ft("li",ft("a[href=/routing/bar]",{oncreate:ft.route.link},"/routing/bar")))}},Dn=h("var ButtonView = {\n  view: function() {\n    return (\n      m('ul',\n        m('li',\n          m('button', {\n            onclick: function() { m.route.set('/routing') }\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('button', {\n            onclick: function() { m.route.set('/routing/foo') }\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('button', {\n            onclick: function() { m.route.set('/routing/bar') }\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};"),Ln=h("const ButtonView = {\n  view() {\n    return (\n      m('ul',\n        m('li',\n          m('button', {\n            onclick: () => m.route.set('/routing')\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('button', {\n            onclick: () => m.route.set('/routing/foo')\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('button', {\n            onclick: () => m.route.set('/routing/bar')\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};"),Bn=h("const ButtonView = {\n  view() {\n    return (\n      <ul>\n        <li>\n          <button onclick={() => m.route.set('/routing')}>\n            Routing page (root)\n          </button>\n        </li>\n        <li>\n          <button onclick={() => m.route.set('/routing/foo')}>\n            /routing/foo\n          </button>\n        </li>\n        <li>\n          <button onclick={() => m.route.set('/routing/bar')}>\n            /routing/bar\n          </button>\n        </li>\n      </ul>\n    );\n  }\n};"),En=[{id:"es5",code:Dn},{id:"es6",code:Ln},{id:"jsx",code:Bn}],On={view:function(){return ft("ul",ft("li",ft("button",{onclick:function(){return ft.route.set("/routing")}},"Routing page (root)")),ft("li",ft("button",{onclick:function(){return ft.route.set("/routing/foo")}},"/routing/foo")),ft("li",ft("button",{onclick:function(){return ft.route.set("/routing/bar")}},"/routing/bar")))}},In={view:y},Nn={view:k};window.__DEV__="localhost"===window.location.hostname;var Pn={"/":Xt,"/gettingstarted":Xt,"/components":Pe,"/applications":sn,"/requests":bn,"/routing":In,"/routing/:param":In,"/streams":Nn};ft.route.prefix(""),ft.route(document.getElementById("app"),"/",Pn)}();
+(function () {
+'use strict';
+
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+
+
+
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var fetch$1 = createCommonjsModule(function (module) {
+(function() {
+  'use strict';
+
+  // if __disableNativeFetch is set to true, the it will always polyfill fetch
+  // with Ajax.
+  if (!self.__disableNativeFetch && self.fetch) {
+    return
+  }
+
+  function normalizeName(name) {
+    if (typeof name !== 'string') {
+      name = String(name);
+    }
+    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+      throw new TypeError('Invalid character in header field name')
+    }
+    return name.toLowerCase()
+  }
+
+  function normalizeValue(value) {
+    if (typeof value !== 'string') {
+      value = String(value);
+    }
+    return value
+  }
+
+  function Headers(headers) {
+    this.map = {};
+
+    if (headers instanceof Headers) {
+      headers.forEach(function(value, name) {
+        this.append(name, value);
+      }, this);
+
+    } else if (headers) {
+      Object.getOwnPropertyNames(headers).forEach(function(name) {
+        this.append(name, headers[name]);
+      }, this);
+    }
+  }
+
+  Headers.prototype.append = function(name, value) {
+    name = normalizeName(name);
+    value = normalizeValue(value);
+    var list = this.map[name];
+    if (!list) {
+      list = [];
+      this.map[name] = list;
+    }
+    list.push(value);
+  };
+
+  Headers.prototype['delete'] = function(name) {
+    delete this.map[normalizeName(name)];
+  };
+
+  Headers.prototype.get = function(name) {
+    var values = this.map[normalizeName(name)];
+    return values ? values[0] : null
+  };
+
+  Headers.prototype.getAll = function(name) {
+    return this.map[normalizeName(name)] || []
+  };
+
+  Headers.prototype.has = function(name) {
+    return this.map.hasOwnProperty(normalizeName(name))
+  };
+
+  Headers.prototype.set = function(name, value) {
+    this.map[normalizeName(name)] = [normalizeValue(value)];
+  };
+
+  Headers.prototype.forEach = function(callback, thisArg) {
+    Object.getOwnPropertyNames(this.map).forEach(function(name) {
+      this.map[name].forEach(function(value) {
+        callback.call(thisArg, value, name, this);
+      }, this);
+    }, this);
+  };
+
+  function consumed(body) {
+    if (body.bodyUsed) {
+      return Promise.reject(new TypeError('Already read'))
+    }
+    body.bodyUsed = true;
+  }
+
+  function fileReaderReady(reader) {
+    return new Promise(function(resolve, reject) {
+      reader.onload = function() {
+        resolve(reader.result);
+      };
+      reader.onerror = function() {
+        reject(reader.error);
+      };
+    })
+  }
+
+  function readBlobAsArrayBuffer(blob) {
+    var reader = new FileReader();
+    reader.readAsArrayBuffer(blob);
+    return fileReaderReady(reader)
+  }
+
+  function readBlobAsText(blob, options) {
+    var reader = new FileReader();
+    var contentType = options.headers.map['content-type'] ? options.headers.map['content-type'].toString() : '';
+    var regex = /charset\=[0-9a-zA-Z\-\_]*;?/;
+    var _charset = blob.type.match(regex) || contentType.match(regex);
+    var args = [blob];
+
+    if(_charset) {
+      args.push(_charset[0].replace(/^charset\=/, '').replace(/;$/, ''));
+    }
+
+    reader.readAsText.apply(reader, args);
+    return fileReaderReady(reader)
+  }
+
+  var support = {
+    blob: 'FileReader' in self && 'Blob' in self && (function() {
+      try {
+        new Blob();
+        return true
+      } catch(e) {
+        return false
+      }
+    })(),
+    formData: 'FormData' in self,
+    arrayBuffer: 'ArrayBuffer' in self
+  };
+
+  function Body() {
+    this.bodyUsed = false;
+
+
+    this._initBody = function(body, options) {
+      this._bodyInit = body;
+      if (typeof body === 'string') {
+        this._bodyText = body;
+      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+        this._bodyBlob = body;
+        this._options = options;
+      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+        this._bodyFormData = body;
+      } else if (!body) {
+        this._bodyText = '';
+      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
+        // Only support ArrayBuffers for POST method.
+        // Receiving ArrayBuffers happens via Blobs, instead.
+      } else {
+        throw new Error('unsupported BodyInit type')
+      }
+    };
+
+    if (support.blob) {
+      this.blob = function() {
+        var rejected = consumed(this);
+        if (rejected) {
+          return rejected
+        }
+
+        if (this._bodyBlob) {
+          return Promise.resolve(this._bodyBlob)
+        } else if (this._bodyFormData) {
+          throw new Error('could not read FormData body as blob')
+        } else {
+          return Promise.resolve(new Blob([this._bodyText]))
+        }
+      };
+
+      this.arrayBuffer = function() {
+        return this.blob().then(readBlobAsArrayBuffer)
+      };
+
+      this.text = function() {
+        var rejected = consumed(this);
+        if (rejected) {
+          return rejected
+        }
+
+        if (this._bodyBlob) {
+          return readBlobAsText(this._bodyBlob, this._options)
+        } else if (this._bodyFormData) {
+          throw new Error('could not read FormData body as text')
+        } else {
+          return Promise.resolve(this._bodyText)
+        }
+      };
+    } else {
+      this.text = function() {
+        var rejected = consumed(this);
+        return rejected ? rejected : Promise.resolve(this._bodyText)
+      };
+    }
+
+    if (support.formData) {
+      this.formData = function() {
+        return this.text().then(decode)
+      };
+    }
+
+    this.json = function() {
+      return this.text().then(JSON.parse)
+    };
+
+    return this
+  }
+
+  // HTTP methods whose capitalization should be normalized
+  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'];
+
+  function normalizeMethod(method) {
+    var upcased = method.toUpperCase();
+    return (methods.indexOf(upcased) > -1) ? upcased : method
+  }
+
+  function Request(input, options) {
+    options = options || {};
+    var body = options.body;
+    if (Request.prototype.isPrototypeOf(input)) {
+      if (input.bodyUsed) {
+        throw new TypeError('Already read')
+      }
+      this.url = input.url;
+      this.credentials = input.credentials;
+      if (!options.headers) {
+        this.headers = new Headers(input.headers);
+      }
+      this.method = input.method;
+      this.mode = input.mode;
+      if (!body) {
+        body = input._bodyInit;
+        input.bodyUsed = true;
+      }
+    } else {
+      this.url = input;
+    }
+
+    this.credentials = options.credentials || this.credentials || 'omit';
+    if (options.headers || !this.headers) {
+      this.headers = new Headers(options.headers);
+    }
+    this.method = normalizeMethod(options.method || this.method || 'GET');
+    this.mode = options.mode || this.mode || null;
+    this.referrer = null;
+
+    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+      throw new TypeError('Body not allowed for GET or HEAD requests')
+    }
+    this._initBody(body, options);
+  }
+
+  Request.prototype.clone = function() {
+    return new Request(this)
+  };
+
+  function decode(body) {
+    var form = new FormData();
+    body.trim().split('&').forEach(function(bytes) {
+      if (bytes) {
+        var split = bytes.split('=');
+        var name = split.shift().replace(/\+/g, ' ');
+        var value = split.join('=').replace(/\+/g, ' ');
+        form.append(decodeURIComponent(name), decodeURIComponent(value));
+      }
+    });
+    return form
+  }
+
+  function headers(xhr) {
+    var head = new Headers();
+    var pairs = xhr.getAllResponseHeaders().trim().split('\n');
+    pairs.forEach(function(header) {
+      var split = header.trim().split(':');
+      var key = split.shift().trim();
+      var value = split.join(':').trim();
+      head.append(key, value);
+    });
+    return head
+  }
+
+  Body.call(Request.prototype);
+
+  function Response(bodyInit, options) {
+    if (!options) {
+      options = {};
+    }
+
+    this._initBody(bodyInit, options);
+    this.type = 'default';
+    this.status = options.status;
+    this.ok = this.status >= 200 && this.status < 300;
+    this.statusText = options.statusText;
+    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers);
+    this.url = options.url || '';
+  }
+
+  Body.call(Response.prototype);
+
+  Response.prototype.clone = function() {
+    return new Response(this._bodyInit, {
+      status: this.status,
+      statusText: this.statusText,
+      headers: new Headers(this.headers),
+      url: this.url
+    })
+  };
+
+  Response.error = function() {
+    var response = new Response(null, {status: 0, statusText: ''});
+    response.type = 'error';
+    return response
+  };
+
+  var redirectStatuses = [301, 302, 303, 307, 308];
+
+  Response.redirect = function(url, status) {
+    if (redirectStatuses.indexOf(status) === -1) {
+      throw new RangeError('Invalid status code')
+    }
+
+    return new Response(null, {status: status, headers: {location: url}})
+  };
+
+  self.Headers = Headers;
+  self.Request = Request;
+  self.Response = Response;
+
+  self.fetch = function(input, init) {
+    return new Promise(function(resolve, reject) {
+      var request;
+      if (Request.prototype.isPrototypeOf(input) && !init) {
+        request = input;
+      } else {
+        request = new Request(input, init);
+      }
+
+      var xhr = new XMLHttpRequest();
+
+      function responseURL() {
+        if ('responseURL' in xhr) {
+          return xhr.responseURL
+        }
+
+        // Avoid security warnings on getResponseHeader when not allowed by CORS
+        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+          return xhr.getResponseHeader('X-Request-URL')
+        }
+
+        return;
+      }
+
+      var __onLoadHandled = false;
+
+      function onload() {
+        if (xhr.readyState !== 4) {
+          return
+        }
+        var status = (xhr.status === 1223) ? 204 : xhr.status;
+        if (status < 100 || status > 599) {
+          if (__onLoadHandled) { return; } else { __onLoadHandled = true; }
+          reject(new TypeError('Network request failed'));
+          return
+        }
+        var options = {
+          status: status,
+          statusText: xhr.statusText,
+          headers: headers(xhr),
+          url: responseURL()
+        };
+        var body = 'response' in xhr ? xhr.response : xhr.responseText;
+
+        if (__onLoadHandled) { return; } else { __onLoadHandled = true; }
+        resolve(new Response(body, options));
+      }
+      xhr.onreadystatechange = onload;
+      xhr.onload = onload;
+      xhr.onerror = function() {
+        if (__onLoadHandled) { return; } else { __onLoadHandled = true; }
+        reject(new TypeError('Network request failed'));
+      };
+
+      xhr.open(request.method, request.url, true);
+
+      // `withCredentials` should be setted after calling `.open` in IE10
+      // http://stackoverflow.com/a/19667959/1219343
+      try {
+        if (request.credentials === 'include') {
+          if ('withCredentials' in xhr) {
+            xhr.withCredentials = true;
+          } else {
+            console && console.warn && console.warn('withCredentials is not supported, you can ignore this warning');
+          }
+        }
+      } catch (e) {
+        console && console.warn && console.warn('set withCredentials error:' + e);
+      }
+
+      if ('responseType' in xhr && support.blob) {
+        xhr.responseType = 'blob';
+      }
+
+      request.headers.forEach(function(value, name) {
+        xhr.setRequestHeader(name, value);
+      });
+
+      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit);
+    })
+  };
+  self.fetch.polyfill = true;
+
+  // Support CommonJS
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = self.fetch;
+  }
+})();
+});
+
+var mithril = createCommonjsModule(function (module) {
+new function() {
+
+function Vnode(tag, key, attrs0, children, text, dom) {
+	return {tag: tag, key: key, attrs: attrs0, children: children, text: text, dom: dom, domSize: undefined, state: {}, events: undefined, instance: undefined, skip: false}
+}
+Vnode.normalize = function(node) {
+	if (Array.isArray(node)) { return Vnode("[", undefined, undefined, Vnode.normalizeChildren(node), undefined, undefined) }
+	if (node != null && typeof node !== "object") { return Vnode("#", undefined, undefined, node === false ? "" : node, undefined, undefined) }
+	return node
+};
+Vnode.normalizeChildren = function normalizeChildren(children) {
+	for (var i = 0; i < children.length; i++) {
+		children[i] = Vnode.normalize(children[i]);
+	}
+	return children
+};
+var selectorParser = /(?:(^|#|\.)([^#\.\[\]]+))|(\[(.+?)(?:\s*=\s*("|'|)((?:\\["'\]]|.)*?)\5)?\])/g;
+var selectorCache = {};
+function hyperscript(selector) {
+	var arguments$1 = arguments;
+
+	if (selector == null || typeof selector !== "string" && typeof selector.view !== "function") {
+		throw Error("The selector must be either a string or a component.");
+	}
+	if (typeof selector === "string" && selectorCache[selector] === undefined) {
+		var match, tag, classes = [], attributes = {};
+		while (match = selectorParser.exec(selector)) {
+			var type = match[1], value = match[2];
+			if (type === "" && value !== "") { tag = value; }
+			else if (type === "#") { attributes.id = value; }
+			else if (type === ".") { classes.push(value); }
+			else if (match[3][0] === "[") {
+				var attrValue = match[6];
+				if (attrValue) { attrValue = attrValue.replace(/\\(["'])/g, "$1").replace(/\\\\/g, "\\"); }
+				if (match[4] === "class") { classes.push(attrValue); }
+				else { attributes[match[4]] = attrValue || true; }
+			}
+		}
+		if (classes.length > 0) { attributes.className = classes.join(" "); }
+		selectorCache[selector] = function(attrs, children) {
+			var hasAttrs = false, childList, text;
+			var className = attrs.className || attrs.class;
+			for (var key in attributes) { attrs[key] = attributes[key]; }
+			if (className !== undefined) {
+				if (attrs.class !== undefined) {
+					attrs.class = undefined;
+					attrs.className = className;
+				}
+				if (attributes.className !== undefined) { attrs.className = attributes.className + " " + className; }
+			}
+			for (var key in attrs) {
+				if (key !== "key") {
+					hasAttrs = true;
+					break
+				}
+			}
+			if (Array.isArray(children) && children.length == 1 && children[0] != null && children[0].tag === "#") { text = children[0].children; }
+			else { childList = children; }
+			return Vnode(tag || "div", attrs.key, hasAttrs ? attrs : undefined, childList, text, undefined)
+		};
+	}
+	var attrs, children, childrenIndex;
+	if (arguments[1] == null || typeof arguments[1] === "object" && arguments[1].tag === undefined && !Array.isArray(arguments[1])) {
+		attrs = arguments[1];
+		childrenIndex = 2;
+	}
+	else { childrenIndex = 1; }
+	if (arguments.length === childrenIndex + 1) {
+		children = Array.isArray(arguments[childrenIndex]) ? arguments[childrenIndex] : [arguments[childrenIndex]];
+	}
+	else {
+		children = [];
+		for (var i = childrenIndex; i < arguments.length; i++) { children.push(arguments$1[i]); }
+	}
+	if (typeof selector === "string") { return selectorCache[selector](attrs || {}, Vnode.normalizeChildren(children)) }
+	return Vnode(selector, attrs && attrs.key, attrs || {}, Vnode.normalizeChildren(children), undefined, undefined)
+}
+hyperscript.trust = function(html) {
+	if (html == null) { html = ""; }
+	return Vnode("<", undefined, undefined, html, undefined, undefined)
+};
+hyperscript.fragment = function(attrs1, children) {
+	return Vnode("[", attrs1.key, attrs1, Vnode.normalizeChildren(children), undefined, undefined)
+};
+var m = hyperscript;
+/** @constructor */
+var PromisePolyfill = function(executor) {
+	if (!(this instanceof PromisePolyfill)) { throw new Error("Promise must be called with `new`") }
+	if (typeof executor !== "function") { throw new TypeError("executor must be a function") }
+	var self = this, resolvers = [], rejectors = [], resolveCurrent = handler(resolvers, true), rejectCurrent = handler(rejectors, false);
+	var instance = self._instance = {resolvers: resolvers, rejectors: rejectors};
+	var callAsync = typeof setImmediate === "function" ? setImmediate : setTimeout;
+	function handler(list, shouldAbsorb) {
+		return function execute(value) {
+			var then;
+			try {
+				if (shouldAbsorb && value != null && (typeof value === "object" || typeof value === "function") && typeof (then = value.then) === "function") {
+					if (value === self) { throw new TypeError("Promise can't be resolved w/ itself") }
+					executeOnce(then.bind(value));
+				}
+				else {
+					callAsync(function() {
+						if (!shouldAbsorb && list.length === 0) { console.error("Possible unhandled promise rejection:", value); }
+						for (var i = 0; i < list.length; i++) { list[i](value); }
+						resolvers.length = 0, rejectors.length = 0;
+						instance.state = shouldAbsorb;
+						instance.retry = function() {execute(value);};
+					});
+				}
+			}
+			catch (e) {
+				rejectCurrent(e);
+			}
+		}
+	}
+	function executeOnce(then) {
+		var runs = 0;
+		function run(fn) {
+			return function(value) {
+				if (runs++ > 0) { return }
+				fn(value);
+			}
+		}
+		var onerror = run(rejectCurrent);
+		try {then(run(resolveCurrent), onerror);} catch (e) {onerror(e);}
+	}
+	executeOnce(executor);
+};
+PromisePolyfill.prototype.then = function(onFulfilled, onRejection) {
+	var self = this, instance = self._instance;
+	function handle(callback, list, next, state) {
+		list.push(function(value) {
+			if (typeof callback !== "function") { next(value); }
+			else { try {resolveNext(callback(value));} catch (e) {if (rejectNext) { rejectNext(e); }} }
+		});
+		if (typeof instance.retry === "function" && state === instance.state) { instance.retry(); }
+	}
+	var resolveNext, rejectNext;
+	var promise = new PromisePolyfill(function(resolve, reject) {resolveNext = resolve, rejectNext = reject;});
+	handle(onFulfilled, instance.resolvers, resolveNext, true), handle(onRejection, instance.rejectors, rejectNext, false);
+	return promise
+};
+PromisePolyfill.prototype.catch = function(onRejection) {
+	return this.then(null, onRejection)
+};
+PromisePolyfill.resolve = function(value) {
+	if (value instanceof PromisePolyfill) { return value }
+	return new PromisePolyfill(function(resolve) {resolve(value);})
+};
+PromisePolyfill.reject = function(value) {
+	return new PromisePolyfill(function(resolve, reject) {reject(value);})
+};
+PromisePolyfill.all = function(list) {
+	return new PromisePolyfill(function(resolve, reject) {
+		var total = list.length, count = 0, values = [];
+		if (list.length === 0) { resolve([]); }
+		else { for (var i = 0; i < list.length; i++) {
+			(function(i) {
+				function consume(value) {
+					count++;
+					values[i] = value;
+					if (count === total) { resolve(values); }
+				}
+				if (list[i] != null && (typeof list[i] === "object" || typeof list[i] === "function") && typeof list[i].then === "function") {
+					list[i].then(consume, reject);
+				}
+				else { consume(list[i]); }
+			})(i);
+		} }
+	})
+};
+PromisePolyfill.race = function(list) {
+	return new PromisePolyfill(function(resolve, reject) {
+		for (var i = 0; i < list.length; i++) {
+			list[i].then(resolve, reject);
+		}
+	})
+};
+if (typeof window !== "undefined") {
+	if (typeof window.Promise === "undefined") { window.Promise = PromisePolyfill; }
+	var PromisePolyfill = window.Promise;
+} else if (typeof commonjsGlobal !== "undefined") {
+	if (typeof commonjsGlobal.Promise === "undefined") { commonjsGlobal.Promise = PromisePolyfill; }
+	var PromisePolyfill = commonjsGlobal.Promise;
+} else {
+}
+var buildQueryString = function(object) {
+	if (Object.prototype.toString.call(object) !== "[object Object]") { return "" }
+	var args = [];
+	for (var key0 in object) {
+		destructure(key0, object[key0]);
+	}
+	return args.join("&")
+	function destructure(key0, value) {
+		if (Array.isArray(value)) {
+			for (var i = 0; i < value.length; i++) {
+				destructure(key0 + "[" + i + "]", value[i]);
+			}
+		}
+		else if (Object.prototype.toString.call(value) === "[object Object]") {
+			for (var i in value) {
+				destructure(key0 + "[" + i + "]", value[i]);
+			}
+		}
+		else { args.push(encodeURIComponent(key0) + (value != null && value !== "" ? "=" + encodeURIComponent(value) : "")); }
+	}
+};
+var _8 = function($window, Promise) {
+	var callbackCount = 0;
+	var oncompletion;
+	function setCompletionCallback(callback) {oncompletion = callback;}
+	function finalizer() {
+		var count = 0;
+		function complete() {if (--count === 0 && typeof oncompletion === "function") { oncompletion(); }}
+		return function finalize(promise0) {
+			var then0 = promise0.then;
+			promise0.then = function() {
+				count++;
+				var next = then0.apply(promise0, arguments);
+				next.then(complete, function(e) {
+					complete();
+					if (count === 0) { throw e }
+				});
+				return finalize(next)
+			};
+			return promise0
+		}
+	}
+	function normalize(args, extra) {
+		if (typeof args === "string") {
+			var url = args;
+			args = extra || {};
+			if (args.url == null) { args.url = url; }
+		}
+		return args
+	}
+	function request(args, extra) {
+		var finalize = finalizer();
+		args = normalize(args, extra);
+		var promise0 = new Promise(function(resolve, reject) {
+			if (args.method == null) { args.method = "GET"; }
+			args.method = args.method.toUpperCase();
+			var useBody = typeof args.useBody === "boolean" ? args.useBody : args.method !== "GET" && args.method !== "TRACE";
+			if (typeof args.serialize !== "function") { args.serialize = typeof FormData !== "undefined" && args.data instanceof FormData ? function(value) {return value} : JSON.stringify; }
+			if (typeof args.deserialize !== "function") { args.deserialize = deserialize; }
+			if (typeof args.extract !== "function") { args.extract = extract; }
+			args.url = interpolate(args.url, args.data);
+			if (useBody) { args.data = args.serialize(args.data); }
+			else { args.url = assemble(args.url, args.data); }
+			var xhr = new $window.XMLHttpRequest();
+			xhr.open(args.method, args.url, typeof args.async === "boolean" ? args.async : true, typeof args.user === "string" ? args.user : undefined, typeof args.password === "string" ? args.password : undefined);
+			if (args.serialize === JSON.stringify && useBody) {
+				xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+			}
+			if (args.deserialize === deserialize) {
+				xhr.setRequestHeader("Accept", "application/json, text/*");
+			}
+			if (args.withCredentials) { xhr.withCredentials = args.withCredentials; }
+			for (var key in args.headers) { if ({}.hasOwnProperty.call(args.headers, key)) {
+				xhr.setRequestHeader(key, args.headers[key]);
+			} }
+			if (typeof args.config === "function") { xhr = args.config(xhr, args) || xhr; }
+			xhr.onreadystatechange = function() {
+				// Don't throw errors on xhr.abort(). XMLHttpRequests ends up in a state of
+				// xhr.status == 0 and xhr.readyState == 4 if aborted after open, but before completion.
+				if (xhr.status && xhr.readyState === 4) {
+					try {
+						var response = (args.extract !== extract) ? args.extract(xhr, args) : args.deserialize(args.extract(xhr, args));
+						if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+							resolve(cast(args.type, response));
+						}
+						else {
+							var error = new Error(xhr.responseText);
+							for (var key in response) { error[key] = response[key]; }
+							reject(error);
+						}
+					}
+					catch (e) {
+						reject(e);
+					}
+				}
+			};
+			if (useBody && (args.data != null)) { xhr.send(args.data); }
+			else { xhr.send(); }
+		});
+		return args.background === true ? promise0 : finalize(promise0)
+	}
+	function jsonp(args, extra) {
+		var finalize = finalizer();
+		args = normalize(args, extra);
+		var promise0 = new Promise(function(resolve, reject) {
+			var callbackName = args.callbackName || "_mithril_" + Math.round(Math.random() * 1e16) + "_" + callbackCount++;
+			var script = $window.document.createElement("script");
+			$window[callbackName] = function(data) {
+				script.parentNode.removeChild(script);
+				resolve(cast(args.type, data));
+				delete $window[callbackName];
+			};
+			script.onerror = function() {
+				script.parentNode.removeChild(script);
+				reject(new Error("JSONP request failed"));
+				delete $window[callbackName];
+			};
+			if (args.data == null) { args.data = {}; }
+			args.url = interpolate(args.url, args.data);
+			args.data[args.callbackKey || "callback"] = callbackName;
+			script.src = assemble(args.url, args.data);
+			$window.document.documentElement.appendChild(script);
+		});
+		return args.background === true? promise0 : finalize(promise0)
+	}
+	function interpolate(url, data) {
+		if (data == null) { return url }
+		var tokens = url.match(/:[^\/]+/gi) || [];
+		for (var i = 0; i < tokens.length; i++) {
+			var key = tokens[i].slice(1);
+			if (data[key] != null) {
+				url = url.replace(tokens[i], data[key]);
+			}
+		}
+		return url
+	}
+	function assemble(url, data) {
+		var querystring = buildQueryString(data);
+		if (querystring !== "") {
+			var prefix = url.indexOf("?") < 0 ? "?" : "&";
+			url += prefix + querystring;
+		}
+		return url
+	}
+	function deserialize(data) {
+		try {return data !== "" ? JSON.parse(data) : null}
+		catch (e) {throw new Error(data)}
+	}
+	function extract(xhr) {return xhr.responseText}
+	function cast(type0, data) {
+		if (typeof type0 === "function") {
+			if (Array.isArray(data)) {
+				for (var i = 0; i < data.length; i++) {
+					data[i] = new type0(data[i]);
+				}
+			}
+			else { return new type0(data) }
+		}
+		return data
+	}
+	return {request: request, jsonp: jsonp, setCompletionCallback: setCompletionCallback}
+};
+var requestService = _8(window, PromisePolyfill);
+var coreRenderer = function($window) {
+	var $doc = $window.document;
+	var $emptyFragment = $doc.createDocumentFragment();
+	var onevent;
+	function setEventCallback(callback) {return onevent = callback}
+	//create
+	function createNodes(parent, vnodes, start, end, hooks, nextSibling, ns) {
+		for (var i = start; i < end; i++) {
+			var vnode = vnodes[i];
+			if (vnode != null) {
+				createNode(parent, vnode, hooks, ns, nextSibling);
+			}
+		}
+	}
+	function createNode(parent, vnode, hooks, ns, nextSibling) {
+		var tag = vnode.tag;
+		if (vnode.attrs != null) { initLifecycle(vnode.attrs, vnode, hooks); }
+		if (typeof tag === "string") {
+			switch (tag) {
+				case "#": return createText(parent, vnode, nextSibling)
+				case "<": return createHTML(parent, vnode, nextSibling)
+				case "[": return createFragment(parent, vnode, hooks, ns, nextSibling)
+				default: return createElement(parent, vnode, hooks, ns, nextSibling)
+			}
+		}
+		else { return createComponent(parent, vnode, hooks, ns, nextSibling) }
+	}
+	function createText(parent, vnode, nextSibling) {
+		vnode.dom = $doc.createTextNode(vnode.children);
+		insertNode(parent, vnode.dom, nextSibling);
+		return vnode.dom
+	}
+	function createHTML(parent, vnode, nextSibling) {
+		var match1 = vnode.children.match(/^\s*?<(\w+)/im) || [];
+		var parent1 = {caption: "table", thead: "table", tbody: "table", tfoot: "table", tr: "tbody", th: "tr", td: "tr", colgroup: "table", col: "colgroup"}[match1[1]] || "div";
+		var temp = $doc.createElement(parent1);
+		temp.innerHTML = vnode.children;
+		vnode.dom = temp.firstChild;
+		vnode.domSize = temp.childNodes.length;
+		var fragment = $doc.createDocumentFragment();
+		var child;
+		while (child = temp.firstChild) {
+			fragment.appendChild(child);
+		}
+		insertNode(parent, fragment, nextSibling);
+		return fragment
+	}
+	function createFragment(parent, vnode, hooks, ns, nextSibling) {
+		var fragment = $doc.createDocumentFragment();
+		if (vnode.children != null) {
+			var children = vnode.children;
+			createNodes(fragment, children, 0, children.length, hooks, null, ns);
+		}
+		vnode.dom = fragment.firstChild;
+		vnode.domSize = fragment.childNodes.length;
+		insertNode(parent, fragment, nextSibling);
+		return fragment
+	}
+	function createElement(parent, vnode, hooks, ns, nextSibling) {
+		var tag = vnode.tag;
+		switch (vnode.tag) {
+			case "svg": ns = "http://www.w3.org/2000/svg"; break
+			case "math": ns = "http://www.w3.org/1998/Math/MathML"; break
+		}
+		var attrs2 = vnode.attrs;
+		var is = attrs2 && attrs2.is;
+		var element = ns ?
+			is ? $doc.createElementNS(ns, tag, {is: is}) : $doc.createElementNS(ns, tag) :
+			is ? $doc.createElement(tag, {is: is}) : $doc.createElement(tag);
+		vnode.dom = element;
+		if (attrs2 != null) {
+			setAttrs(vnode, attrs2, ns);
+		}
+		insertNode(parent, element, nextSibling);
+		if (vnode.attrs != null && vnode.attrs.contenteditable != null) {
+			setContentEditable(vnode);
+		}
+		else {
+			if (vnode.text != null) {
+				if (vnode.text !== "") { element.textContent = vnode.text; }
+				else { vnode.children = [Vnode("#", undefined, undefined, vnode.text, undefined, undefined)]; }
+			}
+			if (vnode.children != null) {
+				var children = vnode.children;
+				createNodes(element, children, 0, children.length, hooks, null, ns);
+				setLateAttrs(vnode);
+			}
+		}
+		return element
+	}
+	function createComponent(parent, vnode, hooks, ns, nextSibling) {
+		vnode.state = Object.create(vnode.tag);
+		var view = vnode.tag.view;
+		if (view.reentrantLock != null) { return $emptyFragment }
+		view.reentrantLock = true;
+		initLifecycle(vnode.tag, vnode, hooks);
+		vnode.instance = Vnode.normalize(view.call(vnode.state, vnode));
+		view.reentrantLock = null;
+		if (vnode.instance != null) {
+			if (vnode.instance === vnode) { throw Error("A view cannot return the vnode it received as arguments") }
+			var element = createNode(parent, vnode.instance, hooks, ns, nextSibling);
+			vnode.dom = vnode.instance.dom;
+			vnode.domSize = vnode.dom != null ? vnode.instance.domSize : 0;
+			insertNode(parent, element, nextSibling);
+			return element
+		}
+		else {
+			vnode.domSize = 0;
+			return $emptyFragment
+		}
+	}
+	//update
+	function updateNodes(parent, old, vnodes, recycling, hooks, nextSibling, ns) {
+		if (old === vnodes || old == null && vnodes == null) { return }
+		else if (old == null) { createNodes(parent, vnodes, 0, vnodes.length, hooks, nextSibling, undefined); }
+		else if (vnodes == null) { removeNodes(old, 0, old.length, vnodes); }
+		else {
+			if (old.length === vnodes.length) {
+				var isUnkeyed = false;
+				for (var i = 0; i < vnodes.length; i++) {
+					if (vnodes[i] != null && old[i] != null) {
+						isUnkeyed = vnodes[i].key == null && old[i].key == null;
+						break
+					}
+				}
+				if (isUnkeyed) {
+					for (var i = 0; i < old.length; i++) {
+						if (old[i] === vnodes[i]) { continue }
+						else if (old[i] == null && vnodes[i] != null) { createNode(parent, vnodes[i], hooks, ns, getNextSibling(old, i + 1, nextSibling)); }
+						else if (vnodes[i] == null) { removeNodes(old, i, i + 1, vnodes); }
+						else { updateNode(parent, old[i], vnodes[i], hooks, getNextSibling(old, i + 1, nextSibling), false, ns); }
+					}
+					return
+				}
+			}
+			recycling = recycling || isRecyclable(old, vnodes);
+			if (recycling) { old = old.concat(old.pool); }
+			
+			var oldStart = 0, start = 0, oldEnd = old.length - 1, end = vnodes.length - 1, map;
+			while (oldEnd >= oldStart && end >= start) {
+				var o = old[oldStart], v = vnodes[start];
+				if (o === v && !recycling) { oldStart++, start++; }
+				else if (o == null) { oldStart++; }
+				else if (v == null) { start++; }
+				else if (o.key === v.key) {
+					oldStart++, start++;
+					updateNode(parent, o, v, hooks, getNextSibling(old, oldStart, nextSibling), recycling, ns);
+					if (recycling && o.tag === v.tag) { insertNode(parent, toFragment(o), nextSibling); }
+				}
+				else {
+					var o = old[oldEnd];
+					if (o === v && !recycling) { oldEnd--, start++; }
+					else if (o == null) { oldEnd--; }
+					else if (v == null) { start++; }
+					else if (o.key === v.key) {
+						updateNode(parent, o, v, hooks, getNextSibling(old, oldEnd + 1, nextSibling), recycling, ns);
+						if (recycling || start < end) { insertNode(parent, toFragment(o), getNextSibling(old, oldStart, nextSibling)); }
+						oldEnd--, start++;
+					}
+					else { break }
+				}
+			}
+			while (oldEnd >= oldStart && end >= start) {
+				var o = old[oldEnd], v = vnodes[end];
+				if (o === v && !recycling) { oldEnd--, end--; }
+				else if (o == null) { oldEnd--; }
+				else if (v == null) { end--; }
+				else if (o.key === v.key) {
+					updateNode(parent, o, v, hooks, getNextSibling(old, oldEnd + 1, nextSibling), recycling, ns);
+					if (recycling && o.tag === v.tag) { insertNode(parent, toFragment(o), nextSibling); }
+					if (o.dom != null) { nextSibling = o.dom; }
+					oldEnd--, end--;
+				}
+				else {
+					if (!map) { map = getKeyMap(old, oldEnd); }
+					if (v != null) {
+						var oldIndex = map[v.key];
+						if (oldIndex != null) {
+							var movable = old[oldIndex];
+							updateNode(parent, movable, v, hooks, getNextSibling(old, oldEnd + 1, nextSibling), recycling, ns);
+							insertNode(parent, toFragment(movable), nextSibling);
+							old[oldIndex].skip = true;
+							if (movable.dom != null) { nextSibling = movable.dom; }
+						}
+						else {
+							var dom = createNode(parent, v, hooks, undefined, nextSibling);
+							nextSibling = dom;
+						}
+					}
+					end--;
+				}
+				if (end < start) { break }
+			}
+			createNodes(parent, vnodes, start, end + 1, hooks, nextSibling, ns);
+			removeNodes(old, oldStart, oldEnd + 1, vnodes);
+		}
+	}
+	function updateNode(parent, old, vnode, hooks, nextSibling, recycling, ns) {
+		var oldTag = old.tag, tag = vnode.tag;
+		if (oldTag === tag) {
+			vnode.state = old.state;
+			vnode.events = old.events;
+			if (shouldUpdate(vnode, old)) { return }
+			if (vnode.attrs != null) {
+				updateLifecycle(vnode.attrs, vnode, hooks, recycling);
+			}
+			if (typeof oldTag === "string") {
+				switch (oldTag) {
+					case "#": updateText(old, vnode); break
+					case "<": updateHTML(parent, old, vnode, nextSibling); break
+					case "[": updateFragment(parent, old, vnode, recycling, hooks, nextSibling, ns); break
+					default: updateElement(old, vnode, recycling, hooks, ns);
+				}
+			}
+			else { updateComponent(parent, old, vnode, hooks, nextSibling, recycling, ns); }
+		}
+		else {
+			removeNode(old, null);
+			createNode(parent, vnode, hooks, ns, nextSibling);
+		}
+	}
+	function updateText(old, vnode) {
+		if (old.children.toString() !== vnode.children.toString()) {
+			old.dom.nodeValue = vnode.children;
+		}
+		vnode.dom = old.dom;
+	}
+	function updateHTML(parent, old, vnode, nextSibling) {
+		if (old.children !== vnode.children) {
+			toFragment(old);
+			createHTML(parent, vnode, nextSibling);
+		}
+		else { vnode.dom = old.dom, vnode.domSize = old.domSize; }
+	}
+	function updateFragment(parent, old, vnode, recycling, hooks, nextSibling, ns) {
+		updateNodes(parent, old.children, vnode.children, recycling, hooks, nextSibling, ns);
+		var domSize = 0, children = vnode.children;
+		vnode.dom = null;
+		if (children != null) {
+			for (var i = 0; i < children.length; i++) {
+				var child = children[i];
+				if (child != null && child.dom != null) {
+					if (vnode.dom == null) { vnode.dom = child.dom; }
+					domSize += child.domSize || 1;
+				}
+			}
+			if (domSize !== 1) { vnode.domSize = domSize; }
+		}
+	}
+	function updateElement(old, vnode, recycling, hooks, ns) {
+		var element = vnode.dom = old.dom;
+		switch (vnode.tag) {
+			case "svg": ns = "http://www.w3.org/2000/svg"; break
+			case "math": ns = "http://www.w3.org/1998/Math/MathML"; break
+		}
+		if (vnode.tag === "textarea") {
+			if (vnode.attrs == null) { vnode.attrs = {}; }
+			if (vnode.text != null) {
+				vnode.attrs.value = vnode.text; //FIXME handle0 multiple children
+				vnode.text = undefined;
+			}
+		}
+		updateAttrs(vnode, old.attrs, vnode.attrs, ns);
+		if (vnode.attrs != null && vnode.attrs.contenteditable != null) {
+			setContentEditable(vnode);
+		}
+		else if (old.text != null && vnode.text != null && vnode.text !== "") {
+			if (old.text.toString() !== vnode.text.toString()) { old.dom.firstChild.nodeValue = vnode.text; }
+		}
+		else {
+			if (old.text != null) { old.children = [Vnode("#", undefined, undefined, old.text, undefined, old.dom.firstChild)]; }
+			if (vnode.text != null) { vnode.children = [Vnode("#", undefined, undefined, vnode.text, undefined, undefined)]; }
+			updateNodes(element, old.children, vnode.children, recycling, hooks, null, ns);
+		}
+	}
+	function updateComponent(parent, old, vnode, hooks, nextSibling, recycling, ns) {
+		vnode.instance = Vnode.normalize(vnode.tag.view.call(vnode.state, vnode));
+		updateLifecycle(vnode.tag, vnode, hooks, recycling);
+		if (vnode.instance != null) {
+			if (old.instance == null) { createNode(parent, vnode.instance, hooks, ns, nextSibling); }
+			else { updateNode(parent, old.instance, vnode.instance, hooks, nextSibling, recycling, ns); }
+			vnode.dom = vnode.instance.dom;
+			vnode.domSize = vnode.instance.domSize;
+		}
+		else if (old.instance != null) {
+			removeNode(old.instance, null);
+			vnode.dom = undefined;
+			vnode.domSize = 0;
+		}
+		else {
+			vnode.dom = old.dom;
+			vnode.domSize = old.domSize;
+		}
+	}
+	function isRecyclable(old, vnodes) {
+		if (old.pool != null && Math.abs(old.pool.length - vnodes.length) <= Math.abs(old.length - vnodes.length)) {
+			var oldChildrenLength = old[0] && old[0].children && old[0].children.length || 0;
+			var poolChildrenLength = old.pool[0] && old.pool[0].children && old.pool[0].children.length || 0;
+			var vnodesChildrenLength = vnodes[0] && vnodes[0].children && vnodes[0].children.length || 0;
+			if (Math.abs(poolChildrenLength - vnodesChildrenLength) <= Math.abs(oldChildrenLength - vnodesChildrenLength)) {
+				return true
+			}
+		}
+		return false
+	}
+	function getKeyMap(vnodes, end) {
+		var map = {}, i = 0;
+		for (var i = 0; i < end; i++) {
+			var vnode = vnodes[i];
+			if (vnode != null) {
+				var key2 = vnode.key;
+				if (key2 != null) { map[key2] = i; }
+			}
+		}
+		return map
+	}
+	function toFragment(vnode) {
+		var count0 = vnode.domSize;
+		if (count0 != null || vnode.dom == null) {
+			var fragment = $doc.createDocumentFragment();
+			if (count0 > 0) {
+				var dom = vnode.dom;
+				while (--count0) { fragment.appendChild(dom.nextSibling); }
+				fragment.insertBefore(dom, fragment.firstChild);
+			}
+			return fragment
+		}
+		else { return vnode.dom }
+	}
+	function getNextSibling(vnodes, i, nextSibling) {
+		for (; i < vnodes.length; i++) {
+			if (vnodes[i] != null && vnodes[i].dom != null) { return vnodes[i].dom }
+		}
+		return nextSibling
+	}
+	function insertNode(parent, dom, nextSibling) {
+		if (nextSibling && nextSibling.parentNode) { parent.insertBefore(dom, nextSibling); }
+		else { parent.appendChild(dom); }
+	}
+	function setContentEditable(vnode) {
+		var children = vnode.children;
+		if (children != null && children.length === 1 && children[0].tag === "<") {
+			var content = children[0].children;
+			if (vnode.dom.innerHTML !== content) { vnode.dom.innerHTML = content; }
+		}
+		else if (vnode.text != null || children != null && children.length !== 0) { throw new Error("Child node of a contenteditable must be trusted") }
+	}
+	//remove
+	function removeNodes(vnodes, start, end, context) {
+		for (var i = start; i < end; i++) {
+			var vnode = vnodes[i];
+			if (vnode != null) {
+				if (vnode.skip) { vnode.skip = false; }
+				else { removeNode(vnode, context); }
+			}
+		}
+	}
+	function removeNode(vnode, context) {
+		var expected = 1, called = 0;
+		if (vnode.attrs && vnode.attrs.onbeforeremove) {
+			var result = vnode.attrs.onbeforeremove.call(vnode.state, vnode);
+			if (result != null && typeof result.then === "function") {
+				expected++;
+				result.then(continuation, continuation);
+			}
+		}
+		if (typeof vnode.tag !== "string" && vnode.tag.onbeforeremove) {
+			var result = vnode.tag.onbeforeremove.call(vnode.state, vnode);
+			if (result != null && typeof result.then === "function") {
+				expected++;
+				result.then(continuation, continuation);
+			}
+		}
+		continuation();
+		function continuation() {
+			if (++called === expected) {
+				onremove(vnode);
+				if (vnode.dom) {
+					var count0 = vnode.domSize || 1;
+					if (count0 > 1) {
+						var dom = vnode.dom;
+						while (--count0) {
+							removeNodeFromDOM(dom.nextSibling);
+						}
+					}
+					removeNodeFromDOM(vnode.dom);
+					if (context != null && vnode.domSize == null && !hasIntegrationMethods(vnode.attrs) && typeof vnode.tag === "string") { //TODO test custom elements
+						if (!context.pool) { context.pool = [vnode]; }
+						else { context.pool.push(vnode); }
+					}
+				}
+			}
+		}
+	}
+	function removeNodeFromDOM(node) {
+		var parent = node.parentNode;
+		if (parent != null) { parent.removeChild(node); }
+	}
+	function onremove(vnode) {
+		if (vnode.attrs && vnode.attrs.onremove) { vnode.attrs.onremove.call(vnode.state, vnode); }
+		if (typeof vnode.tag !== "string" && vnode.tag.onremove) { vnode.tag.onremove.call(vnode.state, vnode); }
+		if (vnode.instance != null) { onremove(vnode.instance); }
+		else {
+			var children = vnode.children;
+			if (Array.isArray(children)) {
+				for (var i = 0; i < children.length; i++) {
+					var child = children[i];
+					if (child != null) { onremove(child); }
+				}
+			}
+		}
+	}
+	//attrs2
+	function setAttrs(vnode, attrs2, ns) {
+		for (var key2 in attrs2) {
+			setAttr(vnode, key2, null, attrs2[key2], ns);
+		}
+	}
+	function setAttr(vnode, key2, old, value, ns) {
+		var element = vnode.dom;
+		if (key2 === "key" || key2 === "is" || (old === value && !isFormAttribute(vnode, key2)) && typeof value !== "object" || typeof value === "undefined" || isLifecycleMethod(key2)) { return }
+		var nsLastIndex = key2.indexOf(":");
+		if (nsLastIndex > -1 && key2.substr(0, nsLastIndex) === "xlink") {
+			element.setAttributeNS("http://www.w3.org/1999/xlink", key2.slice(nsLastIndex + 1), value);
+		}
+		else if (key2[0] === "o" && key2[1] === "n" && typeof value === "function") { updateEvent(vnode, key2, value); }
+		else if (key2 === "style") { updateStyle(element, old, value); }
+		else if (key2 in element && !isAttribute(key2) && ns === undefined && !isCustomElement(vnode)) {
+			//setting input[value] to same value by typing on focused element moves cursor to end in Chrome
+			if (vnode.tag === "input" && key2 === "value" && vnode.dom.value === value && vnode.dom === $doc.activeElement) { return }
+			//setting select[value] to same value while having select open blinks select dropdown in Chrome
+			if (vnode.tag === "select" && key2 === "value" && vnode.dom.value === value && vnode.dom === $doc.activeElement) { return }
+			//setting option[value] to same value while having select open blinks select dropdown in Chrome
+			if (vnode.tag === "option" && key2 === "value" && vnode.dom.value === value) { return }
+			element[key2] = value;
+		}
+		else {
+			if (typeof value === "boolean") {
+				if (value) { element.setAttribute(key2, ""); }
+				else { element.removeAttribute(key2); }
+			}
+			else { element.setAttribute(key2 === "className" ? "class" : key2, value); }
+		}
+	}
+	function setLateAttrs(vnode) {
+		var attrs2 = vnode.attrs;
+		if (vnode.tag === "select" && attrs2 != null) {
+			if ("value" in attrs2) { setAttr(vnode, "value", null, attrs2.value, undefined); }
+			if ("selectedIndex" in attrs2) { setAttr(vnode, "selectedIndex", null, attrs2.selectedIndex, undefined); }
+		}
+	}
+	function updateAttrs(vnode, old, attrs2, ns) {
+		if (attrs2 != null) {
+			for (var key2 in attrs2) {
+				setAttr(vnode, key2, old && old[key2], attrs2[key2], ns);
+			}
+		}
+		if (old != null) {
+			for (var key2 in old) {
+				if (attrs2 == null || !(key2 in attrs2)) {
+					if (key2 === "className") { key2 = "class"; }
+					if (key2[0] === "o" && key2[1] === "n" && !isLifecycleMethod(key2)) { updateEvent(vnode, key2, undefined); }
+					else if (key2 !== "key") { vnode.dom.removeAttribute(key2); }
+				}
+			}
+		}
+	}
+	function isFormAttribute(vnode, attr) {
+		return attr === "value" || attr === "checked" || attr === "selectedIndex" || attr === "selected" && vnode.dom === $doc.activeElement
+	}
+	function isLifecycleMethod(attr) {
+		return attr === "oninit" || attr === "oncreate" || attr === "onupdate" || attr === "onremove" || attr === "onbeforeremove" || attr === "onbeforeupdate"
+	}
+	function isAttribute(attr) {
+		return attr === "href" || attr === "list" || attr === "form" || attr === "width" || attr === "height"// || attr === "type"
+	}
+	function isCustomElement(vnode){
+		return vnode.attrs.is || vnode.tag.indexOf("-") > -1
+	}
+	function hasIntegrationMethods(source) {
+		return source != null && (source.oncreate || source.onupdate || source.onbeforeremove || source.onremove)
+	}
+	//style
+	function updateStyle(element, old, style) {
+		if (old === style) { element.style.cssText = "", old = null; }
+		if (style == null) { element.style.cssText = ""; }
+		else if (typeof style === "string") { element.style.cssText = style; }
+		else {
+			if (typeof old === "string") { element.style.cssText = ""; }
+			for (var key2 in style) {
+				element.style[key2] = style[key2];
+			}
+			if (old != null && typeof old !== "string") {
+				for (var key2 in old) {
+					if (!(key2 in style)) { element.style[key2] = ""; }
+				}
+			}
+		}
+	}
+	//event
+	function updateEvent(vnode, key2, value) {
+		var element = vnode.dom;
+		var callback = typeof onevent !== "function" ? value : function(e) {
+			var result = value.call(element, e);
+			onevent.call(element, e);
+			return result
+		};
+		if (key2 in element) { element[key2] = typeof value === "function" ? callback : null; }
+		else {
+			var eventName = key2.slice(2);
+			if (vnode.events === undefined) { vnode.events = {}; }
+			if (vnode.events[key2] === callback) { return }
+			if (vnode.events[key2] != null) { element.removeEventListener(eventName, vnode.events[key2], false); }
+			if (typeof value === "function") {
+				vnode.events[key2] = callback;
+				element.addEventListener(eventName, vnode.events[key2], false);
+			}
+		}
+	}
+	//lifecycle
+	function initLifecycle(source, vnode, hooks) {
+		if (typeof source.oninit === "function") { source.oninit.call(vnode.state, vnode); }
+		if (typeof source.oncreate === "function") { hooks.push(source.oncreate.bind(vnode.state, vnode)); }
+	}
+	function updateLifecycle(source, vnode, hooks, recycling) {
+		if (recycling) { initLifecycle(source, vnode, hooks); }
+		else if (typeof source.onupdate === "function") { hooks.push(source.onupdate.bind(vnode.state, vnode)); }
+	}
+	function shouldUpdate(vnode, old) {
+		var forceVnodeUpdate, forceComponentUpdate;
+		if (vnode.attrs != null && typeof vnode.attrs.onbeforeupdate === "function") { forceVnodeUpdate = vnode.attrs.onbeforeupdate.call(vnode.state, vnode, old); }
+		if (typeof vnode.tag !== "string" && typeof vnode.tag.onbeforeupdate === "function") { forceComponentUpdate = vnode.tag.onbeforeupdate.call(vnode.state, vnode, old); }
+		if (!(forceVnodeUpdate === undefined && forceComponentUpdate === undefined) && !forceVnodeUpdate && !forceComponentUpdate) {
+			vnode.dom = old.dom;
+			vnode.domSize = old.domSize;
+			vnode.instance = old.instance;
+			return true
+		}
+		return false
+	}
+	function render(dom, vnodes) {
+		if (!dom) { throw new Error("Ensure the DOM element being passed to m.route/m.mount/m.render is not undefined.") }
+		var hooks = [];
+		var active = $doc.activeElement;
+		// First time0 rendering into a node clears it out
+		if (dom.vnodes == null) { dom.textContent = ""; }
+		if (!Array.isArray(vnodes)) { vnodes = [vnodes]; }
+		updateNodes(dom, dom.vnodes, Vnode.normalizeChildren(vnodes), false, hooks, null, undefined);
+		dom.vnodes = vnodes;
+		for (var i = 0; i < hooks.length; i++) { hooks[i](); }
+		if ($doc.activeElement !== active) { active.focus(); }
+	}
+	return {render: render, setEventCallback: setEventCallback}
+};
+function throttle(callback) {
+	//60fps translates to 16.6ms, round it down since setTimeout requires int
+	var time = 16;
+	var last = 0, pending = null;
+	var timeout = typeof requestAnimationFrame === "function" ? requestAnimationFrame : setTimeout;
+	return function() {
+		var now = Date.now();
+		if (last === 0 || now - last >= time) {
+			last = now;
+			callback();
+		}
+		else if (pending === null) {
+			pending = timeout(function() {
+				pending = null;
+				callback();
+				last = Date.now();
+			}, time - (now - last));
+		}
+	}
+}
+var _11 = function($window) {
+	var renderService = coreRenderer($window);
+	renderService.setEventCallback(function(e) {
+		if (e.redraw !== false) { redraw(); }
+	});
+	var callbacks = [];
+	function subscribe(key1, callback) {
+		unsubscribe(key1);
+		callbacks.push(key1, throttle(callback));
+	}
+	function unsubscribe(key1) {
+		var index = callbacks.indexOf(key1);
+		if (index > -1) { callbacks.splice(index, 2); }
+	}
+    function redraw() {
+        for (var i = 1; i < callbacks.length; i += 2) {
+            callbacks[i]();
+        }
+    }
+	return {subscribe: subscribe, unsubscribe: unsubscribe, redraw: redraw, render: renderService.render}
+};
+var redrawService = _11(window);
+requestService.setCompletionCallback(redrawService.redraw);
+var _16 = function(redrawService0) {
+	return function(root, component) {
+		if (component === null) {
+			redrawService0.render(root, []);
+			redrawService0.unsubscribe(root);
+			return
+		}
+		
+		if (component.view == null) { throw new Error("m.mount(element, component) expects a component, not a vnode") }
+		
+		var run0 = function() {
+			redrawService0.render(root, Vnode(component));
+		};
+		redrawService0.subscribe(root, run0);
+		redrawService0.redraw();
+	}
+};
+m.mount = _16(redrawService);
+var Promise = PromisePolyfill;
+var parseQueryString = function(string) {
+	if (string === "" || string == null) { return {} }
+	if (string.charAt(0) === "?") { string = string.slice(1); }
+	var entries = string.split("&"), data0 = {}, counters = {};
+	for (var i = 0; i < entries.length; i++) {
+		var entry = entries[i].split("=");
+		var key5 = decodeURIComponent(entry[0]);
+		var value = entry.length === 2 ? decodeURIComponent(entry[1]) : "";
+		if (value === "true") { value = true; }
+		else if (value === "false") { value = false; }
+		var levels = key5.split(/\]\[?|\[/);
+		var cursor = data0;
+		if (key5.indexOf("[") > -1) { levels.pop(); }
+		for (var j = 0; j < levels.length; j++) {
+			var level = levels[j], nextLevel = levels[j + 1];
+			var isNumber = nextLevel == "" || !isNaN(parseInt(nextLevel, 10));
+			var isValue = j === levels.length - 1;
+			if (level === "") {
+				var key5 = levels.slice(0, j).join();
+				if (counters[key5] == null) { counters[key5] = 0; }
+				level = counters[key5]++;
+			}
+			if (cursor[level] == null) {
+				cursor[level] = isValue ? value : isNumber ? [] : {};
+			}
+			cursor = cursor[level];
+		}
+	}
+	return data0
+};
+var coreRouter = function($window) {
+	var supportsPushState = typeof $window.history.pushState === "function";
+	var callAsync0 = typeof setImmediate === "function" ? setImmediate : setTimeout;
+	function normalize1(fragment0) {
+		var data = $window.location[fragment0].replace(/(?:%[a-f89][a-f0-9])+/gim, decodeURIComponent);
+		if (fragment0 === "pathname" && data[0] !== "/") { data = "/" + data; }
+		return data
+	}
+	var asyncId;
+	function debounceAsync(callback0) {
+		return function() {
+			if (asyncId != null) { return }
+			asyncId = callAsync0(function() {
+				asyncId = null;
+				callback0();
+			});
+		}
+	}
+	function parsePath(path, queryData, hashData) {
+		var queryIndex = path.indexOf("?");
+		var hashIndex = path.indexOf("#");
+		var pathEnd = queryIndex > -1 ? queryIndex : hashIndex > -1 ? hashIndex : path.length;
+		if (queryIndex > -1) {
+			var queryEnd = hashIndex > -1 ? hashIndex : path.length;
+			var queryParams = parseQueryString(path.slice(queryIndex + 1, queryEnd));
+			for (var key4 in queryParams) { queryData[key4] = queryParams[key4]; }
+		}
+		if (hashIndex > -1) {
+			var hashParams = parseQueryString(path.slice(hashIndex + 1));
+			for (var key4 in hashParams) { hashData[key4] = hashParams[key4]; }
+		}
+		return path.slice(0, pathEnd)
+	}
+	var router = {prefix: "#!"};
+	router.getPath = function() {
+		var type2 = router.prefix.charAt(0);
+		switch (type2) {
+			case "#": return normalize1("hash").slice(router.prefix.length)
+			case "?": return normalize1("search").slice(router.prefix.length) + normalize1("hash")
+			default: return normalize1("pathname").slice(router.prefix.length) + normalize1("search") + normalize1("hash")
+		}
+	};
+	router.setPath = function(path, data, options) {
+		var queryData = {}, hashData = {};
+		path = parsePath(path, queryData, hashData);
+		if (data != null) {
+			for (var key4 in data) { queryData[key4] = data[key4]; }
+			path = path.replace(/:([^\/]+)/g, function(match2, token) {
+				delete queryData[token];
+				return data[token]
+			});
+		}
+		var query = buildQueryString(queryData);
+		if (query) { path += "?" + query; }
+		var hash = buildQueryString(hashData);
+		if (hash) { path += "#" + hash; }
+		if (supportsPushState) {
+			var state = options ? options.state : null;
+			var title = options ? options.title : null;
+			$window.onpopstate();
+			if (options && options.replace) { $window.history.replaceState(state, title, router.prefix + path); }
+			else { $window.history.pushState(state, title, router.prefix + path); }
+		}
+		else { $window.location.href = router.prefix + path; }
+	};
+	router.defineRoutes = function(routes, resolve, reject) {
+		function resolveRoute() {
+			var path = router.getPath();
+			var params = {};
+			var pathname = parsePath(path, params, params);
+			var state = $window.history.state;
+			if (state != null) {
+				for (var k in state) { params[k] = state[k]; }
+			}
+			for (var route0 in routes) {
+				var matcher = new RegExp("^" + route0.replace(/:[^\/]+?\.{3}/g, "(.*?)").replace(/:[^\/]+/g, "([^\\/]+)") + "\/?$");
+				if (matcher.test(pathname)) {
+					pathname.replace(matcher, function() {
+						var keys = route0.match(/:[^\/]+/g) || [];
+						var values = [].slice.call(arguments, 1, -2);
+						for (var i = 0; i < keys.length; i++) {
+							params[keys[i].replace(/:|\./g, "")] = decodeURIComponent(values[i]);
+						}
+						resolve(routes[route0], params, path, route0);
+					});
+					return
+				}
+			}
+			reject(path, params);
+		}
+		if (supportsPushState) { $window.onpopstate = debounceAsync(resolveRoute); }
+		else if (router.prefix.charAt(0) === "#") { $window.onhashchange = resolveRoute; }
+		resolveRoute();
+	};
+	return router
+};
+var _20 = function($window, redrawService0) {
+	var routeService = coreRouter($window);
+	var identity = function(v) {return v};
+	var render1, component, attrs3, currentPath, lastUpdate;
+	var route = function(root, defaultRoute, routes) {
+		if (root == null) { throw new Error("Ensure the DOM element that was passed to `m.route` is not undefined") }
+		var run1 = function() {
+			if (render1 != null) { redrawService0.render(root, render1(Vnode(component, attrs3.key, attrs3))); }
+		};
+		var bail = function(path) {
+			if (path !== defaultRoute) { routeService.setPath(defaultRoute, null, {replace: true}); }
+			else { throw new Error("Could not resolve default route " + defaultRoute) }
+		};
+		routeService.defineRoutes(routes, function(payload, params, path) {
+			var update = lastUpdate = function(routeResolver, comp) {
+				if (update !== lastUpdate) { return }
+				component = comp != null && typeof comp.view === "function" ? comp : "div", attrs3 = params, currentPath = path, lastUpdate = null;
+				render1 = (routeResolver.render || identity).bind(routeResolver);
+				run1();
+			};
+			if (payload.view) { update({}, payload); }
+			else {
+				if (payload.onmatch) {
+					Promise.resolve(payload.onmatch(params, path)).then(function(resolved) {
+						update(payload, resolved);
+					}, bail);
+				}
+				else { update(payload, "div"); }
+			}
+		}, bail);
+		redrawService0.subscribe(root, run1);
+	};
+	route.set = function(path, data, options) {
+		if (lastUpdate != null) { options = {replace: true}; }
+		lastUpdate = null;
+		routeService.setPath(path, data, options);
+	};
+	route.get = function() {return currentPath};
+	route.prefix = function(prefix0) {routeService.prefix = prefix0;};
+	route.link = function(vnode1) {
+		vnode1.dom.setAttribute("href", routeService.prefix + vnode1.attrs.href);
+		vnode1.dom.onclick = function(e) {
+			if (e.ctrlKey || e.metaKey || e.shiftKey || e.which === 2) { return }
+			e.preventDefault();
+			e.redraw = false;
+			var href = this.getAttribute("href");
+			if (href.indexOf(routeService.prefix) === 0) { href = href.slice(routeService.prefix.length); }
+			route.set(href, undefined, undefined);
+		};
+	};
+	route.param = function(key3) {
+		if(typeof attrs3 !== "undefined" && typeof key3 !== "undefined") { return attrs3[key3] }
+		return attrs3
+	};
+	return route
+};
+m.route = _20(window, redrawService);
+m.withAttr = function(attrName, callback1, context) {
+	return function(e) {
+		callback1.call(context || this, attrName in e.currentTarget ? e.currentTarget[attrName] : e.currentTarget.getAttribute(attrName));
+	}
+};
+var _28 = coreRenderer(window);
+m.render = _28.render;
+m.redraw = redrawService.redraw;
+m.request = requestService.request;
+m.jsonp = requestService.jsonp;
+m.parseQueryString = parseQueryString;
+m.buildQueryString = buildQueryString;
+m.version = "1.0.1";
+m.vnode = Vnode;
+if (typeof module !== "undefined") { module["exports"] = m; }
+else { window.m = m; }
+};
+});
+
+function getType(x) {
+	var currentType = Object.prototype.toString.call(x).slice(8, -1).toLowerCase();
+	if (currentType === 'array' && x.length > 0) {
+		return '[array of ' + getType(x[0]) + 's]';
+	}
+	return currentType;
+}
+
+function typeStringFromArray(arr) {
+	if (arr.length === 1) {
+		return arr[0].type;
+	}
+	return arr.map(function(typeCheckFn) {
+		return typeCheckFn.type;
+	}).join(' || ');
+}
+
+function T(schema) {
+
+	return function(props, label) {
+
+		var loop = function ( key ) {
+
+			if (schema.hasOwnProperty(key)) {
+
+				var rules = Array.isArray(schema[key]) ? schema[key] : [schema[key]];
+				var success = rules.reduce(function(prev, rule) {
+					return prev || rule(props[key]);
+				}, false);
+
+				if (!success) {
+
+					// recursive call will report errors in next round of checks
+					if (typeStringFromArray(rules).indexOf('interface') > -1) {
+						return;
+					}
+
+					var errorMessage =
+						'Failed type check in ' + (label || 'unknown object') + '\n' +
+						'Expected prop \'' + key + '\' of type ' + typeStringFromArray(rules) + '\n' +
+						'You provided \'' + key + '\' of type ' + getType(props[key]);
+
+					console.error(errorMessage);
+					return { v: errorMessage };
+				}
+			
+			}
+
+		};
+
+		for (var key in schema) {
+			var returned = loop( key );
+
+			if ( returned ) return returned.v;
+		}
+
+		for (var key$1 in props) {
+			if (props.hasOwnProperty(key$1) && !schema.hasOwnProperty(key$1)) {
+				var errorMessage$1 = 'Did not expect to find prop \'' + key$1 + '\' in ' + label;
+				console.error(errorMessage$1);
+				return errorMessage$1;
+			}
+		}
+
+		return null;
+
+	};
+
+}
+
+T.fn = T['function'] = function(x) {
+	return typeof x === 'function';
+};
+
+T.fn.type = 'function';
+
+T.str = T.string = function(x) {
+	return typeof x === 'string';
+};
+
+T.str.type = 'string';
+
+T.num = T.number = function(x) {
+	return typeof x === 'number';
+};
+
+T.num.type = 'number';
+
+T.date = function(x) {
+	return getType(x) === 'date';
+};
+
+T.date.type = 'date';
+
+T.NULL = T['null'] = function(x) {
+	return getType(x) === 'null';
+};
+
+T.NULL.type = 'null';
+
+T.nil = function(x) {
+	return typeof x === 'undefined' || getType(x) === 'null';
+};
+
+T.nil.type = 'nil';
+
+T.obj = T.object = function(x) {
+	return getType(x) === 'object';
+};
+
+T.obj.type = 'object';
+
+T.arr = T.array = function(x) {
+	return Array.isArray(x);
+};
+
+T.arr.type = 'array';
+
+T.arrayOf = function(propType) {
+
+	var arrayOfType = function(x) {
+
+		if (!Array.isArray(x)) {
+			return false;
+		}
+
+		for (var i = 0; i < x.length; i++) {
+			if (!propType(x[i])) {
+				return false;
+			}
+		}
+
+		return true;
+
+	};
+
+	arrayOfType.type = '[array of ' + propType.type + 's]';
+
+	return arrayOfType;
+
+};
+
+T['int'] = T.integer = function(x) {
+	return typeof x === 'number' && isFinite(x) && Math.floor(x) === x;
+};
+
+
+T.integer.type = 'integer';
+
+T.optional = T.undefined = function(x) {
+	return typeof x === 'undefined';
+};
+
+T.optional.type = 'undefined';
+
+T.bool = T['boolean'] = function(x) {
+	return typeof x === 'boolean';
+};
+
+T.bool.type = 'boolean';
+
+T.any = function() {
+	return true;
+};
+
+T.any.type = 'any';
+
+// recursive
+T.schema = T['interface'] = function(schema) {
+	var schemaType = function(prop) {
+		return !T(schema)(prop, 'nested interface'); // returns null if success, so invert as boolean
+	};
+	schemaType.type = 'interface';
+	return schemaType;
+};
+
+var index$1 = T;
+
+var pages = [
+	'Getting started',
+	'Components',
+	'Requests',
+	'Applications',
+	'Routing'
+	// 'Streams'
+];
+
+var linkType = index$1({
+	page: index$1.string,
+	active: index$1.string
+});
+
+var Link = {
+	view: function view$1(ref) {
+		var attrs = ref.attrs;
+
+
+		if (window.__DEV__) {
+			linkType(attrs, 'Link');
+		}
+
+		return (
+			mithril('a.Nav-link', {
+				href: ("/" + (attrs.page.replace(' ', '').toLowerCase())),
+				oncreate: mithril.route.link,
+				className: attrs.active === attrs.page ? 'active' : ''
+			}, attrs.page)
+		);
+	}
+};
+
+var navType = index$1({ active: index$1.string });
+
+function view$3(ref) {
+	var attrs = ref.attrs;
+
+
+	if (window.__DEV__) {
+		navType(attrs, 'Nav');
+	}
+
+	return (
+		mithril('.Nav',
+			mithril('.Container',
+				pages.map(function (page) { return mithril(Link, { page: page, active: attrs.active }); })
+			)
+		)
+	);
+}
+
+var Nav = {
+	view: view$3
+};
+
+var pageType = index$1({ id: index$1.string });
+
+function view$2(ref) {
+	var attrs = ref.attrs;
+	var children = ref.children;
+
+
+	if (window.__DEV__) {
+		pageType(attrs, 'Page');
+	}
+
+	return (
+		mithril('div',
+			mithril('.Display',
+				mithril('.Container',
+					mithril('h1', 'Mithril.js examples')
+				)
+			),
+			mithril(Nav, { active: attrs.id }),
+			mithril('.Content',
+				mithril('.Container', children)
+			)
+		)
+	);
+}
+
+var Page = {
+	view: view$2
+};
+
+var stream$2 = createCommonjsModule(function (module) {
+"use strict";
+
+var guid = 0, HALT = {};
+function createStream() {
+	function stream() {
+		if (arguments.length > 0 && arguments[0] !== HALT) { updateStream(stream, arguments[0]); }
+		return stream._state.value
+	}
+	initStream(stream);
+
+	if (arguments.length > 0 && arguments[0] !== HALT) { updateStream(stream, arguments[0]); }
+
+	return stream
+}
+function initStream(stream) {
+	stream.constructor = createStream;
+	stream._state = {id: guid++, value: undefined, state: 0, derive: undefined, recover: undefined, deps: {}, parents: [], endStream: undefined};
+	stream.map = stream["fantasy-land/map"] = map, stream["fantasy-land/ap"] = ap, stream["fantasy-land/of"] = createStream;
+	stream.valueOf = valueOf, stream.toJSON = toJSON, stream.toString = valueOf;
+
+	Object.defineProperties(stream, {
+		end: {get: function() {
+			if (!stream._state.endStream) {
+				var endStream = createStream();
+				endStream.map(function(value) {
+					if (value === true) { unregisterStream(stream), unregisterStream(endStream); }
+					return value
+				});
+				stream._state.endStream = endStream;
+			}
+			return stream._state.endStream
+		}}
+	});
+}
+function updateStream(stream, value) {
+	updateState(stream, value);
+	for (var id in stream._state.deps) { updateDependency(stream._state.deps[id], false); }
+	finalize(stream);
+}
+function updateState(stream, value) {
+	stream._state.value = value;
+	stream._state.changed = true;
+	if (stream._state.state !== 2) { stream._state.state = 1; }
+}
+function updateDependency(stream, mustSync) {
+	var state = stream._state, parents = state.parents;
+	if (parents.length > 0 && parents.every(active) && (mustSync || parents.some(changed))) {
+		var value = stream._state.derive();
+		if (value === HALT) { return false }
+		updateState(stream, value);
+	}
+}
+function finalize(stream) {
+	stream._state.changed = false;
+	for (var id in stream._state.deps) { stream._state.deps[id]._state.changed = false; }
+}
+
+function combine(fn, streams) {
+	if (!streams.every(valid)) { throw new Error("Ensure that each item passed to m.prop.combine/m.prop.merge is a stream") }
+	return initDependency(createStream(), streams, function() {
+		return fn.apply(this, streams.concat([streams.filter(changed)]))
+	})
+}
+
+function initDependency(dep, streams, derive) {
+	var state = dep._state;
+	state.derive = derive;
+	state.parents = streams.filter(notEnded);
+
+	registerDependency(dep, state.parents);
+	updateDependency(dep, true);
+
+	return dep
+}
+function registerDependency(stream, parents) {
+	for (var i = 0; i < parents.length; i++) {
+		parents[i]._state.deps[stream._state.id] = stream;
+		registerDependency(stream, parents[i]._state.parents);
+	}
+}
+function unregisterStream(stream) {
+	for (var i = 0; i < stream._state.parents.length; i++) {
+		var parent = stream._state.parents[i];
+		delete parent._state.deps[stream._state.id];
+	}
+	for (var id in stream._state.deps) {
+		var dependent = stream._state.deps[id];
+		var index = dependent._state.parents.indexOf(stream);
+		if (index > -1) { dependent._state.parents.splice(index, 1); }
+	}
+	stream._state.state = 2; //ended
+	stream._state.deps = {};
+}
+
+function map(fn) {return combine(function(stream) {return fn(stream())}, [this])}
+function ap(stream) {return combine(function(s1, s2) {return s1()(s2())}, [stream, this])}
+function valueOf() {return this._state.value}
+function toJSON() {return this._state.value != null && typeof this._state.value.toJSON === "function" ? this._state.value.toJSON() : this._state.value}
+
+function valid(stream) {return stream._state }
+function active(stream) {return stream._state.state === 1}
+function changed(stream) {return stream._state.changed}
+function notEnded(stream) {return stream._state.state !== 2}
+
+function merge(streams) {
+	return combine(function() {
+		return streams.map(function(s) {return s()})
+	}, streams)
+}
+createStream["fantasy-land/of"] = createStream;
+createStream.merge = merge;
+createStream.combine = combine;
+createStream.HALT = HALT;
+
+if (typeof module !== "undefined") { module["exports"] = createStream; }
+else { window.stream = createStream; }
+});
+
+var stream = stream$2;
+
+var tabType = index$1({
+	fiddle: [index$1.string, index$1.optional],
+	tabs: index$1.arrayOf(index$1.schema({
+		id: index$1.string,
+		code: index$1.string
+	}))
+});
+
+function oninit$1(ref) {
+	var state = ref.state;
+
+	state.activeIndex = stream(0);
+}
+
+function view$4(ref) {
+	var attrs = ref.attrs;
+	var state = ref.state;
+
+
+	if (window.__DEV__) {
+		tabType(attrs, 'Tabs');
+	}
+
+	var fiddleButton = attrs.fiddle ? (
+		mithril('a.FiddleLink', { href: ("https://jsfiddle.net/" + (attrs.fiddle) + "/") }, 'jsFiddle')
+	) : null;
+
+	return (
+		mithril('.Tabs.drop20',
+			mithril('.TabBar',
+				mithril('div',
+					attrs.tabs.map(function (tab, i) { return mithril('.Tab', {
+							key: tab.id,
+							className: state.activeIndex() === i ? 'active' : '',
+							onclick: function () { return state.activeIndex(i); }
+						}, tab.id); }
+					)
+				),
+				fiddleButton
+			),
+			mithril('pre.TabContent',
+				mithril('code', mithril.trust(attrs.tabs[state.activeIndex()].code))
+			)
+		)
+	);
+}
+
+var Tabs = {
+	oninit: oninit$1,
+	view: view$4
+};
+
+function generateCode(fullString) {
+	var output = [];
+	var codeRegex = /(`(.*?)`)/gm;
+	var split = fullString.split(codeRegex);
+	var isCodeRaw = false;
+	var isCode = false;
+	for (var i = 0; i < split.length; i++) {
+		isCodeRaw = codeRegex.test(split[i]);
+		isCode = codeRegex.test(split[i - 1] || '');
+		if (isCode) {
+			output.push(mithril('code.inline', split[i]));
+		}
+		else if (!isCodeRaw) {
+			output.push(mithril('span', split[i]));
+		}
+	}
+	return output;
+}
+
+function generateLink(title, fullString) {
+	var parenRegex = /\(([^)]+)\)/;
+	var url = fullString.match(parenRegex)[1];
+	if (url[0] === '/') {
+		return mithril('a', { href: url, oncreate: mithril.route.link }, title);
+	}
+	return mithril('a', { href: url }, title);
+}
+
+function markup(str) {
+	var codeRegex = /`(.*?)`/gm;
+	var linkRegex = /(\[(.*?)\]\(.*?\))/gm;
+	var output = [];
+	var rawContents = str.split(linkRegex);
+	var hasCode = false;
+	var isLinkRaw = false;
+	var isLink = false;
+	for (var i = 0; i < rawContents.length; i++) {
+		hasCode = codeRegex.test(rawContents[i]);
+		isLinkRaw = linkRegex.test(rawContents[i]);
+		isLink = linkRegex.test(rawContents[i - 1] || '');
+		if (hasCode) {
+			output.push(generateCode(rawContents[i]));
+		}
+		else if (isLink) {
+			output.push(generateLink(rawContents[i], rawContents[i - 1])); // previous item is context with url
+		}
+		else if (!isLinkRaw) {
+			output.push(rawContents[i]);
+		}
+	}
+	return output;
+}
+
+var prism = createCommonjsModule(function (module) {
+/* **********************************************
+     Begin prism-core.js
+********************************************** */
+
+var _self = (typeof window !== 'undefined')
+	? window   // if in browser
+	: (
+		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
+		? self // if in worker
+		: {}   // if in node js
+	);
+
+/**
+ * Prism: Lightweight, robust, elegant syntax highlighting
+ * MIT license http://www.opensource.org/licenses/mit-license.php/
+ * @author Lea Verou http://lea.verou.me
+ */
+
+var Prism = (function(){
+
+// Private helper vars
+var lang = /\blang(?:uage)?-(\w+)\b/i;
+var uniqueId = 0;
+
+var _ = _self.Prism = {
+	util: {
+		encode: function (tokens) {
+			if (tokens instanceof Token) {
+				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
+			} else if (_.util.type(tokens) === 'Array') {
+				return tokens.map(_.util.encode);
+			} else {
+				return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
+			}
+		},
+
+		type: function (o) {
+			return Object.prototype.toString.call(o).match(/\[object (\w+)\]/)[1];
+		},
+
+		objId: function (obj) {
+			if (!obj['__id']) {
+				Object.defineProperty(obj, '__id', { value: ++uniqueId });
+			}
+			return obj['__id'];
+		},
+
+		// Deep clone a language definition (e.g. to extend it)
+		clone: function (o) {
+			var type = _.util.type(o);
+
+			switch (type) {
+				case 'Object':
+					var clone = {};
+
+					for (var key in o) {
+						if (o.hasOwnProperty(key)) {
+							clone[key] = _.util.clone(o[key]);
+						}
+					}
+
+					return clone;
+
+				case 'Array':
+					// Check for existence for IE8
+					return o.map && o.map(function(v) { return _.util.clone(v); });
+			}
+
+			return o;
+		}
+	},
+
+	languages: {
+		extend: function (id, redef) {
+			var lang = _.util.clone(_.languages[id]);
+
+			for (var key in redef) {
+				lang[key] = redef[key];
+			}
+
+			return lang;
+		},
+
+		/**
+		 * Insert a token before another token in a language literal
+		 * As this needs to recreate the object (we cannot actually insert before keys in object literals),
+		 * we cannot just provide an object, we need anobject and a key.
+		 * @param inside The key (or language id) of the parent
+		 * @param before The key to insert before. If not provided, the function appends instead.
+		 * @param insert Object with the key/value pairs to insert
+		 * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
+		 */
+		insertBefore: function (inside, before, insert, root) {
+			root = root || _.languages;
+			var grammar = root[inside];
+
+			if (arguments.length == 2) {
+				insert = arguments[1];
+
+				for (var newToken in insert) {
+					if (insert.hasOwnProperty(newToken)) {
+						grammar[newToken] = insert[newToken];
+					}
+				}
+
+				return grammar;
+			}
+
+			var ret = {};
+
+			for (var token in grammar) {
+
+				if (grammar.hasOwnProperty(token)) {
+
+					if (token == before) {
+
+						for (var newToken in insert) {
+
+							if (insert.hasOwnProperty(newToken)) {
+								ret[newToken] = insert[newToken];
+							}
+						}
+					}
+
+					ret[token] = grammar[token];
+				}
+			}
+
+			// Update references in other language definitions
+			_.languages.DFS(_.languages, function(key, value) {
+				if (value === root[inside] && key != inside) {
+					this[key] = ret;
+				}
+			});
+
+			return root[inside] = ret;
+		},
+
+		// Traverse a language definition with Depth First Search
+		DFS: function(o, callback, type, visited) {
+			visited = visited || {};
+			for (var i in o) {
+				if (o.hasOwnProperty(i)) {
+					callback.call(o, i, o[i], type || i);
+
+					if (_.util.type(o[i]) === 'Object' && !visited[_.util.objId(o[i])]) {
+						visited[_.util.objId(o[i])] = true;
+						_.languages.DFS(o[i], callback, null, visited);
+					}
+					else if (_.util.type(o[i]) === 'Array' && !visited[_.util.objId(o[i])]) {
+						visited[_.util.objId(o[i])] = true;
+						_.languages.DFS(o[i], callback, i, visited);
+					}
+				}
+			}
+		}
+	},
+	plugins: {},
+
+	highlightAll: function(async, callback) {
+		var env = {
+			callback: callback,
+			selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
+		};
+
+		_.hooks.run("before-highlightall", env);
+
+		var elements = env.elements || document.querySelectorAll(env.selector);
+
+		for (var i=0, element; element = elements[i++];) {
+			_.highlightElement(element, async === true, env.callback);
+		}
+	},
+
+	highlightElement: function(element, async, callback) {
+		// Find language
+		var language, grammar, parent = element;
+
+		while (parent && !lang.test(parent.className)) {
+			parent = parent.parentNode;
+		}
+
+		if (parent) {
+			language = (parent.className.match(lang) || [,''])[1].toLowerCase();
+			grammar = _.languages[language];
+		}
+
+		// Set language on the element, if not present
+		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+
+		// Set language on the parent, for styling
+		parent = element.parentNode;
+
+		if (/pre/i.test(parent.nodeName)) {
+			parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+		}
+
+		var code = element.textContent;
+
+		var env = {
+			element: element,
+			language: language,
+			grammar: grammar,
+			code: code
+		};
+
+		_.hooks.run('before-sanity-check', env);
+
+		if (!env.code || !env.grammar) {
+			_.hooks.run('complete', env);
+			return;
+		}
+
+		_.hooks.run('before-highlight', env);
+
+		if (async && _self.Worker) {
+			var worker = new Worker(_.filename);
+
+			worker.onmessage = function(evt) {
+				env.highlightedCode = evt.data;
+
+				_.hooks.run('before-insert', env);
+
+				env.element.innerHTML = env.highlightedCode;
+
+				callback && callback.call(env.element);
+				_.hooks.run('after-highlight', env);
+				_.hooks.run('complete', env);
+			};
+
+			worker.postMessage(JSON.stringify({
+				language: env.language,
+				code: env.code,
+				immediateClose: true
+			}));
+		}
+		else {
+			env.highlightedCode = _.highlight(env.code, env.grammar, env.language);
+
+			_.hooks.run('before-insert', env);
+
+			env.element.innerHTML = env.highlightedCode;
+
+			callback && callback.call(element);
+
+			_.hooks.run('after-highlight', env);
+			_.hooks.run('complete', env);
+		}
+	},
+
+	highlight: function (text, grammar, language) {
+		var tokens = _.tokenize(text, grammar);
+		return Token.stringify(_.util.encode(tokens), language);
+	},
+
+	tokenize: function(text, grammar, language) {
+		var Token = _.Token;
+
+		var strarr = [text];
+
+		var rest = grammar.rest;
+
+		if (rest) {
+			for (var token in rest) {
+				grammar[token] = rest[token];
+			}
+
+			delete grammar.rest;
+		}
+
+		tokenloop: for (var token in grammar) {
+			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
+				continue;
+			}
+
+			var patterns = grammar[token];
+			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
+
+			for (var j = 0; j < patterns.length; ++j) {
+				var pattern = patterns[j],
+					inside = pattern.inside,
+					lookbehind = !!pattern.lookbehind,
+					greedy = !!pattern.greedy,
+					lookbehindLength = 0,
+					alias = pattern.alias;
+
+				pattern = pattern.pattern || pattern;
+
+				for (var i=0; i<strarr.length; i++) { // Don’t cache length as it changes during the loop
+
+					var str = strarr[i];
+
+					if (strarr.length > text.length) {
+						// Something went terribly wrong, ABORT, ABORT!
+						break tokenloop;
+					}
+
+					if (str instanceof Token) {
+						continue;
+					}
+
+					pattern.lastIndex = 0;
+
+					var match = pattern.exec(str),
+					    delNum = 1;
+
+					// Greedy patterns can override/remove up to two previously matched tokens
+					if (!match && greedy && i != strarr.length - 1) {
+						// Reconstruct the original text using the next two tokens
+						var nextToken = strarr[i + 1].matchedStr || strarr[i + 1],
+						    combStr = str + nextToken;
+
+						if (i < strarr.length - 2) {
+							combStr += strarr[i + 2].matchedStr || strarr[i + 2];
+						}
+
+						// Try the pattern again on the reconstructed text
+						pattern.lastIndex = 0;
+						match = pattern.exec(combStr);
+						if (!match) {
+							continue;
+						}
+
+						var from = match.index + (lookbehind ? match[1].length : 0);
+						// To be a valid candidate, the new match has to start inside of str
+						if (from >= str.length) {
+							continue;
+						}
+						var to = match.index + match[0].length,
+						    len = str.length + nextToken.length;
+
+						// Number of tokens to delete and replace with the new match
+						delNum = 3;
+
+						if (to <= len) {
+							if (strarr[i + 1].greedy) {
+								continue;
+							}
+							delNum = 2;
+							combStr = combStr.slice(0, len);
+						}
+						str = combStr;
+					}
+
+					if (!match) {
+						continue;
+					}
+
+					if(lookbehind) {
+						lookbehindLength = match[1].length;
+					}
+
+					var from = match.index + lookbehindLength,
+					    match = match[0].slice(lookbehindLength),
+					    to = from + match.length,
+					    before = str.slice(0, from),
+					    after = str.slice(to);
+
+					var args = [i, delNum];
+
+					if (before) {
+						args.push(before);
+					}
+
+					var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias, match, greedy);
+
+					args.push(wrapped);
+
+					if (after) {
+						args.push(after);
+					}
+
+					Array.prototype.splice.apply(strarr, args);
+				}
+			}
+		}
+
+		return strarr;
+	},
+
+	hooks: {
+		all: {},
+
+		add: function (name, callback) {
+			var hooks = _.hooks.all;
+
+			hooks[name] = hooks[name] || [];
+
+			hooks[name].push(callback);
+		},
+
+		run: function (name, env) {
+			var callbacks = _.hooks.all[name];
+
+			if (!callbacks || !callbacks.length) {
+				return;
+			}
+
+			for (var i=0, callback; callback = callbacks[i++];) {
+				callback(env);
+			}
+		}
+	}
+};
+
+var Token = _.Token = function(type, content, alias, matchedStr, greedy) {
+	this.type = type;
+	this.content = content;
+	this.alias = alias;
+	// Copy of the full string this token was created from
+	this.matchedStr = matchedStr || null;
+	this.greedy = !!greedy;
+};
+
+Token.stringify = function(o, language, parent) {
+	if (typeof o == 'string') {
+		return o;
+	}
+
+	if (_.util.type(o) === 'Array') {
+		return o.map(function(element) {
+			return Token.stringify(element, language, o);
+		}).join('');
+	}
+
+	var env = {
+		type: o.type,
+		content: Token.stringify(o.content, language, parent),
+		tag: 'span',
+		classes: ['token', o.type],
+		attributes: {},
+		language: language,
+		parent: parent
+	};
+
+	if (env.type == 'comment') {
+		env.attributes['spellcheck'] = 'true';
+	}
+
+	if (o.alias) {
+		var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
+		Array.prototype.push.apply(env.classes, aliases);
+	}
+
+	_.hooks.run('wrap', env);
+
+	var attributes = '';
+
+	for (var name in env.attributes) {
+		attributes += (attributes ? ' ' : '') + name + '="' + (env.attributes[name] || '') + '"';
+	}
+
+	return '<' + env.tag + ' class="' + env.classes.join(' ') + '" ' + attributes + '>' + env.content + '</' + env.tag + '>';
+
+};
+
+if (!_self.document) {
+	if (!_self.addEventListener) {
+		// in Node.js
+		return _self.Prism;
+	}
+ 	// In worker
+	_self.addEventListener('message', function(evt) {
+		var message = JSON.parse(evt.data),
+		    lang = message.language,
+		    code = message.code,
+		    immediateClose = message.immediateClose;
+
+		_self.postMessage(_.highlight(code, _.languages[lang], lang));
+		if (immediateClose) {
+			_self.close();
+		}
+	}, false);
+
+	return _self.Prism;
+}
+
+//Get current script and highlight
+var script = document.currentScript || [].slice.call(document.getElementsByTagName("script")).pop();
+
+if (script) {
+	_.filename = script.src;
+
+	if (document.addEventListener && !script.hasAttribute('data-manual')) {
+		if(document.readyState !== "loading") {
+			requestAnimationFrame(_.highlightAll, 0);
+		}
+		else {
+			document.addEventListener('DOMContentLoaded', _.highlightAll);
+		}
+	}
+}
+
+return _self.Prism;
+
+})();
+
+if (typeof module !== 'undefined' && module.exports) {
+	module.exports = Prism;
+}
+
+// hack for components to work correctly in node.js
+if (typeof commonjsGlobal !== 'undefined') {
+	commonjsGlobal.Prism = Prism;
+}
+
+
+/* **********************************************
+     Begin prism-markup.js
+********************************************** */
+
+Prism.languages.markup = {
+	'comment': /<!--[\w\W]*?-->/,
+	'prolog': /<\?[\w\W]+?\?>/,
+	'doctype': /<!DOCTYPE[\w\W]+?>/,
+	'cdata': /<!\[CDATA\[[\w\W]*?]]>/i,
+	'tag': {
+		pattern: /<\/?(?!\d)[^\s>\/=.$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,
+		inside: {
+			'tag': {
+				pattern: /^<\/?[^\s>\/]+/i,
+				inside: {
+					'punctuation': /^<\/?/,
+					'namespace': /^[^\s>\/:]+:/
+				}
+			},
+			'attr-value': {
+				pattern: /=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,
+				inside: {
+					'punctuation': /[=>"']/
+				}
+			},
+			'punctuation': /\/?>/,
+			'attr-name': {
+				pattern: /[^\s>\/]+/,
+				inside: {
+					'namespace': /^[^\s>\/:]+:/
+				}
+			}
+
+		}
+	},
+	'entity': /&#?[\da-z]{1,8};/i
+};
+
+// Plugin to make entity title show the real entity, idea by Roman Komarov
+Prism.hooks.add('wrap', function(env) {
+
+	if (env.type === 'entity') {
+		env.attributes['title'] = env.content.replace(/&amp;/, '&');
+	}
+});
+
+Prism.languages.xml = Prism.languages.markup;
+Prism.languages.html = Prism.languages.markup;
+Prism.languages.mathml = Prism.languages.markup;
+Prism.languages.svg = Prism.languages.markup;
+
+
+/* **********************************************
+     Begin prism-css.js
+********************************************** */
+
+Prism.languages.css = {
+	'comment': /\/\*[\w\W]*?\*\//,
+	'atrule': {
+		pattern: /@[\w-]+?.*?(;|(?=\s*\{))/i,
+		inside: {
+			'rule': /@[\w-]+/
+			// See rest below
+		}
+	},
+	'url': /url\((?:(["'])(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,
+	'selector': /[^\{\}\s][^\{\};]*?(?=\s*\{)/,
+	'string': /("|')(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1/,
+	'property': /(\b|\B)[\w-]+(?=\s*:)/i,
+	'important': /\B!important\b/i,
+	'function': /[-a-z0-9]+(?=\()/i,
+	'punctuation': /[(){};:]/
+};
+
+Prism.languages.css['atrule'].inside.rest = Prism.util.clone(Prism.languages.css);
+
+if (Prism.languages.markup) {
+	Prism.languages.insertBefore('markup', 'tag', {
+		'style': {
+			pattern: /(<style[\w\W]*?>)[\w\W]*?(?=<\/style>)/i,
+			lookbehind: true,
+			inside: Prism.languages.css,
+			alias: 'language-css'
+		}
+	});
+	
+	Prism.languages.insertBefore('inside', 'attr-value', {
+		'style-attr': {
+			pattern: /\s*style=("|').*?\1/i,
+			inside: {
+				'attr-name': {
+					pattern: /^\s*style/i,
+					inside: Prism.languages.markup.tag.inside
+				},
+				'punctuation': /^\s*=\s*['"]|['"]\s*$/,
+				'attr-value': {
+					pattern: /.+/i,
+					inside: Prism.languages.css
+				}
+			},
+			alias: 'language-css'
+		}
+	}, Prism.languages.markup.tag);
+}
+
+/* **********************************************
+     Begin prism-clike.js
+********************************************** */
+
+Prism.languages.clike = {
+	'comment': [
+		{
+			pattern: /(^|[^\\])\/\*[\w\W]*?\*\//,
+			lookbehind: true
+		},
+		{
+			pattern: /(^|[^\\:])\/\/.*/,
+			lookbehind: true
+		}
+	],
+	'string': {
+		pattern: /(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+		greedy: true
+	},
+	'class-name': {
+		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,
+		lookbehind: true,
+		inside: {
+			punctuation: /(\.|\\)/
+		}
+	},
+	'keyword': /\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+	'boolean': /\b(true|false)\b/,
+	'function': /[a-z0-9_]+(?=\()/i,
+	'number': /\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,
+	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
+	'punctuation': /[{}[\];(),.:]/
+};
+
+
+/* **********************************************
+     Begin prism-javascript.js
+********************************************** */
+
+Prism.languages.javascript = Prism.languages.extend('clike', {
+	'keyword': /\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/,
+	'number': /\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,
+	// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
+	'function': /[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i
+});
+
+Prism.languages.insertBefore('javascript', 'keyword', {
+	'regex': {
+		pattern: /(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,
+		lookbehind: true,
+		greedy: true
+	}
+});
+
+Prism.languages.insertBefore('javascript', 'string', {
+	'template-string': {
+		pattern: /`(?:\\\\|\\?[^\\])*?`/,
+		greedy: true,
+		inside: {
+			'interpolation': {
+				pattern: /\$\{[^}]+\}/,
+				inside: {
+					'interpolation-punctuation': {
+						pattern: /^\$\{|\}$/,
+						alias: 'punctuation'
+					},
+					rest: Prism.languages.javascript
+				}
+			},
+			'string': /[\s\S]+/
+		}
+	}
+});
+
+if (Prism.languages.markup) {
+	Prism.languages.insertBefore('markup', 'tag', {
+		'script': {
+			pattern: /(<script[\w\W]*?>)[\w\W]*?(?=<\/script>)/i,
+			lookbehind: true,
+			inside: Prism.languages.javascript,
+			alias: 'language-javascript'
+		}
+	});
+}
+
+Prism.languages.js = Prism.languages.javascript;
+
+/* **********************************************
+     Begin prism-file-highlight.js
+********************************************** */
+
+(function () {
+	if (typeof self === 'undefined' || !self.Prism || !self.document || !document.querySelector) {
+		return;
+	}
+
+	self.Prism.fileHighlight = function() {
+
+		var Extensions = {
+			'js': 'javascript',
+			'py': 'python',
+			'rb': 'ruby',
+			'ps1': 'powershell',
+			'psm1': 'powershell',
+			'sh': 'bash',
+			'bat': 'batch',
+			'h': 'c',
+			'tex': 'latex'
+		};
+
+		if(Array.prototype.forEach) { // Check to prevent error in IE8
+			Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+				var src = pre.getAttribute('data-src');
+
+				var language, parent = pre;
+				var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
+				while (parent && !lang.test(parent.className)) {
+					parent = parent.parentNode;
+				}
+
+				if (parent) {
+					language = (pre.className.match(lang) || [, ''])[1];
+				}
+
+				if (!language) {
+					var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+					language = Extensions[extension] || extension;
+				}
+
+				var code = document.createElement('code');
+				code.className = 'language-' + language;
+
+				pre.textContent = '';
+
+				code.textContent = 'Loading…';
+
+				pre.appendChild(code);
+
+				var xhr = new XMLHttpRequest();
+
+				xhr.open('GET', src, true);
+
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState == 4) {
+
+						if (xhr.status < 400 && xhr.responseText) {
+							code.textContent = xhr.responseText;
+
+							Prism.highlightElement(code);
+						}
+						else if (xhr.status >= 400) {
+							code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+						}
+						else {
+							code.textContent = '✖ Error: File does not exist or is empty';
+						}
+					}
+				};
+
+				xhr.send(null);
+			});
+		}
+
+	};
+
+	document.addEventListener('DOMContentLoaded', self.Prism.fileHighlight);
+
+})();
+});
+
+function codeString(str) {
+	return prism.highlight(str, prism.languages.javascript);
+}
+
+codeString.css = function(str) {
+	return prism.highlight(str, prism.languages.css);
+};
+
+var es5 = codeString(
+"var HelloButton = {\n  view: function() {\n    return m('button', 'Hello world!');\n  }\n};");
+
+var es6 = codeString(
+"const HelloButton = {\n  view() {\n    return m('button', 'Hello world!');\n  }\n};");
+
+var jsx = codeString(
+"const HelloButton = {\n  view() {\n    return <button>Hello world!</button>;\n  }\n};");
+
+var code = [
+  { id: 'es5', code: es5 },
+  { id: 'es6', code: es6 },
+  { id: 'jsx', code: jsx }
+];
+
+var Component = {
+  view: function view() {
+    return mithril('button', 'Hello world!');
+  }
+};
+
+var es5$1 = codeString(
+"var HelloButton = {\n  view: function(vnode) {\n    return m('button', 'Hello ' + vnode.attrs.title);\n  }\n};\n\nvar Component = {\n  view: function() {\n    return (\n      m('div',\n        m(HelloButton, { title: 'world' }),\n        m(HelloButton, { title: 'everyone' }),\n        m(HelloButton, { title: 'darkness my old friend' })\n      )\n    );\n  }\n};");
+
+var es6$1 = codeString(
+"const HelloButton = {\n  view({ attrs }) {\n    return m('button', `Hello ${attrs.title}`);\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      m('div',\n        m(HelloButton, { title: 'world' }),\n        m(HelloButton, { title: 'everyone' }),\n        m(HelloButton, { title: 'darkness my old friend' })\n      )\n    );\n  }\n};");
+
+var jsx$1 = codeString(
+"const HelloButton = {\n  view({ attrs }) {\n    return <button>Hello {attrs.title}</button>;\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      <div>\n        <HelloButton title='world'/>\n        <HelloButton title='everyone'/>\n        <HelloButton title='darkness my old friend'/>\n      </div>\n    );\n  }\n};");
+
+var code$1 = [
+  { id: 'es5', code: es5$1 },
+  { id: 'es6', code: es6$1 },
+  { id: 'jsx', code: jsx$1 }
+];
+
+var HelloButton = {
+  view: function view(ref) {
+    var attrs = ref.attrs;
+
+    return mithril('button', ("Hello " + (attrs.title)));
+  }
+};
+
+var Component$1 = {
+  view: function view$1() {
+    return (
+      mithril('div',
+        mithril(HelloButton, { title: 'world'}),
+        mithril(HelloButton, { title: 'everyone'}),
+        mithril(HelloButton, { title: 'darkness my old friend'})
+      )
+    );
+  }
+};
+
+var es5$2 = codeString(
+"const HelloButton = {\n  view: function(vnode) {\n    return m('button', 'Hello ' + vnode.attrs.title);\n  }\n};\n\nvar Component = {\n  oninit: function(vnode) {\n    vnode.state.inputValue = ''; // initial state\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: vnode.state.inputValue, // read from state\n          oninput: function(event) {\n            vnode.state.inputValue = event.target.value;\n          }\n        }),\n        m(HelloButton, {\n          title: vnode.state.inputValue\n        })\n      )\n    );\n  }\n};");
+
+var es6$2 = codeString(
+"const HelloButton = {\n  view({ attrs }) {\n    return m('button', `Hello ${attrs.title}`);\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = ''; // initial state\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: state.inputValue, // read from state\n          oninput(event) {\n            state.inputValue = event.target.value;\n          }\n        }),\n        m(HelloButton, { title: state.inputValue })\n      )\n    );\n  }\n};");
+
+var jsx$2 = codeString(
+"const HelloButton = {\n  view({ attrs }) {\n    return <button>Hello {attrs.title}</button>;\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = ''; // initial state\n  },\n  view({ state }) {\n    return (\n      <div>\n        <input\n          type='text'\n          value={state.inputValue}\n          oninput={\n            (event) => { state.inputValue = event.target.value }\n          }/>\n        <HelloButton title={state.inputValue}/>\n      </div>\n    );\n  }\n};");
+
+var code$2 = [
+  { id: 'es5', code: es5$2 },
+  { id: 'es6', code: es6$2 },
+  { id: 'jsx', code: jsx$2 }
+];
+
+var HelloButton$1 = {
+  view: function view(ref) {
+    var attrs = ref.attrs;
+
+    return mithril('button', ("Hello " + (attrs.title)));
+  }
+};
+
+var Component$2 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.inputValue = ''; // initial state
+  },
+  view: function view$1(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('input[type=text]', {
+          value: state.inputValue, // read the value from state
+          oninput: function oninput(event) {
+            state.inputValue = event.target.value;
+          }
+        }),
+        mithril(HelloButton$1, { title: state.inputValue })
+      )
+    );
+  }
+};
+
+var es5$3 = codeString(
+"var stream = require('mithril/stream');\n\nvar HelloWorldButton = {\n  view: function(vnode) {\n    return m('button', 'Hello ' + vnode.attrs.title);\n  }\n};\n\nvar Component = {\n  oninit: function(vnode) {\n    vnode.state.inputValue = stream('');\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: vnode.state.inputValue(),\n          oninput: m.withAttr('value', vnode.state.inputValue)\n        }),\n        m(HelloWorldButton, {\n          title: vnode.state.inputValue()\n        })\n      )\n    );\n  }\n};");
+
+var es6$3 = codeString(
+"import stream from 'mithril/stream';\n\nconst HelloWorldButton = {\n  view({ attrs }) {\n    return m('button', `Hello ${attrs.title}`);\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = stream('');\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('input[type=text]', {\n          value: state.inputValue(),\n          oninput: m.withAttr('value', state.inputValue)\n        }),\n        m(HelloWorldButton, { title: state.inputValue() })\n      )\n    );\n  }\n};");
+
+var jsx$3 = codeString(
+"import stream from 'mithril/stream';\n\nconst HelloWorldButton = {\n  view({ attrs }) {\n    return <button>Hello {attrs.title}</button>;\n  }\n};\n\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = stream('');\n  },\n  view({ state }) {\n    return (\n      <div>\n        <input\n          type='text'\n          value={state.inputValue()}\n          oninput={m.withAttr('value', state.inputValue)}/>\n        <HelloWorldButton title={state.inputValue()}/>\n      </div>\n    );\n  }\n}");
+
+var code$3 = [
+  { id: 'es5', code: es5$3 },
+  { id: 'es6', code: es6$3 },
+  { id: 'jsx', code: jsx$3 }
+];
+
+var HelloWorldButton = {
+  view: function view(ref) {
+    var attrs = ref.attrs;
+
+    return mithril('button', ("Hello " + (attrs.title)));
+  }
+};
+
+var Component$3 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.inputValue = stream('');
+  },
+  view: function view$1(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('input[type=text]', {
+          value: state.inputValue(),
+          oninput: mithril.withAttr('value', state.inputValue)
+        }),
+        mithril(HelloWorldButton, { title: state.inputValue() })
+      )
+    );
+  }
+};
+
+var es5$4 = codeString(
+"var stream = require('mithril/stream');\n\n// stateless functional component\nfunction HelloWorldButton(title) {\n  return m('button', 'Hello ' + title);\n}\n\n// stateless functional component\nfunction Input(valueStream) {\n  return m('input[type=text]', {\n    value: valueStream(),\n    oninput: m.withAttr('value', valueStream)\n  });\n}\n\n// stateful component\nvar Component = {\n  oninit: function(vnode) {\n    vnode.state.inputValue = stream('');\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        Input(vnode.state.inputValue),\n        HelloWorldButton(vnode.state.inputValue())\n      )\n    );\n  }\n};");
+
+var es6$4 = codeString(
+"import stream from 'mithril/stream';\n\n// stateless functional component\nfunction HelloWorldButton(title) {\n  return m('button', `Hello ${title}`);\n}\n\n// stateless functional component\nfunction Input(valueStream) {\n  return m('input[type=text]', {\n    value: valueStream(),\n    oninput: m.withAttr('value', valueStream)\n  });\n}\n\n// stateful component\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = stream('');\n  },\n  view({ state }) {\n    return (\n      m('div',\n        Input(state.inputValue),\n        HelloWorldButton(state.inputValue())\n      )\n    );\n  }\n};");
+
+var jsx$4 = codeString(
+"import stream from 'mithril/stream';\n\n// stateless functional component\nfunction HelloWorldButton(title) {\n  return <button>Hello {title}</button>;\n}\n\n// stateless functional component\nfunction Input(valueStream) {\n  return (\n    <input\n      type=\"text\"\n      value={valueStream()}\n      oninput={m.withAttr('value', valueStream)}/>\n  );\n}\n\n// stateful component\nconst Component = {\n  oninit({ state }) {\n    state.inputValue = stream('');\n  },\n  view({ state }) {\n    return (\n      <div>\n        {Input(state.inputValue)}\n        {HelloWorldButton(state.inputValue())}\n      </div>\n    );\n  }\n};");
+
+var code$4 = [
+  { id: 'es5', code: es5$4 },
+  { id: 'es6', code: es6$4 },
+  { id: 'jsx', code: jsx$4 }
+];
+
+function HelloWorldButton$1(title) {
+  return mithril('button', ("Hello " + title));
+}
+
+function Input(valueStream) {
+  return mithril('input[type=text]', {
+    value: valueStream(),
+    oninput: mithril.withAttr('value', valueStream)
+  });
+}
+
+var Component$4 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.inputValue = stream('');
+  },
+  view: function view(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        Input(state.inputValue),
+        HelloWorldButton$1(state.inputValue())
+      )
+    );
+  }
+};
+
+function view$1$1() {
+	return (
+		mithril(Page, { id: 'Getting started' },
+			mithril('.Section',
+				mithril('h2', 'Overview'),
+				mithril('p', 'Mithril is a client-side MVC framework. You can read more about it at the ',
+					mithril('a[href=http://mithril.js.org]', 'official website'), '. ',
+					'This is an unofficial guide and collection of examples using the ',
+					mithril('a[href=https://github.com/lhorie/mithril.js/tree/rewrite/docs]', '1.0 version'),
+					' of Mithril.js.'
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Basic components'),
+				mithril('p',
+					'Every component is at minimum an object with a ',
+					mithril('code.inline', 'view'),
+					' method that returns a mithril virtual dom node.'
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code, fiddle: '69b1624v' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component))
+					)
+				),
+				mithril('p',
+					'The first argument to ',
+					mithril('code.inline', 'm'),
+					' is the element (as a css selector-like string) or component that should be rendered, and the optional last argument(s)',
+					' are the children of that component.'
+				),
+				mithril('p',
+					'Components can pass properties down to their children by passing in an object as the second argument in the call to ',
+					mithril('code.inline', 'm'),
+					'. Those properties become available to the component through the ',
+					mithril('code.inline', 'attrs'),
+					' object in the mithril virtual dom node.'
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$1, fiddle: 'amw7q2bv' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$1))
+					)
+				),
+				mithril('p',
+					'In addition to the ',
+					mithril('code.inline', 'view'),
+					' method, Mithril components have a variety of ',
+					mithril('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/lifecycle-methods.renderToStaticMarkup]', 'lifecycle hooks'),
+					'. Using the ',
+					mithril('code.inline', 'oninit'),
+					' lifecycle hook, which runs once immediately before rendering the component, ',
+					' we can set the initial state. At this point it is worth noting that the ',
+					mithril('code.inline', 'vnode'),
+					' object that is passed to the ',
+					mithril('code.inline', 'view'),
+					' method contains, in addition to ',
+					mithril('code.inline', 'attrs'),
+					', a ',
+					mithril('code.inline', 'state'),
+					' object that can be used to store the state of that specific component.'
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$2, fiddle: 'ezh0f7sd' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$2))
+					)
+				),
+				mithril('p',
+					'Mithril provides two utilities ',
+					mithril('code.inline', 'm.withAttr'),
+					' and ',
+					mithril('code.inline', 'stream'),
+					' (not included by default with mithril) that help simplify this process.'
+				),
+				mithril('p',
+					'A ',
+					mithril('code.inline', mithril('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/stream.md]', 'stream')),
+					' is, at its simplest, a getter-setter function, while ',
+					mithril('code.inline', mithril('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/withAttr.md]', 'm.withAttr')),
+					' creates an event handler that uses a specified dom element property as the argument to a provided callback. ',
+					'We can use them both to simplify the previous code. All together, this is the final version of this example:'
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$3, fiddle: 'morgz8m0' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$3))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Stateless functional components'),
+				mithril('p',
+					'With mithril, it is also possible to create components in a more functional style. ',
+					'The following is another acceptable way to write mithril components:'
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$4 })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$4))
+					)
+				)
+			)
+		)
+	);
+}
+
+var GettingStarted = {
+	view: view$1$1
+};
+
+var es5$5 = codeString(
+"var Stopwatch = {\n  oninit: function(vnode) {\n    vnode.state.seconds = 0;\n    vnode.state.count = function() {\n      vnode.state.seconds++;\n      m.redraw();\n    };\n    vnode.state.interval = setInterval(vnode.state.count, 1000);\n  },\n  onremove: function(vnode) {\n    clearInterval(vnode.state.interval);\n  },\n  view: function(vnode) {\n    return m('span', 'Timer: ' + vnode.state.seconds);\n  }\n};");
+
+var es6$5 = codeString(
+"const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return m('span', `Timer: ${state.seconds}`);\n  }\n};");
+
+var jsx$5 = codeString(
+"const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return <span>Timer: {state.seconds}</span>;\n  }\n};");
+
+var code$5 = [
+  { id: 'es5', code: es5$5 },
+  { id: 'es6', code: es6$5 },
+  { id: 'jsx', code: jsx$5 }
+];
+
+var Component$5 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.seconds = 0;
+    state.count = function () {
+      state.seconds++;
+      mithril.redraw();
+    };
+    state.interval = setInterval(state.count, 1000);
+  },
+  onremove: function onremove(ref) {
+    var state = ref.state;
+
+    clearInterval(state.interval);
+  },
+  view: function view(ref) {
+    var state = ref.state;
+
+    return mithril('span', ("Timer: " + (state.seconds)));
+  }
+};
+
+var es5$6 = codeString(
+"var Stopwatch = {\n  oninit: function(vnode) {\n    vnode.state.seconds = 0;\n    vnode.state.isPaused = false;\n    vnode.state.reset = function() {\n      vnode.state.seconds = 0;\n    };\n    vnode.state.toggle = function() {\n      vnode.state.isPaused = !vnode.state.isPaused;\n      clearInterval(vnode.state.interval);\n      if (!vnode.state.isPaused) {\n        vnode.state.interval =\n          setInterval(vnode.state.count, 1000);\n      }\n    };\n    vnode.state.count = function() {\n      vnode.state.seconds++;\n      m.redraw();\n    };\n    vnode.state.interval =\n      setInterval(vnode.state.count, 1000);\n  },\n  onremove: function(vnode) {\n    clearInterval(vnode.state.interval);\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('span', 'Timer: ' + vnode.state.seconds),\n        m('button', { onclick: vnode.state.reset }, 'Reset'),\n        m('button', {\n          onclick: vnode.state.toggle\n        }, state.isPaused ? 'Start' : 'Pause')\n      )\n    );\n  }\n};");
+
+var es6$6 = codeString(
+"const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.isPaused = false;\n    state.reset = () => { state.seconds = 0; };\n    state.toggle = () => {\n      state.isPaused = !state.isPaused;\n      clearInterval(state.interval);\n      if (!state.isPaused) {\n        state.interval = setInterval(state.count, 1000);\n      }\n    };\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('span', `Timer: ${state.seconds}`),\n        m('button', { onclick: state.reset }, 'Reset'),\n        m('button', {\n          onclick: state.toggle\n        }, state.isPaused ? 'Start' : 'Pause')\n      )\n    );\n  }\n};");
+
+var jsx$6 = codeString(
+"const Stopwatch = {\n  oninit({ state }) {\n    state.seconds = 0;\n    state.isPaused = false;\n    state.reset = () => { state.seconds = 0; };\n    state.toggle = () => {\n      state.isPaused = !state.isPaused;\n      clearInterval(state.interval);\n      if (!state.isPaused) {\n        state.interval = setInterval(state.count, 1000);\n      }\n    };\n    state.count = () => {\n      state.seconds++;\n      m.redraw();\n    };\n    state.interval = setInterval(state.count, 1000);\n  },\n  onremove({ state }) {\n    clearInterval(state.interval);\n  },\n  view({ state }) {\n    return (\n      <div>\n        <span>Timer: {state.seconds}</span>\n        <button onclick={state.reset}>Reset</button>\n        <button onclick={state.toggle}>\n          {state.isPaused ? 'Start' : 'Pause'}\n        </button>\n      )\n    );\n  }\n};");
+
+var code$6 = [
+  { id: 'es5', code: es5$6 },
+  { id: 'es6', code: es6$6 },
+  { id: 'jsx', code: jsx$6 }
+];
+
+var Component$6 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.seconds = 0;
+    state.isPaused = false;
+    state.reset = function () { state.seconds = 0; };
+    state.toggle = function () {
+      state.isPaused = !state.isPaused;
+      clearInterval(state.interval);
+      if (!state.isPaused) {
+        state.interval = setInterval(state.count, 1000);
+      }
+    };
+    state.count = function () {
+      state.seconds++;
+      mithril.redraw();
+    };
+    state.interval = setInterval(state.count, 1000);
+  },
+  onremove: function onremove(ref) {
+    var state = ref.state;
+
+    clearInterval(state.interval);
+  },
+  view: function view(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('span', ("Timer: " + (state.seconds))),
+        mithril('button', { onclick: state.reset }, 'Reset'),
+        mithril('button', { onclick: state.toggle }, state.isPaused ? 'Start' : 'Pause')
+      )
+    );
+  }
+};
+
+var es5$7 = codeString(
+"var Rotator = {\n  oninit: function(vnode) {\n    vnode.state.list = ['One', 'Two', 'Three', 'Four'];\n    vnode.state.rotate = function() {\n      vnode.state.list.push(vnode.state.list.shift());\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('ul',\n          state.list.map(function(item) {\n            return m('li', { key: item }, item)\n          }\n        ),\n        m('button', { onclick: state.rotate }, 'Rotate')\n      )\n    );\n  }\n};");
+
+var es6$7 = codeString(
+"const Rotator = {\n  oninit({ state }) {\n    state.list = ['One', 'Two', 'Three', 'Four'];\n    state.rotate = () => state.list.push(state.list.shift());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('ul',\n          state.list.map((item) =>\n            m('li', { key: item }, item)\n          )\n        ),\n        m('button', { onclick: state.rotate }, 'Rotate')\n      )\n    );\n  }\n};");
+
+var jsx$7 = codeString(
+"const Rotator = {\n  oninit({ state }) {\n    state.list = ['One', 'Two', 'Three', 'Four'];\n    state.rotate = () => state.list.push(state.list.shift());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <ul>\n          {\n            state.list.map((item) =>\n              <li key={item}>{item}</li>\n            )\n          }\n        </ul>\n        <button onclick={state.rotate}>Rotate</button>\n      </div>\n    );\n  }\n};");
+
+var code$7 = [
+  { id: 'es5', code: es5$7 },
+  { id: 'es6', code: es6$7 },
+  { id: 'jsx', code: jsx$7 }
+];
+
+var Component$7 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.list = ['One', 'Two', 'Three', 'Four'];
+    state.rotate = function () { return state.list.push(state.list.shift()); };
+  },
+  view: function view(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('ul',
+          state.list.map(function (item) { return mithril('li', { key: item }, item); }
+          )
+        ),
+        mithril('button', { onclick: state.rotate }, 'Rotate')
+      )
+    );
+  }
+};
+
+var es5$8 = codeString(
+"var stream = require('mithril/stream');\n\nvar PasswordInput = {\n  oninit: function(vnode) {\n    vnode.state.visible = stream(false);\n    vnode.state.value = stream('');\n    vnode.state.toggle = function() {\n      vnode.state.visible(!vnode.state.visible());\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('input', {\n          type: vnode.state.visible() ? 'text' : 'password',\n          placeholder: vnode.state.visible() ?\n            'password' : '••••••••',\n          value: vnode.state.value(),\n          oninput: m.withAttr('value', vnode.state.value)\n        }),\n        m('button', {\n          onclick: vnode.state.toggle\n        }, vnode.state.visible() ? 'Hide' : 'Show')\n      )\n    );\n  }\n};");
+
+var es6$8 = codeString(
+"import stream from 'mithril/stream';\n\nconst PasswordInput = {\n  oninit({ state }) {\n    state.visible = stream(false);\n    state.value = stream('');\n    state.toggle = () => state.visible(!state.visible());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('input', {\n          type: state.visible() ? 'text' : 'password',\n          placeholder: state.visible() ? 'password' : '••••••••',\n          value: state.value(),\n          oninput: m.withAttr('value', state.value)\n        }),\n        m('button', {\n          onclick: state.toggle\n        }, state.visible() ? 'Hide' : 'Show')\n      )\n    );\n  }\n};");
+
+var jsx$8 = codeString(
+"import stream from 'mithril/stream';\n\nconst PasswordInput = {\n  oninit({ state }) {\n    state.visible = stream(false);\n    state.value = stream('');\n    state.toggle = () => state.visible(!state.visible());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <input\n          type={state.visible() ? 'text' : 'password'}\n          placeholder={state.visible() ? 'password' : '••••••••'}\n          value={state.value()}\n          oninput={m.withAttr('value', state.value)}/>\n        <button onclick={state.toggle}>\n          {state.visible() ? 'Hide' : 'Show'}\n        </button>\n      </div>\n    );\n  }\n};");
+
+var code$8 = [
+  { id: 'es5', code: es5$8 },
+  { id: 'es6', code: es6$8 },
+  { id: 'jsx', code: jsx$8 }
+];
+
+var Component$8 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.visible = stream(false);
+    state.value = stream('');
+    state.toggle = function () { return state.visible(!state.visible()); };
+  },
+  view: function view(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('input', {
+          type: state.visible() ? 'text' : 'password',
+          placeholder: state.visible() ? 'password' : '••••••••',
+          value: state.value(),
+          oninput: mithril.withAttr('value', state.value)
+        }),
+        mithril('button', {
+          onclick: state.toggle
+        }, state.visible() ? 'Hide' : 'Show')
+      )
+    );
+  }
+};
+
+var es5$9 = codeString(
+"var stream = require('mithril/stream');\n\nfunction setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = domNode.scrollHeight + 'px';\n}\n\nvar Textarea = {\n  oninit: function(vnode) {\n    vnode.state.value = stream();\n  },\n  oncreate: function(vnode) {\n    vnode.state.value.run(function() {\n      setHeight(vnode.dom);\n    )};\n  },\n  view: function(vnode) {\n    return m('textarea', {\n      value: vnode.state.value(),\n      oninput: m.withAttr('value', vnode.state.value)\n    });\n  }\n};");
+
+var es6$9 = codeString(
+"import stream from 'mithril/stream';\n\nfunction setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n  oninit({ state }) {\n    state.value = stream();\n  },\n  oncreate({ dom, state }) {\n    state.value.run(() => setHeight(dom));\n  },\n  view({ state }) {\n    return m('textarea', {\n      value: state.value(),\n      oninput: m.withAttr('value', state.value)\n    });\n  }\n};");
+
+var jsx$9 = codeString(
+"import stream from 'mithril/stream';\n\nfunction setHeight(domNode) {\n  domNode.style.height = ''; // reset before recalculating\n  domNode.style.height = `${domNode.scrollHeight}px`;\n}\n\nconst Textarea = {\n  oninit({ state }) {\n    state.value = stream();\n  },\n  oncreate({ dom, state }) {\n    state.value.run(() => setHeight(dom));\n  },\n  view({ state }) {\n    return <textarea\n      value={state.value()}\n      oninput={m.withAttr('value', state.value)}/>;\n  }\n};");
+
+var code$9 = [
+  { id: 'es5', code: es5$9 },
+  { id: 'es6', code: es6$9 },
+  { id: 'jsx', code: jsx$9 }
+];
+
+function setHeight(domNode) {
+  domNode.style.height = ''; // reset before recalculating
+  domNode.style.height = (domNode.scrollHeight) + "px";
+}
+
+var Component$9 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.value = stream();
+  },
+  oncreate: function oncreate(ref) {
+    var dom = ref.dom;
+    var state = ref.state;
+
+    state.value.map(function () { return setHeight(dom); });
+  },
+  view: function view(ref) {
+    var state = ref.state;
+
+    return mithril('textarea', {
+      value: state.value(),
+      oninput: mithril.withAttr('value', state.value)
+    });
+  }
+};
+
+var es5$10 = codeString(
+"var stream = require('mithril/stream');\n\nvar tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nvar tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nvar Tabs = {\n  oninit: function(vnode) {\n    vnode.state.activeTab = stream(0);\n  },\n  view: function(vnode) {\n    var active = vnode.state.activeTab();\n    return (\n      m('.Tabs',\n        m('.TabBar',\n          vnode.attrs.tabs.map(function(tab, i) {\n            return m('.Tab', {\n              key: tab.id,\n              className: i === active ? 'active' : '',\n              onclick: function() {\n                vnode.state.activeTab(i);\n              }\n            }, tab.id)\n          })\n        ),\n        m('.TabContent', vnode.attrs.tabs[active].content)\n      )\n    );\n  }\n};\n\nvar Component = {\n  view: function() {\n    return (\n      m('div',\n        m(Tabs, { tabs: tabContent1 }),\n        m('br'),\n        m(Tabs, { tabs: tabContent2 })\n      )\n    );\n  }\n};");
+
+var es6$10 = codeString(
+"import stream from 'mithril/stream';\n\nconst tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n  oninit({ state }) {\n    state.activeTab = stream(0);\n  },\n  view({ attrs, state }) {\n    return (\n      m('.Tabs',\n        m('.TabBar',\n          attrs.tabs.map((tab, i) =>\n            m('.Tab', {\n              key: tab.id,\n              className: state.activeTab() === i ? 'active' : '',\n              onclick() { state.activeTab(i); }\n            }, tab.id)\n          )\n        ),\n        m('.TabContent', attrs.tabs[state.activeTab()].content)\n      )\n    );\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      m('div',\n        m(Tabs, { tabs: tabContent1 }),\n        m('br'),\n        m(Tabs, { tabs: tabContent2 })\n      )\n    );\n  }\n};");
+
+var jsx$10 = codeString(
+"import stream from 'mithril/stream';\n\nconst tabContent1 = [\n  { id: 'One', content: 'First tab' },\n  { id: 'Two', content: 'Second tab' },\n  { id: 'Three', content: 'Third tab' }\n];\n\nconst tabContent2 = [\n  { id: 'Lorem', content: 'Lorem ipsum...' },\n  { id: 'Ipsum', content: 'Duis aute...' }\n];\n\nconst Tabs = {\n  oninit({ state }) {\n    state.activeTab = stream(0);\n  },\n  view({ attrs, state }) {\n    const active = state.activeTab();\n    return (\n      <div className='Tabs'>\n        <div className='TabBar'>\n          {\n            attrs.tabs.map((tab, i) =>\n              <div\n                key={tab.id}\n                className={`Tab ${active === i ? 'active' : ''}`}\n                onclick={() => state.activeTab(i) }>\n                {tab.id}\n              </div>\n            )\n          }\n        </div>\n        <div className='TabContent'>\n          {attrs.tabs[state.activeTab()].content}\n        </div>\n      </div>\n    );\n  }\n};\n\nconst Component = {\n  view() {\n    return (\n      <div>\n        <Tabs tabs={tabContent1}/>\n        <br/>\n        <Tabs tabs={tabContent2}/>\n      </div>\n    );\n  }\n};");
+
+var code$10 = [
+  { id: 'es5', code: es5$10 },
+  { id: 'es6', code: es6$10 },
+  { id: 'jsx', code: jsx$10 }
+];
+
+var tabContent1 = [
+  { id: 'One', content: 'First tab' },
+  { id: 'Two', content: 'Second tab' },
+  { id: 'Three', content: 'Third tab' }
+];
+
+var tabContent2 = [
+  { id: 'Lorem', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit' },
+  { id: 'Ipsum', content: 'Duis aute irure dolor in reprehenderit in voluptate velit' }
+];
+
+var Tabs$2 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.activeTab = stream(0);
+  },
+  view: function view(ref) {
+    var attrs = ref.attrs;
+    var state = ref.state;
+
+    return (
+      mithril('.Tabs',
+        mithril('.TabBar',
+          attrs.tabs.map(function (tab, i) { return mithril('.Tab', {
+              key: i,
+              className: state.activeTab() === i ? 'active' : '',
+              onclick: function onclick() { state.activeTab(i); }
+            }, tab.id); }
+          )
+        ),
+        mithril('.TabContent', attrs.tabs[state.activeTab()].content)
+      )
+    );
+  }
+};
+
+var Component$10 = {
+  view: function view$1() {
+    return (
+      mithril('div',
+        mithril(Tabs$2, { tabs: tabContent1 }),
+        mithril('br'),
+        mithril(Tabs$2, { tabs: tabContent2 })
+      )
+    );
+  }
+};
+
+var es5$11 = codeString(
+"// define the Tooltip component\nvar Tooltip = {\n  view: function(vnode) {\n    return (\n      m('.Tooltip-wrap',\n        vnode.children,\n        m('.Tooltip', vnode.attrs.value)\n      )\n    );\n  }\n};\n\n// elsewhere, use the Tooltip component\nvar Component = {\n  view: function() {\n    return (\n      m('div',\n        m(Tooltip, { value: 'Foo' },\n          m('button', 'Hover over this button')\n        ),\n        m(Tooltip, { value: 'Bar' },\n          m('span', 'or hover here')\n        )\n      )\n    );\n  }\n};");
+
+var es6$11 = codeString(
+"// define the Tooltip component\nconst Tooltip = {\n  view({ attrs, children }) {\n    return (\n      m('.Tooltip-wrap',\n        children,\n        m('.Tooltip', attrs.value)\n      )\n    );\n  }\n};\n\n// elsewhere, use the Tooltip component\nconst Component = {\n  view() {\n    return (\n      m('div',\n        m(Tooltip, { value: 'Foo' },\n          m('button', 'Hover over this button')\n        ),\n        m(Tooltip, { value: 'Bar' },\n          m('span', 'or hover here')\n        )\n      )\n    );\n  }\n};");
+
+var jsx$11 = codeString(
+"// define the Tooltip component\nconst Tooltip = {\n  view({ attrs, children }) {\n    return (\n      <div className='Tooltip-wrap'>\n        {children}\n        <div className='Tooltip'>{attrs.value}</div>\n      </div>\n    );\n  }\n};\n\n// elsewhere, use the Tooltip component\nconst Component = {\n  view() {\n    return (\n      <div>\n        <Tooltip value='Foo'>\n          <button>Hover over this button</button>\n        </Tooltip>\n        <Tooltip value='Bar'>\n          <span>or hover here</span>\n        </Tooltip>\n      </div>\n    );\n  }\n};");
+
+var css = codeString.css(
+".Tooltip-wrap {\n  display: inline-block;\n  position: relative;\n  transform: translateZ(0);\n}\n\n.Tooltip-wrap:hover .Tooltip {\n  opacity: 1;\n  transform: translateX(-50%) translateY(5px);\n  transition: all .3s ease .5s;\n  visibility: visible;\n}\n\n.Tooltip {\n  background: rgba(0, 0, 0, .8);\n  border-radius: 2px;\n  bottom: -30px;\n  color: white;\n  font-size: 12px;\n  left: 50%;\n  opacity: 0;\n  padding: 5px 10px;\n  position: absolute;\n  transform: translateX(-50%) translateY(0);\n  transition: all .2s ease;\n  user-select: none;\n  visibility: hidden;\n  white-space: nowrap;\n}");
+
+var code$11 = [
+  { id: 'es5', code: es5$11 },
+  { id: 'es6', code: es6$11 },
+  { id: 'jsx', code: jsx$11 },
+  { id: 'css', code: css }
+];
+
+
+var Tooltip = {
+  view: function view(ref) {
+    var attrs = ref.attrs;
+    var children = ref.children;
+
+    return (
+      mithril('.Tooltip-wrap',
+        children,
+        mithril('.Tooltip', attrs.value)
+      )
+    );
+  }
+};
+
+var Component$11 = {
+  view: function view$1() {
+    return (
+      mithril('div',
+        mithril(Tooltip, { value: 'Foo' },
+          mithril('button', 'Hover over this button')
+        ),
+        mithril(Tooltip, { value: 'Bar' },
+          mithril('span', 'or hover here')
+        )
+      )
+    );
+  }
+};
+
+function view$5() {
+	return (
+		mithril(Page, { id: 'Components' },
+			mithril('.Section',
+				mithril('h2', 'Stopwatch'),
+				mithril('p',
+					markup(
+						'In the [Getting started](/) example there was no need to manually tell mithril to update the view when ' +
+						'the contents of the input changed, because mithril automatically redraws after event handlers are ' +
+						'called. In this example there are no events that trigger an update, so we tell mithril to update via ' +
+						'`m.redraw`.'
+					)
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$5, fiddle: 'ckap5y2g' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$5))
+					)
+				),
+				mithril('p',
+					markup(
+						'Adding a reset button is as simple as creating the button element in the `view` function and setting ' +
+						'its `onclick` handler to a function that changes the count to 0. Similarly, the Start/Pause toggle ' +
+						'is just a button that either clears or starts a new counter.'
+					)
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$6, fiddle: 'nkuc6rbk' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$6))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'List rotator'),
+				mithril('p',
+					markup(
+						'When rendering a list of data, it is a good idea to supply Mithril with a `key` attribute for each ' +
+						'element in that list. [Keys](https://github.com/lhorie/mithril.js/blob/rewrite/docs/keys.md) help maintain ' +
+						'references to each element and should be unique for each item in the list.'
+					)
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$7, fiddle: '5ek60qfs' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$7))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Password input'),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$8, fiddle: '256kx8sy' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$8))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Autogrow textarea'),
+				mithril('p',
+					markup(
+						'In some cases it is necessary to interact directly with the rendered dom node, not ' +
+						'just mithril virtual dom nodes. For those cases, certain lifecycle methods (including ' +
+						'`oncreate`) provide access to the actual node through the `dom` property. This example ' +
+						'uses it to set the height of the textarea.'
+					)
+				),
+				mithril('p',
+					markup(
+						'This example also relies on the fact that, in addition to being a getter-setter, ' +
+						'any variable set to `stream()`  can be observed for changes. Whenever the value is ' +
+						'updated, its `run` function calls its callback with the new value. (In this case, ' +
+						'we just ignore the new value since the height is set regardless of the specific contents).'
+					)
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$9, fiddle: 'n9rLg94u' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$9))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Tabs'),
+				mithril('p',
+					markup(
+						'The only state that tabs need to keep internally is the index of the active tab. ' +
+						'The example components store this state in each instance of the tabs. The implementation ' +
+						'of the tabs on this site can be viewed [on github](https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2).'
+					)
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$10, fiddle: 'h2vftbr8' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$10))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Tooltips'),
+				mithril('p',
+					markup(
+						'There are a lot of ways to implement tooltips. This implementation relies more on CSS than javascript, ' +
+						'but mithril makes it easy to reuse the component. The code that defines the tooltip component just wraps ' +
+						'arbitrary child components in the correct CSS class names, and allows the value of the tooltip to be ' +
+						'dynamically set using `attrs.value`.'
+					)
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$11, fiddle: '181vwbL8' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$11))
+					)
+				)
+			)
+		)
+	);
+}
+
+var Components = {
+	view: view$5
+};
+
+var es5$12 = codeString(
+"var stream = require('mithril/stream');\n\nvar TodoList = {\n  view: function(vnode) {\n    return (\n      m('ul',\n        vnode.attrs.items.map(function(item, i) {\n          return m('li', { key: i }, item);\n        })\n      )\n    );\n  }\n};\n\nvar TodoApp = {\n  oninit: function(vnode) {\n    vnode.state.items = [];\n    vnode.state.text = stream('');\n    vnode.state.handleSubmit = function(event) {\n      event.preventDefault();\n      vnode.state.items.push(vnode.state.text());\n      vnode.state.text('');\n    };\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'To-do'),\n        m(TodoList, { items: vnode.state.items }),\n        m('form', { onsubmit: vnode.state.handleSubmit },\n          m('input[type=text]', {\n            oninput: m.withAttr('value', vnode.state.text),\n            value: vnode.state.text()\n          }),\n          m('button', {\n            type: 'submit'\n          }, `Add #${vnode.state.items.length + 1}`)\n        )\n      )\n    );\n  }\n};");
+
+var es6$12 = codeString(
+"import stream from 'mithril/stream';\n\nconst TodoList = {\n  view({ attrs }) {\n    return (\n      m('ul',\n        attrs.items.map((item, i) =>\n          m('li', { key: i }, item)\n        )\n      )\n    );\n  }\n};\n\nconst TodoApp = {\n  oninit({ state }) {\n    state.items = [];\n    state.text = stream('');\n    state.handleSubmit = function(event) {\n      event.preventDefault();\n      state.items.push(state.text());\n      state.text('');\n    };\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'To-do'),\n        m(TodoList, { items: state.items }),\n        m('form', { onsubmit: state.handleSubmit },\n          m('input[type=text]', {\n            oninput: m.withAttr('value', state.text),\n            value: state.text()\n          }),\n          m('button', {\n            type: 'submit'\n          }, `Add #${state.items.length + 1}`)\n        )\n      )\n    );\n  }\n};");
+
+var jsx$12 = codeString(
+"import stream from 'mithril/stream';\n\nconst TodoList = {\n  view({ attrs }) {\n    return (\n      <ul>\n        {\n          attrs.items.map((item, i) => <li key={i}>{item}</li>)\n        }\n      </ul>\n    );\n  }\n};\n\nconst TodoApp = {\n  oninit({ state }) {\n    state.items = [];\n    state.text = stream('');\n    state.handleSubmit = function(event) {\n      event.preventDefault();\n      state.items.push(state.text());\n      state.text('');\n    };\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>To-do</h3>\n        <TodoList items={state.items}/>\n        <form onsubmit={state.handleSubmit}>\n          <input\n            type='text'\n            oninput={m.withAttr('value', state.text)}/>\n          <button type='submit'>\n            Add #{state.items.length + 1}\n          </button>\n        </form>\n      </div>\n    );\n  }\n};");
+
+var code$12 = [
+  { id: 'es5', code: es5$12 },
+  { id: 'es6', code: es6$12 },
+  { id: 'jsx', code: jsx$12 }
+];
+
+var TodoList = {
+  view: function view(ref) {
+    var attrs = ref.attrs;
+
+    return (
+      mithril('ul',
+        attrs.items.map(function (item, i) { return mithril('li', { key: i }, item); }
+        )
+      )
+    );
+  }
+};
+
+var Component$12 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.items = [];
+    state.text = stream('');
+    state.handleSubmit = function(event) {
+      event.preventDefault();
+      state.items.push(state.text());
+      state.text('');
+    };
+  },
+  view: function view$1(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('h3', 'To-do'),
+        mithril(TodoList, { items: state.items }),
+        mithril('form', { onsubmit: state.handleSubmit },
+          mithril('input[type=text]', {
+            oninput: mithril.withAttr('value', state.text),
+            value: state.text()
+          }),
+          mithril('button', { type: 'submit' }, ("Add #" + (state.items.length + 1)))
+        )
+      )
+    );
+  }
+};
+
+var es5$13 = codeString(
+"var stream = require('mithril/stream');\n\nvar ListView = {\n  view: function(vnode) {\n    return (\n      m('ul',\n          vnode.attrs.items ?\n            vnode.attrs.items.map(function(book, i) {\n              return m('li', { key: i },\n                m('span', book.name, ' $', book.price),\n                m('button.right', {\n                  onclick: function() {\n                    vnode.attrs.action(book);\n                  }\n                }, vnode.attrs.actionLabel)\n              )\n          }) : m('div', 'Loading...')\n      )\n    );\n  }\n};\n\nvar BookShop = {\n  oninit: function(vnode) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    vnode.state.books = stream();\n    m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    }).then(vnode.state.books);\n\n    vnode.state.cart = stream([]);\n    vnode.state.text = stream('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    vnode.state.shop = stream.combine(function(text, books, cart) {\n      return books().filter(function(book) {\n        return book.name.toLowerCase()\n          .indexOf(text().toLowerCase()) > -1 &&\n            cart().indexOf(book) === -1;\n      });\n    }, [vnode.state.text, vnode.state.books, vnode.state.cart]);\n\n    // when the cart updates, state.total = price of books in cart\n    vnode.state.total = vnode.state.cart.map(function(cart) {\n      return cart.reduce(function(prev, next) {\n        return prev + next.price;\n      }, 0);\n    });\n\n    vnode.state.addToCart = function(book) {\n      vnode.state.cart(vnode.state.cart().concat(book));\n    };\n\n    vnode.state.removeFromCart = function(book) {\n      vnode.state.cart(\n        vnode.state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Book Shop'),\n        m('input[type=text]', {\n          placeholder: 'Filter',\n          value: vnode.state.text(),\n          oninput: m.withAttr('value', vnode.state.text)\n        }),\n        m(ListView, {\n          items: vnode.state.shop(),\n          action: vnode.state.addToCart,\n          actionLabel: 'Add'\n        }),\n        m('hr'),\n        m('h3', 'Cart'),\n        m(ListView, {\n          items: vnode.state.cart(),\n          action: vnode.state.removeFromCart,\n          actionLabel: 'Remove'\n        }),\n        m('strong', 'Total: '),\n        m('span', '$', vnode.state.total())\n      )\n    );\n  }\n};");
+
+var es6$13 = codeString(
+"import stream from 'mithril/stream';\n\nconst ListView = {\n  view({ attrs }) {\n    return (\n      m('ul',\n          attrs.items ? attrs.items.map((book, i) =>\n            m('li', { key: i },\n              m('span', book.name, ' $', book.price),\n              m('button.right', {\n                onclick() {\n                  attrs.action(book);\n                }\n              }, attrs.actionLabel)\n            )\n          ) : m('div', 'Loading...')\n\n      )\n    );\n  }\n};\n\nconst BookShop = {\n  oninit({ state }) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    state.books = stream();\n    m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    }).then(state.books);\n\n    state.cart = stream([]);\n    state.text = stream('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    state.shop = stream.combine((text, books, cart) =>\n      books().filter((book) =>\n        book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n          cart().indexOf(book) === -1\n      ), [state.text, state.books, state.cart]\n    );\n\n    // when the cart updates, state.total = price of books in cart\n    state.total = state.cart.map(function(cart) {\n      return cart.reduce((prev, next) => prev + next.price, 0);\n    });\n\n    state.addToCart = function(book) {\n      state.cart(state.cart().concat(book));\n    };\n\n    state.removeFromCart = function(book) {\n      state.cart(\n        state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Book Shop'),\n        m('input[type=text]', {\n          placeholder: 'Filter',\n          value: state.text(),\n          oninput: m.withAttr('value', state.text)\n        }),\n        m(ListView, {\n          items: state.shop(),\n          action: state.addToCart,\n          actionLabel: 'Add'\n        }),\n        m('hr'),\n        m('h3', 'Cart'),\n        m(ListView, {\n          items: state.cart(),\n          action: state.removeFromCart,\n          actionLabel: 'Remove'\n        }),\n        m('strong', 'Total: '),\n        m('span', '$', state.total())\n      )\n    );\n  }\n};");
+
+var jsx$13 = codeString(
+"import stream from 'mithril/stream';\n\nconst ListView = {\n  view({ attrs }) {\n    return (\n      <ul>\n        {\n          attrs.items ? attrs.items.map((book, i) =>\n            <li key={i}>\n              <span>{book.name} ${book.price}</span>\n              <button className='right' onclick={() => attrs.action(book)}>\n                {attrs.actionLabel}\n              </button>\n            </li>\n          ) : <div>Loading...</div>\n        }\n      </ul>\n    );\n  }\n};\n\nconst BookShop = {\n  oninit({ state }) {\n\n    // fetch array of book objects from server of form:\n    // { name: 'The Iliad', price: 12 }\n    state.books = stream();\n    m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    }).then(state.books);\n\n    state.cart = stream([]);\n    state.text = stream('');\n\n    // once books have loaded, filter by title and prevent\n    // items in cart from showing up in the shop\n    state.shop = stream.combine((text, books, cart) =>\n      books().filter((book) =>\n        book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&\n          cart().indexOf(book) === -1\n      ), [state.text, state.books, state.cart]\n    );\n\n    // when the cart updates, state.total = price of books in cart\n    state.total = state.cart.map(function(cart) {\n      return cart.reduce((prev, next) => prev + next.price, 0);\n    });\n\n    state.addToCart = function(book) {\n      state.cart(state.cart().concat(book));\n    };\n\n    state.removeFromCart = function(book) {\n      state.cart(\n        state.cart().filter((item) => item !== book)\n      );\n    };\n\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Book shop</h3>\n        <input\n          type='text'\n          placeholder='filter'\n          value={state.text()}\n          oninput={m.withAttr('value', state.text)}/>\n        <ListView\n          items={state.shop()}\n          action={state.addToCart}\n          actionLabel='Add'/>\n        <hr/>\n        <h3>Cart</h3>\n        <ListView\n          items={state.cart()}\n          action={state.removeFromCart}\n          actionLabel='Remove'/>\n        <strong>Total: </strong>\n        <span>${state.total()}</span>\n      </div>\n    );\n  }\n};");
+
+var code$13 = [
+  { id: 'es5', code: es5$13 },
+  { id: 'es6', code: es6$13 },
+  { id: 'jsx', code: jsx$13 }
+];
+
+var ListView = {
+  view: function view(ref) {
+    var attrs = ref.attrs;
+
+    return (
+      mithril('ul',
+          attrs.items ? attrs.items.map(function (book, i) { return mithril('li', { key: i },
+              mithril('span', book.name, ' $', book.price),
+              mithril('button.right', {
+                onclick: function onclick() {
+                  attrs.action(book);
+                }
+              }, attrs.actionLabel)
+            ); }
+          ) : mithril('div', 'Loading...')
+
+      )
+    );
+  }
+};
+
+var Component$13 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+
+    // fetch array of book objects from server of form:
+    // { name: 'The Iliad', price: 12 }
+    state.books = stream();
+    mithril.request({
+      method: 'GET',
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    }).then(state.books);
+
+    state.cart = stream([]);
+    state.text = stream('');
+
+    // once books have loaded, filter by title and prevent
+    // items in cart from showing up in the shop
+    state.shop = stream.combine(function (text, books, cart) { return books().filter(function (book) { return book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
+          cart().indexOf(book) === -1; }
+      ); }, [state.text, state.books, state.cart]
+    );
+
+    // when the cart updates, state.total = price of books in cart
+    state.total = state.cart.map(function(cart) {
+      return cart.reduce(function (prev, next) { return prev + next.price; }, 0);
+    });
+
+    state.addToCart = function(book) {
+      state.cart(state.cart().concat(book));
+    };
+
+    state.removeFromCart = function(book) {
+      state.cart(
+        state.cart().filter(function (item) { return item !== book; })
+      );
+    };
+
+  },
+  view: function view$1(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('h3', 'Book Shop'),
+        mithril('input[type=text]', {
+          placeholder: 'Filter',
+          value: state.text(),
+          oninput: mithril.withAttr('value', state.text)
+        }),
+        mithril(ListView, {
+          items: state.shop(),
+          action: state.addToCart,
+          actionLabel: 'Add'
+        }),
+        mithril('hr'),
+        mithril('h3', 'Cart'),
+        mithril(ListView, {
+          items: state.cart(),
+          action: state.removeFromCart,
+          actionLabel: 'Remove'
+        }),
+        mithril('strong', 'Total: '),
+        mithril('span', '$', state.total())
+      )
+    );
+  }
+};
+
+var es5$14 = codeString(
+"var stream = require('mithril/stream');\n\nfunction mapAsciiToBraille(character) {\n\n  var map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nvar BrailleTranslator = {\n  oninit: function(vnode) {\n    vnode.state.input = stream('');\n    vnode.state.output = vnode.state.input.map(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('div', 'Enter ascii text:'),\n        m('input[type=text]', {\n          placeholder: 'input',\n          value: vnode.state.input(),\n          oninput: m.withAttr('value', vnode.state.input)\n        }),\n        m('hr'),\n        m('div', 'Braille:'),\n        m('div', vnode.state.output())\n      )\n    );\n  }\n};");
+
+var es6$14 = codeString(
+"import stream from 'mithril/stream';\n\nfunction mapAsciiToBraille(character) {\n\n  const map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n  oninit({ state }) {\n    state.input = stream('');\n    state.output = state.input.map(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('div', 'Enter ascii text:'),\n        m('input[type=text]', {\n          placeholder: 'input',\n          value: state.input(),\n          oninput: m.withAttr('value', state.input)\n        }),\n        m('hr'),\n        m('div', 'Braille:'),\n        m('div', state.output())\n      )\n    );\n  }\n};");
+
+var jsx$14 = codeString(
+"import stream from 'mithril/stream';\n\nfunction mapAsciiToBraille(character) {\n\n  const map = {\n    a: '⠁',\n    b: '⠃',\n    c: '⠉',\n    d: '⠙',\n    e: '⠑',\n    f: '⠋',\n    g: '⠛',\n    h: '⠓',\n    i: '⠊',\n    j: '⠚',\n    k: '⠅',\n    l: '⠇',\n    m: '⠍',\n    n: '⠝',\n    o: '⠕',\n    p: '⠏',\n    q: '⠟',\n    r: '⠗',\n    s: '⠎',\n    t: '⠞',\n    u: '⠥',\n    v: '⠧',\n    w: '⠺',\n    x: '⠭',\n    y: '⠽',\n    z: '⠵',\n    0: '⠼⠚',\n    1: '⠼⠁',\n    2: '⠼⠃',\n    3: '⠼⠉',\n    4: '⠼⠙',\n    5: '⠼⠑',\n    6: '⠼⠋',\n    7: '⠼⠛',\n    8: '⠼⠓',\n    9: '⠼⠊'\n  };\n\n  return map[character] || character;\n\n}\n\nconst BrailleTranslator = {\n  oninit({ state }) {\n    state.input = stream('');\n    state.output = state.input.map(function(text) {\n      return text\n        .toLowerCase()\n        .split('')\n        .map(mapAsciiToBraille)\n        .join('');\n    });\n  },\n  view({ state }) {\n    return (\n      <div>\n        <div>Enter ascii text:</div>\n        <input\n          type='text'\n          value={state.input()}\n          oninput={m.withAttr('value', state.input)}/>\n        <hr/>\n        <div>Braille:</div>\n        <div>{state.output()}</div>\n      </div>\n    );\n  }\n};");
+
+var code$14 = [
+  { id: 'es5', code: es5$14 },
+  { id: 'es6', code: es6$14 },
+  { id: 'jsx', code: jsx$14 }
+];
+
+
+function mapAsciiToBraille(character) {
+
+  var map = {
+    a: '⠁',
+    b: '⠃',
+    c: '⠉',
+    d: '⠙',
+    e: '⠑',
+    f: '⠋',
+    g: '⠛',
+    h: '⠓',
+    i: '⠊',
+    j: '⠚',
+    k: '⠅',
+    l: '⠇',
+    m: '⠍',
+    n: '⠝',
+    o: '⠕',
+    p: '⠏',
+    q: '⠟',
+    r: '⠗',
+    s: '⠎',
+    t: '⠞',
+    u: '⠥',
+    v: '⠧',
+    w: '⠺',
+    x: '⠭',
+    y: '⠽',
+    z: '⠵',
+    0: '⠼⠚',
+    1: '⠼⠁',
+    2: '⠼⠃',
+    3: '⠼⠉',
+    4: '⠼⠙',
+    5: '⠼⠑',
+    6: '⠼⠋',
+    7: '⠼⠛',
+    8: '⠼⠓',
+    9: '⠼⠊'
+  };
+
+  return map[character] || character;
+
+}
+
+var Component$14 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.input = stream('');
+    state.output = state.input.map(function(text) {
+      return text
+        .toLowerCase()
+        .split('')
+        .map(mapAsciiToBraille)
+        .join('');
+    });
+  },
+  view: function view(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('div', 'Enter ascii text:'),
+        mithril('input[type=text]', {
+          placeholder: 'input',
+          value: state.input(),
+          oninput: mithril.withAttr('value', state.input)
+        }),
+        mithril('hr'),
+        mithril('div', 'Braille:'),
+        mithril('div', state.output())
+      )
+    );
+  }
+};
+
+var marked = createCommonjsModule(function (module, exports) {
+/**
+ * marked - a markdown parser
+ * Copyright (c) 2011-2014, Christopher Jeffrey. (MIT Licensed)
+ * https://github.com/chjj/marked
+ */
+
+(function() {
+
+/**
+ * Block-Level Grammar
+ */
+
+var block = {
+  newline: /^\n+/,
+  code: /^( {4}[^\n]+\n*)+/,
+  fences: noop,
+  hr: /^( *[-*_]){3,} *(?:\n+|$)/,
+  heading: /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/,
+  nptable: noop,
+  lheading: /^([^\n]+)\n *(=|-){2,} *(?:\n+|$)/,
+  blockquote: /^( *>[^\n]+(\n(?!def)[^\n]+)*\n*)+/,
+  list: /^( *)(bull) [\s\S]+?(?:hr|def|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,
+  html: /^ *(?:comment *(?:\n|\s*$)|closed *(?:\n{2,}|\s*$)|closing *(?:\n{2,}|\s*$))/,
+  def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,
+  table: noop,
+  paragraph: /^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,
+  text: /^[^\n]+/
+};
+
+block.bullet = /(?:[*+-]|\d+\.)/;
+block.item = /^( *)(bull) [^\n]*(?:\n(?!\1bull )[^\n]*)*/;
+block.item = replace(block.item, 'gm')
+  (/bull/g, block.bullet)
+  ();
+
+block.list = replace(block.list)
+  (/bull/g, block.bullet)
+  ('hr', '\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))')
+  ('def', '\\n+(?=' + block.def.source + ')')
+  ();
+
+block.blockquote = replace(block.blockquote)
+  ('def', block.def)
+  ();
+
+block._tag = '(?!(?:'
+  + 'a|em|strong|small|s|cite|q|dfn|abbr|data|time|code'
+  + '|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo'
+  + '|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b';
+
+block.html = replace(block.html)
+  ('comment', /<!--[\s\S]*?-->/)
+  ('closed', /<(tag)[\s\S]+?<\/\1>/)
+  ('closing', /<tag(?:"[^"]*"|'[^']*'|[^'">])*?>/)
+  (/tag/g, block._tag)
+  ();
+
+block.paragraph = replace(block.paragraph)
+  ('hr', block.hr)
+  ('heading', block.heading)
+  ('lheading', block.lheading)
+  ('blockquote', block.blockquote)
+  ('tag', '<' + block._tag)
+  ('def', block.def)
+  ();
+
+/**
+ * Normal Block Grammar
+ */
+
+block.normal = merge({}, block);
+
+/**
+ * GFM Block Grammar
+ */
+
+block.gfm = merge({}, block.normal, {
+  fences: /^ *(`{3,}|~{3,})[ \.]*(\S+)? *\n([\s\S]*?)\s*\1 *(?:\n+|$)/,
+  paragraph: /^/,
+  heading: /^ *(#{1,6}) +([^\n]+?) *#* *(?:\n+|$)/
+});
+
+block.gfm.paragraph = replace(block.paragraph)
+  ('(?!', '(?!'
+    + block.gfm.fences.source.replace('\\1', '\\2') + '|'
+    + block.list.source.replace('\\1', '\\3') + '|')
+  ();
+
+/**
+ * GFM + Tables Block Grammar
+ */
+
+block.tables = merge({}, block.gfm, {
+  nptable: /^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,
+  table: /^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/
+});
+
+/**
+ * Block Lexer
+ */
+
+function Lexer(options) {
+  this.tokens = [];
+  this.tokens.links = {};
+  this.options = options || marked.defaults;
+  this.rules = block.normal;
+
+  if (this.options.gfm) {
+    if (this.options.tables) {
+      this.rules = block.tables;
+    } else {
+      this.rules = block.gfm;
+    }
+  }
+}
+
+/**
+ * Expose Block Rules
+ */
+
+Lexer.rules = block;
+
+/**
+ * Static Lex Method
+ */
+
+Lexer.lex = function(src, options) {
+  var lexer = new Lexer(options);
+  return lexer.lex(src);
+};
+
+/**
+ * Preprocessing
+ */
+
+Lexer.prototype.lex = function(src) {
+  src = src
+    .replace(/\r\n|\r/g, '\n')
+    .replace(/\t/g, '    ')
+    .replace(/\u00a0/g, ' ')
+    .replace(/\u2424/g, '\n');
+
+  return this.token(src, true);
+};
+
+/**
+ * Lexing
+ */
+
+Lexer.prototype.token = function(src, top, bq) {
+  var this$1 = this;
+
+  var src = src.replace(/^ +$/gm, '')
+    , next
+    , loose
+    , cap
+    , bull
+    , b
+    , item
+    , space
+    , i
+    , l;
+
+  while (src) {
+    // newline
+    if (cap = this$1.rules.newline.exec(src)) {
+      src = src.substring(cap[0].length);
+      if (cap[0].length > 1) {
+        this$1.tokens.push({
+          type: 'space'
+        });
+      }
+    }
+
+    // code
+    if (cap = this$1.rules.code.exec(src)) {
+      src = src.substring(cap[0].length);
+      cap = cap[0].replace(/^ {4}/gm, '');
+      this$1.tokens.push({
+        type: 'code',
+        text: !this$1.options.pedantic
+          ? cap.replace(/\n+$/, '')
+          : cap
+      });
+      continue;
+    }
+
+    // fences (gfm)
+    if (cap = this$1.rules.fences.exec(src)) {
+      src = src.substring(cap[0].length);
+      this$1.tokens.push({
+        type: 'code',
+        lang: cap[2],
+        text: cap[3] || ''
+      });
+      continue;
+    }
+
+    // heading
+    if (cap = this$1.rules.heading.exec(src)) {
+      src = src.substring(cap[0].length);
+      this$1.tokens.push({
+        type: 'heading',
+        depth: cap[1].length,
+        text: cap[2]
+      });
+      continue;
+    }
+
+    // table no leading pipe (gfm)
+    if (top && (cap = this$1.rules.nptable.exec(src))) {
+      src = src.substring(cap[0].length);
+
+      item = {
+        type: 'table',
+        header: cap[1].replace(/^ *| *\| *$/g, '').split(/ *\| */),
+        align: cap[2].replace(/^ *|\| *$/g, '').split(/ *\| */),
+        cells: cap[3].replace(/\n$/, '').split('\n')
+      };
+
+      for (i = 0; i < item.align.length; i++) {
+        if (/^ *-+: *$/.test(item.align[i])) {
+          item.align[i] = 'right';
+        } else if (/^ *:-+: *$/.test(item.align[i])) {
+          item.align[i] = 'center';
+        } else if (/^ *:-+ *$/.test(item.align[i])) {
+          item.align[i] = 'left';
+        } else {
+          item.align[i] = null;
+        }
+      }
+
+      for (i = 0; i < item.cells.length; i++) {
+        item.cells[i] = item.cells[i].split(/ *\| */);
+      }
+
+      this$1.tokens.push(item);
+
+      continue;
+    }
+
+    // lheading
+    if (cap = this$1.rules.lheading.exec(src)) {
+      src = src.substring(cap[0].length);
+      this$1.tokens.push({
+        type: 'heading',
+        depth: cap[2] === '=' ? 1 : 2,
+        text: cap[1]
+      });
+      continue;
+    }
+
+    // hr
+    if (cap = this$1.rules.hr.exec(src)) {
+      src = src.substring(cap[0].length);
+      this$1.tokens.push({
+        type: 'hr'
+      });
+      continue;
+    }
+
+    // blockquote
+    if (cap = this$1.rules.blockquote.exec(src)) {
+      src = src.substring(cap[0].length);
+
+      this$1.tokens.push({
+        type: 'blockquote_start'
+      });
+
+      cap = cap[0].replace(/^ *> ?/gm, '');
+
+      // Pass `top` to keep the current
+      // "toplevel" state. This is exactly
+      // how markdown.pl works.
+      this$1.token(cap, top, true);
+
+      this$1.tokens.push({
+        type: 'blockquote_end'
+      });
+
+      continue;
+    }
+
+    // list
+    if (cap = this$1.rules.list.exec(src)) {
+      src = src.substring(cap[0].length);
+      bull = cap[2];
+
+      this$1.tokens.push({
+        type: 'list_start',
+        ordered: bull.length > 1
+      });
+
+      // Get each top-level item.
+      cap = cap[0].match(this$1.rules.item);
+
+      next = false;
+      l = cap.length;
+      i = 0;
+
+      for (; i < l; i++) {
+        item = cap[i];
+
+        // Remove the list item's bullet
+        // so it is seen as the next token.
+        space = item.length;
+        item = item.replace(/^ *([*+-]|\d+\.) +/, '');
+
+        // Outdent whatever the
+        // list item contains. Hacky.
+        if (~item.indexOf('\n ')) {
+          space -= item.length;
+          item = !this$1.options.pedantic
+            ? item.replace(new RegExp('^ {1,' + space + '}', 'gm'), '')
+            : item.replace(/^ {1,4}/gm, '');
+        }
+
+        // Determine whether the next list item belongs here.
+        // Backpedal if it does not belong in this list.
+        if (this$1.options.smartLists && i !== l - 1) {
+          b = block.bullet.exec(cap[i + 1])[0];
+          if (bull !== b && !(bull.length > 1 && b.length > 1)) {
+            src = cap.slice(i + 1).join('\n') + src;
+            i = l - 1;
+          }
+        }
+
+        // Determine whether item is loose or not.
+        // Use: /(^|\n)(?! )[^\n]+\n\n(?!\s*$)/
+        // for discount behavior.
+        loose = next || /\n\n(?!\s*$)/.test(item);
+        if (i !== l - 1) {
+          next = item.charAt(item.length - 1) === '\n';
+          if (!loose) { loose = next; }
+        }
+
+        this$1.tokens.push({
+          type: loose
+            ? 'loose_item_start'
+            : 'list_item_start'
+        });
+
+        // Recurse.
+        this$1.token(item, false, bq);
+
+        this$1.tokens.push({
+          type: 'list_item_end'
+        });
+      }
+
+      this$1.tokens.push({
+        type: 'list_end'
+      });
+
+      continue;
+    }
+
+    // html
+    if (cap = this$1.rules.html.exec(src)) {
+      src = src.substring(cap[0].length);
+      this$1.tokens.push({
+        type: this$1.options.sanitize
+          ? 'paragraph'
+          : 'html',
+        pre: !this$1.options.sanitizer
+          && (cap[1] === 'pre' || cap[1] === 'script' || cap[1] === 'style'),
+        text: cap[0]
+      });
+      continue;
+    }
+
+    // def
+    if ((!bq && top) && (cap = this$1.rules.def.exec(src))) {
+      src = src.substring(cap[0].length);
+      this$1.tokens.links[cap[1].toLowerCase()] = {
+        href: cap[2],
+        title: cap[3]
+      };
+      continue;
+    }
+
+    // table (gfm)
+    if (top && (cap = this$1.rules.table.exec(src))) {
+      src = src.substring(cap[0].length);
+
+      item = {
+        type: 'table',
+        header: cap[1].replace(/^ *| *\| *$/g, '').split(/ *\| */),
+        align: cap[2].replace(/^ *|\| *$/g, '').split(/ *\| */),
+        cells: cap[3].replace(/(?: *\| *)?\n$/, '').split('\n')
+      };
+
+      for (i = 0; i < item.align.length; i++) {
+        if (/^ *-+: *$/.test(item.align[i])) {
+          item.align[i] = 'right';
+        } else if (/^ *:-+: *$/.test(item.align[i])) {
+          item.align[i] = 'center';
+        } else if (/^ *:-+ *$/.test(item.align[i])) {
+          item.align[i] = 'left';
+        } else {
+          item.align[i] = null;
+        }
+      }
+
+      for (i = 0; i < item.cells.length; i++) {
+        item.cells[i] = item.cells[i]
+          .replace(/^ *\| *| *\| *$/g, '')
+          .split(/ *\| */);
+      }
+
+      this$1.tokens.push(item);
+
+      continue;
+    }
+
+    // top-level paragraph
+    if (top && (cap = this$1.rules.paragraph.exec(src))) {
+      src = src.substring(cap[0].length);
+      this$1.tokens.push({
+        type: 'paragraph',
+        text: cap[1].charAt(cap[1].length - 1) === '\n'
+          ? cap[1].slice(0, -1)
+          : cap[1]
+      });
+      continue;
+    }
+
+    // text
+    if (cap = this$1.rules.text.exec(src)) {
+      // Top-level should never reach here.
+      src = src.substring(cap[0].length);
+      this$1.tokens.push({
+        type: 'text',
+        text: cap[0]
+      });
+      continue;
+    }
+
+    if (src) {
+      throw new
+        Error('Infinite loop on byte: ' + src.charCodeAt(0));
+    }
+  }
+
+  return this.tokens;
+};
+
+/**
+ * Inline-Level Grammar
+ */
+
+var inline = {
+  escape: /^\\([\\`*{}\[\]()#+\-.!_>])/,
+  autolink: /^<([^ >]+(@|:\/)[^ >]+)>/,
+  url: noop,
+  tag: /^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,
+  link: /^!?\[(inside)\]\(href\)/,
+  reflink: /^!?\[(inside)\]\s*\[([^\]]*)\]/,
+  nolink: /^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,
+  strong: /^__([\s\S]+?)__(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/,
+  em: /^\b_((?:[^_]|__)+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+  code: /^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,
+  br: /^ {2,}\n(?!\s*$)/,
+  del: noop,
+  text: /^[\s\S]+?(?=[\\<!\[_*`]| {2,}\n|$)/
+};
+
+inline._inside = /(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;
+inline._href = /\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;
+
+inline.link = replace(inline.link)
+  ('inside', inline._inside)
+  ('href', inline._href)
+  ();
+
+inline.reflink = replace(inline.reflink)
+  ('inside', inline._inside)
+  ();
+
+/**
+ * Normal Inline Grammar
+ */
+
+inline.normal = merge({}, inline);
+
+/**
+ * Pedantic Inline Grammar
+ */
+
+inline.pedantic = merge({}, inline.normal, {
+  strong: /^__(?=\S)([\s\S]*?\S)__(?!_)|^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/,
+  em: /^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/
+});
+
+/**
+ * GFM Inline Grammar
+ */
+
+inline.gfm = merge({}, inline.normal, {
+  escape: replace(inline.escape)('])', '~|])')(),
+  url: /^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,
+  del: /^~~(?=\S)([\s\S]*?\S)~~/,
+  text: replace(inline.text)
+    (']|', '~]|')
+    ('|', '|https?://|')
+    ()
+});
+
+/**
+ * GFM + Line Breaks Inline Grammar
+ */
+
+inline.breaks = merge({}, inline.gfm, {
+  br: replace(inline.br)('{2,}', '*')(),
+  text: replace(inline.gfm.text)('{2,}', '*')()
+});
+
+/**
+ * Inline Lexer & Compiler
+ */
+
+function InlineLexer(links, options) {
+  this.options = options || marked.defaults;
+  this.links = links;
+  this.rules = inline.normal;
+  this.renderer = this.options.renderer || new Renderer;
+  this.renderer.options = this.options;
+
+  if (!this.links) {
+    throw new
+      Error('Tokens array requires a `links` property.');
+  }
+
+  if (this.options.gfm) {
+    if (this.options.breaks) {
+      this.rules = inline.breaks;
+    } else {
+      this.rules = inline.gfm;
+    }
+  } else if (this.options.pedantic) {
+    this.rules = inline.pedantic;
+  }
+}
+
+/**
+ * Expose Inline Rules
+ */
+
+InlineLexer.rules = inline;
+
+/**
+ * Static Lexing/Compiling Method
+ */
+
+InlineLexer.output = function(src, links, options) {
+  var inline = new InlineLexer(links, options);
+  return inline.output(src);
+};
+
+/**
+ * Lexing/Compiling
+ */
+
+InlineLexer.prototype.output = function(src) {
+  var this$1 = this;
+
+  var out = ''
+    , link
+    , text
+    , href
+    , cap;
+
+  while (src) {
+    // escape
+    if (cap = this$1.rules.escape.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += cap[1];
+      continue;
+    }
+
+    // autolink
+    if (cap = this$1.rules.autolink.exec(src)) {
+      src = src.substring(cap[0].length);
+      if (cap[2] === '@') {
+        text = cap[1].charAt(6) === ':'
+          ? this$1.mangle(cap[1].substring(7))
+          : this$1.mangle(cap[1]);
+        href = this$1.mangle('mailto:') + text;
+      } else {
+        text = escape(cap[1]);
+        href = text;
+      }
+      out += this$1.renderer.link(href, null, text);
+      continue;
+    }
+
+    // url (gfm)
+    if (!this$1.inLink && (cap = this$1.rules.url.exec(src))) {
+      src = src.substring(cap[0].length);
+      text = escape(cap[1]);
+      href = text;
+      out += this$1.renderer.link(href, null, text);
+      continue;
+    }
+
+    // tag
+    if (cap = this$1.rules.tag.exec(src)) {
+      if (!this$1.inLink && /^<a /i.test(cap[0])) {
+        this$1.inLink = true;
+      } else if (this$1.inLink && /^<\/a>/i.test(cap[0])) {
+        this$1.inLink = false;
+      }
+      src = src.substring(cap[0].length);
+      out += this$1.options.sanitize
+        ? this$1.options.sanitizer
+          ? this$1.options.sanitizer(cap[0])
+          : escape(cap[0])
+        : cap[0];
+      continue;
+    }
+
+    // link
+    if (cap = this$1.rules.link.exec(src)) {
+      src = src.substring(cap[0].length);
+      this$1.inLink = true;
+      out += this$1.outputLink(cap, {
+        href: cap[2],
+        title: cap[3]
+      });
+      this$1.inLink = false;
+      continue;
+    }
+
+    // reflink, nolink
+    if ((cap = this$1.rules.reflink.exec(src))
+        || (cap = this$1.rules.nolink.exec(src))) {
+      src = src.substring(cap[0].length);
+      link = (cap[2] || cap[1]).replace(/\s+/g, ' ');
+      link = this$1.links[link.toLowerCase()];
+      if (!link || !link.href) {
+        out += cap[0].charAt(0);
+        src = cap[0].substring(1) + src;
+        continue;
+      }
+      this$1.inLink = true;
+      out += this$1.outputLink(cap, link);
+      this$1.inLink = false;
+      continue;
+    }
+
+    // strong
+    if (cap = this$1.rules.strong.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this$1.renderer.strong(this$1.output(cap[2] || cap[1]));
+      continue;
+    }
+
+    // em
+    if (cap = this$1.rules.em.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this$1.renderer.em(this$1.output(cap[2] || cap[1]));
+      continue;
+    }
+
+    // code
+    if (cap = this$1.rules.code.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this$1.renderer.codespan(escape(cap[2], true));
+      continue;
+    }
+
+    // br
+    if (cap = this$1.rules.br.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this$1.renderer.br();
+      continue;
+    }
+
+    // del (gfm)
+    if (cap = this$1.rules.del.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this$1.renderer.del(this$1.output(cap[1]));
+      continue;
+    }
+
+    // text
+    if (cap = this$1.rules.text.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += this$1.renderer.text(escape(this$1.smartypants(cap[0])));
+      continue;
+    }
+
+    if (src) {
+      throw new
+        Error('Infinite loop on byte: ' + src.charCodeAt(0));
+    }
+  }
+
+  return out;
+};
+
+/**
+ * Compile Link
+ */
+
+InlineLexer.prototype.outputLink = function(cap, link) {
+  var href = escape(link.href)
+    , title = link.title ? escape(link.title) : null;
+
+  return cap[0].charAt(0) !== '!'
+    ? this.renderer.link(href, title, this.output(cap[1]))
+    : this.renderer.image(href, title, escape(cap[1]));
+};
+
+/**
+ * Smartypants Transformations
+ */
+
+InlineLexer.prototype.smartypants = function(text) {
+  if (!this.options.smartypants) { return text; }
+  return text
+    // em-dashes
+    .replace(/---/g, '\u2014')
+    // en-dashes
+    .replace(/--/g, '\u2013')
+    // opening singles
+    .replace(/(^|[-\u2014/(\[{"\s])'/g, '$1\u2018')
+    // closing singles & apostrophes
+    .replace(/'/g, '\u2019')
+    // opening doubles
+    .replace(/(^|[-\u2014/(\[{\u2018\s])"/g, '$1\u201c')
+    // closing doubles
+    .replace(/"/g, '\u201d')
+    // ellipses
+    .replace(/\.{3}/g, '\u2026');
+};
+
+/**
+ * Mangle Links
+ */
+
+InlineLexer.prototype.mangle = function(text) {
+  if (!this.options.mangle) { return text; }
+  var out = ''
+    , l = text.length
+    , i = 0
+    , ch;
+
+  for (; i < l; i++) {
+    ch = text.charCodeAt(i);
+    if (Math.random() > 0.5) {
+      ch = 'x' + ch.toString(16);
+    }
+    out += '&#' + ch + ';';
+  }
+
+  return out;
+};
+
+/**
+ * Renderer
+ */
+
+function Renderer(options) {
+  this.options = options || {};
+}
+
+Renderer.prototype.code = function(code, lang, escaped) {
+  if (this.options.highlight) {
+    var out = this.options.highlight(code, lang);
+    if (out != null && out !== code) {
+      escaped = true;
+      code = out;
+    }
+  }
+
+  if (!lang) {
+    return '<pre><code>'
+      + (escaped ? code : escape(code, true))
+      + '\n</code></pre>';
+  }
+
+  return '<pre><code class="'
+    + this.options.langPrefix
+    + escape(lang, true)
+    + '">'
+    + (escaped ? code : escape(code, true))
+    + '\n</code></pre>\n';
+};
+
+Renderer.prototype.blockquote = function(quote) {
+  return '<blockquote>\n' + quote + '</blockquote>\n';
+};
+
+Renderer.prototype.html = function(html) {
+  return html;
+};
+
+Renderer.prototype.heading = function(text, level, raw) {
+  return '<h'
+    + level
+    + ' id="'
+    + this.options.headerPrefix
+    + raw.toLowerCase().replace(/[^\w]+/g, '-')
+    + '">'
+    + text
+    + '</h'
+    + level
+    + '>\n';
+};
+
+Renderer.prototype.hr = function() {
+  return this.options.xhtml ? '<hr/>\n' : '<hr>\n';
+};
+
+Renderer.prototype.list = function(body, ordered) {
+  var type = ordered ? 'ol' : 'ul';
+  return '<' + type + '>\n' + body + '</' + type + '>\n';
+};
+
+Renderer.prototype.listitem = function(text) {
+  return '<li>' + text + '</li>\n';
+};
+
+Renderer.prototype.paragraph = function(text) {
+  return '<p>' + text + '</p>\n';
+};
+
+Renderer.prototype.table = function(header, body) {
+  return '<table>\n'
+    + '<thead>\n'
+    + header
+    + '</thead>\n'
+    + '<tbody>\n'
+    + body
+    + '</tbody>\n'
+    + '</table>\n';
+};
+
+Renderer.prototype.tablerow = function(content) {
+  return '<tr>\n' + content + '</tr>\n';
+};
+
+Renderer.prototype.tablecell = function(content, flags) {
+  var type = flags.header ? 'th' : 'td';
+  var tag = flags.align
+    ? '<' + type + ' style="text-align:' + flags.align + '">'
+    : '<' + type + '>';
+  return tag + content + '</' + type + '>\n';
+};
+
+// span level renderer
+Renderer.prototype.strong = function(text) {
+  return '<strong>' + text + '</strong>';
+};
+
+Renderer.prototype.em = function(text) {
+  return '<em>' + text + '</em>';
+};
+
+Renderer.prototype.codespan = function(text) {
+  return '<code>' + text + '</code>';
+};
+
+Renderer.prototype.br = function() {
+  return this.options.xhtml ? '<br/>' : '<br>';
+};
+
+Renderer.prototype.del = function(text) {
+  return '<del>' + text + '</del>';
+};
+
+Renderer.prototype.link = function(href, title, text) {
+  if (this.options.sanitize) {
+    try {
+      var prot = decodeURIComponent(unescape(href))
+        .replace(/[^\w:]/g, '')
+        .toLowerCase();
+    } catch (e) {
+      return '';
+    }
+    if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0) {
+      return '';
+    }
+  }
+  var out = '<a href="' + href + '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  out += '>' + text + '</a>';
+  return out;
+};
+
+Renderer.prototype.image = function(href, title, text) {
+  var out = '<img src="' + href + '" alt="' + text + '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  out += this.options.xhtml ? '/>' : '>';
+  return out;
+};
+
+Renderer.prototype.text = function(text) {
+  return text;
+};
+
+/**
+ * Parsing & Compiling
+ */
+
+function Parser(options) {
+  this.tokens = [];
+  this.token = null;
+  this.options = options || marked.defaults;
+  this.options.renderer = this.options.renderer || new Renderer;
+  this.renderer = this.options.renderer;
+  this.renderer.options = this.options;
+}
+
+/**
+ * Static Parse Method
+ */
+
+Parser.parse = function(src, options, renderer) {
+  var parser = new Parser(options, renderer);
+  return parser.parse(src);
+};
+
+/**
+ * Parse Loop
+ */
+
+Parser.prototype.parse = function(src) {
+  var this$1 = this;
+
+  this.inline = new InlineLexer(src.links, this.options, this.renderer);
+  this.tokens = src.reverse();
+
+  var out = '';
+  while (this.next()) {
+    out += this$1.tok();
+  }
+
+  return out;
+};
+
+/**
+ * Next Token
+ */
+
+Parser.prototype.next = function() {
+  return this.token = this.tokens.pop();
+};
+
+/**
+ * Preview Next Token
+ */
+
+Parser.prototype.peek = function() {
+  return this.tokens[this.tokens.length - 1] || 0;
+};
+
+/**
+ * Parse Text Tokens
+ */
+
+Parser.prototype.parseText = function() {
+  var this$1 = this;
+
+  var body = this.token.text;
+
+  while (this.peek().type === 'text') {
+    body += '\n' + this$1.next().text;
+  }
+
+  return this.inline.output(body);
+};
+
+/**
+ * Parse Current Token
+ */
+
+Parser.prototype.tok = function() {
+  var this$1 = this;
+
+  switch (this.token.type) {
+    case 'space': {
+      return '';
+    }
+    case 'hr': {
+      return this.renderer.hr();
+    }
+    case 'heading': {
+      return this.renderer.heading(
+        this.inline.output(this.token.text),
+        this.token.depth,
+        this.token.text);
+    }
+    case 'code': {
+      return this.renderer.code(this.token.text,
+        this.token.lang,
+        this.token.escaped);
+    }
+    case 'table': {
+      var header = ''
+        , body = ''
+        , i
+        , row
+        , cell
+        , flags
+        , j;
+
+      // header
+      cell = '';
+      for (i = 0; i < this.token.header.length; i++) {
+        flags = { header: true, align: this$1.token.align[i] };
+        cell += this$1.renderer.tablecell(
+          this$1.inline.output(this$1.token.header[i]),
+          { header: true, align: this$1.token.align[i] }
+        );
+      }
+      header += this.renderer.tablerow(cell);
+
+      for (i = 0; i < this.token.cells.length; i++) {
+        row = this$1.token.cells[i];
+
+        cell = '';
+        for (j = 0; j < row.length; j++) {
+          cell += this$1.renderer.tablecell(
+            this$1.inline.output(row[j]),
+            { header: false, align: this$1.token.align[j] }
+          );
+        }
+
+        body += this$1.renderer.tablerow(cell);
+      }
+      return this.renderer.table(header, body);
+    }
+    case 'blockquote_start': {
+      var body = '';
+
+      while (this.next().type !== 'blockquote_end') {
+        body += this$1.tok();
+      }
+
+      return this.renderer.blockquote(body);
+    }
+    case 'list_start': {
+      var body = ''
+        , ordered = this.token.ordered;
+
+      while (this.next().type !== 'list_end') {
+        body += this$1.tok();
+      }
+
+      return this.renderer.list(body, ordered);
+    }
+    case 'list_item_start': {
+      var body = '';
+
+      while (this.next().type !== 'list_item_end') {
+        body += this$1.token.type === 'text'
+          ? this$1.parseText()
+          : this$1.tok();
+      }
+
+      return this.renderer.listitem(body);
+    }
+    case 'loose_item_start': {
+      var body = '';
+
+      while (this.next().type !== 'list_item_end') {
+        body += this$1.tok();
+      }
+
+      return this.renderer.listitem(body);
+    }
+    case 'html': {
+      var html = !this.token.pre && !this.options.pedantic
+        ? this.inline.output(this.token.text)
+        : this.token.text;
+      return this.renderer.html(html);
+    }
+    case 'paragraph': {
+      return this.renderer.paragraph(this.inline.output(this.token.text));
+    }
+    case 'text': {
+      return this.renderer.paragraph(this.parseText());
+    }
+  }
+};
+
+/**
+ * Helpers
+ */
+
+function escape(html, encode) {
+  return html
+    .replace(!encode ? /&(?!#?\w+;)/g : /&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function unescape(html) {
+	// explicitly match decimal, hex, and named HTML entities 
+  return html.replace(/&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/g, function(_, n) {
+    n = n.toLowerCase();
+    if (n === 'colon') { return ':'; }
+    if (n.charAt(0) === '#') {
+      return n.charAt(1) === 'x'
+        ? String.fromCharCode(parseInt(n.substring(2), 16))
+        : String.fromCharCode(+n.substring(1));
+    }
+    return '';
+  });
+}
+
+function replace(regex, opt) {
+  regex = regex.source;
+  opt = opt || '';
+  return function self(name, val) {
+    if (!name) { return new RegExp(regex, opt); }
+    val = val.source || val;
+    val = val.replace(/(^|[^\[])\^/g, '$1');
+    regex = regex.replace(name, val);
+    return self;
+  };
+}
+
+function noop() {}
+noop.exec = noop;
+
+function merge(obj) {
+  var arguments$1 = arguments;
+
+  var i = 1
+    , target
+    , key;
+
+  for (; i < arguments.length; i++) {
+    target = arguments$1[i];
+    for (key in target) {
+      if (Object.prototype.hasOwnProperty.call(target, key)) {
+        obj[key] = target[key];
+      }
+    }
+  }
+
+  return obj;
+}
+
+
+/**
+ * Marked
+ */
+
+function marked(src, opt, callback) {
+  if (callback || typeof opt === 'function') {
+    if (!callback) {
+      callback = opt;
+      opt = null;
+    }
+
+    opt = merge({}, marked.defaults, opt || {});
+
+    var highlight = opt.highlight
+      , tokens
+      , pending
+      , i = 0;
+
+    try {
+      tokens = Lexer.lex(src, opt);
+    } catch (e) {
+      return callback(e);
+    }
+
+    pending = tokens.length;
+
+    var done = function(err) {
+      if (err) {
+        opt.highlight = highlight;
+        return callback(err);
+      }
+
+      var out;
+
+      try {
+        out = Parser.parse(tokens, opt);
+      } catch (e) {
+        err = e;
+      }
+
+      opt.highlight = highlight;
+
+      return err
+        ? callback(err)
+        : callback(null, out);
+    };
+
+    if (!highlight || highlight.length < 3) {
+      return done();
+    }
+
+    delete opt.highlight;
+
+    if (!pending) { return done(); }
+
+    for (; i < tokens.length; i++) {
+      (function(token) {
+        if (token.type !== 'code') {
+          return --pending || done();
+        }
+        return highlight(token.text, token.lang, function(err, code) {
+          if (err) { return done(err); }
+          if (code == null || code === token.text) {
+            return --pending || done();
+          }
+          token.text = code;
+          token.escaped = true;
+          --pending || done();
+        });
+      })(tokens[i]);
+    }
+
+    return;
+  }
+  try {
+    if (opt) { opt = merge({}, marked.defaults, opt); }
+    return Parser.parse(Lexer.lex(src, opt), opt);
+  } catch (e) {
+    e.message += '\nPlease report this to https://github.com/chjj/marked.';
+    if ((opt || marked.defaults).silent) {
+      return '<p>An error occured:</p><pre>'
+        + escape(e.message + '', true)
+        + '</pre>';
+    }
+    throw e;
+  }
+}
+
+/**
+ * Options
+ */
+
+marked.options =
+marked.setOptions = function(opt) {
+  merge(marked.defaults, opt);
+  return marked;
+};
+
+marked.defaults = {
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  sanitizer: null,
+  mangle: true,
+  smartLists: false,
+  silent: false,
+  highlight: null,
+  langPrefix: 'lang-',
+  smartypants: false,
+  headerPrefix: '',
+  renderer: new Renderer,
+  xhtml: false
+};
+
+/**
+ * Expose
+ */
+
+marked.Parser = Parser;
+marked.parser = Parser.parse;
+
+marked.Renderer = Renderer;
+
+marked.Lexer = Lexer;
+marked.lexer = Lexer.lex;
+
+marked.InlineLexer = InlineLexer;
+marked.inlineLexer = InlineLexer.output;
+
+marked.parse = marked;
+
+if (typeof module !== 'undefined' && typeof exports === 'object') {
+  module.exports = marked;
+} else if (typeof define === 'function' && define.amd) {
+  define(function() { return marked; });
+} else {
+  this.marked = marked;
+}
+
+}).call(function() {
+  return this || (typeof window !== 'undefined' ? window : commonjsGlobal);
+}());
+});
+
+var es5$15 = codeString(
+"var stream = require('mithril/stream');\n\nvar MarkdownEditor = {\n  oninit: function(vnode) {\n    vnode.state.value = stream('Type some *markdown* here!');\n    vnode.state.markdown = vnode.state.value.map(marked);\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Input'),\n        m('textarea.fullWidth', {\n          oninput: m.withAttr('value', vnode.state.value),\n          value: vnode.state.value()\n        }),\n        m('h3', 'Output'),\n        m('div', m.trust(vnode.state.markdown()))\n      )\n    );\n  }\n};");
+
+var es6$15 = codeString(
+"import stream from 'mithril/stream';\n\nconst MarkdownEditor = {\n  oninit({ state }) {\n    state.value = stream('Type some *markdown* here!');\n    state.markdown = state.value.map(marked);\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Input'),\n        m('textarea.fullWidth', {\n          oninput: m.withAttr('value', state.value),\n          value: state.value()\n        }),\n        m('h3', 'Output'),\n        m('div', m.trust(state.markdown()))\n      )\n    );\n  }\n};");
+
+var jsx$15 = codeString(
+"import stream from 'mithril/stream';\n\nconst MarkdownEditor = {\n  oninit({ state }) {\n    state.value = stream('Type some *markdown* here!');\n    state.markdown = state.value.map(marked);\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Input</h3>\n        <textarea\n          className='fullWidth'\n          oninput={m.withAttr('value', state.value)}\n          value{state.value()}/>\n        <h3>Output</h3>\n        <div>{m.trust(state.markdown())}</div>\n      </div>\n    );\n  }\n};");
+
+var code$15 = [
+  { id: 'es5', code: es5$15 },
+  { id: 'es6', code: es6$15 },
+  { id: 'jsx', code: jsx$15 }
+];
+
+var Component$15 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.value = stream('Type some *markdown* here!');
+    state.markdown = state.value.map(marked);
+  },
+  view: function view(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('h3', 'Input'),
+        mithril('textarea.fullWidth', {
+          oninput: mithril.withAttr('value', state.value),
+          value: state.value()
+        }),
+        mithril('h3', 'Output'),
+        mithril('div', mithril.trust(state.markdown()))
+      )
+    );
+  }
+};
+
+function view$6() {
+	return (
+		mithril(Page, { id: 'Applications' },
+			mithril('.Section',
+				mithril('h2', 'Todo list'),
+				mithril('p',
+					'This example is ported over from the React.js documentation in order to demonstrate ',
+					'some of the differences between Mithril\'s syntax and React\'s.'
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$12, fiddle: 'vqqfvjb6' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$12))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Shopping cart'),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$13, fiddle: 'mbyqewny' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$13))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Braille Translator'),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$14, fiddle: '53xrgmxq' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$14))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Markdown editor'),
+				mithril('p',
+					markup(
+						'Like the to-do example, this example that closely mirrors a demo application on the react.js site. ' +
+						'We are using the [marked](https://github.com/chjj/marked) library to transform the ' +
+						'input string into a raw html string. In the view, `m.trust` is used to bypass the ' +
+						'input sanitation provided by default with mithril.'
+					)
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$15, fiddle: 'ozjtms1q' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$15))
+					)
+				)
+			)
+		)
+	);
+}
+
+var Applications = {
+	view: view$6
+};
+
+var es5$16 = codeString(
+"var stream = require('mithril/stream');\n\nvar BookView = {\n  oninit: function(vnode) {\n    vnode.state.books = stream([]);\n    m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    }).then(vnode.state.books);\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          vnode.state.books().map(function(book) {\n            return m('li', { key: book.id }, book.name);\n          })\n        )\n      )\n    );\n  }\n};");
+
+var es6$16 = codeString(
+"import stream from 'mithril/stream';\n\nconst BookView = {\n  oninit({ state }) {\n    state.books = stream([]);\n    m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    }).then(state.books);\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          state.books().map((book) =>\n            m('li', { key: book.id }, book.name)\n          )\n        )\n      )\n    );\n  }\n};");
+
+var jsx$16 = codeString(
+"import stream from 'mithril/stream';\n\nconst BookView = {\n  oninit({ state }) {\n    state.books = stream([]);\n    m.request({\n      method: 'GET',\n      url: 'https://mithril-examples.firebaseio.com/books.json'\n    }).then(state.books);\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Books</h3>\n        <ul>\n          {\n            state.books().map((book) =>\n              <li key={book.id}>{book.name}</li>\n            )\n          }\n        </ul>\n      </div>\n    );\n  }\n};");
+
+var code$16 = [
+  { id: 'es5', code: es5$16 },
+  { id: 'es6', code: es6$16 },
+  { id: 'jsx', code: jsx$16 }
+];
+
+// Fetches an array of books objects of the form:
+// { name: String, price: Number, id: Number }
+var Component$16 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.books = stream([]);
+    mithril.request({
+      method: 'GET',
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    }).then(state.books);
+  },
+  view: function view(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('h3', 'Books'),
+        mithril('ul',
+          state.books().map(function (book) { return mithril('li', { key: book.id }, book.name); }
+          )
+        )
+      )
+    );
+  }
+};
+
+var es5$17 = codeString(
+"var stream = require('mithril/stream');\n\nvar BookView = {\n  oninit: function(vnode) {\n    vnode.state.books = stream([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then(function(response) {\n        return response.json();\n      })\n      .then(vnode.state.books)\n      .then(function() {\n        m.redraw();\n      });\n  },\n  view: function(vnode) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          vnode.state.books().map(function(book) {\n            return m('li', { key: book.id }, book.name);\n          })\n        )\n      )\n    );\n  }\n};");
+
+var es6$17 = codeString(
+"import stream from 'mithril/stream';\n\nconst BookView = {\n  oninit({ state }) {\n    state.books = stream([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then((response) => response.json())\n      .then(state.books)\n      .then(() => m.redraw());\n  },\n  view({ state }) {\n    return (\n      m('div',\n        m('h3', 'Books'),\n        m('ul',\n          state.books().map((book) =>\n            m('li', { key: book.id }, book.name)\n          )\n        )\n      )\n    );\n  }\n};");
+
+var jsx$17 = codeString(
+"import stream from 'mithril/stream';\n\nconst BookView = {\n  oninit({ state }) {\n    state.books = stream([]);\n    fetch('https://mithril-examples.firebaseio.com/books.json')\n      .then((response) => response.json())\n      .then(state.books)\n      .then(() => m.redraw());\n  },\n  view({ state }) {\n    return (\n      <div>\n        <h3>Books</h3>\n        <ul>\n          {\n            state.books().map((book) =>\n              <li key={book.id}>{book.name}</li>\n            )\n          }\n        </ul>\n      </div>\n    );\n  }\n};");
+
+var code$17 = [
+  { id: 'es5', code: es5$17 },
+  { id: 'es6', code: es6$17 },
+  { id: 'jsx', code: jsx$17 }
+];
+
+var Component$17 = {
+  oninit: function oninit(ref) {
+    var state = ref.state;
+
+    state.books = stream([]);
+    fetch('https://mithril-examples.firebaseio.com/books.json')
+      .then(function (response) { return response.json(); })
+      .then(state.books)
+      .then(function () { return mithril.redraw(); });
+  },
+  view: function view(ref) {
+    var state = ref.state;
+
+    return (
+      mithril('div',
+        mithril('h3', 'Books'),
+        mithril('ul',
+          state.books().map(function (book) { return mithril('li', { key: book.id }, book.name); }
+          )
+        )
+      )
+    );
+  }
+};
+
+function view$7() {
+	return (
+		mithril(Page, { id: 'Requests' },
+			mithril('.Section',
+				mithril('h2', 'Render fetched list'),
+				mithril('p',
+					mithril('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/request.md]',
+						mithril('code.inline', 'm.request')
+					),
+					' performs an AJAX request against a specified url and returns a ',
+					mithril('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/stream.md]', 'stream'),
+					' whose value becomes the data fetched from the server.'
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$16, fiddle: 'rd54g0f4' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$16))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Equivalent using fetch api'),
+				mithril('p',
+					mithril('code.inline', 'm.request'),
+					' is similar to the native fetch api, but adds automatic redrawing upon completion, ',
+					'converts the response to JSON, and resolves to a stream. For comparison, the following ',
+					'code is the equivalent of the first example, using the native fetch api instead.'
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$17, fiddle: '5b1wn90n' })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$17))
+					)
+				)
+			)
+		)
+	);
+}
+
+var Requests = {
+	view: view$7
+};
+
+var es5$18 = codeString(
+"var RouteView = {\n  view: function() {\n    return m('div', 'Current route: ', m.route.get());\n  }\n};");
+
+var es6$18 = codeString(
+"const RouteView = {\n  view() {\n    return m('div', 'Current route: ', m.route.get());\n  }\n};");
+
+var jsx$18 = codeString(
+"const RouteView = {\n  view() {\n    return <div>Current route: {m.route.get()}</div>;\n  }\n};");
+
+var code$18 = [
+  { id: 'es5', code: es5$18 },
+  { id: 'es6', code: es6$18 },
+  { id: 'jsx', code: jsx$18 }
+];
+
+var Component$18 = {
+  view: function view() {
+    return mithril('div', 'Current route: ', mithril.route.get());
+  }
+};
+
+var es5$19 = codeString(
+"var LinkView = {\n  view: function() {\n    return (\n      m('ul',\n        m('li',\n          m('a[href=/routing]', {\n            oncreate: m.route.link\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('a[href=/routing/foo]', {\n            oncreate: m.route.link\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('a[href=/routing/bar]', {\n            oncreate: m.route.link\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};");
+
+var es6$19 = codeString(
+"const LinkView = {\n  view() {\n    return (\n      m('ul',\n        m('li',\n          m('a[href=/routing]', {\n            oncreate: m.route.link\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('a[href=/routing/foo]', {\n            oncreate: m.route.link\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('a[href=/routing/bar]', {\n            oncreate: m.route.link\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};");
+
+var jsx$19 = codeString(
+"const LinkView = {\n  view() {\n    return (\n      <ul>\n        <li>\n          <a href='/routing' oncreate={m.route.link}>\n            Routing page (root)\n          </a>\n        </li>\n        <li>\n          <a href='/routing/foo' oncreate={m.route.link}>\n            /routing/foo\n          </a>\n        </li>\n        <li>\n          <a href='/routing/bar' oncreate={m.route.link}>\n            /routing/bar\n          </a>\n        </li>\n      </ul>\n    );\n  }\n};");
+
+var code$19 = [
+  { id: 'es5', code: es5$19 },
+  { id: 'es6', code: es6$19 },
+  { id: 'jsx', code: jsx$19 }
+];
+
+var Component$19 = {
+  view: function view() {
+    return (
+      mithril('ul',
+        mithril('li',
+          mithril('a[href=/routing]', {
+            oncreate: mithril.route.link
+          }, 'Routing page (root)')
+        ),
+        mithril('li',
+          mithril('a[href=/routing/foo]', {
+            oncreate: mithril.route.link
+          }, '/routing/foo')
+        ),
+        mithril('li',
+          mithril('a[href=/routing/bar]', {
+            oncreate: mithril.route.link
+          }, '/routing/bar')
+        )
+      )
+    );
+  }
+};
+
+var es5$20 = codeString(
+"var ButtonView = {\n  view: function() {\n    return (\n      m('ul',\n        m('li',\n          m('button', {\n            onclick: function() { m.route.set('/routing') }\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('button', {\n            onclick: function() { m.route.set('/routing/foo') }\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('button', {\n            onclick: function() { m.route.set('/routing/bar') }\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};");
+
+var es6$20 = codeString(
+"const ButtonView = {\n  view() {\n    return (\n      m('ul',\n        m('li',\n          m('button', {\n            onclick: () => m.route.set('/routing')\n          }, 'Routing page (root)')\n        ),\n        m('li',\n          m('button', {\n            onclick: () => m.route.set('/routing/foo')\n          }, '/routing/foo')\n        ),\n        m('li',\n          m('button', {\n            onclick: () => m.route.set('/routing/bar')\n          }, '/routing/bar')\n        )\n      )\n    );\n  }\n};");
+
+var jsx$20 = codeString(
+"const ButtonView = {\n  view() {\n    return (\n      <ul>\n        <li>\n          <button onclick={() => m.route.set('/routing')}>\n            Routing page (root)\n          </button>\n        </li>\n        <li>\n          <button onclick={() => m.route.set('/routing/foo')}>\n            /routing/foo\n          </button>\n        </li>\n        <li>\n          <button onclick={() => m.route.set('/routing/bar')}>\n            /routing/bar\n          </button>\n        </li>\n      </ul>\n    );\n  }\n};");
+
+var code$20 = [
+  { id: 'es5', code: es5$20 },
+  { id: 'es6', code: es6$20 },
+  { id: 'jsx', code: jsx$20 }
+];
+
+var Component$20 = {
+  view: function view() {
+    return (
+      mithril('ul',
+        mithril('li',
+          mithril('button', {
+            onclick: function () { return mithril.route.set('/routing'); }
+          }, 'Routing page (root)')
+        ),
+        mithril('li',
+          mithril('button', {
+            onclick: function () { return mithril.route.set('/routing/foo'); }
+          }, '/routing/foo')
+        ),
+        mithril('li',
+          mithril('button', {
+            onclick: function () { return mithril.route.set('/routing/bar'); }
+          }, '/routing/bar')
+        )
+      )
+    );
+  }
+};
+
+function view$8() {
+	return (
+		mithril(Page, { id: 'Routing' },
+			mithril('.Section',
+				mithril('h2', 'Getting the current route'),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$18 })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$18))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Setting the current route (with links)'),
+				mithril('p',
+					'When using links (',
+					mithril('code.inline', 'a'),
+					' elements), Mithril provides a method that prevents the default behavior of links ',
+					'(which would refresh the page unnecessarily) and ensures that those links adhere to the ',
+					'current routing mode, whether it\'s hash based, query string based, or pathname based. ',
+					'For any links that do not route away from the current site, use ',
+					mithril('code.inline', 'm.route.link'),
+					' in that link\'s ',
+					mithril('code.inline', 'oncreate'),
+					' lifecycle method.'
+				),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$19 })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$19))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Setting the current route programmatically'),
+				mithril('.Demo',
+					mithril('.Demo-left',
+						mithril(Tabs, { tabs: code$20 })
+					),
+					mithril('.Demo-right',
+						mithril('.Demo-result', mithril(Component$20))
+					)
+				)
+			),
+			mithril('.Section',
+				mithril('h2', 'Further reading'),
+				mithril('p',
+					'Take a look at the ',
+					mithril('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/route.md]', 'official router documentation'),
+					' for more information on how routing works in Mithril. ',
+					'The implementation of the router used for this website can be found ',
+					mithril('a[href=https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/index.js?ts=2]', 'on github'),
+					'.'
+				),
+				mithril('p',
+					markup('See also: interactive [mithril router usage on JSFiddle](https://jsfiddle.net/qproodwf/).')
+				)
+			)
+		)
+	);
+}
+
+var Routing = {
+	view: view$8
+};
+
+function view$9() {
+	return (
+		mithril(Page, { id: 'Streams' },
+			mithril('.Section',
+				mithril('h2', '...')
+			)
+		)
+	);
+}
+
+var Prop = {
+	view: view$9
+};
+
+window.__DEV__ = window.location.hostname === 'localhost';
+
+var routes = {
+	'/': GettingStarted,
+	'/gettingstarted': GettingStarted,
+	'/components': Components,
+	'/applications': Applications,
+	'/requests': Requests,
+	'/routing': Routing,
+	'/routing/:param': Routing,
+	'/streams': Prop
+};
+
+mithril.route.prefix('');
+mithril.route(document.getElementById('app'), '/', routes);
+
+}());

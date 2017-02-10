@@ -1,12 +1,15 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import marked from 'marked';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`var MarkdownEditor = {
+`var stream = require('mithril/stream');
+
+var MarkdownEditor = {
   oninit: function(vnode) {
-    vnode.state.value = m.prop('Type some *markdown* here!');
-    vnode.state.markdown = vnode.state.value.run(marked);
+    vnode.state.value = stream('Type some *markdown* here!');
+    vnode.state.markdown = vnode.state.value.map(marked);
   },
   view: function(vnode) {
     return (
@@ -24,10 +27,12 @@ const es5 = codeString(
 };`);
 
 const es6 = codeString(
-`const MarkdownEditor = {
+`import stream from 'mithril/stream';
+
+const MarkdownEditor = {
   oninit({ state }) {
-    state.value = m.prop('Type some *markdown* here!');
-    state.markdown = state.value.run(marked);
+    state.value = stream('Type some *markdown* here!');
+    state.markdown = state.value.map(marked);
   },
   view({ state }) {
     return (
@@ -45,10 +50,12 @@ const es6 = codeString(
 };`);
 
 const jsx = codeString(
-`const MarkdownEditor = {
+`import stream from 'mithril/stream';
+
+const MarkdownEditor = {
   oninit({ state }) {
-    state.value = m.prop('Type some *markdown* here!');
-    state.markdown = state.value.run(marked);
+    state.value = stream('Type some *markdown* here!');
+    state.markdown = state.value.map(marked);
   },
   view({ state }) {
     return (
@@ -73,8 +80,8 @@ export const code = [
 
 export const Component = {
   oninit({ state }) {
-    state.value = m.prop('Type some *markdown* here!');
-    state.markdown = state.value.run(marked);
+    state.value = stream('Type some *markdown* here!');
+    state.markdown = state.value.map(marked);
   },
   view({ state }) {
     return (

@@ -1,10 +1,13 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`var BookView = {
+`var stream = require('mithril/stream');
+
+var BookView = {
   oninit: function(vnode) {
-    vnode.state.books = m.prop([]);
+    vnode.state.books = stream([]);
     fetch('https://mithril-examples.firebaseio.com/books.json')
       .then(function(response) {
         return response.json();
@@ -29,9 +32,11 @@ const es5 = codeString(
 };`);
 
 const es6 = codeString(
-`const BookView = {
+`import stream from 'mithril/stream';
+
+const BookView = {
   oninit({ state }) {
-    state.books = m.prop([]);
+    state.books = stream([]);
     fetch('https://mithril-examples.firebaseio.com/books.json')
       .then((response) => response.json())
       .then(state.books)
@@ -52,9 +57,11 @@ const es6 = codeString(
 };`);
 
 const jsx = codeString(
-`const BookView = {
+`import stream from 'mithril/stream';
+
+const BookView = {
   oninit({ state }) {
-    state.books = m.prop([]);
+    state.books = stream([]);
     fetch('https://mithril-examples.firebaseio.com/books.json')
       .then((response) => response.json())
       .then(state.books)
@@ -84,7 +91,7 @@ export const code = [
 
 export const Component = {
   oninit({ state }) {
-    state.books = m.prop([]);
+    state.books = stream([]);
     fetch('https://mithril-examples.firebaseio.com/books.json')
       .then((response) => response.json())
       .then(state.books)

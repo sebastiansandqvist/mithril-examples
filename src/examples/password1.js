@@ -1,11 +1,14 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`var PasswordInput = {
+`var stream = require('mithril/stream');
+
+var PasswordInput = {
   oninit: function(vnode) {
-    vnode.state.visible = m.prop(false);
-    vnode.state.value = m.prop('');
+    vnode.state.visible = stream(false);
+    vnode.state.value = stream('');
     vnode.state.toggle = function() {
       vnode.state.visible(!vnode.state.visible());
     };
@@ -29,10 +32,12 @@ const es5 = codeString(
 };`);
 
 const es6 = codeString(
-`const PasswordInput = {
+`import stream from 'mithril/stream';
+
+const PasswordInput = {
   oninit({ state }) {
-    state.visible = m.prop(false);
-    state.value = m.prop('');
+    state.visible = stream(false);
+    state.value = stream('');
     state.toggle = () => state.visible(!state.visible());
   },
   view({ state }) {
@@ -53,10 +58,12 @@ const es6 = codeString(
 };`);
 
 const jsx = codeString(
-`const PasswordInput = {
+`import stream from 'mithril/stream';
+
+const PasswordInput = {
   oninit({ state }) {
-    state.visible = m.prop(false);
-    state.value = m.prop('');
+    state.visible = stream(false);
+    state.value = stream('');
     state.toggle = () => state.visible(!state.visible());
   },
   view({ state }) {
@@ -83,8 +90,8 @@ export const code = [
 
 export const Component = {
   oninit({ state }) {
-    state.visible = m.prop(false);
-    state.value = m.prop('');
+    state.visible = stream(false);
+    state.value = stream('');
     state.toggle = () => state.visible(!state.visible());
   },
   view({ state }) {

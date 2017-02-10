@@ -1,15 +1,18 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`function setHeight(domNode) {
+`var stream = require('mithril/stream');
+
+function setHeight(domNode) {
   domNode.style.height = ''; // reset before recalculating
   domNode.style.height = domNode.scrollHeight + 'px';
 }
 
 var Textarea = {
   oninit: function(vnode) {
-    vnode.state.value = m.prop();
+    vnode.state.value = stream();
   },
   oncreate: function(vnode) {
     vnode.state.value.run(function() {
@@ -25,14 +28,16 @@ var Textarea = {
 };`);
 
 const es6 = codeString(
-`function setHeight(domNode) {
+`import stream from 'mithril/stream';
+
+function setHeight(domNode) {
   domNode.style.height = ''; // reset before recalculating
   domNode.style.height = \`$\{domNode.scrollHeight}px\`;
 }
 
 const Textarea = {
   oninit({ state }) {
-    state.value = m.prop();
+    state.value = stream();
   },
   oncreate({ dom, state }) {
     state.value.run(() => setHeight(dom));
@@ -46,14 +51,16 @@ const Textarea = {
 };`);
 
 const jsx = codeString(
-`function setHeight(domNode) {
+`import stream from 'mithril/stream';
+
+function setHeight(domNode) {
   domNode.style.height = ''; // reset before recalculating
   domNode.style.height = \`$\{domNode.scrollHeight}px\`;
 }
 
 const Textarea = {
   oninit({ state }) {
-    state.value = m.prop();
+    state.value = stream();
   },
   oncreate({ dom, state }) {
     state.value.run(() => setHeight(dom));
@@ -78,7 +85,7 @@ function setHeight(domNode) {
 
 export const Component = {
   oninit({ state }) {
-    state.value = m.prop();
+    state.value = stream();
   },
   oncreate({ dom, state }) {
     state.value.map(() => setHeight(dom));

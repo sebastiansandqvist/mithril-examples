@@ -1,8 +1,11 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`var TodoList = {
+`var stream = require('mithril/stream');
+
+var TodoList = {
   view: function(vnode) {
     return (
       m('ul',
@@ -17,7 +20,7 @@ const es5 = codeString(
 var TodoApp = {
   oninit: function(vnode) {
     vnode.state.items = [];
-    vnode.state.text = m.prop('');
+    vnode.state.text = stream('');
     vnode.state.handleSubmit = function(event) {
       event.preventDefault();
       vnode.state.items.push(vnode.state.text());
@@ -44,7 +47,9 @@ var TodoApp = {
 };`);
 
 const es6 = codeString(
-`const TodoList = {
+`import stream from 'mithril/stream';
+
+const TodoList = {
   view({ attrs }) {
     return (
       m('ul',
@@ -59,7 +64,7 @@ const es6 = codeString(
 const TodoApp = {
   oninit({ state }) {
     state.items = [];
-    state.text = m.prop('');
+    state.text = stream('');
     state.handleSubmit = function(event) {
       event.preventDefault();
       state.items.push(state.text());
@@ -86,7 +91,9 @@ const TodoApp = {
 };`);
 
 const jsx = codeString(
-`const TodoList = {
+`import stream from 'mithril/stream';
+
+const TodoList = {
   view({ attrs }) {
     return (
       <ul>
@@ -101,7 +108,7 @@ const jsx = codeString(
 const TodoApp = {
   oninit({ state }) {
     state.items = [];
-    state.text = m.prop('');
+    state.text = stream('');
     state.handleSubmit = function(event) {
       event.preventDefault();
       state.items.push(state.text());
@@ -147,7 +154,7 @@ const TodoList = {
 export const Component = {
   oninit({ state }) {
     state.items = [];
-    state.text = m.prop('');
+    state.text = stream('');
     state.handleSubmit = function(event) {
       event.preventDefault();
       state.items.push(state.text());

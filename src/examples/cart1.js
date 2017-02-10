@@ -1,8 +1,11 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`var ListView = {
+`var stream = require('mithril/stream');
+
+var ListView = {
   view: function(vnode) {
     return (
       m('ul',
@@ -27,17 +30,18 @@ var BookShop = {
 
     // fetch array of book objects from server of form:
     // { name: 'The Iliad', price: 12 }
-    vnode.state.books = m.request({
+    vnode.state.books = stream();
+    m.request({
       method: 'GET',
       url: 'https://mithril-examples.firebaseio.com/books.json'
-    });
+    }).then(vnode.state.books);
 
-    vnode.state.cart = m.prop([]);
-    vnode.state.text = m.prop('');
+    vnode.state.cart = stream([]);
+    vnode.state.text = stream('');
 
     // once books have loaded, filter by title and prevent
     // items in cart from showing up in the shop
-    vnode.state.shop = m.prop.combine(function(text, books, cart) {
+    vnode.state.shop = stream.combine(function(text, books, cart) {
       return books().filter(function(book) {
         return book.name.toLowerCase()
           .indexOf(text().toLowerCase()) > -1 &&
@@ -46,7 +50,7 @@ var BookShop = {
     }, [vnode.state.text, vnode.state.books, vnode.state.cart]);
 
     // when the cart updates, state.total = price of books in cart
-    vnode.state.total = vnode.state.cart.run(function(cart) {
+    vnode.state.total = vnode.state.cart.map(function(cart) {
       return cart.reduce(function(prev, next) {
         return prev + next.price;
       }, 0);
@@ -92,7 +96,9 @@ var BookShop = {
 };`);
 
 const es6 = codeString(
-`const ListView = {
+`import stream from 'mithril/stream';
+
+const ListView = {
   view({ attrs }) {
     return (
       m('ul',
@@ -117,17 +123,18 @@ const BookShop = {
 
     // fetch array of book objects from server of form:
     // { name: 'The Iliad', price: 12 }
-    state.books = m.request({
+    state.books = stream();
+    m.request({
       method: 'GET',
       url: 'https://mithril-examples.firebaseio.com/books.json'
-    });
+    }).then(state.books);
 
-    state.cart = m.prop([]);
-    state.text = m.prop('');
+    state.cart = stream([]);
+    state.text = stream('');
 
     // once books have loaded, filter by title and prevent
     // items in cart from showing up in the shop
-    state.shop = m.prop.combine((text, books, cart) =>
+    state.shop = stream.combine((text, books, cart) =>
       books().filter((book) =>
         book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
           cart().indexOf(book) === -1
@@ -135,7 +142,7 @@ const BookShop = {
     );
 
     // when the cart updates, state.total = price of books in cart
-    state.total = state.cart.run(function(cart) {
+    state.total = state.cart.map(function(cart) {
       return cart.reduce((prev, next) => prev + next.price, 0);
     });
 
@@ -179,7 +186,9 @@ const BookShop = {
 };`);
 
 const jsx = codeString(
-`const ListView = {
+`import stream from 'mithril/stream';
+
+const ListView = {
   view({ attrs }) {
     return (
       <ul>
@@ -203,17 +212,18 @@ const BookShop = {
 
     // fetch array of book objects from server of form:
     // { name: 'The Iliad', price: 12 }
-    state.books = m.request({
+    state.books = stream();
+    m.request({
       method: 'GET',
       url: 'https://mithril-examples.firebaseio.com/books.json'
-    });
+    }).then(state.books);
 
-    state.cart = m.prop([]);
-    state.text = m.prop('');
+    state.cart = stream([]);
+    state.text = stream('');
 
     // once books have loaded, filter by title and prevent
     // items in cart from showing up in the shop
-    state.shop = m.prop.combine((text, books, cart) =>
+    state.shop = stream.combine((text, books, cart) =>
       books().filter((book) =>
         book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
           cart().indexOf(book) === -1
@@ -221,7 +231,7 @@ const BookShop = {
     );
 
     // when the cart updates, state.total = price of books in cart
-    state.total = state.cart.run(function(cart) {
+    state.total = state.cart.map(function(cart) {
       return cart.reduce((prev, next) => prev + next.price, 0);
     });
 
@@ -293,17 +303,18 @@ export const Component = {
 
     // fetch array of book objects from server of form:
     // { name: 'The Iliad', price: 12 }
-    state.books = m.request({
+    state.books = stream();
+    m.request({
       method: 'GET',
       url: 'https://mithril-examples.firebaseio.com/books.json'
-    });
+    }).then(state.books);
 
-    state.cart = m.prop([]);
-    state.text = m.prop('');
+    state.cart = stream([]);
+    state.text = stream('');
 
     // once books have loaded, filter by title and prevent
     // items in cart from showing up in the shop
-    state.shop = m.prop.combine((text, books, cart) =>
+    state.shop = stream.combine((text, books, cart) =>
       books().filter((book) =>
         book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
           cart().indexOf(book) === -1
@@ -311,7 +322,7 @@ export const Component = {
     );
 
     // when the cart updates, state.total = price of books in cart
-    state.total = state.cart.run(function(cart) {
+    state.total = state.cart.map(function(cart) {
       return cart.reduce((prev, next) => prev + next.price, 0);
     });
 

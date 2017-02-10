@@ -32,7 +32,7 @@
   "dependencies": {
     "fetch-ie8": "1.4.3",
     "marked": "0.3.6",
-    "mithril": "git://github.com/lhorie/mithril.js.git#664888d151092c186a036467b7210b80410ba534",
+    "mithril": "1.0.1",
     "prismjs": "1.5.1",
     "s-types": "1.0.4"
   },

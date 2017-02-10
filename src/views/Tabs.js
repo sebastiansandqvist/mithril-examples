@@ -1,4 +1,5 @@
 import m from 'mithril';
+import stream from 'mithril/stream';
 import T from 's-types';
 
 const tabType = T({
@@ -10,7 +11,7 @@ const tabType = T({
 });
 
 function oninit({ state }) {
-	state.activeIndex = m.prop(0);
+	state.activeIndex = stream(0);
 }
 
 function view({ attrs, state }) {

@@ -10,7 +10,7 @@ module.exports = {
 	plugins: [
 		nodeResolve({ browser: true }),
 		commonjs(),
-		buble(),
-		uglify()
+		buble()
+		// uglify()
 	]
 };
