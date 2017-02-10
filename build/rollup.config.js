@@ -5,7 +5,7 @@ import uglify from 'rollup-plugin-uglify';
 
 module.exports = {
 	entry: 'src/index.js',
-	dest: 'public/bundle.04.js',
+	dest: 'public/bundle.05.js',
 	format: 'iife',
 	plugins: [
 		nodeResolve({ browser: true }),
