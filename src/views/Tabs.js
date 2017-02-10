@@ -20,9 +20,9 @@ function view({ attrs, state }) {
 		tabType(attrs, 'Tabs');
 	}
 
-	const fiddleButton = attrs.fiddle ? (
-		m('a.FiddleLink', { href: `https://jsfiddle.net/${attrs.fiddle}/` }, 'jsFiddle')
-	) : null;
+	// const fiddleButton = attrs.fiddle ? (
+	// 	m('a.FiddleLink', { href: `https://jsfiddle.net/${attrs.fiddle}/` }, 'jsFiddle')
+	// ) : null;
 
 	return (
 		m('.Tabs.drop20',
@@ -35,8 +35,8 @@ function view({ attrs, state }) {
 							onclick: () => state.activeIndex(i)
 						}, tab.id)
 					)
-				),
-				fiddleButton
+				)
+				// fiddleButton
 			),
 			m('pre.TabContent',
 				m('code', m.trust(attrs.tabs[state.activeIndex()].code))
