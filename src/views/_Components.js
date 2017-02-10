@@ -118,7 +118,7 @@ function view() {
 					markup(
 						'This example also relies on the fact that, in addition to being a getter-setter, ' +
 						'any variable set to `stream()`  can be observed for changes. Whenever the value is ' +
-						'updated, its `run` function calls its callback with the new value. (In this case, ' +
+						'updated, its `map` function calls its callback with the new value. (In this case, ' +
 						'we just ignore the new value since the height is set regardless of the specific contents).'
 					)
 				),
