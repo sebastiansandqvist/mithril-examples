@@ -14,6 +14,11 @@ import {
 } from '../examples/stopwatch2.js';
 
 import {
+	code as stopwatch3,
+	Component as StopwatchComponent3
+} from '../examples/stopwatch3.js';
+
+import {
 	code as rotator1,
 	Component as RotatorComponent1
 } from '../examples/rotator1.js';
@@ -72,6 +77,17 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(StopwatchComponent2))
+					)
+				),
+				m('p',
+					'Because of the increased complexity this adds to the component, it is a good idea to refactor it to decouple the view logic from the data.'
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: stopwatch3 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(StopwatchComponent3))
 					)
 				)
 			),
