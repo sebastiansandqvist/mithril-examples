@@ -5,6 +5,16 @@ import codeString from '../util/codeString.js';
 const es5 = codeString(
 `var stream = require('mithril/stream');
 
+var model = {
+  todos: [],
+  newTodoText: stream(''),
+  addTodo: function(event) {
+    event.preventDefault();
+    model.todos.push(model.newTodoText());
+    model.newTodoText(''); // reset
+  }
+};
+
 var TodoList = {
   view: function(vnode) {
     return (
@@ -18,28 +28,19 @@ var TodoList = {
 };
 
 var TodoApp = {
-  oninit: function(vnode) {
-    vnode.state.items = [];
-    vnode.state.text = stream('');
-    vnode.state.handleSubmit = function(event) {
-      event.preventDefault();
-      vnode.state.items.push(vnode.state.text());
-      vnode.state.text('');
-    };
-  },
-  view: function(vnode) {
+  view: function() {
     return (
       m('div',
         m('h3', 'To-do'),
-        m(TodoList, { items: vnode.state.items }),
-        m('form', { onsubmit: vnode.state.handleSubmit },
+        m(TodoList, { items: model.todos }),
+        m('form', { onsubmit: model.addTodo },
           m('input[type=text]', {
-            oninput: m.withAttr('value', vnode.state.text),
-            value: vnode.state.text()
+            oninput: m.withAttr('value', model.newTodoText),
+            value: model.newTodoText()
           }),
           m('button', {
             type: 'submit'
-          }, \`Add #$\{vnode.state.items.length + 1}\`)
+          }, 'Add #' + (model.todos.length + 1))
         )
       )
     );
@@ -48,6 +49,16 @@ var TodoApp = {
 
 const es6 = codeString(
 `import stream from 'mithril/stream';
+
+const model = {
+  todos: [],
+  newTodoText: stream(''),
+  addTodo(event) {
+    event.preventDefault();
+    model.todos.push(model.newTodoText());
+    model.newTodoText(''); // reset
+  }
+};
 
 const TodoList = {
   view({ attrs }) {
@@ -62,28 +73,17 @@ const TodoList = {
 };
 
 const TodoApp = {
-  oninit({ state }) {
-    state.items = [];
-    state.text = stream('');
-    state.handleSubmit = function(event) {
-      event.preventDefault();
-      state.items.push(state.text());
-      state.text('');
-    };
-  },
-  view({ state }) {
+  view() {
     return (
       m('div',
         m('h3', 'To-do'),
-        m(TodoList, { items: state.items }),
-        m('form', { onsubmit: state.handleSubmit },
+        m(TodoList, { items: model.todos }),
+        m('form', { onsubmit: model.addTodo },
           m('input[type=text]', {
-            oninput: m.withAttr('value', state.text),
-            value: state.text()
+            oninput: m.withAttr('value', model.newTodoText),
+            value: model.newTodoText()
           }),
-          m('button', {
-            type: 'submit'
-          }, \`Add #$\{state.items.length + 1}\`)
+          m('button', { type: 'submit' }, \`Add #$\{model.todos.length + 1}\`)
         )
       )
     );
@@ -92,6 +92,16 @@ const TodoApp = {
 
 const jsx = codeString(
 `import stream from 'mithril/stream';
+
+const model = {
+  todos: [],
+  newTodoText: stream(''),
+  addTodo(event) {
+    event.preventDefault();
+    model.todos.push(model.newTodoText());
+    model.newTodoText(''); // reset
+  }
+};
 
 const TodoList = {
   view({ attrs }) {
@@ -106,26 +116,18 @@ const TodoList = {
 };
 
 const TodoApp = {
-  oninit({ state }) {
-    state.items = [];
-    state.text = stream('');
-    state.handleSubmit = function(event) {
-      event.preventDefault();
-      state.items.push(state.text());
-      state.text('');
-    };
-  },
-  view({ state }) {
+  view() {
     return (
       <div>
         <h3>To-do</h3>
-        <TodoList items={state.items}/>
-        <form onsubmit={state.handleSubmit}>
+        <TodoList items={model.todos}/>
+        <form onsubmit={model.addTodo}>
           <input
             type='text'
-            oninput={m.withAttr('value', state.text)}/>
+            value={model.newTodoText()}
+            oninput={m.withAttr('value', model.newTodoText)}/>
           <button type='submit'>
-            Add #{state.items.length + 1}
+            Add #{model.todos.length + 1}
           </button>
         </form>
       </div>
@@ -138,6 +140,16 @@ export const code = [
   { id: 'es6', code: es6 },
   { id: 'jsx', code: jsx }
 ];
+
+const model = {
+  todos: [],
+  newTodoText: stream(''),
+  addTodo(event) {
+    event.preventDefault();
+    model.todos.push(model.newTodoText());
+    model.newTodoText(''); // reset
+  }
+};
 
 const TodoList = {
   view({ attrs }) {
@@ -152,26 +164,17 @@ const TodoList = {
 };
 
 export const Component = {
-  oninit({ state }) {
-    state.items = [];
-    state.text = stream('');
-    state.handleSubmit = function(event) {
-      event.preventDefault();
-      state.items.push(state.text());
-      state.text('');
-    };
-  },
-  view({ state }) {
+  view() {
     return (
       m('div',
         m('h3', 'To-do'),
-        m(TodoList, { items: state.items }),
-        m('form', { onsubmit: state.handleSubmit },
+        m(TodoList, { items: model.todos }),
+        m('form', { onsubmit: model.addTodo },
           m('input[type=text]', {
-            oninput: m.withAttr('value', state.text),
-            value: state.text()
+            oninput: m.withAttr('value', model.newTodoText),
+            value: model.newTodoText()
           }),
-          m('button', { type: 'submit' }, `Add #${state.items.length + 1}`)
+          m('button', { type: 'submit' }, `Add #${model.todos.length + 1}`)
         )
       )
     );

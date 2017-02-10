@@ -21,9 +21,8 @@ function view() {
 					m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/request.md]',
 						m('code.inline', 'm.request')
 					),
-					' performs an AJAX request against a specified url and returns a ',
-					m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/stream.md]', 'stream'),
-					' whose value becomes the data fetched from the server.'
+					' performs an AJAX request against a specified url and returns a promise that ',
+					' resolves to the data fetched from the server.'
 				),
 				m('.Demo',
 					m('.Demo-left',

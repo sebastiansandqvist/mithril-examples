@@ -28,6 +28,11 @@ import {
 	Component as HelloWorldFnComponent
 } from '../examples/helloWorld-functions.js';
 
+import {
+	code as helloWorldModel,
+	Component as HelloWorldModelComponent
+} from '../examples/helloWorld-model.js';
+
 function view() {
 	return (
 		m(Page, { id: 'Getting started' },
@@ -80,7 +85,7 @@ function view() {
 					'In addition to the ',
 					m('code.inline', 'view'),
 					' method, Mithril components have a variety of ',
-					m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/lifecycle-methods.renderToStaticMarkup]', 'lifecycle hooks'),
+					m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/lifecycle-methods.md]', 'lifecycle hooks'),
 					'. Using the ',
 					m('code.inline', 'oninit'),
 					' lifecycle hook, which runs once immediately before rendering the component, ',
@@ -138,6 +143,24 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(HelloWorldFnComponent))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Data separation'),
+				m('p',
+					'It is often a good idea to separate the data concerns from the view logic in your application. ',
+					'For many of the simple examples presented here, state lives and dies with each component. ',
+					'By instead allowing state to exist outside of the components, it can be accessed by other parts of the application. ',
+					'(Also, note that one subtle difference this makes is that the state will persist even after the component unmounts.) ',
+					'The example that we have been using is minimal, but it could be refactored as follows:'
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: helloWorldModel })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(HelloWorldModelComponent))
 					)
 				)
 			)

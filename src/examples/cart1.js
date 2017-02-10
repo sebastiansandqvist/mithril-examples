@@ -5,91 +5,87 @@ import codeString from '../util/codeString.js';
 const es5 = codeString(
 `var stream = require('mithril/stream');
 
+var model = {
+  books: [],
+  cart: [],
+  query: stream(''),
+  total: 0,
+  getResults: function(query) {
+    query = query.toLowerCase();
+    return model.books.filter(function(book) {
+      return book.name.toLowerCase().indexOf(query) > -1 &&
+        model.cart.indexOf(book) === -1;
+    });
+  },
+  addToCart: function(book) {
+    model.cart.push(book);
+    model.total += book.price;
+  },
+  removeFromCart: function(book) {
+    model.cart = model.cart.filter(function(item) {
+      return item !== book;
+    });
+    model.total -= book.price;
+  },
+  fetchBooks: function() {
+    m.request({
+      method: 'GET',
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    }).then(function(books) {
+      model.books = books || [];
+    });
+  }
+};
+
+
 var ListView = {
   view: function(vnode) {
     return (
       m('ul',
-          vnode.attrs.items ?
-            vnode.attrs.items.map(function(book, i) {
-              return m('li', { key: i },
-                m('span', book.name, ' $', book.price),
-                m('button.right', {
-                  onclick: function() {
-                    vnode.attrs.action(book);
-                  }
-                }, vnode.attrs.actionLabel)
-              )
-          }) : m('div', 'Loading...')
+        vnode.attrs.items.map(function(book) {
+          return m('li', { key: book.id },
+            m('span', book.name, ' $', book.price),
+            m('button.right', {
+              onclick: function() {
+                vnode.attrs.action(book);
+              }
+            }, vnode.attrs.actionLabel)
+          )
+        })
       )
     );
   }
 };
 
-var BookShop = {
-  oninit: function(vnode) {
-
+var Component = {
+  oninit: function() {
     // fetch array of book objects from server of form:
     // { name: 'The Iliad', price: 12 }
-    vnode.state.books = stream();
-    m.request({
-      method: 'GET',
-      url: 'https://mithril-examples.firebaseio.com/books.json'
-    }).then(vnode.state.books);
-
-    vnode.state.cart = stream([]);
-    vnode.state.text = stream('');
-
-    // once books have loaded, filter by title and prevent
-    // items in cart from showing up in the shop
-    vnode.state.shop = stream.combine(function(text, books, cart) {
-      return books().filter(function(book) {
-        return book.name.toLowerCase()
-          .indexOf(text().toLowerCase()) > -1 &&
-            cart().indexOf(book) === -1;
-      });
-    }, [vnode.state.text, vnode.state.books, vnode.state.cart]);
-
-    // when the cart updates, state.total = price of books in cart
-    vnode.state.total = vnode.state.cart.map(function(cart) {
-      return cart.reduce(function(prev, next) {
-        return prev + next.price;
-      }, 0);
-    });
-
-    vnode.state.addToCart = function(book) {
-      vnode.state.cart(vnode.state.cart().concat(book));
-    };
-
-    vnode.state.removeFromCart = function(book) {
-      vnode.state.cart(
-        vnode.state.cart().filter((item) => item !== book)
-      );
-    };
-
+    model.fetchBooks();
   },
-  view: function(vnode) {
+  view: function() {
     return (
       m('div',
         m('h3', 'Book Shop'),
         m('input[type=text]', {
           placeholder: 'Filter',
-          value: vnode.state.text(),
-          oninput: m.withAttr('value', vnode.state.text)
+          value: model.query(),
+          oninput: m.withAttr('value', model.query)
         }),
         m(ListView, {
-          items: vnode.state.shop(),
-          action: vnode.state.addToCart,
+          items: model.getResults(model.query()),
+          action: model.addToCart,
           actionLabel: 'Add'
         }),
         m('hr'),
         m('h3', 'Cart'),
         m(ListView, {
-          items: vnode.state.cart(),
-          action: vnode.state.removeFromCart,
+          items: model.cart,
+          action: model.removeFromCart,
           actionLabel: 'Remove'
         }),
         m('strong', 'Total: '),
-        m('span', '$', vnode.state.total())
+        m('span', '$', model.total)
       )
     );
   }
@@ -98,88 +94,84 @@ var BookShop = {
 const es6 = codeString(
 `import stream from 'mithril/stream';
 
+const model = {
+  books: [],
+  cart: [],
+  query: stream(''),
+  total: 0,
+  getResults(query) {
+    return model.books.filter((book) =>
+      book.name.toLowerCase().indexOf(query.toLowerCase()) > -1 &&
+        model.cart.indexOf(book) === -1
+    );
+  },
+  addToCart(book) {
+    model.cart.push(book);
+    model.total += book.price;
+  },
+  removeFromCart(book) {
+    model.cart = model.cart.filter((item) => item !== book);
+    model.total -= book.price;
+  },
+  fetchBooks() {
+    m.request({
+      method: 'GET',
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    }).then(function(books) {
+      model.books = books || [];
+    });
+  }
+};
+
+
 const ListView = {
   view({ attrs }) {
     return (
       m('ul',
-          attrs.items ? attrs.items.map((book, i) =>
-            m('li', { key: i },
-              m('span', book.name, ' $', book.price),
-              m('button.right', {
-                onclick() {
-                  attrs.action(book);
-                }
-              }, attrs.actionLabel)
-            )
-          ) : m('div', 'Loading...')
-
+        attrs.items.map((book) =>
+          m('li', { key: book.id },
+            m('span', book.name, ' $', book.price),
+            m('button.right', {
+              onclick() {
+                attrs.action(book);
+              }
+            }, attrs.actionLabel)
+          )
+        )
       )
     );
   }
 };
 
-const BookShop = {
-  oninit({ state }) {
-
+const Component = {
+  oninit() {
     // fetch array of book objects from server of form:
     // { name: 'The Iliad', price: 12 }
-    state.books = stream();
-    m.request({
-      method: 'GET',
-      url: 'https://mithril-examples.firebaseio.com/books.json'
-    }).then(state.books);
-
-    state.cart = stream([]);
-    state.text = stream('');
-
-    // once books have loaded, filter by title and prevent
-    // items in cart from showing up in the shop
-    state.shop = stream.combine((text, books, cart) =>
-      books().filter((book) =>
-        book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
-          cart().indexOf(book) === -1
-      ), [state.text, state.books, state.cart]
-    );
-
-    // when the cart updates, state.total = price of books in cart
-    state.total = state.cart.map(function(cart) {
-      return cart.reduce((prev, next) => prev + next.price, 0);
-    });
-
-    state.addToCart = function(book) {
-      state.cart(state.cart().concat(book));
-    };
-
-    state.removeFromCart = function(book) {
-      state.cart(
-        state.cart().filter((item) => item !== book)
-      );
-    };
-
+    model.fetchBooks();
   },
-  view({ state }) {
+  view() {
     return (
       m('div',
         m('h3', 'Book Shop'),
         m('input[type=text]', {
           placeholder: 'Filter',
-          value: state.text(),
-          oninput: m.withAttr('value', state.text)
+          value: model.query(),
+          oninput: m.withAttr('value', model.query)
         }),
         m(ListView, {
-          items: state.shop(),
-          action: state.addToCart,
+          items: model.getResults(model.query()),
+          action: model.addToCart,
           actionLabel: 'Add'
         }),
         m('hr'),
         m('h3', 'Cart'),
         m(ListView, {
-          items: state.cart(),
-          action: state.removeFromCart,
+          items: model.cart,
+          action: model.removeFromCart,
           actionLabel: 'Remove'
         }),
         m('strong', 'Total: '),
-        m('span', '$', state.total())
+        m('span', '$', model.total)
       )
     );
   }
@@ -188,89 +180,88 @@ const BookShop = {
 const jsx = codeString(
 `import stream from 'mithril/stream';
 
+const model = {
+  books: [],
+  cart: [],
+  query: stream(''),
+  total: 0,
+  getResults(query) {
+    return model.books.filter((book) =>
+      book.name.toLowerCase().indexOf(query.toLowerCase()) > -1 &&
+        model.cart.indexOf(book) === -1
+    );
+  },
+  addToCart(book) {
+    model.cart.push(book);
+    model.total += book.price;
+  },
+  removeFromCart(book) {
+    model.cart = model.cart.filter((item) => item !== book);
+    model.total -= book.price;
+  },
+  fetchBooks() {
+    m.request({
+      method: 'GET',
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    }).then(function(books) {
+      model.books = books || [];
+    });
+  }
+};
+
 const ListView = {
   view({ attrs }) {
     return (
       <ul>
         {
-          attrs.items ? attrs.items.map((book, i) =>
-            <li key={i}>
+          attrs.items.map((book) =>
+            <li key={book.id}>
               <span>{book.name} $\{book.price}</span>
               <button className='right' onclick={() => attrs.action(book)}>
                 {attrs.actionLabel}
               </button>
             </li>
-          ) : <div>Loading...</div>
+          )
         }
       </ul>
     );
   }
 };
 
-const BookShop = {
-  oninit({ state }) {
 
+export const Component = {
+  oninit() {
     // fetch array of book objects from server of form:
     // { name: 'The Iliad', price: 12 }
-    state.books = stream();
-    m.request({
-      method: 'GET',
-      url: 'https://mithril-examples.firebaseio.com/books.json'
-    }).then(state.books);
-
-    state.cart = stream([]);
-    state.text = stream('');
-
-    // once books have loaded, filter by title and prevent
-    // items in cart from showing up in the shop
-    state.shop = stream.combine((text, books, cart) =>
-      books().filter((book) =>
-        book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
-          cart().indexOf(book) === -1
-      ), [state.text, state.books, state.cart]
-    );
-
-    // when the cart updates, state.total = price of books in cart
-    state.total = state.cart.map(function(cart) {
-      return cart.reduce((prev, next) => prev + next.price, 0);
-    });
-
-    state.addToCart = function(book) {
-      state.cart(state.cart().concat(book));
-    };
-
-    state.removeFromCart = function(book) {
-      state.cart(
-        state.cart().filter((item) => item !== book)
-      );
-    };
-
+    model.fetchBooks();
   },
-  view({ state }) {
+  view() {
     return (
       <div>
-        <h3>Book shop</h3>
+        <h3>Book Shop</h3>
         <input
-          type='text'
-          placeholder='filter'
-          value={state.text()}
-          oninput={m.withAttr('value', state.text)}/>
+          type="text"
+          placeholder="Filter"
+          value={model.query()}
+          oninput={m.withAttr('value', model.query)}/>
         <ListView
-          items={state.shop()}
-          action={state.addToCart}
-          actionLabel='Add'/>
+          items={model.getResults(model.query())}
+          action={model.addToCart}
+          actionLabel="Add"/>
         <hr/>
         <h3>Cart</h3>
         <ListView
-          items={state.cart()}
-          action={state.removeFromCart}
-          actionLabel='Remove'/>
+          items={model.cart}
+          action={model.removeFromCart}
+          actionLabel="Remove"/>
         <strong>Total: </strong>
-        <span>$\{state.total()}</span>
+        <span>$\{model.total}</span>
       </div>
     );
   }
-};`);
+};
+
+`);
 
 export const code = [
   { id: 'es5', code: es5 },
@@ -278,88 +269,84 @@ export const code = [
   { id: 'jsx', code: jsx }
 ];
 
+const model = {
+  books: [],
+  cart: [],
+  query: stream(''),
+  total: 0,
+  getResults(query) {
+    return model.books.filter((book) =>
+      book.name.toLowerCase().indexOf(query.toLowerCase()) > -1 &&
+        model.cart.indexOf(book) === -1
+    );
+  },
+  addToCart(book) {
+    model.cart.push(book);
+    model.total += book.price;
+  },
+  removeFromCart(book) {
+    model.cart = model.cart.filter((item) => item !== book);
+    model.total -= book.price;
+  },
+  fetchBooks() {
+    m.request({
+      method: 'GET',
+      url: 'https://mithril-examples.firebaseio.com/books.json'
+    }).then(function(books) {
+      model.books = books || [];
+    });
+  }
+};
+
+
 const ListView = {
   view({ attrs }) {
     return (
       m('ul',
-          attrs.items ? attrs.items.map((book, i) =>
-            m('li', { key: i },
-              m('span', book.name, ' $', book.price),
-              m('button.right', {
-                onclick() {
-                  attrs.action(book);
-                }
-              }, attrs.actionLabel)
-            )
-          ) : m('div', 'Loading...')
-
+        attrs.items.map((book) =>
+          m('li', { key: book.id },
+            m('span', book.name, ' $', book.price),
+            m('button.right', {
+              onclick() {
+                attrs.action(book);
+              }
+            }, attrs.actionLabel)
+          )
+        )
       )
     );
   }
 };
 
 export const Component = {
-  oninit({ state }) {
-
+  oninit() {
     // fetch array of book objects from server of form:
     // { name: 'The Iliad', price: 12 }
-    state.books = stream();
-    m.request({
-      method: 'GET',
-      url: 'https://mithril-examples.firebaseio.com/books.json'
-    }).then(state.books);
-
-    state.cart = stream([]);
-    state.text = stream('');
-
-    // once books have loaded, filter by title and prevent
-    // items in cart from showing up in the shop
-    state.shop = stream.combine((text, books, cart) =>
-      books().filter((book) =>
-        book.name.toLowerCase().indexOf(text().toLowerCase()) > -1 &&
-          cart().indexOf(book) === -1
-      ), [state.text, state.books, state.cart]
-    );
-
-    // when the cart updates, state.total = price of books in cart
-    state.total = state.cart.map(function(cart) {
-      return cart.reduce((prev, next) => prev + next.price, 0);
-    });
-
-    state.addToCart = function(book) {
-      state.cart(state.cart().concat(book));
-    };
-
-    state.removeFromCart = function(book) {
-      state.cart(
-        state.cart().filter((item) => item !== book)
-      );
-    };
-
+    model.fetchBooks();
   },
-  view({ state }) {
+  view() {
     return (
       m('div',
         m('h3', 'Book Shop'),
         m('input[type=text]', {
           placeholder: 'Filter',
-          value: state.text(),
-          oninput: m.withAttr('value', state.text)
+          value: model.query(),
+          oninput: m.withAttr('value', model.query)
         }),
         m(ListView, {
-          items: state.shop(),
-          action: state.addToCart,
+          items: model.getResults(model.query()),
+          action: model.addToCart,
           actionLabel: 'Add'
         }),
         m('hr'),
         m('h3', 'Cart'),
         m(ListView, {
-          items: state.cart(),
-          action: state.removeFromCart,
+          items: model.cart,
+          action: model.removeFromCart,
           actionLabel: 'Remove'
         }),
         m('strong', 'Total: '),
-        m('span', '$', state.total())
+        m('span', '$', model.total)
       )
     );
   }
