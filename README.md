@@ -11,7 +11,6 @@ https://mithril-examples.firebaseapp.com/
 - Components: notification (trigger with function)
 - Components: SVG
 - Components: slider
-- Components: form validation
 - Components: list filtering using input
 - Components: debounced typing indicator
 
