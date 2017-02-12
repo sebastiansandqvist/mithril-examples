@@ -39,6 +39,11 @@ import {
 } from '../examples/textarea1.js';
 
 import {
+	code as formValidation1,
+	Component as FormValidationComponent1
+} from '../examples/form-validation1.js';
+
+import {
 	code as tabs1,
 	Component as TabsComponent1
 } from '../examples/tabs1.js';
@@ -165,6 +170,23 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(TextareaComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Form validation'),
+				m('p',
+					'While there are many ways to implement form validation, this approach tends to scale well. ',
+					'Here we allow each field within the model to determine its own validation function and keep ',
+					'track of its own error state. This means that in the future we could trivially add a feature to, for example, ',
+					'validate each input when it is blurred.'
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: formValidation1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(FormValidationComponent1))
 					)
 				)
 			),

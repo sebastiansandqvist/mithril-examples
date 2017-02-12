@@ -211,6 +211,16 @@ p {
 	border-radius: 3px;
 }
 
+.errorMessage {
+	color: #a55;
+	font-size: 12px;
+	padding: 0;
+}
+
+.error {
+	border: 1px solid #a55;
+}
+
 pre {
 	tab-size: 2;
 }
