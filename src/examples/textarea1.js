@@ -15,7 +15,7 @@ var Textarea = {
     vnode.state.value = stream();
   },
   oncreate: function(vnode) {
-    vnode.state.value.run(function() {
+    vnode.state.value.map(function() {
       setHeight(vnode.dom);
     )};
   },
@@ -40,7 +40,7 @@ const Textarea = {
     state.value = stream();
   },
   oncreate({ dom, state }) {
-    state.value.run(() => setHeight(dom));
+    state.value.map(() => setHeight(dom));
   },
   view({ state }) {
     return m('textarea', {
@@ -63,7 +63,7 @@ const Textarea = {
     state.value = stream();
   },
   oncreate({ dom, state }) {
-    state.value.run(() => setHeight(dom));
+    state.value.map(() => setHeight(dom));
   },
   view({ state }) {
     return <textarea
