@@ -124,7 +124,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: helloWorld4, fiddle: 'morgz8m0' })
+						m(Tabs, { tabs: helloWorld4, fiddle: 'br1f9qa9' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(HelloWorldComponent4))
@@ -139,7 +139,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: helloWorldFn })
+						m(Tabs, { tabs: helloWorldFn, fiddle: 'kjwp89t3' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(HelloWorldFnComponent))
@@ -157,7 +157,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: helloWorldModel })
+						m(Tabs, { tabs: helloWorldModel, fiddle: 'yszw15wy' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(HelloWorldModelComponent))

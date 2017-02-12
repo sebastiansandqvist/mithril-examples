@@ -95,7 +95,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: stopwatch3 })
+						m(Tabs, { tabs: stopwatch3, fiddle: '02jgqhyh' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(StopwatchComponent3))
@@ -110,7 +110,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: stopwatch4 })
+						m(Tabs, { tabs: stopwatch4, fiddle: 'd8mwmh01' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(StopwatchComponent4))
@@ -139,7 +139,7 @@ function view() {
 				m('h2', 'Password input'),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: password1, fiddle: '256kx8sy' })
+						m(Tabs, { tabs: password1, fiddle: 'xndgwjp4' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(PasswordComponent1))
@@ -166,7 +166,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: textarea1, fiddle: 'n9rLg94u' })
+						m(Tabs, { tabs: textarea1, fiddle: 'ppcdz2ew' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(TextareaComponent1))
@@ -183,7 +183,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: formValidation1 })
+						m(Tabs, { tabs: formValidation1, fiddle: 'ao9wagsd' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(FormValidationComponent1))
@@ -201,7 +201,7 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: tabs1, fiddle: 'h2vftbr8' })
+						m(Tabs, { tabs: tabs1, fiddle: '4qrxgppj' })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(TabsComponent1))
