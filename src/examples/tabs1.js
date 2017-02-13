@@ -155,10 +155,42 @@ const Component = {
   }
 };`);
 
+const css = codeString.css(
+`/* Wrapper component */
+.Tabs {
+  background: #2c3e50;
+}
+
+/* Top bar containing each tab's title */
+.TabBar {
+  background: #3a536c;
+  overflow: hidden;
+}
+
+/* Each individual tab displaying the title */
+.Tab {
+  color: #fff;
+  cursor: pointer;
+  float: left;
+  padding: 10px 25px;
+}
+
+.Tab.active {
+  background: #2c3e50; /* matches the content's background */
+  cursor: default;
+}
+
+/* The content displayed beneath the tabs */
+.TabContent {
+  color: #fff;
+  padding: 10px 20px;
+}`);
+
 export const code = [
   { id: 'es5', code: es5 },
   { id: 'es6', code: es6 },
-  { id: 'jsx', code: jsx }
+  { id: 'jsx', code: jsx },
+  { id: 'css', code: css }
 ];
 
 const tabContent1 = [
