@@ -29,6 +29,11 @@ import {
 } from '../examples/rotator1.js';
 
 import {
+	code as classNames1,
+	Component as ClassNameComponent1
+} from '../examples/classNames1.js';
+
+import {
 	code as password1,
 	Component as PasswordComponent1
 } from '../examples/password1.js';
@@ -132,6 +137,35 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(RotatorComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Dynamic class names'),
+				m('p',
+					markup(
+						'Because mithril allows you to set class names through both the selector—`m(\'h1.foo.bar\')`—and ' +
+						'the attributes of the vnode—`m(\'h1\', { className: \'foo bar\' })`—knowing when to use each style may not be ' +
+						'immediately obvious. In general, a good approach is to put class names that will not change into ' +
+						'the selector, and to put dynamic class names in the attributes. Following this convention makes it so that ' +
+						'mithril does not have to re-parse the selector, and typically makes view code more readable by ' +
+						'allowing selectors to always be simple strings.'
+					)
+				),
+				m('p',
+					'When there are many dynamic classes in use, a common technique among mithril users is to ',
+					'use an array that contains each part of the class name, and then join it into a single class name string.'
+				),
+				m('p',
+					'One final thing to note is that because mithril hyperscript supports css-like selectors while JSX does not, ',
+					'the distinction between dynamic and static class names is of less concern to JSX users.'
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: classNames1, fiddle: 'r0pw6u3g' })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(ClassNameComponent1))
 					)
 				)
 			),
