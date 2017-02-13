@@ -157,8 +157,12 @@ function view() {
 					'use an array that contains each part of the class name, and then join it into a single class name string.'
 				),
 				m('p',
-					'One final thing to note is that because mithril hyperscript supports css-like selectors while JSX does not, ',
-					'the distinction between dynamic and static class names is of less concern to JSX users.'
+					markup(
+						'One final thing to note is that because mithril hyperscript supports css-like selectors while JSX does not, ' +
+						'the distinction between dynamic and static class names is of less concern to JSX users. However, JSX users ' +
+						'can still use joined arrays for class names. ' +
+						'A good example of this is the [lichess mobile app](https://github.com/veloce/lichobile/blob/master/src/js/ui/clock/clockView.js).'
+					)
 				),
 				m('.Demo',
 					m('.Demo-left',
