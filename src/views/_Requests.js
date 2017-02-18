@@ -37,8 +37,8 @@ function view() {
 				m('h2', 'Equivalent using fetch api'),
 				m('p',
 					m('code.inline', 'm.request'),
-					' is similar to the native fetch api, but adds automatic redrawing upon completion, ',
-					'converts the response to JSON, and resolves to a stream. For comparison, the following ',
+					' is similar to the native fetch api, but adds automatic redrawing upon completion ',
+					'and converts the response to JSON. For comparison, the following ',
 					'code is the equivalent of the first example, using the native fetch api instead.'
 				),
 				m('.Demo',

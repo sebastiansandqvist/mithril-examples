@@ -92,7 +92,6 @@ const css = codeString.css(
 `.Tooltip-wrap {
   display: inline-block;
   position: relative;
-  transform: translateZ(0);
 }
 
 .Tooltip-wrap:hover .Tooltip {

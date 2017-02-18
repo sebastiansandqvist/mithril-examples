@@ -120,7 +120,7 @@ function view() {
 					' is, at its simplest, a getter-setter function, while ',
 					m('code.inline', m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/withAttr.md]', 'm.withAttr')),
 					' creates an event handler that uses a specified dom element property as the argument to a provided callback. ',
-					'We can use them both to simplify the previous code. All together, this is the final version of this example:'
+					'We can use them both to simplify the previous code. Altogether, this is the final version of this example:'
 				),
 				m('.Demo',
 					m('.Demo-left',

@@ -67,10 +67,10 @@ function view() {
 				m('h2', 'Markdown editor'),
 				m('p',
 					markup(
-						'Like the to-do example, this example that closely mirrors a demo application on the react.js site. ' +
+						'Like the to-do example, this example closely mirrors a demo application on the react.js site. ' +
 						'We are using the [marked](https://github.com/chjj/marked) library to transform the ' +
 						'input string into a raw html string. In the view, `m.trust` is used to bypass the ' +
-						'input sanitation provided by default with mithril.'
+						'input sanitization provided by default with mithril.'
 					)
 				),
 				m('.Demo',
