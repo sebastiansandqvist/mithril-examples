@@ -3,7 +3,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import uglify from 'rollup-plugin-uglify';
 
-module.exports = {
+export default {
 	entry: 'src/index.js',
 	dest: 'public/bundle.09.js',
 	format: 'iife',
