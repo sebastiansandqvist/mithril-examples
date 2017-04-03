@@ -10,8 +10,12 @@ const tabType = T({
 	}))
 });
 
+const MAX_HEIGHT = 150;
+
 function oninit({ state }) {
 	state.activeIndex = stream(0);
+	state.collapsed = stream(true);
+	state.tabContentHeight = stream(MAX_HEIGHT + 1);
 }
 
 function view({ attrs, state }) {
@@ -23,6 +27,14 @@ function view({ attrs, state }) {
 	const fiddleButton = attrs.fiddle ? (
 		m('a.FiddleLink', { href: `https://jsfiddle.net/${attrs.fiddle}/` }, 'jsFiddle')
 	) : null;
+
+	const showMore = state.collapsed() && state.tabContentHeight() > MAX_HEIGHT ? (
+		m('.ExpandTab', { onclick: () => state.collapsed(false) }, 'Show more...')
+	) : null;
+
+	const tabContentStyle = {
+		height: state.collapsed() ? `${MAX_HEIGHT}px` : `${state.tabContentHeight()}px`
+	};
 
 	return (
 		m('.Tabs.drop20',
@@ -38,9 +50,15 @@ function view({ attrs, state }) {
 				),
 				fiddleButton
 			),
-			m('pre.TabContent',
+			m('pre.TabContent', {
+				style: tabContentStyle,
+				oncreate({ dom }) {
+					state.tabContentHeight(dom.scrollHeight);
+				}
+			},
 				m('code', m.trust(attrs.tabs[state.activeIndex()].code))
-			)
+			),
+			showMore
 		)
 	);
 }

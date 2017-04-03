@@ -131,6 +131,8 @@ ul {
 
 .Tabs {
 	background: #2c3e50;
+	overflow: hidden;
+	position: relative;
 }
 
 .TabBar {
@@ -153,6 +155,7 @@ ul {
 .TabContent {
 	color: #fff;
 	padding: 10px 20px;
+	transition: height .2s ease;
 }
 
 .FiddleLink {
@@ -174,6 +177,17 @@ ul {
 	height: 10px;
 	margin-left:5px;
 	width: 15px;
+}
+
+.ExpandTab {
+	background: #3a536c;
+	bottom: 0;
+	color: #fff;
+	cursor: pointer;
+	padding: 10px 0;
+	text-align: center;
+	position: absolute;
+	width: 100%;
 }
 
 /* ---------------------- TOOLTIP ---------------------- */
