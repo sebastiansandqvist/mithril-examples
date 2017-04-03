@@ -6,9 +6,7 @@ const pageType = T({ id: T.string });
 
 function view({ attrs, children }) {
 
-	if (window.__DEV__) {
-		pageType(attrs, 'Page');
-	}
+	pageType(attrs, 'Page');
 
 	return (
 		m('div',

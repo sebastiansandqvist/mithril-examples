@@ -154,7 +154,8 @@ ul {
 
 .TabContent {
 	color: #fff;
-	padding: 10px 20px;
+	padding: 0;
+	margin: 20px;
 	transition: height .2s ease;
 }
 

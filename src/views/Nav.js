@@ -18,9 +18,7 @@ const linkType = T({
 const Link = {
 	view({ attrs }) {
 
-		if (window.__DEV__) {
-			linkType(attrs, 'Link');
-		}
+		linkType(attrs, 'Link');
 
 		return (
 			m('a.Nav-link', {
@@ -36,9 +34,7 @@ const navType = T({ active: T.string });
 
 function view({ attrs }) {
 
-	if (window.__DEV__) {
-		navType(attrs, 'Nav');
-	}
+	navType(attrs, 'Nav');
 
 	return (
 		m('.Nav',

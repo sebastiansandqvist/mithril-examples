@@ -12,60 +12,66 @@ const tabType = T({
 
 const MAX_HEIGHT = 150;
 
-function oninit({ state }) {
-	state.activeIndex = stream(0);
-	state.collapsed = stream(true);
-	state.tabContentHeight = stream(MAX_HEIGHT + 1);
+const asyncRederaw = () => requestAnimationFrame(m.redraw);
+
+function FiddleButton(id) {
+	return id ? m('a.FiddleLink', { href: `https://jsfiddle.net/${id}/` }, 'jsFiddle') : null;
 }
 
-function view({ attrs, state }) {
-
-	if (window.__DEV__) {
-		tabType(attrs, 'Tabs');
-	}
-
-	const fiddleButton = attrs.fiddle ? (
-		m('a.FiddleLink', { href: `https://jsfiddle.net/${attrs.fiddle}/` }, 'jsFiddle')
+function ShowMore(collapsed, onclick, height = 0) {
+	return collapsed && (height > MAX_HEIGHT) ? (
+		m('.ExpandTab', { onclick }, 'Show more...')
 	) : null;
+}
 
-	const showMore = state.collapsed() && state.tabContentHeight() > MAX_HEIGHT ? (
-		m('.ExpandTab', { onclick: () => state.collapsed(false) }, 'Show more...')
-	) : null;
+const px = (n) => `${n}px`;
 
-	const tabContentStyle = {
-		height: state.collapsed() ? `${MAX_HEIGHT}px` : `${state.tabContentHeight()}px`
+export default function Tabs({ attrs }) {
+	const activeIndex = stream(0);
+	const collapsed = stream(true);
+	const tabContentHeight = stream();
+	tabContentHeight.map(asyncRederaw);
+	return {
+		view() {
+
+			tabType(attrs, 'Tabs');
+
+			return (
+				m('.Tabs.drop20',
+					m('.TabBar',
+						m('div',
+							attrs.tabs.map((tab, i) =>
+								m('.Tab', {
+									key: tab.id,
+									className: activeIndex() === i ? 'active' : '',
+									onclick: () => activeIndex(i)
+								}, tab.id)
+							)
+						),
+						FiddleButton(attrs.fiddle)
+					),
+					m('pre.TabContent', {
+						oncreate({ dom }) {
+							if (dom.scrollHeight <= MAX_HEIGHT) {
+								collapsed(false);
+							}
+							tabContentHeight(dom.scrollHeight);
+						},
+						onupdate({ dom }) {
+							if (tabContentHeight() !== dom.scrollHeight) {
+								tabContentHeight(dom.scrollHeight);
+							}
+						},
+						style: {
+							height: collapsed() ? px(Math.min(MAX_HEIGHT, tabContentHeight() || 0)) : px(tabContentHeight())
+						}
+					},
+						m('code', m.trust(attrs.tabs[activeIndex()].code))
+					),
+					ShowMore(collapsed(), () => collapsed(false), tabContentHeight())
+				)
+			);
+
+		}
 	};
-
-	return (
-		m('.Tabs.drop20',
-			m('.TabBar',
-				m('div',
-					attrs.tabs.map((tab, i) =>
-						m('.Tab', {
-							key: tab.id,
-							className: state.activeIndex() === i ? 'active' : '',
-							onclick: () => state.activeIndex(i)
-						}, tab.id)
-					)
-				),
-				fiddleButton
-			),
-			m('pre.TabContent', {
-				style: tabContentStyle,
-				oncreate({ dom }) {
-					state.tabContentHeight(dom.scrollHeight);
-				}
-			},
-				m('code', m.trust(attrs.tabs[state.activeIndex()].code))
-			),
-			showMore
-		)
-	);
 }
-
-const Tabs = {
-	oninit,
-	view
-};
-
-export default Tabs;
