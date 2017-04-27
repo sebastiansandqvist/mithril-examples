@@ -18,6 +18,11 @@ import {
 	Component as StopwatchComponent3
 } from '../examples/examples/stopwatch3.js';
 
+import {
+	code as rotator1,
+	Component as RotatorComponent1
+} from '../examples/examples/rotator1.js';
+
 
 function view() {
 	return (
@@ -67,6 +72,25 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(StopwatchComponent3))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'List rotator'),
+				m('p',
+					markup(
+						'When rendering a list of data, it is a good idea to supply Mithril',
+						'with a `key` attribute for each element in that list.',
+						'[Keys](https://mithril.js.org/keys.html) help maintain references to',
+						'each element and should be unique for each item in the list.'
+					)
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: rotator1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(RotatorComponent1))
 					)
 				)
 			)
