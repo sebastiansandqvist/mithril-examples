@@ -9,7 +9,7 @@ const es5 = codeString(
 function Rotator() {
 	var list = ['One', 'Two', 'Three', 'Four'];
 	return {
-		view() {
+		view: function() {
 			return [
 				m('ul', list.map(function(item) {
 					return m('li', { key: item }, item)

@@ -28,6 +28,11 @@ import {
 	Component as ClassNameComponent1
 } from '../examples/examples/classnames1.js';
 
+import {
+	code as password1,
+	Component as PasswordComponent1
+} from '../examples/examples/password1.js';
+
 
 function view() {
 	return (
@@ -133,6 +138,17 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(ClassNameComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Password input'),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: password1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(PasswordComponent1))
 					)
 				)
 			)
