@@ -29,26 +29,32 @@ function generateLink(title, fullString) {
 }
 
 export default function markup(...args) {
-	const str = args.join(' ');
 	const codeRegex = /`(.*?)`/gm;
 	const linkRegex = /(\[(.*?)\]\(.*?\))/gm;
 	const output = [];
-	const rawContents = str.split(linkRegex);
-	let hasCode = false;
-	let isLinkRaw = false;
-	let isLink = false;
-	for (let i = 0; i < rawContents.length; i++) {
-		hasCode = codeRegex.test(rawContents[i]);
-		isLinkRaw = linkRegex.test(rawContents[i]);
-		isLink = linkRegex.test(rawContents[i - 1] || '');
-		if (hasCode) {
-			output.push(generateCode(rawContents[i]));
-		}
-		else if (isLink) {
-			output.push(generateLink(rawContents[i], rawContents[i - 1])); // previous item is context with url
-		}
-		else if (!isLinkRaw) {
-			output.push(rawContents[i]);
+	for (let a = 0; a < args.length; a++) {
+		const str = args[a].concat(' ');
+		const rawContents = str.split(linkRegex);
+		let hasCode = false;
+		let isLinkRaw = false;
+		let isLink = false;
+		for (let i = 0; i < rawContents.length; i++) {
+			hasCode = codeRegex.test(rawContents[i]);
+			isLinkRaw = linkRegex.test(rawContents[i]);
+			isLink = linkRegex.test(rawContents[i - 1] || '');
+			if (hasCode) {
+				output.push(generateCode(rawContents[i]));
+			}
+			else if (isLink) {
+				output.push(generateLink(rawContents[i], rawContents[i - 1])); // previous item is context with url
+			}
+			else if (rawContents[i][0] === '\n') {
+				output.push(m('br'));
+				output.push(m('br'));
+			}
+			else if (!isLinkRaw) {
+				output.push(rawContents[i]);
+			}
 		}
 	}
 	return output;
