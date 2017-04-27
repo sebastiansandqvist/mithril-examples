@@ -28,7 +28,8 @@ function generateLink(title, fullString) {
 	return m('a', { href: url }, title);
 }
 
-export default function markup(str) {
+export default function markup(...args) {
+	const str = args.join(' ');
 	const codeRegex = /`(.*?)`/gm;
 	const linkRegex = /(\[(.*?)\]\(.*?\))/gm;
 	const output = [];

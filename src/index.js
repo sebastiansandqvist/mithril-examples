@@ -2,7 +2,7 @@ import 'fetch-ie8';
 import m from 'mithril';
 import T from 's-types';
 import GettingStarted from './views/_GettingStarted.js';
-import Components from './views/_Components.js';
+import Examples from './views/_Examples.js';
 import Applications from './views/_Applications.js';
 import Requests from './views/_Requests.js';
 import Routing from './views/_Routing.js';
@@ -13,7 +13,7 @@ T.disabled = window.location.hostname !== 'localhost';
 const routes = {
 	'/': GettingStarted,
 	'/gettingstarted': GettingStarted,
-	'/components': Components,
+	'/examples': Examples,
 	'/applications': Applications,
 	'/requests': Requests,
 	'/routing': Routing,

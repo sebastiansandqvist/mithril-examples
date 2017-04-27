@@ -51,35 +51,9 @@ const es6 = codeString(
   }
 };`);
 
-const jsx = codeString(
-`const ButtonView = {
-  view() {
-    return (
-      <ul>
-        <li>
-          <button onclick={() => m.route.set('/routing')}>
-            Routing page (root)
-          </button>
-        </li>
-        <li>
-          <button onclick={() => m.route.set('/routing/foo')}>
-            /routing/foo
-          </button>
-        </li>
-        <li>
-          <button onclick={() => m.route.set('/routing/bar')}>
-            /routing/bar
-          </button>
-        </li>
-      </ul>
-    );
-  }
-};`);
-
 export const code = [
-  { id: 'es5', code: es5 },
   { id: 'es6', code: es6 },
-  { id: 'jsx', code: jsx }
+  { id: 'es5', code: es5 }
 ];
 
 export const Component = {

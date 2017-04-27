@@ -1,3 +1,5 @@
+/*
+
 import m from 'mithril';
 
 export const combine = function(...args: Array<Function>): Function {
@@ -40,3 +42,5 @@ export const dropRepeats = function(stream: Function): Function {
 		return m.prop.HALT;
 	});
 };
+
+*/

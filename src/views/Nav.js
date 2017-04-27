@@ -3,7 +3,7 @@ import T from 's-types';
 
 const pages = [
 	'Getting started',
-	'Components',
+	'Examples',
 	'Requests',
 	'Applications',
 	'Routing'

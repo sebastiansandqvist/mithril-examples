@@ -3,6 +3,7 @@ import stream from 'mithril/stream';
 import T from 's-types';
 
 const tabType = T({
+	noTabs: [T.bool, T.optional],
 	fiddle: [T.string, T.optional],
 	tabs: T.arrayOf(T.schema({
 		id: T.string,
@@ -10,7 +11,7 @@ const tabType = T({
 	}))
 });
 
-const MAX_HEIGHT = 150;
+const MAX_HEIGHT = 250;
 
 const asyncRederaw = () => requestAnimationFrame(m.redraw);
 
@@ -38,7 +39,7 @@ export default function Tabs({ attrs }) {
 
 			return (
 				m('.Tabs.drop20',
-					m('.TabBar',
+					attrs.noTabs ? null : m('.TabBar',
 						m('div',
 							attrs.tabs.map((tab, i) =>
 								m('.Tab', {

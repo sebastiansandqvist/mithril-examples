@@ -1,16 +1,17 @@
 import m from 'mithril';
 import Page from './Page.js';
 import Tabs from './Tabs.js';
+import markup from '../util/markup.js';
 
 import {
 	code as request1,
 	Component as RequestComponent1
-} from '../examples/request1.js';
+} from '../examples/requests/request1.js';
 
 import {
 	code as request2,
 	Component as RequestComponent2
-} from '../examples/request2.js';
+} from '../examples/requests/request2.js';
 
 function view() {
 	return (
@@ -18,15 +19,16 @@ function view() {
 			m('.Section',
 				m('h2', 'Render fetched list'),
 				m('p',
-					m('a[href=https://github.com/lhorie/mithril.js/blob/rewrite/docs/request.md]',
-						m('code.inline', 'm.request')
-					),
-					' performs an AJAX request against a specified url and returns a promise that ',
-					' resolves to the data fetched from the server.'
+					markup(
+						'[m.request](https://mithril.js.org/request.html)',
+						'performs an AJAX request against a specified url and returns a promise that',
+						'resolves to the data fetched from the server. After the promise chain has completed,',
+						'a redraw is triggered.'
+					)
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: request1, fiddle: 's8ha1ux9' })
+						m(Tabs, { tabs: request1 })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(RequestComponent1))
@@ -36,14 +38,15 @@ function view() {
 			m('.Section',
 				m('h2', 'Equivalent using fetch api'),
 				m('p',
-					m('code.inline', 'm.request'),
-					' is similar to the native fetch api, but adds automatic redrawing upon completion ',
-					'and converts the response to JSON. For comparison, the following ',
-					'code is the equivalent of the first example, using the native fetch api instead.'
+					markup(
+						'`m.request` is similar to the native fetch api, but adds automatic redrawing upon completion',
+						'and converts the response to JSON. For comparison, the following',
+						'code is the equivalent of the first example, using the native fetch api instead.'
+					)
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: request2, fiddle: 'w7quf0xz' })
+						m(Tabs, { tabs: request2 })
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(RequestComponent2))
