@@ -33,6 +33,11 @@ import {
 	Component as PasswordComponent1
 } from '../examples/examples/password1.js';
 
+import {
+	code as autogrow1,
+	Component as AutogrowComponent1
+} from '../examples/examples/autogrow1.js';
+
 
 function view() {
 	return (
@@ -149,6 +154,33 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(PasswordComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Autogrow textarea'),
+				m('p',
+					markup(
+						'In some cases it is necessary to interact directly with',
+						'the rendered dom node, not just mithril virtual dom nodes.',
+						'For those cases, certain lifecycle methods (including `oncreate`)',
+						'provide access to the actual node through the `dom` property.',
+						'This example uses it to set the height of the textarea.',
+						'\n',
+						'This example also relies on the fact that, in addition to being a',
+						'getter-setter, any variable set to stream() can be observed for',
+						'changes. Whenever the value is updated, its `map` function calls',
+						'its callback with the new value. (In this case, we just ignore',
+						'the new value since the height is set regardless of the specific',
+						'value in the textarea.)'
+					)
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: autogrow1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(AutogrowComponent1))
 					)
 				)
 			)
