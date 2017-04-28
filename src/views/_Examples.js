@@ -38,6 +38,11 @@ import {
 	Component as AutogrowComponent1
 } from '../examples/examples/autogrow1.js';
 
+import {
+	code as validation1,
+	Component as ValidationComponent1
+} from '../examples/examples/validation1.js';
+
 
 function view() {
 	return (
@@ -181,6 +186,17 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(AutogrowComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Form validation'),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: validation1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(ValidationComponent1))
 					)
 				)
 			)
