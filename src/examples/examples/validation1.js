@@ -4,35 +4,34 @@ import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
 `function formModel() {
-	return {
+	var model = {
 		longField: {
 			value: stream(''),
-			error: ''
+			error: '',
+			validate: function() {
+				model.longField.error =
+					model.longField.value().length < 10 ?
+						'Expected at least 10 characters' : '';
+			}
 		},
 		shortField: {
 			value: stream(''),
-			error: ''
+			error: '',
+			validate: function() {
+				model.shortField.error =
+					model.shortField.value().length > 5 ?
+						'Expected no more than 5 characters' : '';
+			}
 		}
 	};
+	return model;
 }
 
-var actions = {
-	validate: {
-		longField: function(field) {
-			field.error = field.value().length < 10 ?
-				'Expected at least 10 characters' : '';
-		},
-		shortField: function(field) {
-			field.error = field.value().length > 5 ?
-				'Expected no more than 5 characters' : '';
-		}
-	},
-	validateAll: function(model) {
-		Object.keys(model).forEach(function(field) {
-			actions.validate[field](model[field]);
-		});
-	}
-};
+function validateAll(model) {
+	Object.keys(model).forEach(function(field) {
+		model[field].validate();
+	});
+}
 
 var ValidatedInput = {
 	view: function(vnode) {
@@ -55,7 +54,7 @@ function Component() {
 				m('form', {
 					onsubmit: function(event) {
 						event.preventDefault();
-						actions.validateAll(model);
+						validateAll(model);
 					}
 				},
 					m('p', 'At least 10 characters:'),
@@ -72,34 +71,33 @@ function Component() {
 
 const es6 = codeString(
 `function formModel() {
-	return {
+	const model = {
 		longField: {
 			value: stream(''),
-			error: ''
+			error: '',
+			validate() {
+				model.longField.error =
+					model.longField.value().length < 10 ?
+						'Expected at least 10 characters' : '';
+			}
 		},
 		shortField: {
 			value: stream(''),
-			error: ''
+			error: '',
+			validate() {
+				model.shortField.error =
+					model.shortField.value().length > 5 ?
+						'Expected no more than 5 characters' : '';
+			}
 		}
 	};
+	return model;
 }
 
-const actions = {
-	validate: {
-		longField(field) {
-			field.error = field.value().length < 10 ?
-				'Expected at least 10 characters' : '';
-		},
-		shortField(field) {
-			field.error = field.value().length > 5 ?
-				'Expected no more than 5 characters' : '';
-		}
-	},
-	validateAll(model) {
-		Object.keys(model).forEach((field) =>
-			actions.validate[field](model[field]));
-	}
-};
+function validateAll(model) {
+	Object.keys(model).forEach((field) =>
+		model[field].validate());
+}
 
 const ValidatedInput = {
 	view({ attrs }) {
@@ -122,7 +120,7 @@ function Component() {
 				m('form', {
 					onsubmit(event) {
 						event.preventDefault();
-						actions.validateAll(model);
+						validateAll(model);
 					}
 				},
 					m('p', 'At least 10 characters:'),
@@ -143,34 +141,33 @@ export const code = [
 ];
 
 function formModel() {
-	return {
+	const model = {
 		longField: {
 			value: stream(''),
-			error: ''
+			error: '',
+			validate() {
+				model.longField.error =
+					model.longField.value().length < 10 ?
+						'Expected at least 10 characters' : '';
+			}
 		},
 		shortField: {
 			value: stream(''),
-			error: ''
+			error: '',
+			validate() {
+				model.shortField.error =
+					model.shortField.value().length > 5 ?
+						'Expected no more than 5 characters' : '';
+			}
 		}
 	};
+	return model;
 }
 
-const actions = {
-	validate: {
-		longField(field) {
-			field.error = field.value().length < 10 ?
-				'Expected at least 10 characters' : '';
-		},
-		shortField(field) {
-			field.error = field.value().length > 5 ?
-				'Expected no more than 5 characters' : '';
-		}
-	},
-	validateAll(model) {
-		Object.keys(model).forEach((field) =>
-			actions.validate[field](model[field]));
-	}
-};
+function validateAll(model) {
+	Object.keys(model).forEach((field) =>
+		model[field].validate());
+}
 
 const ValidatedInput = {
 	view({ attrs }) {
@@ -193,7 +190,7 @@ export function Component() {
 				m('form', {
 					onsubmit(event) {
 						event.preventDefault();
-						actions.validateAll(model);
+						validateAll(model);
 					}
 				},
 					m('p', 'At least 10 characters:'),

@@ -191,6 +191,14 @@ function view() {
 			),
 			m('.Section',
 				m('h2', 'Form validation'),
+				m('p',
+					markup(
+						'There are many ways to implement form validation in mithril.',
+						'For this example, we allow each field within the model to',
+						'determine its own validation function and keep track of its',
+						'own error state.'
+					)
+				),
 				m('.Demo',
 					m('.Demo-left',
 						m(Tabs, { tabs: validation1 })
