@@ -136,7 +136,7 @@ function stopwatchModel() {
   };
 }
 
-var actions = {
+const actions = {
   increment: function(model) {
     model.seconds++;
     m.redraw();
@@ -162,7 +162,7 @@ var actions = {
 };
 
 function Stopwatch() {
-  var model = stopwatchModel();
+  const model = stopwatchModel();
   actions.start(model);
   return {
     view: function() {

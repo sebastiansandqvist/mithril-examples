@@ -250,10 +250,10 @@ function view() {
 				),
 				m('.Demo',
 					m('.Demo-left',
-						m(Tabs, { tabs: tabs1 })
+						m(Tabs, { tabs: tooltips1 })
 					),
 					m('.Demo-right',
-						m('.Demo-result', m(TabsComponent1))
+						m('.Demo-result', m(TooltipsComponent1))
 					)
 				)
 			)
