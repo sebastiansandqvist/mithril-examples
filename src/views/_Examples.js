@@ -48,6 +48,11 @@ import {
 	Component as TabsComponent1
 } from '../examples/examples/tabs1.js';
 
+import {
+	code as tooltips1,
+	Component as TooltipsComponent1
+} from '../examples/examples/tooltips1.js';
+
 
 function view() {
 	return (
@@ -221,6 +226,26 @@ function view() {
 						'of the active tab. The example components store this state in',
 						'each instance of the tabs. The implementation of the tabs on',
 						'this site can be viewed [on github](https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2).'
+					)
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: tabs1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(TabsComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Tooltips'),
+				m('p',
+					markup(
+						'This tooltip implementation relies more on CSS than javascript',
+						'but mithril makes it easy to reuse the component. The code that',
+						'defines the tooltip component just wraps arbitrary child components',
+						'in the correct CSS class names, and allows the value of the tooltip',
+						'to be dynamically set using `attrs.value`.'
 					)
 				),
 				m('.Demo',
