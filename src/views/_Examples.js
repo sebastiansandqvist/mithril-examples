@@ -43,6 +43,11 @@ import {
 	Component as ValidationComponent1
 } from '../examples/examples/validation1.js';
 
+import {
+	code as tabs1,
+	Component as TabsComponent1
+} from '../examples/examples/tabs1.js';
+
 
 function view() {
 	return (
@@ -205,6 +210,25 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(ValidationComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Tabs'),
+				m('p',
+					markup(
+						'The only state that tabs need to keep internally is the index',
+						'of the active tab. The example components store this state in',
+						'each instance of the tabs. The implementation of the tabs on',
+						'this site can be viewed [on github](https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2).'
+					)
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: tabs1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(TabsComponent1))
 					)
 				)
 			)
