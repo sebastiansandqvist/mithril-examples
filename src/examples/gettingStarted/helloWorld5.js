@@ -16,8 +16,8 @@ export const code = [
 
 function Button() {
   return m('button', {
-    onclick: function(event) {
-      alert('Button clicked!');
+    onclick: function() {
+      alert('Button clicked!'); // eslint-disable-line no-alert
     }
   }, 'Click me');
 }

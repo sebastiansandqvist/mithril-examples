@@ -33,6 +33,26 @@ import {
 	Component as PasswordComponent1
 } from '../examples/examples/password1.js';
 
+import {
+	code as autogrow1,
+	Component as AutogrowComponent1
+} from '../examples/examples/autogrow1.js';
+
+import {
+	code as validation1,
+	Component as ValidationComponent1
+} from '../examples/examples/validation1.js';
+
+import {
+	code as tabs1,
+	Component as TabsComponent1
+} from '../examples/examples/tabs1.js';
+
+import {
+	code as tooltips1,
+	Component as TooltipsComponent1
+} from '../examples/examples/tooltips1.js';
+
 
 function view() {
 	return (
@@ -149,6 +169,91 @@ function view() {
 					),
 					m('.Demo-right',
 						m('.Demo-result', m(PasswordComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Autogrow textarea'),
+				m('p',
+					markup(
+						'In some cases it is necessary to interact directly with',
+						'the rendered dom node, not just mithril virtual dom nodes.',
+						'For those cases, certain lifecycle methods (including `oncreate`)',
+						'provide access to the actual node through the `dom` property.',
+						'This example uses it to set the height of the textarea.',
+						'\n',
+						'This example also relies on the fact that, in addition to being a',
+						'getter-setter, any variable set to stream() can be observed for',
+						'changes. Whenever the value is updated, its `map` function calls',
+						'its callback with the new value. (In this case, we just ignore',
+						'the new value since the height is set regardless of the specific',
+						'value in the textarea.)'
+					)
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: autogrow1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(AutogrowComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Form validation'),
+				m('p',
+					markup(
+						'There are many ways to implement form validation in mithril.',
+						'For this example, we allow each field within the model to',
+						'determine its own validation function and keep track of its',
+						'own error state.'
+					)
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: validation1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(ValidationComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Tabs'),
+				m('p',
+					markup(
+						'The only state that tabs need to keep internally is the index',
+						'of the active tab. The example components store this state in',
+						'each instance of the tabs. The implementation of the tabs on',
+						'this site can be viewed [on github](https://github.com/sebastiansandqvist/mithril-examples/blob/master/src/views/Tabs.js?ts=2).'
+					)
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: tabs1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(TabsComponent1))
+					)
+				)
+			),
+			m('.Section',
+				m('h2', 'Tooltips'),
+				m('p',
+					markup(
+						'This tooltip implementation relies more on CSS than javascript',
+						'but mithril makes it easy to reuse the component. The code that',
+						'defines the tooltip component just wraps arbitrary child components',
+						'in the correct CSS class names, and allows the value of the tooltip',
+						'to be dynamically set using `attrs.value`.'
+					)
+				),
+				m('.Demo',
+					m('.Demo-left',
+						m(Tabs, { tabs: tooltips1 })
+					),
+					m('.Demo-right',
+						m('.Demo-result', m(TooltipsComponent1))
 					)
 				)
 			)

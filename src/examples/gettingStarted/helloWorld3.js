@@ -21,13 +21,13 @@ export const code = [
   { id: 'js', code: es5 }
 ];
 
-var Button = {
+const Button = {
   view: function(vnode) {
     return m('button', ['Hello ', vnode.children]);
   }
 };
 
-var App = {
+const App = {
   view: function() {
     return [
       m(Button, ['world']),

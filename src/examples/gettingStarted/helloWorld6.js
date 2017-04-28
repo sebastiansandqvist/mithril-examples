@@ -24,7 +24,7 @@ export const code = [
 ];
 
 function App() {
-  var text = '';
+  let text = '';
   return {
     view: function() {
       return [
