@@ -13,13 +13,14 @@ https://mithril-examples.firebaseapp.com/
 - Components: slider
 - Components: list filtering using input
 - Components: debounced typing indicator
+- Components: m.route.link
 
 # Todo
 
 - Add jsfiddles to refactored examples
 - Add jsx syntax to refactored examples
 - Display only title/demo + button to reveal more in examples
-- Navigation: [ Getting started, Request, Route, Stream, Examples ] ?
+- Navigation: [ Getting Started, Examples ]
 - Server render everything but the demos
 
 # Contributing

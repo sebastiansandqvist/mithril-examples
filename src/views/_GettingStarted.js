@@ -159,6 +159,11 @@ function view() {
 				)
 			),
 			m('.Section',
+				m('.center',
+					m('a.Button.Button--large[href=/examples]', 'View mithril examples →')
+				)
+			),
+			m('.Section',
 				m('h2', 'Further reading'),
 				m('p',
 					markup(
