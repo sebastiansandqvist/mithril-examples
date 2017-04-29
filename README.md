@@ -34,6 +34,8 @@ Since browser support for tab-spacing is poor, spaces (not tabs) should be used 
 
 To add an example, create a folder for it in `src/demos`. Within that folder, add three files: `code.js`, `demo.js`, and `text.js`. See the existing examples as a guide for what to export from those files. Next, in `src/examples/index.js`, add a new object to the exported array that follows the same schema as the existing examples. This schema is defined as follows in `src/views/MainView.js`:
 
+When adding text descriptions for code examples, you can use `src/util/markup.js` to help format the text. This provides a minimal markdown-like syntax for formatting links (`[title](url)`), code (``var x = 5``), and unordered lists (`* list item`).
+
 ```js
 T.schema({
 	title: T.string,

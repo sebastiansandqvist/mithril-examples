@@ -39,6 +39,7 @@ const tag = {
 	dom: { name: 'DOM', url: 'https://mithril.js.org/lifecycle-methods.html#oncreate' }, // TODO: find better url for this
 	keys: { name: 'Keys', url: 'https://mithril.js.org/keys.html' },
 	lifecycle: { name: 'Lifecycle Hooks', url: 'https://mithril.js.org/lifecycle-methods.html' },
+	link: { name: 'm.route.link', url: 'https://mithril.js.org/route.html#mroutelink' },
 	redraw: { name: 'm.redraw', url: 'https://mithril.js.org/redraw.html' },
 	request: { name: 'm.request', url: 'https://mithril.js.org/request.html' },
 	route: { name: 'm.route', url: 'https://mithril.js.org/route.html' },
