@@ -23,8 +23,6 @@ https://mithril-examples.firebaseapp.com/
 
 # Contributing
 
-Install the firebase cli tools from npm in order to run the local server.
-
 Run `npm start` to start the local server.
 Run `npm run watch` to bundle the code and continue watching for incremental builds.
 Run `npm run lint` and make sure there are no linting errors or warnings in your changes prior to making a pull request.
