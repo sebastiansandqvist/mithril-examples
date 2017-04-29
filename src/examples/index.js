@@ -14,14 +14,20 @@ import rotatorDemo from './rotator/demo';
 import rotatorText from './rotator/text';
 import rotatorCode from './rotator/code';
 
+import markdownDemo from './markdown/demo';
+import markdownText from './markdown/text';
+import markdownCode from './markdown/code';
+
 const tag = {
 	closureComponent: { name: 'Closure Component', url: 'https://mithril.js.org/components.html#closure-components' },
 	keys: { name: 'Keys', url: 'https://mithril.js.org/keys.html' },
 	lifecycle: { name: 'Lifecycle Hooks', url: 'https://mithril.js.org/lifecycle-methods.html' },
-	redraw: { name: 'Redraw', url: 'https://mithril.js.org/redraw.html' },
-	request: { name: 'Request', url: 'https://mithril.js.org/request.html' },
-	route: { name: 'Route', url: 'https://mithril.js.org/route.html' },
-	stream: { name: 'Stream', url: 'https://mithril.js.org/stream.html' }
+	redraw: { name: 'm.redraw', url: 'https://mithril.js.org/redraw.html' },
+	request: { name: 'm.request', url: 'https://mithril.js.org/request.html' },
+	route: { name: 'm.route', url: 'https://mithril.js.org/route.html' },
+	trust: { name: 'm.trust', url: 'https://mithril.js.org/trust.html' },
+	stream: { name: 'Stream', url: 'https://mithril.js.org/stream.html' },
+	withAttr: { name: 'm.withAttr', url: 'https://mithril.js.org/withAttr.html' }
 };
 
 const examples = [
@@ -52,13 +58,26 @@ const examples = [
 	{
 		title: 'List Rotator',
 		demo: rotatorDemo,
-		tags: [tag.keys, tag.closureComponent],
+		tags: [tag.closureComponent, tag.keys],
 		isOpen: false,
 		description: [
 			{
 				text: rotatorText,
 				demo: rotatorDemo,
 				code: rotatorCode
+			}
+		]
+	},
+	{
+		title: 'Markdown',
+		demo: markdownDemo,
+		tags: [tag.closureComponent, tag.stream, tag.trust, tag.withAttr],
+		isOpen: false,
+		description: [
+			{
+				text: markdownText,
+				demo: markdownDemo,
+				code: markdownCode
 			}
 		]
 	}

@@ -290,7 +290,7 @@ h1 {
 	text-align: center;
 }
 
-.Demo h1 {
+.Demo-result h1 {
 	color: #345;
 	text-align: left;
 }
@@ -306,6 +306,12 @@ h3 {
 	color: #345;
 	font-size: 18px;
 	font-weight: 400;
+	margin: 0;
+}
+
+h4,
+h5,
+h6 {
 	margin: 0;
 }
 
