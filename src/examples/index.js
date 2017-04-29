@@ -26,6 +26,10 @@ import passwordDemo from './password/demo';
 import passwordText from './password/text';
 import passwordCode from './password/code';
 
+import cartDemo from './cart/demo';
+import cartText from './cart/text';
+import cartCode from './cart/code';
+
 const tag = {
 	closureComponent: { name: 'Closure Component', url: 'https://mithril.js.org/components.html#closure-components' },
 	dom: { name: 'DOM', url: 'https://mithril.js.org/lifecycle-methods.html#oncreate' }, // TODO: find better url for this
@@ -92,7 +96,7 @@ const examples = [
 		]
 	},
 	{
-		title: 'Autogrow textarea',
+		title: 'Autogrow Textarea',
 		demo: autogrowDemo,
 		tags: [tag.closureComponent, tag.dom, tag.lifecycle, tag.stream, tag.withAttr],
 		isOpen: false,
@@ -105,7 +109,7 @@ const examples = [
 		]
 	},
 	{
-		title: 'Password input',
+		title: 'Password Input',
 		demo: passwordDemo,
 		tags: [tag.closureComponent, tag.stream, tag.withAttr],
 		isOpen: false,
@@ -114,6 +118,19 @@ const examples = [
 				text: passwordText,
 				demo: passwordDemo,
 				code: passwordCode
+			}
+		]
+	},
+	{
+		title: 'Shopping Cart',
+		demo: cartDemo,
+		tags: [tag.closureComponent, tag.keys, tag.request, tag.stream, tag.withAttr],
+		isOpen: false,
+		description: [
+			{
+				text: cartText,
+				demo: cartDemo,
+				code: cartCode
 			}
 		]
 	}
