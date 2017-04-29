@@ -60,26 +60,15 @@ const tag = {
 
 const examples = [
 	{
-		title: 'Stopwatch', // must be unique
-		demo: stopwatch2Demo,
-		tags: [tag.closureComponent, tag.lifecycle, tag.redraw],
+		title: 'Autogrow Textarea',
+		demo: autogrowDemo,
+		tags: [tag.closureComponent, tag.dom, tag.lifecycle, tag.stream, tag.withAttr],
 		isOpen: false,
 		description: [
 			{
-				text: stopwatchText,
-				demo: stopwatchDemo,
-				code: stopwatchCode
-			},
-			{
-				text: stopwatch2Text,
-				demo: stopwatch2Demo,
-				code: stopwatch2Code
-			},
-			{
-				text: stopwatch3Text,
-				demo: stopwatch3Demo,
-				code: stopwatch3Code,
-				noTabs: true
+				text: autogrowText,
+				demo: autogrowDemo,
+				code: autogrowCode
 			}
 		]
 	},
@@ -110,19 +99,6 @@ const examples = [
 		]
 	},
 	{
-		title: 'Autogrow Textarea',
-		demo: autogrowDemo,
-		tags: [tag.closureComponent, tag.dom, tag.lifecycle, tag.stream, tag.withAttr],
-		isOpen: false,
-		description: [
-			{
-				text: autogrowText,
-				demo: autogrowDemo,
-				code: autogrowCode
-			}
-		]
-	},
-	{
 		title: 'Password Input',
 		demo: passwordDemo,
 		tags: [tag.closureComponent, tag.stream, tag.withAttr],
@@ -149,15 +125,26 @@ const examples = [
 		]
 	},
 	{
-		title: 'To-do List',
-		demo: todoDemo,
-		tags: [tag.closureComponent, tag.stream, tag.withAttr],
+		title: 'Stopwatch', // must be unique
+		demo: stopwatch2Demo,
+		tags: [tag.closureComponent, tag.lifecycle, tag.redraw],
 		isOpen: false,
 		description: [
 			{
-				text: todoText,
-				demo: todoDemo,
-				code: todoCode
+				text: stopwatchText,
+				demo: stopwatchDemo,
+				code: stopwatchCode
+			},
+			{
+				text: stopwatch2Text,
+				demo: stopwatch2Demo,
+				code: stopwatch2Code
+			},
+			{
+				text: stopwatch3Text,
+				demo: stopwatch3Demo,
+				code: stopwatch3Code,
+				noTabs: true
 			}
 		]
 	},
@@ -171,6 +158,19 @@ const examples = [
 				text: tabsText,
 				demo: tabsDemo,
 				code: tabsCode
+			}
+		]
+	},
+	{
+		title: 'To-do List',
+		demo: todoDemo,
+		tags: [tag.closureComponent, tag.stream, tag.withAttr],
+		isOpen: false,
+		description: [
+			{
+				text: todoText,
+				demo: todoDemo,
+				code: todoCode
 			}
 		]
 	},
