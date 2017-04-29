@@ -38,7 +38,12 @@ import tabsDemo from './tabs/demo';
 import tabsText from './tabs/text';
 import tabsCode from './tabs/code';
 
+import tooltipDemo from './tooltip/demo';
+import tooltipText from './tooltip/text';
+import tooltipCode from './tooltip/code';
+
 const tag = {
+	children: { name: 'vnode.children', url: 'https://mithril.js.org/vnodes.html#structure' },
 	closureComponent: { name: 'Closure Component', url: 'https://mithril.js.org/components.html#closure-components' },
 	dom: { name: 'DOM', url: 'https://mithril.js.org/lifecycle-methods.html#oncreate' },
 	keys: { name: 'Keys', url: 'https://mithril.js.org/keys.html' },
@@ -166,6 +171,19 @@ const examples = [
 				text: tabsText,
 				demo: tabsDemo,
 				code: tabsCode
+			}
+		]
+	},
+	{
+		title: 'Tooltips',
+		demo: tooltipDemo,
+		tags: [tag.children],
+		isOpen: false,
+		description: [
+			{
+				text: tooltipText,
+				demo: tooltipDemo,
+				code: tooltipCode
 			}
 		]
 	}

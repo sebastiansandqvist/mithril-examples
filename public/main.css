@@ -23,7 +23,13 @@ body {
 
 .Section {
 	margin-bottom: 40px;
-	overflow: hidden;
+}
+
+/* clearfix */
+.Section::after {
+	content: '';
+	display: table;
+	clear: both;
 }
 
 .LeftContent {
