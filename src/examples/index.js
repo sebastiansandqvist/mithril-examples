@@ -22,6 +22,10 @@ import autogrowDemo from './autogrow/demo';
 import autogrowText from './autogrow/text';
 import autogrowCode from './autogrow/code';
 
+import passwordDemo from './password/demo';
+import passwordText from './password/text';
+import passwordCode from './password/code';
+
 const tag = {
 	closureComponent: { name: 'Closure Component', url: 'https://mithril.js.org/components.html#closure-components' },
 	dom: { name: 'DOM', url: 'https://mithril.js.org/lifecycle-methods.html#oncreate' }, // TODO: find better url for this
@@ -97,6 +101,19 @@ const examples = [
 				text: autogrowText,
 				demo: autogrowDemo,
 				code: autogrowCode
+			}
+		]
+	},
+	{
+		title: 'Password input',
+		demo: passwordDemo,
+		tags: [tag.closureComponent, tag.stream, tag.withAttr],
+		isOpen: false,
+		description: [
+			{
+				text: passwordText,
+				demo: passwordDemo,
+				code: passwordCode
 			}
 		]
 	}
