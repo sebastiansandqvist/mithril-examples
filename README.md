@@ -74,4 +74,4 @@ In use, it looks something like this:
 }
 ```
 
-When adding text descriptions for code examples, you can use `src/util/markup.js` to help format the text. This provides a minimal markdown-like syntax for formatting links (`[title](url)`), code (``var x = 5``), and unordered lists (`* list item`).
+When adding text descriptions for code examples in `src/examples/**/text.js`, you can use `src/util/markup.js` to help format the text. This provides a minimal markdown-like syntax for formatting links (`[title](url)`), code (``var x = 5``), and unordered lists (`* list item`).
