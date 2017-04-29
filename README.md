@@ -34,24 +34,42 @@ Since browser support for tab-spacing is poor, spaces (not tabs) should be used 
 
 To add an example, create a folder for it in `src/demos`. Within that folder, add three files: `code.js`, `demo.js`, and `text.js`. See the existing examples as a guide for what to export from those files. Next, in `src/examples/index.js`, add a new object to the exported array that follows the same schema as the existing examples. This schema is defined as follows in `src/views/MainView.js`:
 
-When adding text descriptions for code examples, you can use `src/util/markup.js` to help format the text. This provides a minimal markdown-like syntax for formatting links (`[title](url)`), code (``var x = 5``), and unordered lists (`* list item`).
-
 ```js
 T.schema({
-	title: T.string,
-	demo: T.any, // a mithril component
-	// tags must come from the existing tags defined in `src/examples/index.js`
-	tags: T.arrayOf(T.schema({ name: T.string, url: T.string })),
-	isOpen: T.bool,
-	description: T.arrayOf(T.schema({
-		text: T.any, // a string, array, anything that can be rendered by mithril
-		demo: T.any, // a mithril component
-		code: T.arrayOf(T.schema({ // tabs
-			id: T.string,
-			code: T.string
-		})),
-		noTabs: [T.bool, T.optional],
-		fiddle: [T.string, T.optional] // a jsfiddle id
-	}))
+  title: T.string,
+  demo: T.any, // a mithril component
+  // tags must come from the existing tags defined in `src/examples/index.js`
+  tags: T.arrayOf(T.schema({ name: T.string, url: T.string })),
+  isOpen: T.bool,
+  description: T.arrayOf(T.schema({
+    text: T.any, // a string, array, anything that can be rendered by mithril
+    demo: T.any, // a mithril component
+    code: T.arrayOf(T.schema({ // tabs
+      id: T.string,
+      code: T.string
+    })),
+    noTabs: [T.bool, T.optional],
+    fiddle: [T.string, T.optional] // a jsfiddle id
+  }))
 });
 ```
+
+In use, it looks something like this:
+
+```js
+{
+  title: 'To-do List',
+  demo: todoDemo, // './demos/todo/demo.js'
+  tags: [tag.closureComponent, tag.stream, tag.withAttr],
+  isOpen: false,
+  description: [
+    {
+      text: todoText, // './demos/todo/text.js'
+      demo: todoDemo, // './demos/todo/demo.js',
+      code: todoCode  // './demos/todo/code.js'
+    }
+  ]
+}
+```
+
+When adding text descriptions for code examples, you can use `src/util/markup.js` to help format the text. This provides a minimal markdown-like syntax for formatting links (`[title](url)`), code (``var x = 5``), and unordered lists (`* list item`).
