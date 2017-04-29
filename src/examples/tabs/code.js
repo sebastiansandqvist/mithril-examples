@@ -64,7 +64,7 @@ function Tabs() {
   };
 }
 
-const Component = {
+const App = {
   view() {
     return m(Tabs, { tabs: tabContent });
   }
