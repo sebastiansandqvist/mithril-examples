@@ -34,6 +34,10 @@ import todoDemo from './todo/demo';
 import todoText from './todo/text';
 import todoCode from './todo/code';
 
+import tabsDemo from './tabs/demo';
+import tabsText from './tabs/text';
+import tabsCode from './tabs/code';
+
 const tag = {
 	closureComponent: { name: 'Closure Component', url: 'https://mithril.js.org/components.html#closure-components' },
 	dom: { name: 'DOM', url: 'https://mithril.js.org/lifecycle-methods.html#oncreate' },
@@ -149,6 +153,19 @@ const examples = [
 				text: todoText,
 				demo: todoDemo,
 				code: todoCode
+			}
+		]
+	},
+	{
+		title: 'Tabs',
+		demo: tabsDemo,
+		tags: [tag.closureComponent, tag.keys, tag.stream],
+		isOpen: false,
+		description: [
+			{
+				text: tabsText,
+				demo: tabsDemo,
+				code: tabsCode
 			}
 		]
 	}
