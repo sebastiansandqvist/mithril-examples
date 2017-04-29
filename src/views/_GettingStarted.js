@@ -6,32 +6,32 @@ import markup from '../util/markup.js';
 import {
 	code as helloWorld1,
 	Component as HelloWorldComponent1
-} from '../examples/gettingStarted/helloWorld1.js';
+} from '../gettingStarted/helloWorld1.js';
 
 import {
 	code as helloWorld2,
 	Component as HelloWorldComponent2
-} from '../examples/gettingStarted/helloWorld2.js';
+} from '../gettingStarted/helloWorld2.js';
 
 import {
 	code as helloWorld3,
 	Component as HelloWorldComponent3
-} from '../examples/gettingStarted/helloWorld3.js';
+} from '../gettingStarted/helloWorld3.js';
 
 import {
 	code as helloWorld4,
 	Component as HelloWorldComponent4
-} from '../examples/gettingStarted/helloWorld4.js';
+} from '../gettingStarted/helloWorld4.js';
 
 import {
 	code as helloWorld5,
 	Component as HelloWorldComponent5
-} from '../examples/gettingStarted/helloWorld5.js';
+} from '../gettingStarted/helloWorld5.js';
 
 import {
 	code as helloWorld6,
 	Component as HelloWorldComponent6
-} from '../examples/gettingStarted/helloWorld6.js';
+} from '../gettingStarted/helloWorld6.js';
 
 
 function view() {
@@ -151,7 +151,7 @@ function view() {
 				),
 				m('p.clear',
 					markup(
-						'The [examples](/examples) on this site will use closure component syntax in most cases',
+						'The [examples](/) on this site will use closure component syntax in most cases',
 						'where there is internal state to manage. However, there are',
 						'[alternative ways](https://mithril.js.org/components.html#syntactic-variants) to write',
 						'functionally identical components.'
@@ -160,14 +160,14 @@ function view() {
 			),
 			m('.Section',
 				m('.center',
-					m('a.Button.Button--large[href=/examples]', 'View mithril examples →')
+					m('a.Button.Button--large[href=/]', 'View mithril examples →')
 				)
 			),
 			m('.Section',
 				m('h2', 'Further reading'),
 				m('p',
 					markup(
-						'The rest of the [examples](/examples) on this site assume some familiarity with Mithril.',
+						'The rest of the [examples](/) on this site assume some familiarity with Mithril.',
 						'This Getting Started guide should be enough to have you familiar with the basic syntax,',
 						'but some Mithril features will be used that have not been documented here. Consult the',
 						'[official docs](https://mithril.js.org) in case something you read on this site is confusing.'
