@@ -30,6 +30,10 @@ import cartDemo from './cart/demo';
 import cartText from './cart/text';
 import cartCode from './cart/code';
 
+import todoDemo from './todo/demo';
+import todoText from './todo/text';
+import todoCode from './todo/code';
+
 const tag = {
 	closureComponent: { name: 'Closure Component', url: 'https://mithril.js.org/components.html#closure-components' },
 	dom: { name: 'DOM', url: 'https://mithril.js.org/lifecycle-methods.html#oncreate' }, // TODO: find better url for this
@@ -131,6 +135,19 @@ const examples = [
 				text: cartText,
 				demo: cartDemo,
 				code: cartCode
+			}
+		]
+	},
+	{
+		title: 'To-do List',
+		demo: todoDemo,
+		tags: [tag.closureComponent, tag.stream, tag.withAttr],
+		isOpen: false,
+		description: [
+			{
+				text: todoText,
+				demo: todoDemo,
+				code: todoCode
 			}
 		]
 	}
