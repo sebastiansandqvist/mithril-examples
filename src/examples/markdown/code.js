@@ -5,21 +5,21 @@ const es5 = codeString(
 var marked = require('marked');
 
 function MarkdownEditor() {
-	var value = stream('Type some *markdown* here!');
-	var markdown = value.map(marked);
-	return {
-		view: function() {
-			return [
-				m('h3', 'Input'),
-				m('textarea.fullWidth', {
-					oninput: m.withAttr('value', value),
-					value: value()
-				}),
-				m('h3', 'Output'),
-				m('div', m.trust(markdown()))
-			];
-		}
-	};
+  var value = stream('Type some *markdown* here!');
+  var markdown = value.map(marked);
+  return {
+    view: function() {
+      return [
+        m('h3', 'Input'),
+        m('textarea.fullWidth', {
+          oninput: m.withAttr('value', value),
+          value: value()
+        }),
+        m('h3', 'Output'),
+        m('div', m.trust(markdown()))
+      ];
+    }
+  };
 }`);
 
 const es6 = codeString(
@@ -27,21 +27,21 @@ const es6 = codeString(
 import marked from 'marked';
 
 function MarkdownEditor() {
-	const value = stream('Type some *markdown* here!');
-	const markdown = value.map(marked);
-	return {
-		view() {
-			return [
-				m('h3', 'Input'),
-				m('textarea.fullWidth', {
-					oninput: m.withAttr('value', value),
-					value: value()
-				}),
-				m('h3', 'Output'),
-				m('div', m.trust(markdown()))
-			];
-		}
-	};
+  const value = stream('Type some *markdown* here!');
+  const markdown = value.map(marked);
+  return {
+    view() {
+      return [
+        m('h3', 'Input'),
+        m('textarea.fullWidth', {
+          oninput: m.withAttr('value', value),
+          value: value()
+        }),
+        m('h3', 'Output'),
+        m('div', m.trust(markdown()))
+      ];
+    }
+  };
 }`);
 
 

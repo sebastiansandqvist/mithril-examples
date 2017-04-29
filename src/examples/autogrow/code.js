@@ -7,18 +7,18 @@ const es6 = codeString(
 }
 
 function Textarea() {
-	const value = stream('');
-	return {
-		oncreate({ dom }) {
-			value.map(() => setHeight(dom));
-		},
-		view() {
-			return m('textarea', {
-				value: value(),
-				oninput: m.withAttr('value', value)
-			});
-		}
-	};
+  const value = stream('');
+  return {
+    oncreate({ dom }) {
+      value.map(() => setHeight(dom));
+    },
+    view() {
+      return m('textarea', {
+        value: value(),
+        oninput: m.withAttr('value', value)
+      });
+    }
+  };
 }`);
 
 const es5 = codeString(
@@ -28,20 +28,20 @@ const es5 = codeString(
 }
 
 function Textarea() {
-	const value = stream('');
-	return {
-		oncreate: function(vnode) {
-			value.map(function() {
-				setHeight(vnode.dom);
-			});
-		},
-		view: function() {
-			return m('textarea', {
-				value: value(),
-				oninput: m.withAttr('value', value)
-			});
-		}
-	};
+  const value = stream('');
+  return {
+    oncreate: function(vnode) {
+      value.map(function() {
+        setHeight(vnode.dom);
+      });
+    },
+    view: function() {
+      return m('textarea', {
+        value: value(),
+        oninput: m.withAttr('value', value)
+      });
+    }
+  };
 }`);
 
 export default [

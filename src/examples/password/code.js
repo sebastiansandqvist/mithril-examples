@@ -5,27 +5,27 @@ const es5 = codeString(
 
 // toggles a stream's value
 function toggle(s) {
-	s(!s());
+  s(!s());
 }
 
 function PasswordInput() {
-	var visible = stream(false);
-	var value = stream('');
-	return {
-		view: function() {
-			return [
-				m('input', {
-					type: visible() ? 'text' : 'password',
-					placeholder: visible() ? 'password' : '••••••••',
-					value: value(),
-					oninput: m.withAttr('value', value)
-				}),
-				m('button', {
-					onclick: function() { toggle(visible); }
-				}, visible() ? 'Hide' : 'Show')
-			];
-		}
-	};
+  var visible = stream(false);
+  var value = stream('');
+  return {
+    view: function() {
+      return [
+        m('input', {
+          type: visible() ? 'text' : 'password',
+          placeholder: visible() ? 'password' : '••••••••',
+          value: value(),
+          oninput: m.withAttr('value', value)
+        }),
+        m('button', {
+          onclick: function() { toggle(visible); }
+        }, visible() ? 'Hide' : 'Show')
+      ];
+    }
+  };
 }`);
 
 const es6 = codeString(
@@ -35,23 +35,23 @@ const es6 = codeString(
 const toggle = (s) => s(!s());
 
 function PasswordInput() {
-	const visible = stream(false);
-	const value = stream('');
-	return {
-		view() {
-			return [
-				m('input', {
-					type: visible() ? 'text' : 'password',
-					placeholder: visible() ? 'password' : '••••••••',
-					value: value(),
-					oninput: m.withAttr('value', value)
-				}),
-				m('button', {
-					onclick() { toggle(visible); }
-				}, visible() ? 'Hide' : 'Show')
-			];
-		}
-	};
+  const visible = stream(false);
+  const value = stream('');
+  return {
+    view() {
+      return [
+        m('input', {
+          type: visible() ? 'text' : 'password',
+          placeholder: visible() ? 'password' : '••••••••',
+          value: value(),
+          oninput: m.withAttr('value', value)
+        }),
+        m('button', {
+          onclick() { toggle(visible); }
+        }, visible() ? 'Hide' : 'Show')
+      ];
+    }
+  };
 }`);
 
 export default [
