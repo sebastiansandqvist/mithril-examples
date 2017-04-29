@@ -21,6 +21,8 @@ https://mithril-examples.firebaseapp.com/
 - Add jsfiddles to refactored examples
 - Add jsx syntax to refactored examples
 - Finish refactoring examples in `src/examples/old/...`
+- Add { key: ??? } to todo example?
+- Allow filtering examples by tags
 
 # Contributing
 
@@ -28,7 +30,7 @@ Run `npm start` to start the local server.
 Run `npm run watch` to bundle the code and continue watching for incremental builds.
 Run `npm run lint` and make sure there are no linting errors or warnings in your changes prior to making a pull request.
 
-Since browser support for tab-spacing is poor, spaces (not tabs) should be used for indentation in all of the code for the examples on the website. This means any code within `src/demos/**/code.js` should be indented with spaces. All code anywhere else should be indented using tabs.
+Since browser support for tab-spacing is poor, spaces (not tabs) should be used for indentation in all of the code for the examples on the website. This means any code within `src/demos/**/code.js` should be indented with spaces. All code anywhere else should be indented with tabs.
 
 To add an example, create a folder for it in `src/demos`. Within that folder, add three files: `code.js`, `demo.js`, and `text.js`. See the existing examples as a guide for what to export from those files. Next, in `src/examples/index.js`, add a new object to the exported array that follows the same schema as the existing examples. This schema is defined as follows in `src/views/MainView.js`:
 
