@@ -21,8 +21,10 @@ https://mithril-examples.firebaseapp.com/
 - Add jsfiddles to refactored examples
 - Add jsx syntax to refactored examples
 - Finish refactoring examples in `src/examples/old/...`
-- Add { key: ??? } to todo example?
+- Add `{ key: ??? }` to todo example?
 - Allow filtering examples by tags
+- Fix markup.js bug that requires todo/text.js to have ``dom`` on its own line
+- Find better url for `tags.dom`
 
 # Contributing
 

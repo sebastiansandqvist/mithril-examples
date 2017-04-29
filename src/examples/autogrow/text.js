@@ -5,7 +5,7 @@ export default markup(
 	'the rendered dom node, not just mithril virtual dom nodes.',
 	'For those cases, certain lifecycle methods (including `oncreate`)',
 	'provide access to the actual node through the',
-	'`dom` property.', // TODO: bug in `markup.js` requires this to be on own line
+	'`dom` property.',
 	'This example uses it to set the height of the textarea.',
 	'\n',
 	'This example also relies on the fact that, in addition to being a',

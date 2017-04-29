@@ -36,7 +36,7 @@ import todoCode from './todo/code';
 
 const tag = {
 	closureComponent: { name: 'Closure Component', url: 'https://mithril.js.org/components.html#closure-components' },
-	dom: { name: 'DOM', url: 'https://mithril.js.org/lifecycle-methods.html#oncreate' }, // TODO: find better url for this
+	dom: { name: 'DOM', url: 'https://mithril.js.org/lifecycle-methods.html#oncreate' },
 	keys: { name: 'Keys', url: 'https://mithril.js.org/keys.html' },
 	lifecycle: { name: 'Lifecycle Hooks', url: 'https://mithril.js.org/lifecycle-methods.html' },
 	link: { name: 'm.route.link', url: 'https://mithril.js.org/route.html#mroutelink' },
