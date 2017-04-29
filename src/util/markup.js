@@ -35,25 +35,25 @@ export default function markup(...args) {
 	for (let a = 0; a < args.length; a++) {
 		const str = args[a].concat(' ');
 		const rawContents = str.split(linkRegex);
-		let hasCode = false;
-		let isLinkRaw = false;
-		let isLink = false;
 		for (let i = 0; i < rawContents.length; i++) {
-			hasCode = codeRegex.test(rawContents[i]);
-			isLinkRaw = linkRegex.test(rawContents[i]);
-			isLink = linkRegex.test(rawContents[i - 1] || '');
+			const hasCode = codeRegex.test(rawContents[i]);
+			const isLinkRaw = linkRegex.test(rawContents[i]);
+			const isLink = linkRegex.test(rawContents[i - 1] || '');
+			const isList = rawContents[i].trim()[0] === '*';
+			const el = isList ? 'li' : 'span';
+			const text = isList ? rawContents[i].slice(1) : rawContents[i];
 			if (hasCode) {
-				output.push(generateCode(rawContents[i]));
+				output.push(m(el, generateCode(text)));
 			}
 			else if (isLink) {
-				output.push(generateLink(rawContents[i], rawContents[i - 1])); // previous item is context with url
+				output.push(m(el, generateLink(text, rawContents[i - 1]))); // previous item is context with url
 			}
-			else if (rawContents[i][0] === '\n') {
+			else if (text[0] === '\n') {
 				output.push(m('br'));
 				output.push(m('br'));
 			}
 			else if (!isLinkRaw) {
-				output.push(rawContents[i]);
+				output.push(m(el, text));
 			}
 		}
 	}

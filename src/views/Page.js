@@ -12,10 +12,10 @@ function view({ attrs, children }) {
 		m('div',
 			m('.Display',
 				m('.Container',
-					m('h1', 'Mithril.js examples')
+					m('h1', 'Mithril.js examples'),
+					m(Nav, { active: attrs.id })
 				)
 			),
-			m(Nav, { active: attrs.id }),
 			m('.Content',
 				m('.Container', children)
 			)

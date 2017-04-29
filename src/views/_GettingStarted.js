@@ -62,7 +62,7 @@ function view() {
 						m('.Demo-result', m(HelloWorldComponent1))
 					)
 				),
-				m('p', 'Passing in custom parameters is simple:'),
+				m('p.clear', 'Passing in custom parameters is simple:'),
 				m('.Demo',
 					m('.Demo-left',
 						m(Tabs, { tabs: helloWorld2, noTabs: true })
@@ -71,7 +71,7 @@ function view() {
 						m('.Demo-result', m(HelloWorldComponent2))
 					)
 				),
-				m('p',
+				m('p.clear',
 					markup(
 						'This approach works very well for simple components, but you will often need to store state within components',
 						'or use [lifecycle methods](https://mithril.js.org/lifecycle-methods.html). For those cases, the idiomatic ',
@@ -95,7 +95,7 @@ function view() {
 						m('.Demo-result', m(HelloWorldComponent3))
 					)
 				),
-				m('p',
+				m('p.clear',
 					markup(
 						'We can now render this component in the same way we render a virtual DOM element, using `m()`.',
 						'Mithril passes the last argument(s) in the call to `m()` as children to the virtual DOM node.',
@@ -149,7 +149,7 @@ function view() {
 						m('.Demo-result', m(HelloWorldComponent6))
 					)
 				),
-				m('p',
+				m('p.clear',
 					markup(
 						'The [examples](/examples) on this site will use closure component syntax in most cases',
 						'where there is internal state to manage. However, there are',

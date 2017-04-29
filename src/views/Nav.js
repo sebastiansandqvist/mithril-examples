@@ -2,12 +2,8 @@ import m from 'mithril';
 import T from 's-types';
 
 const pages = [
-	'Getting started',
 	'Examples',
-	'Requests',
-	'Applications',
-	'Routing'
-	// 'Streams'
+	'Getting started'
 ];
 
 const linkType = T({
@@ -38,9 +34,7 @@ function view({ attrs }) {
 
 	return (
 		m('.Nav',
-			m('.Container',
-				pages.map((page) => m(Link, { page, active: attrs.active }))
-			)
+			pages.map((page) => m(Link, { page, active: attrs.active }))
 		)
 	);
 }

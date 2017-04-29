@@ -1,12 +1,12 @@
 {
   "name": "mithril-examples",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "mithril.js ui examples",
   "main": "src/index.js",
   "scripts": {
     "build": "rollup -c build/rollup.config.js",
     "lint": "eslint ./src/",
-    "start": "firebase serve --port 3000",
+    "start": "superstatic --config firebase.json --port 3000",
     "watch": "rollup -c build/rollup.config.js --watch"
   },
   "repository": {
@@ -28,7 +28,8 @@
     "rollup-plugin-commonjs": "5.0.5",
     "rollup-plugin-node-resolve": "2.0.0",
     "rollup-plugin-uglify": "1.0.1",
-    "rollup-watch": "2.5.0"
+    "rollup-watch": "2.5.0",
+    "superstatic": "4.1.0"
   },
   "dependencies": {
     "fetch-ie8": "1.4.3",
