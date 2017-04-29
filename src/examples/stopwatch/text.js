@@ -1,4 +1,4 @@
-import markup from '../../../util/markup.js';
+import markup from '../../util/markup.js';
 
 export default markup(
 	'These examples use a simple convention for state management.',

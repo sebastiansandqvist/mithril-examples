@@ -1,4 +1,4 @@
-import markup from '../../../util/markup.js';
+import markup from '../../util/markup.js';
 
 export default markup(
 	'Adding a "reset" button to the stopwatch is as simple as creating the',

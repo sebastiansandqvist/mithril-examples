@@ -1,4 +1,4 @@
-import codeString from '../../../util/codeString.js';
+import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
 `function App() {

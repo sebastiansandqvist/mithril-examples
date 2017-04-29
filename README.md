@@ -39,7 +39,7 @@ T.schema({
 	tags: T.arrayOf(T.schema({ name: T.string, url: T.string })),
 	isOpen: T.bool,
 	description: T.arrayOf(T.schema({
-		text: T.any,
+		text: T.any, // a string, array, anything that can be rendered by mithril
 		demo: T.any, // a mithril component
 		code: T.arrayOf(T.schema({ // tabs
 			id: T.string,

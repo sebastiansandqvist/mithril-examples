@@ -1,4 +1,4 @@
-import markup from '../../../util/markup.js';
+import markup from '../../util/markup.js';
 
 export default markup(
 	'When rendering a list of data, it is a good idea to supply Mithril',
