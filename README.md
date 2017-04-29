@@ -6,6 +6,7 @@ https://mithril-examples.firebaseapp.com/
 - Applications: calculator
 - Request: loading indicator & error state
 - Request: file upload progress (simulate)
+- Request: m.jsonp
 - Components: custom checkbox
 - Components: collapser
 - Components: notification (trigger with function)

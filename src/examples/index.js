@@ -18,8 +18,13 @@ import markdownDemo from './markdown/demo';
 import markdownText from './markdown/text';
 import markdownCode from './markdown/code';
 
+import autogrowDemo from './autogrow/demo';
+import autogrowText from './autogrow/text';
+import autogrowCode from './autogrow/code';
+
 const tag = {
 	closureComponent: { name: 'Closure Component', url: 'https://mithril.js.org/components.html#closure-components' },
+	dom: { name: 'DOM', url: 'https://mithril.js.org/lifecycle-methods.html#oncreate' }, // TODO: find better url for this
 	keys: { name: 'Keys', url: 'https://mithril.js.org/keys.html' },
 	lifecycle: { name: 'Lifecycle Hooks', url: 'https://mithril.js.org/lifecycle-methods.html' },
 	redraw: { name: 'm.redraw', url: 'https://mithril.js.org/redraw.html' },
@@ -27,6 +32,7 @@ const tag = {
 	route: { name: 'm.route', url: 'https://mithril.js.org/route.html' },
 	trust: { name: 'm.trust', url: 'https://mithril.js.org/trust.html' },
 	stream: { name: 'Stream', url: 'https://mithril.js.org/stream.html' },
+	svg: { name: 'SVG', url: 'https://mithril.js.org/hyperscript.html#svg-and-mathml' },
 	withAttr: { name: 'm.withAttr', url: 'https://mithril.js.org/withAttr.html' }
 };
 
@@ -78,6 +84,19 @@ const examples = [
 				text: markdownText,
 				demo: markdownDemo,
 				code: markdownCode
+			}
+		]
+	},
+	{
+		title: 'Autogrow textarea',
+		demo: autogrowDemo,
+		tags: [tag.closureComponent, tag.dom, tag.lifecycle, tag.stream, tag.withAttr],
+		isOpen: false,
+		description: [
+			{
+				text: autogrowText,
+				demo: autogrowDemo,
+				code: autogrowCode
 			}
 		]
 	}
