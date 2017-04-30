@@ -16,17 +16,6 @@ https://mithril-examples.firebaseapp.com/
 - Components: debounced typing indicator
 - Components: m.route.link
 
-# Todo
-
-- Add jsfiddles to refactored examples
-- Add jsx syntax to refactored examples
-- Finish refactoring examples in `src/examples/old/...`
-- Add `{ key: ??? }` to todo example?
-- Allow filtering examples by tags
-- Fix markup.js bug that requires todo/text.js to have ``dom`` on its own line
-- Find better url for `tags.dom`
-- Use async/await for cleaner morse code player
-
 # Contributing
 
 Run `npm start` to start the local server.
@@ -76,3 +65,17 @@ In use, it looks something like this:
 ```
 
 When adding text descriptions for code examples in `src/examples/**/text.js`, you can use `src/util/markup.js` to help format the text. This provides a minimal markdown-like syntax for formatting links (`[title](url)`), code (``var x = 5``), and unordered lists (`* list item`).
+
+
+
+# Todo
+
+- Add jsfiddles to refactored examples
+- Add jsx syntax to refactored examples
+- Finish refactoring examples in `src/examples/old/...`
+- Add `{ key: ??? }` to todo example?
+- Allow filtering examples by tags
+- Fix markup.js bug that requires todo/text.js to have ``dom`` on its own line
+- Find better url for `tags.dom`
+- Use async/await for cleaner morse code player
+- Stop morse player's sound in `onremove()`

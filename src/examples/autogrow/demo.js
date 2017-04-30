@@ -13,7 +13,7 @@ export default function AutogrowTextarea() {
 			value.map(() => setHeight(dom));
 		},
 		view() {
-			return m('textarea', {
+			return m('textarea.fullWidth', {
 				value: value(),
 				placeholder: 'Enter some text',
 				oninput: m.withAttr('value', value)
