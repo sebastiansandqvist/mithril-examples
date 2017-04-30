@@ -379,6 +379,10 @@ code {
 	font-size: 13px;
 }
 
+.Demo-result code {
+	color: #345;
+}
+
 code.inline {
 	background: #eee;
 	color: #345;

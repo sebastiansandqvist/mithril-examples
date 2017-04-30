@@ -1,3 +1,27 @@
+import autogrowDemo from './autogrow/demo';
+import autogrowText from './autogrow/text';
+import autogrowCode from './autogrow/code';
+
+import cartDemo from './cart/demo';
+import cartText from './cart/text';
+import cartCode from './cart/code';
+
+import markdownDemo from './markdown/demo';
+import markdownText from './markdown/text';
+import markdownCode from './markdown/code';
+
+import morseDemo from './morse/demo';
+import morseText from './morse/text';
+import morseCode from './morse/code';
+
+import passwordDemo from './password/demo';
+import passwordText from './password/text';
+import passwordCode from './password/code';
+
+import rotatorDemo from './rotator/demo';
+import rotatorText from './rotator/text';
+import rotatorCode from './rotator/code';
+
 import stopwatchDemo from './stopwatch/demo';
 import stopwatchText from './stopwatch/text';
 import stopwatchCode from './stopwatch/code';
@@ -9,26 +33,6 @@ import stopwatch2Code from './stopwatch2/code';
 import stopwatch3Demo from './stopwatch3/demo';
 import stopwatch3Text from './stopwatch3/text';
 import stopwatch3Code from './stopwatch3/code';
-
-import rotatorDemo from './rotator/demo';
-import rotatorText from './rotator/text';
-import rotatorCode from './rotator/code';
-
-import markdownDemo from './markdown/demo';
-import markdownText from './markdown/text';
-import markdownCode from './markdown/code';
-
-import autogrowDemo from './autogrow/demo';
-import autogrowText from './autogrow/text';
-import autogrowCode from './autogrow/code';
-
-import passwordDemo from './password/demo';
-import passwordText from './password/text';
-import passwordCode from './password/code';
-
-import cartDemo from './cart/demo';
-import cartText from './cart/text';
-import cartCode from './cart/code';
 
 import todoDemo from './todo/demo';
 import todoText from './todo/text';
@@ -95,6 +99,19 @@ const examples = [
 				text: markdownText,
 				demo: markdownDemo,
 				code: markdownCode
+			}
+		]
+	},
+	{
+		title: 'Morse Code Player',
+		demo: morseDemo,
+		tags: [tag.closureComponent],
+		isOpen: false,
+		description: [
+			{
+				text: morseText,
+				demo: morseDemo,
+				code: morseCode
 			}
 		]
 	},
