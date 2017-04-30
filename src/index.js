@@ -4,6 +4,8 @@ import T from 's-types';
 import GettingStarted from './views/_GettingStarted.js';
 import Examples from './views/_Examples.js';
 
+window.m = m; // expose m so it can be played with in the console
+
 T.disabled = window.location.hostname !== 'localhost';
 
 const routes = {
