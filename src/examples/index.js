@@ -18,6 +18,14 @@ import passwordDemo from './password/demo';
 import passwordText from './password/text';
 import passwordCode from './password/code';
 
+import requestDemo from './request/demo';
+import requestText from './request/text';
+import requestCode from './request/code';
+
+import request2Demo from './request2/demo';
+import request2Text from './request2/text';
+import request2Code from './request2/code';
+
 import rotatorDemo from './rotator/demo';
 import rotatorText from './rotator/text';
 import rotatorCode from './rotator/code';
@@ -125,6 +133,24 @@ const examples = [
 				text: passwordText,
 				demo: passwordDemo,
 				code: passwordCode
+			}
+		]
+	},
+	{
+		title: 'Request JSON from Server',
+		demo: requestDemo,
+		tags: [tag.closureComponent, tag.keys, tag.request, tag.stream],
+		isOpen: false,
+		description: [
+			{
+				text: requestText,
+				demo: requestDemo,
+				code: requestCode
+			},
+			{
+				text: request2Text,
+				demo: request2Demo,
+				code: request2Code
 			}
 		]
 	},
