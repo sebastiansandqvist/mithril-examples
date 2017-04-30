@@ -96,50 +96,50 @@ const actions = {
     actions.stopSound(model);
     model.audioCtx.close();
   },
-  wait(duration, cb) {
-    setTimeout(cb, duration);
+  wait(duration) {
+    return new Promise(function(resolve) {
+      setTimeout(resolve, duration);
+    });
   },
-  playDot(model, cb) {
+  async playDot(model) {
     actions.startSound(model);
-    setTimeout(function() {
-      actions.stopSound(model);
-      setTimeout(cb, BETWEEN_TIME);
-    }, DOT_TIME);
+    await actions.wait(DOT_TIME);
+    actions.stopSound(model);
+    await actions.wait(BETWEEN_TIME);
   },
-  playDash(model, cb) {
+  async playDash(model) {
     actions.startSound(model);
-    setTimeout(function() {
-      actions.stopSound(model);
-      setTimeout(cb, BETWEEN_TIME);
-    }, DASH_TIME);
+    await actions.wait(DASH_TIME);
+    actions.stopSound(model);
+    await actions.wait(BETWEEN_TIME);
   },
-  playLetter(model, morseLetter, cb) {
+  async playLetter(model, morseLetter) {
     const chars = morseLetter.split('');
-    if (chars.length === 0) { cb(); return; }
+    if (chars.length === 0) { return; }
     const char = chars.shift();
     switch (char) {
-      case '.': actions.playDot(model, () =>
-        actions.playLetter(model, chars.join(''), cb));
+      case '.': 
+        await actions.playDot(model);
+        await actions.playLetter(model, chars.join(''));
         return;
-      case '-': actions.playDash(model, () =>
-        actions.playLetter(model, chars.join(''), cb));
+      case '-':
+        await actions.playDash(model);
+        await actions.playLetter(model, chars.join(''));
         return;
-      case ' ': actions.wait(WORD_PAUSE, () =>
-        actions.playLetter(model, chars.join(''), cb));
+      case ' ':
+        await actions.wait(WORD_PAUSE);
+        await actions.playLetter(model, chars.join(''));
         return;
       default:
         alert('Unable to play character: ' + char);
-        cb();
     }
   },
-  playAll(model, morseArr, cb) {
-    if (morseArr.length === 0) { cb(); return; }
+  async playAll(model, morseArr) {
+    if (morseArr.length === 0) { return; }
     const letter = morseArr.shift();
-    actions.playLetter(model, letter, function() {
-      actions.wait(LETTER_PAUSE, function() {
-        actions.playAll(model, morseArr, cb);
-      });
-    });
+    await actions.playLetter(model, letter);
+    await actions.wait(LETTER_PAUSE);
+    await actions.playAll(model, morseArr);
   }
 };
 
@@ -157,13 +157,13 @@ function MorsePlayer() {
         m('div', m('code', model.morseString())),
         m('button', {
           disabled: model.isPlaying,
-          onclick() {
-            actions.setPlaying(model, true);
-            actions.playAll(model, model.morseArr(), function() {
+          async onclick() {
+              actions.setPlaying(model, true);
+              await actions.playAll(model, model.morseArr());
               actions.setPlaying(model, false);
-            });
-          }
-        }, 'Play')
+              m.redraw();
+            }
+          }, 'Play')
       ];
     },
     onremove() {
@@ -339,6 +339,7 @@ function MorsePlayer() {
             actions.setPlaying(model, true);
             actions.playAll(model, model.morseArr(), function() {
               actions.setPlaying(model, false);
+              m.redraw();
             });
           }
         }, 'Play')

@@ -164,6 +164,7 @@ export default function MorsePlayer() {
 							actions.setPlaying(model, true);
 							actions.playAll(model, model.morseArr(), function() {
 								actions.setPlaying(model, false);
+								m.redraw();
 							});
 						}
 					}, 'Play')
