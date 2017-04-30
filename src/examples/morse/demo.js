@@ -142,27 +142,32 @@ const actions = {
 };
 
 export default function MorsePlayer() {
-	const model = morseModel();
+	let hasError = false;
+	let model;
+	try { model = morseModel(); }
+	catch (err) { hasError = true; }
 	return {
 		view() {
-			return [
-				m('textarea.fullWidth', {
-					placeholder: 'Enter some text',
-					oninput(event) {
-						actions.setText(model, event.target.value);
-					}
-				}),
-				m('div', m('code', model.morseString())),
-				m('button', {
-					disabled: model.isPlaying,
-					onclick() {
-						actions.setPlaying(model, true);
-						actions.playAll(model, model.morseArr(), function() {
-							actions.setPlaying(model, false);
-						});
-					}
-				}, 'Play')
-			];
+			return hasError ?
+				m('p.errorMessage', '(Your browser does not support the web audio api.)') :
+				[
+					m('textarea.fullWidth', {
+						placeholder: 'Enter some text',
+						oninput(event) {
+							actions.setText(model, event.target.value);
+						}
+					}),
+					m('div', m('code', model.morseString())),
+					m('button', {
+						disabled: model.isPlaying,
+						onclick() {
+							actions.setPlaying(model, true);
+							actions.playAll(model, model.morseArr(), function() {
+								actions.setPlaying(model, false);
+							});
+						}
+					}, 'Play')
+				];
 		},
 		onremove() {
 			actions.destroy(model);
