@@ -57,14 +57,14 @@ In use, it looks something like this:
 ```js
 {
   title: 'To-do List',
-  demo: todoDemo, // './demos/todo/demo.js'
+  demo: todoDemo, // './examples/todo/demo.js'
   tags: [tag.closureComponent, tag.stream, tag.withAttr],
   isOpen: false,
   description: [
     {
-      text: todoText, // './demos/todo/text.js'
-      demo: todoDemo, // './demos/todo/demo.js',
-      code: todoCode  // './demos/todo/code.js'
+      text: todoText, // './examples/todo/text.js'
+      demo: todoDemo, // './examples/todo/demo.js',
+      code: todoCode  // './examples/todo/code.js'
     }
   ]
 }
