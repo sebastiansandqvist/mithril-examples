@@ -18,32 +18,38 @@ https://mithril-examples.firebaseapp.com/
 
 # Contributing
 
-Run `npm start` to start the local server.
-Run `npm run watch` to bundle the code and continue watching for incremental builds.
-Run `npm run lint` and make sure there are no linting errors or warnings in your changes prior to making a pull request.
+1. Submit your idea in an issue (including example code)
+2. View the format of the existing examples in `src/examples/**` and `src/examples/index.js`
+3. Fork this repo
+4. Add a folder for your idea in `src/examples/`
+5. Create `text.js`, `code.js`, and `demo.js` within that folder.
+  - `text.js` should export a string (or anything that mithril can render, like an array of strings or mithril vnodes). This will be the description of your example.
+  - `code.js` should export an array of objects with the form: `{ id: String, code: String }`. These will be the tabs displaying the code for your example. The `id`s can be: `es6` for the string of es6 code, `es5` for the es5 equivalent, and optionally `css` if your example requires some custom css. `code` should be a string produced by `src/util/codeString.js`. If your example includes css, add your css to `public/main.css` and use `codeString.css()` instead of `codeString()`. Code should be indented with spaces in `code.js` only. This is because browser support for tab-spacing is poor and tends to over-indent. Use two spaces for indentation. (For all other code, though, use tabs for indentation.)
+  - `demo.js` should export a mithril component.
+6. Create a jsfiddle for your demo. It should be as close to `demo.js` as possible. Fork an existing jsfiddle from the site so that you don't have to worry about which version of mithril to import.
+7. Add an object to `src/examples/index.js` following the structure of the existing examples. If your demo includes multiple code samples and demos, you may need to repeat steps 4 and 5. Follow the `stopwatch` example to see how this works. The overall structure of the object you should add is below.
+8. Create a pull request.
 
-Since browser support for tab-spacing is poor, spaces (not tabs) should be used for indentation in the code example strings on the website. This means any code within `src/demos/**/code.js` should be indented with spaces. All code anywhere else should be indented with tabs.
-
-To add an example, create a folder for it in `src/demos`. Within that folder, add three files: `code.js`, `demo.js`, and `text.js`. See the existing examples as a guide for what to export from those files. Next, in `src/examples/index.js`, add a new object to the exported array that follows the same schema as the existing examples. This schema is defined as follows in `src/views/MainView.js`:
+The structure of the object you will add to `src/examples/index.js` is:
 
 ```js
-T.schema({
-  title: T.string,
-  demo: T.any, // a mithril component
+{
+  title: String,
+  demo: MithrilComponent
   // tags must come from the existing tags defined in `src/examples/index.js`
-  tags: T.arrayOf(T.schema({ name: T.string, url: T.string })),
-  isOpen: T.bool,
-  description: T.arrayOf(T.schema({
-    text: T.any, // a string, array, anything that can be rendered by mithril
-    demo: T.any, // a mithril component
-    code: T.arrayOf(T.schema({ // tabs
-      id: T.string,
-      code: T.string
-    })),
-    noTabs: [T.bool, T.optional],
-    fiddle: [T.string, T.optional] // a jsfiddle id
-  }))
-});
+  tags: [{ name: String, url: String }],
+  isOpen: Boolean,
+  description: [{
+    text: Any, // a string, array, anything that can be rendered by mithril
+    demo: MithrilComponent,
+    code: [{ // tabs
+      id: String,
+      code: String
+    }],
+    noTabs: Boolean?,
+    fiddle: String? // a jsfiddle id
+  }]
+}
 ```
 
 In use, it looks something like this:
@@ -63,6 +69,12 @@ In use, it looks something like this:
   ]
 }
 ```
+
+Run `npm start` to start the local server.
+
+Run `npm run watch` to bundle the code and continue watching for incremental builds.
+
+Run `npm run lint` and make sure there are no linting errors or warnings in your changes prior to making a pull request.
 
 When adding text descriptions for code examples in `src/examples/**/text.js`, you can use `src/util/markup.js` to help format the text. This provides a minimal markdown-like syntax for formatting links (`[title](url)`), code (``var x = 5``), and unordered lists (`* list item`).
 
