@@ -38,7 +38,7 @@ The structure of the object you will add to `src/examples/index.js` is:
   demo: MithrilComponent
   // tags must come from the existing tags defined in `src/examples/index.js`
   tags: [{ name: String, url: String }],
-  isOpen: Boolean,
+  isOpen: Boolean, // set this to false (determines if the demo is expanded/collapsed)
   description: [{
     text: Any, // a string, array, anything that can be rendered by mithril
     demo: MithrilComponent,
