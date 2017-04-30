@@ -12,7 +12,10 @@ function todoModel() {
 
 const actions = {
   addTodo(model) {
-    model.todos.push(model.newTodoText());
+    model.todos.push({
+      text: model.newTodoText(),
+      id: Date.now()
+    });
     model.newTodoText(''); // reset
   }
 };
@@ -21,8 +24,8 @@ const TodoList = {
   view({ attrs }) {
     return (
       m('ul',
-        attrs.items.map((item) =>
-          m('li', item)
+        attrs.todos.map((todo) =>
+          m('li', { key: todo.id }, todo.text)
         )
       )
     );
@@ -35,7 +38,7 @@ function TodoApp() {
     view() {
       return [
         m('h3', 'To-do'),
-        m(TodoList, { items: model.todos }),
+        m(TodoList, { todos: model.todos }),
         m('form', {
           onsubmit(event) {
             event.preventDefault();
@@ -67,7 +70,10 @@ function todoModel() {
 
 var actions = {
   addTodo: function(model) {
-    model.todos.push(model.newTodoText());
+    model.todos.push({
+      text: model.newTodoText(),
+      id: Date.now()
+    });
     model.newTodoText(''); // reset
   }
 };
@@ -76,8 +82,8 @@ var TodoList = {
   view: function(vnode) {
     return (
       m('ul',
-        vnode.attrs.items.map(function(item) {
-          return m('li', item);
+        vnode.attrs.todos.map(function(todo) {
+          return m('li', { key: todo.id }, todo.text);
         })
       )
     );
@@ -90,7 +96,7 @@ function TodoApp() {
     view: function() {
       return [
         m('h3', 'To-do'),
-        m(TodoList, { items: model.todos }),
+        m(TodoList, { todos: model.todos }),
         m('form', {
           onsubmit: function(event) {
             event.preventDefault();

@@ -10,7 +10,10 @@ function todoModel() {
 
 const actions = {
 	addTodo(model) {
-		model.todos.push(model.newTodoText());
+		model.todos.push({
+      text: model.newTodoText(),
+      id: Date.now()
+    });
 		model.newTodoText(''); // reset
 	}
 };
@@ -19,8 +22,8 @@ const TodoList = {
 	view({ attrs }) {
     return (
       m('ul',
-        attrs.items.map((item) =>
-          m('li', item)
+        attrs.todos.map((todo) =>
+          m('li', { key: todo.id }, todo.text)
         )
       )
     );
@@ -33,7 +36,7 @@ export default function TodoApp() {
 		view() {
 			return [
         m('h3', 'To-do'),
-        m(TodoList, { items: model.todos }),
+        m(TodoList, { todos: model.todos }),
         m('form', {
           onsubmit(event) {
             event.preventDefault();
