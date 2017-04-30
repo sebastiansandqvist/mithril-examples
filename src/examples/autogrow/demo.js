@@ -15,6 +15,7 @@ export default function AutogrowTextarea() {
 		view() {
 			return m('textarea', {
 				value: value(),
+				placeholder: 'Enter some text',
 				oninput: m.withAttr('value', value)
 			});
 		}

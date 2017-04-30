@@ -15,6 +15,7 @@ function Textarea() {
     view() {
       return m('textarea', {
         value: value(),
+        placeholder: 'Enter some text',
         oninput: m.withAttr('value', value)
       });
     }
@@ -38,6 +39,7 @@ function Textarea() {
     view: function() {
       return m('textarea', {
         value: value(),
+        placeholder: 'Enter some text',
         oninput: m.withAttr('value', value)
       });
     }
