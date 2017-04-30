@@ -74,7 +74,7 @@ In use, it looks something like this:
 - Run `npm run watch` to bundle the code and continue watching for incremental builds.
 - Run `npm run lint` and make sure there are no linting errors or warnings in your changes prior to making a pull request.
 
-When adding text descriptions for code examples in `src/examples/**/text.js`, you can use `src/util/markup.js` to help format the text. This provides a minimal markdown-like syntax for formatting links (`[title](url)`), code (`\`var x = 5\``), and unordered lists (`* list item`).
+When adding text descriptions for code examples in `src/examples/**/text.js`, you can use `src/util/markup.js` to help format the text. This provides a minimal markdown-like syntax for formatting links (`[title](url)`), code (`` `var x = 5` ``), and unordered lists (`* list item`).
 
 
 
