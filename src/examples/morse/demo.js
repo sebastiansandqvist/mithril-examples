@@ -81,10 +81,18 @@ const actions = {
 		model.isPlaying = value;
 	},
 	startSound(model) {
-		model.gainNode.connect(model.audioCtx.destination);
+		if (model.audioCtx.state !== 'closed') {
+			model.gainNode.connect(model.audioCtx.destination);
+		}
 	},
 	stopSound(model) {
-		model.gainNode.disconnect(model.audioCtx.destination);
+		if (model.audioCtx.state !== 'closed') {
+			model.gainNode.disconnect();
+		}
+	},
+	destroy(model) {
+		actions.stopSound(model);
+		model.audioCtx.close();
 	},
 	wait(duration, cb) {
 		setTimeout(cb, duration);
@@ -155,6 +163,9 @@ export default function MorsePlayer() {
 					}
 				}, 'Play')
 			];
+		},
+		onremove() {
+			actions.destroy(model);
 		}
 	};
 }

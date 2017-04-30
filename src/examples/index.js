@@ -105,7 +105,7 @@ const examples = [
 	{
 		title: 'Morse Code Player',
 		demo: morseDemo,
-		tags: [tag.closureComponent],
+		tags: [tag.closureComponent, tag.lifecycle],
 		isOpen: false,
 		description: [
 			{

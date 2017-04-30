@@ -78,4 +78,3 @@ When adding text descriptions for code examples in `src/examples/**/text.js`, yo
 - Fix markup.js bug that requires todo/text.js to have ``dom`` on its own line
 - Find better url for `tags.dom`
 - Use async/await for cleaner morse code player
-- Stop morse player's sound in `onremove()`
