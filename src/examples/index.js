@@ -80,7 +80,8 @@ const examples = [
 			{
 				text: autogrowText,
 				demo: autogrowDemo,
-				code: autogrowCode
+				code: autogrowCode,
+				fiddle: 'j3Lcw1vs'
 			}
 		]
 	},
@@ -93,7 +94,8 @@ const examples = [
 			{
 				text: rotatorText,
 				demo: rotatorDemo,
-				code: rotatorCode
+				code: rotatorCode,
+				fiddle: 's0of2sgf'
 			}
 		]
 	},
@@ -106,7 +108,8 @@ const examples = [
 			{
 				text: markdownText,
 				demo: markdownDemo,
-				code: markdownCode
+				code: markdownCode,
+				fiddle: 'waybLfm4'
 			}
 		]
 	},
@@ -133,7 +136,8 @@ const examples = [
 			{
 				text: passwordText,
 				demo: passwordDemo,
-				code: passwordCode
+				code: passwordCode,
+				fiddle: '9ujphc65'
 			}
 		]
 	},
@@ -146,7 +150,8 @@ const examples = [
 			{
 				text: requestText,
 				demo: requestDemo,
-				code: requestCode
+				code: requestCode,
+				fiddle: 'xjcq37c9'
 			},
 			{
 				text: request2Text,
@@ -164,7 +169,8 @@ const examples = [
 			{
 				text: cartText,
 				demo: cartDemo,
-				code: cartCode
+				code: cartCode,
+				fiddle: '80rvnyrs'
 			}
 		]
 	},
@@ -177,12 +183,14 @@ const examples = [
 			{
 				text: stopwatchText,
 				demo: stopwatchDemo,
-				code: stopwatchCode
+				code: stopwatchCode,
+				fiddle: '8476ypns'
 			},
 			{
 				text: stopwatch2Text,
 				demo: stopwatch2Demo,
-				code: stopwatch2Code
+				code: stopwatch2Code,
+				fiddle: '09nLejgz'
 			},
 			{
 				text: stopwatch3Text,
@@ -201,7 +209,8 @@ const examples = [
 			{
 				text: tabsText,
 				demo: tabsDemo,
-				code: tabsCode
+				code: tabsCode,
+				fiddle: '8v8v57wL'
 			}
 		]
 	},
@@ -227,7 +236,8 @@ const examples = [
 			{
 				text: tooltipText,
 				demo: tooltipDemo,
-				code: tooltipCode
+				code: tooltipCode,
+				fiddle: '2k4290gu'
 			}
 		]
 	}
