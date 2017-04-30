@@ -158,12 +158,12 @@ function MorsePlayer() {
         m('button', {
           disabled: model.isPlaying,
           async onclick() {
-              actions.setPlaying(model, true);
-              await actions.playAll(model, model.morseArr());
-              actions.setPlaying(model, false);
-              m.redraw();
-            }
-          }, 'Play')
+            actions.setPlaying(model, true);
+            await actions.playAll(model, model.morseArr());
+            actions.setPlaying(model, false);
+            m.redraw();
+          }
+        }, 'Play')
       ];
     },
     onremove() {

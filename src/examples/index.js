@@ -113,13 +113,14 @@ const examples = [
 	{
 		title: 'Morse Code Player',
 		demo: morseDemo,
-		tags: [tag.closureComponent, tag.lifecycle],
+		tags: [tag.closureComponent, tag.lifecycle, tag.redraw],
 		isOpen: false,
 		description: [
 			{
 				text: morseText,
 				demo: morseDemo,
-				code: morseCode
+				code: morseCode,
+				fiddle: '6xqhLqc2'
 			}
 		]
 	},
