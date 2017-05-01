@@ -10,6 +10,10 @@ import classNamesDemo from './classNames/demo';
 import classNamesText from './classNames/text';
 import classNamesCode from './classNames/code';
 
+import formValidationDemo from './formValidation/demo';
+import formValidationText from './formValidation/text';
+import formValidationCode from './formValidation/code';
+
 import markdownDemo from './markdown/demo';
 import markdownText from './markdown/text';
 import markdownCode from './markdown/code';
@@ -100,6 +104,20 @@ const examples = [
 				demo: classNamesDemo,
 				code: classNamesCode,
 				fiddle: 'n7qj4yfu'
+			}
+		]
+	},
+	{
+		title: 'Form Validation',
+		demo: formValidationDemo,
+		tags: [tag.closureComponent, tag.stream, tag.withAttr],
+		isOpen: false,
+		description: [
+			{
+				text: formValidationText,
+				demo: formValidationDemo,
+				code: formValidationCode,
+				fiddle: '0u1kq8q5'
 			}
 		]
 	},
