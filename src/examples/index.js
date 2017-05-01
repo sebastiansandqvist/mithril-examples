@@ -233,7 +233,8 @@ const examples = [
 			{
 				text: route3Text,
 				demo: route3Demo,
-				code: route3Code
+				code: route3Code,
+				noTabs: true
 			},
 			{
 				text: route4Text,
