@@ -6,6 +6,10 @@ import cartDemo from './cart/demo';
 import cartText from './cart/text';
 import cartCode from './cart/code';
 
+import classNamesDemo from './classNames/demo';
+import classNamesText from './classNames/text';
+import classNamesCode from './classNames/code';
+
 import markdownDemo from './markdown/demo';
 import markdownText from './markdown/text';
 import markdownCode from './markdown/code';
@@ -82,6 +86,20 @@ const examples = [
 				demo: autogrowDemo,
 				code: autogrowCode,
 				fiddle: 'j3Lcw1vs'
+			}
+		]
+	},
+	{
+		title: 'Dynamic Class Names',
+		demo: classNamesDemo,
+		tags: [tag.closureComponent, tag.stream, tag.withAttr],
+		isOpen: false,
+		description: [
+			{
+				text: classNamesText,
+				demo: classNamesDemo,
+				code: classNamesCode,
+				fiddle: 'n7qj4yfu'
 			}
 		]
 	},
