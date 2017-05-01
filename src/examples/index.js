@@ -38,6 +38,22 @@ import rotatorDemo from './rotator/demo';
 import rotatorText from './rotator/text';
 import rotatorCode from './rotator/code';
 
+import routeDemo from './route/demo';
+import routeText from './route/text';
+import routeCode from './route/code';
+
+import route2Demo from './route2/demo';
+import route2Text from './route2/text';
+import route2Code from './route2/code';
+
+import route3Demo from './route3/demo';
+import route3Text from './route3/text';
+import route3Code from './route3/code';
+
+import route4Demo from './route4/demo';
+import route4Text from './route4/text';
+import route4Code from './route4/code';
+
 import stopwatchDemo from './stopwatch/demo';
 import stopwatchText from './stopwatch/text';
 import stopwatchCode from './stopwatch/code';
@@ -193,6 +209,37 @@ const examples = [
 				text: request2Text,
 				demo: request2Demo,
 				code: request2Code
+			}
+		]
+	},
+	{
+		title: 'Route',
+		demo: routeDemo,
+		tags: [tag.link, tag.route],
+		isOpen: false,
+		description: [
+			{
+				text: routeText,
+				demo: routeDemo,
+				code: routeCode,
+				noTabs: true
+			},
+			{
+				text: route2Text,
+				demo: route2Demo,
+				code: route2Code,
+				noTabs: true
+			},
+			{
+				text: route3Text,
+				demo: route3Demo,
+				code: route3Code
+			},
+			{
+				text: route4Text,
+				demo: route4Demo,
+				code: route4Code,
+				noTabs: true
 			}
 		]
 	},

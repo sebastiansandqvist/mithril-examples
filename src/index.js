@@ -12,7 +12,7 @@ const routes = {
 	'/': Examples,
 	'/gettingstarted': GettingStarted,
 	'/examples': Examples,
-	'/examples/:param': Examples
+	'/examples/:x': Examples
 };
 
 m.route.prefix('');
