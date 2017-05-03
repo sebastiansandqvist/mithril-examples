@@ -74,6 +74,10 @@ import tabsDemo from './tabs/demo';
 import tabsText from './tabs/text';
 import tabsCode from './tabs/code';
 
+import tictactoeDemo from './tictactoe/demo';
+import tictactoeText from './tictactoe/text';
+import tictactoeCode from './tictactoe/code';
+
 import tooltipDemo from './tooltip/demo';
 import tooltipText from './tooltip/text';
 import tooltipCode from './tooltip/code';
@@ -295,6 +299,20 @@ const examples = [
 				demo: tabsDemo,
 				code: tabsCode,
 				fiddle: '8v8v57wL'
+			}
+		]
+	},
+	{
+		title: 'Tic Tac Toe',
+		demo: tictactoeDemo,
+		tags: [tag.closureComponent],
+		isOpen: false,
+		description: [
+			{
+				text: tictactoeText,
+				demo: tictactoeDemo,
+				code: tictactoeCode,
+				fiddle: 's4atxu0x'
 			}
 		]
 	},

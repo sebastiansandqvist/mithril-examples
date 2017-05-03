@@ -111,6 +111,22 @@ ul {
 	margin: 0;
 }
 
+/* tic tac toe */
+table.Board {
+	border-collapse: collapse;
+	table-layout: fixed;
+	width: 100%;
+}
+
+td.Square {
+	background: #fff;
+	border: 1px solid #000;
+	font-family: 'Monaco', monospace;
+	font-size: 12px;
+	height: 50px;
+	text-align: center;
+}
+
 /* ---------------------- NAVIGATION ---------------------- */
 
 .Nav {
