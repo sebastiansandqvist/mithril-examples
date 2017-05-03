@@ -66,7 +66,7 @@ function getLabel(model) {
 function move(model, row, column) {
   // only move if game isn't over and location is available
   if (!getWinner(model.board) && !model.board[row][column]) {
-    const player = model.isX ? 'X' : 'O';
+    var player = model.isX ? 'X' : 'O';
     model.board[row][column] = player;
     model.isX = !model.isX;
   }
