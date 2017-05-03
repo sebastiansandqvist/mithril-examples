@@ -345,7 +345,7 @@ function MorsePlayer() {
         }, 'Play')
       ];
     },
-    onremove() {
+    onremove: function() {
       actions.destroy(model);
     }
   };
