@@ -15,6 +15,7 @@ https://mithril-examples.firebaseapp.com/
 - Components: list filtering using input
 - Components: debounced typing indicator
 - Components: m.route.link
+- Components: undo/redo in editor or game
 
 # Contributing
 

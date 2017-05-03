@@ -18,6 +18,11 @@ function view({ attrs, children }) {
 			),
 			m('.Content',
 				m('.Container', children)
+			),
+			m('.Footer',
+				m('a.Footer-link[href=https://github.com/sebastiansandqvist/mithril-examples]', 'Contribute'),
+				m('a.Footer-link[href=https://mithril.js.org]', 'Mithril.js.org'),
+				m('a.Footer-link[href=https://github.com/MithrilJS/mithril.js]', 'Mithril Github')
 			)
 		)
 	);

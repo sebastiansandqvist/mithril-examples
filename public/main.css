@@ -45,6 +45,32 @@ body {
 }
 
 
+/* ---------------------- FOOTER ---------------------- */
+
+.Footer {
+	background: #5a5;
+	padding: 20px;
+	text-align: center;
+}
+
+.Footer-link {
+	border-bottom: 1px solid #8d8;
+	color: #fff;
+	font-size: 12px;
+	letter-spacing: 2px;
+	opacity: 0.8;
+	margin: 0 20px;
+	padding: 2px 0;
+	text-decoration: none;
+	text-transform: uppercase;
+	transition: all .2s ease;
+}
+
+.Footer-link:hover {
+	border-bottom: 1px solid #fff;
+	opacity: 1;
+}
+
 /* ---------------------- TAGS ---------------------- */
 
 .Tags {
