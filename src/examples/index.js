@@ -66,6 +66,10 @@ import stopwatch3Demo from './stopwatch3/demo';
 import stopwatch3Text from './stopwatch3/text';
 import stopwatch3Code from './stopwatch3/code';
 
+import svgDemo from './svg/demo';
+import svgText from './svg/text';
+import svgCode from './svg/code';
+
 import todoDemo from './todo/demo';
 import todoText from './todo/text';
 import todoCode from './todo/code';
@@ -285,6 +289,20 @@ const examples = [
 				demo: stopwatch3Demo,
 				code: stopwatch3Code,
 				noTabs: true
+			}
+		]
+	},
+	{
+		title: 'SVG', // must be unique
+		demo: svgDemo,
+		tags: [tag.closureComponent, tag.svg, tag.withAttr],
+		isOpen: false,
+		description: [
+			{
+				text: svgText,
+				demo: svgDemo,
+				code: svgCode,
+				fiddle: 'nbeqzdmu'
 			}
 		]
 	},

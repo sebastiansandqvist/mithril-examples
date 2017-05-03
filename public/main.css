@@ -153,6 +153,12 @@ td.Square {
 	text-align: center;
 }
 
+/* svg example */
+svg.Svg-wrap {
+	height: 120px;
+	width: 100%;
+}
+
 /* ---------------------- NAVIGATION ---------------------- */
 
 .Nav {
