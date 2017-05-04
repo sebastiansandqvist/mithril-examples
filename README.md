@@ -9,13 +9,12 @@ https://mithril-examples.firebaseapp.com/
 - Request: m.jsonp
 - Components: custom checkbox
 - Components: collapser
+- Components: tree view
 - Components: notification (trigger with function)
-- Components: SVG
 - Components: slider
-- Components: list filtering using input
 - Components: debounced typing indicator
-- Components: m.route.link
 - Components: undo/redo in editor or game
+- Components: multiple stream examples that use full stream api
 
 # Contributing
 
@@ -24,7 +23,7 @@ https://mithril-examples.firebaseapp.com/
 3. Fork this repo.
 4. Add a folder for your idea in `src/examples/`.
 5. Create `text.js`, `code.js`, and `demo.js` within that folder.
-  - `text.js` should export a string (or anything that mithril can render, like an array of strings or mithril vnodes). This will be the description of your example.
+  - `text.js` should export a string (or anything that mithril can render, like an array of strings or mithril vnodes). This will be the description of your example. If your module is simple enough to not need a description, export an empty string from `text.js`.
   - `code.js` should export an array of objects with the form: `{ id: String, code: String }`. These will be the tabs displaying the code for your example. The `id`s can be: `"es6"` for the string of es6 code, `"es5"` for the es5 equivalent, and optionally `"css"` if your example requires some custom css. `code` should be a string produced by `src/util/codeString.js`. If your example includes css, add your css to `public/main.css` and use `codeString.css()` instead of `codeString()`. Code should be indented with spaces in `code.js` only. This is because browser support for tab-spacing is poor and tends to over-indent. Use two spaces for indentation. (For all other code, though, use tabs for indentation.)
   - `demo.js` should export a mithril component.
 6. Create a jsfiddle for your demo. It should be as close to `demo.js` as possible. Fork an existing jsfiddle from the site so that you don't have to worry about which version of mithril to import.

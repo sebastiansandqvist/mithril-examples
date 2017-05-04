@@ -29,7 +29,7 @@ const es5 = codeString(
 }
 
 function Textarea() {
-  const value = stream('');
+  var value = stream('');
   return {
     oncreate: function(vnode) {
       value.map(function() {
