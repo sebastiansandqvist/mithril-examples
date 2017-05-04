@@ -403,7 +403,8 @@ p {
 
 .Subtitle {
 	color: #89a;
-	font-size: 14px;
+	font-size: 13px;
+	font-weight: 400;
 	padding-left: 15px;
 	position: relative;
 	top: -2px;
