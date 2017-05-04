@@ -160,7 +160,10 @@ function view() {
 			),
 			m('.Section',
 				m('.center',
-					m('a.Button.Button--large[href=/]', 'View mithril examples →')
+					m('a.Button.Button--large[href=/]', {
+						// since mithril does not scroll to top by default
+						onclick() { window.scrollTo(0); }
+					}, 'View mithril examples →')
 				)
 			),
 			m('.Section',
