@@ -1,7 +1,7 @@
 {
 	"extends": "@seabass",
 	"rules": {
-		"indent": 0,
+    "indent": 0,
 		"prefer-template": 0
 	}
 }

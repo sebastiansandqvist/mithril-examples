@@ -1,0 +1,11 @@
+---
+  0 error pnpm: 
+    message: 
+      code: "UNEXPECTED_STORE"
+      expectedStorePath: "/home/seb/.pnpm-store/1"
+      actualStorePath: "/home/seb/.pnpm-store/2"
+    err: 
+      name: "Error"
+      message: "Unexpected store used for installation"
+      code: "UNEXPECTED_STORE"
+      stack: "Error: Unexpected store used for installation\n    at Object.checkCompatibility [as default] (/home/seb/.nvm/versions/node/v8.1.1/lib/node_modules/pnpm/lib/api/checkCompatibility.js:46:15)\n    at Object.<anonymous> (/home/seb/.nvm/versions/node/v8.1.1/lib/node_modules/pnpm/lib/api/getContext.js:33:45)\n    at Generator.next (<anonymous>)\n    at fulfilled (/home/seb/.nvm/versions/node/v8.1.1/lib/node_modules/pnpm/lib/api/getContext.js:4:58)\n    at <anonymous>"

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rollup -c build/rollup.config.js",
     "lint": "eslint ./src/",
-    "start": "superstatic --config firebase.json --port 3000",
+    "serve": "superstatic --config firebase.json --port 3000",
+    "start": "npm-run-all --parallel serve watch",
     "watch": "rollup -c build/rollup.config.js --watch"
   },
   "repository": {
@@ -23,6 +24,7 @@
     "@seabass/eslint-config": "1.8.6",
     "babel-eslint": "7.0.0",
     "eslint": "3.8.0",
+    "npm-run-all": "^4.0.2",
     "rollup": "0.36.3",
     "rollup-plugin-buble": "0.14.0",
     "rollup-plugin-commonjs": "5.0.5",

@@ -2,52 +2,52 @@ import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
 `var Tooltip = {
-	view: function(vnode) {
-		return (
-			m('.Tooltip-wrap',
-				vnode.children,
-				m('.Tooltip', vnode.attrs.value)
-			)
-		);
-	}
+  view: function(vnode) {
+    return (
+      m('.Tooltip-wrap',
+        vnode.children,
+        m('.Tooltip', vnode.attrs.value)
+      )
+    );
+  }
 };
 
 var App = {
-	view: function() {
-		return [
-			m(Tooltip, { value: 'Foo' },
-				m('button', 'Hover over this button')
-			),
-			m(Tooltip, { value: 'Bar' },
-				m('span', ' or hover here')
-			)
-		];
-	}
+  view: function() {
+    return [
+      m(Tooltip, { value: 'Foo' },
+        m('button', 'Hover over this button')
+      ),
+      m(Tooltip, { value: 'Bar' },
+        m('span', ' or hover here')
+      )
+    ];
+  }
 };`);
 
 const es6 = codeString(
 `const Tooltip = {
-	view({ attrs, children }) {
-		return (
-			m('.Tooltip-wrap',
-				children,
-				m('.Tooltip', attrs.value)
-			)
-		);
-	}
+  view({ attrs, children }) {
+    return (
+      m('.Tooltip-wrap',
+        children,
+        m('.Tooltip', attrs.value)
+      )
+    );
+  }
 };
 
 const App = {
-	view() {
-		return [
-			m(Tooltip, { value: 'Foo' },
-				m('button', 'Hover over this button')
-			),
-			m(Tooltip, { value: 'Bar' },
-				m('span', ' or hover here')
-			)
-		];
-	}
+  view() {
+    return [
+      m(Tooltip, { value: 'Foo' },
+        m('button', 'Hover over this button')
+      ),
+      m(Tooltip, { value: 'Bar' },
+        m('span', ' or hover here')
+      )
+    ];
+  }
 };`);
 
 const css = codeString.css(
