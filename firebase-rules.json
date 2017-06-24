@@ -1,6 +1,10 @@
 {	
 	"rules": {
-		"books": {
+    "books": {
+      ".read": true,
+      ".write": false
+    },
+		"movies": {
 			".read": true,
 			".write": false
 		}
