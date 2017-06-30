@@ -116,6 +116,10 @@ body {
 	margin-top: 15px;
 }
 
+.Demo-result button {
+	height: 18px;
+}
+
 /* generic layout helpers */
 
 .clear {
