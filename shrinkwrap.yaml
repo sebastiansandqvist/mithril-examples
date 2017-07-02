@@ -2077,6 +2077,7 @@ packages:
     resolution:
       integrity: sha1-9+572FfdfB0tOMDnTvvWgdFDH9E=
 registry: 'https://registry.npmjs.org/'
+shrinkwrapVersion: 3
 specifiers:
   '@seabass/eslint-config': 1.8.6
   babel-eslint: 7.0.0
@@ -2094,4 +2095,3 @@ specifiers:
   rollup-watch: 2.5.0
   s-types: 1.3.0
   superstatic: 4.1.0
-version: 3

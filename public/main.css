@@ -212,8 +212,9 @@ svg.Svg-wrap {
 
 .Button {
 	background: #5a5;
-	color: #fff;
 	border: 3px solid #5a5;
+	color: #fff;
+	height: 30px;
 	text-decoration: none;
 }
 
