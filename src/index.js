@@ -9,10 +9,10 @@ window.m = m; // expose m so it can be played with in the console
 T.disabled = window.location.hostname !== 'localhost';
 
 const routes = {
-	'/': Examples,
-	'/gettingstarted': GettingStarted,
-	'/examples': Examples,
-	'/examples/:x': Examples
+  '/': Examples,
+  '/gettingstarted': GettingStarted,
+  '/examples': Examples,
+  '/examples/:x': Examples,
 };
 
 m.route.prefix('');

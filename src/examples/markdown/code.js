@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
-`var stream = require('mithril/stream');
+  `var stream = require('mithril/stream');
 var marked = require('marked');
 
 function MarkdownEditor() {
@@ -23,7 +23,7 @@ function MarkdownEditor() {
 }`);
 
 const es6 = codeString(
-`import stream from 'mithril/stream';
+  `import stream from 'mithril/stream';
 import marked from 'marked';
 
 function MarkdownEditor() {
@@ -47,5 +47,5 @@ function MarkdownEditor() {
 
 export default [
   { id: 'es6', code: es6 },
-  { id: 'es5', code: es5 }
+  { id: 'es5', code: es5 },
 ];

@@ -2,7 +2,7 @@ import m from 'mithril';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`function App() {
+  `function App() {
   var text = '';
   return {
     view: function() {
@@ -20,7 +20,7 @@ const es5 = codeString(
 }`);
 
 export const code = [
-  { id: 'js', code: es5 }
+  { id: 'js', code: es5 },
 ];
 
 function App() {
@@ -32,11 +32,11 @@ function App() {
           value: text,
           oninput: function(event) {
             text = event.target.value;
-          }
+          },
         }),
-        m('button', 'Hello ' + text)
+        m('button', 'Hello ' + text),
       ];
-    }
+    },
   };
 }
 

@@ -4,7 +4,7 @@ import stream from 'mithril/stream';
 const tabContent = [
   { id: 'One', content: 'First tab' },
   { id: 'Two', content: 'Second tab' },
-  { id: 'Three', content: 'Third tab' }
+  { id: 'Three', content: 'Third tab' },
 ];
 
 function Tabs() {
@@ -18,19 +18,19 @@ function Tabs() {
               m('.Tab', {
                 key: tab.id,
                 className: activeTab() === i ? 'active' : '',
-                onclick() { activeTab(i); }
+                onclick() { activeTab(i); },
               }, tab.id)
             )
           ),
           m('.TabContent', attrs.tabs[activeTab()].content)
         )
       );
-    }
+    },
   };
 }
 
 export default {
   view() {
     return m(Tabs, { tabs: tabContent });
-  }
+  },
 };

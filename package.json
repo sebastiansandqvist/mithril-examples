@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/sebastiansandqvist/mithril-examples#readme",
   "devDependencies": {
-    "@seabass/eslint-config": "1.8.6",
+    "@seabass/eslint-config": "2.4.0",
     "babel-eslint": "7.0.0",
     "eslint": "3.8.0",
     "npm-run-all": "^4.0.2",

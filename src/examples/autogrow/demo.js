@@ -7,17 +7,17 @@ function setHeight(domNode) {
 }
 
 export default function AutogrowTextarea() {
-	const value = stream('');
-	return {
-		oncreate({ dom }) {
-			value.map(() => setHeight(dom));
-		},
-		view() {
-			return m('textarea.fullWidth', {
-				value: value(),
-				placeholder: 'Enter some text',
-				oninput: m.withAttr('value', value)
-			});
-		}
-	};
+  const value = stream('');
+  return {
+    oncreate({ dom }) {
+      value.map(() => setHeight(dom));
+    },
+    view() {
+      return m('textarea.fullWidth', {
+        value: value(),
+        placeholder: 'Enter some text',
+        oninput: m.withAttr('value', value),
+      });
+    },
+  };
 }

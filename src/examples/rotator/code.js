@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
-`function rotate(list) {
+  `function rotate(list) {
   list.push(list.shift());
 }
 
@@ -24,7 +24,7 @@ function Rotator() {
 }`);
 
 const es6 = codeString(
-`const rotate = (list) => list.push(list.shift());
+  `const rotate = (list) => list.push(list.shift());
 
 function Rotator() {
   const list = ['One', 'Two', 'Three', 'Four'];
@@ -44,5 +44,5 @@ function Rotator() {
 
 export default [
   { id: 'es6', code: es6 },
-  { id: 'es5', code: es5 }
+  { id: 'es5', code: es5 },
 ];

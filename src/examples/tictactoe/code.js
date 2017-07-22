@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
-`function gameModel() {
+  `function gameModel() {
   return {
     board: [
       [null, null, null],
@@ -98,7 +98,7 @@ function Board() {
 }`);
 
 const es6 = codeString(
-`function gameModel() {
+  `function gameModel() {
   return {
     board: [
       [null, null, null],
@@ -192,7 +192,7 @@ function Board() {
 }`);
 
 const css = codeString.css(
-`table.Board {
+  `table.Board {
   border-collapse: collapse;
   table-layout: fixed;
   width: 100%;
@@ -214,5 +214,5 @@ td.Square {
 export default [
   { id: 'es6', code: es6 },
   { id: 'es5', code: es5 },
-  { id: 'css', code: css }
+  { id: 'css', code: css },
 ];

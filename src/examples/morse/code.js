@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es6 = codeString(
-`const morseMap = {
+  `const morseMap = {
   'a': '.-',
   'b': '-...',
   'c': '-.-.',
@@ -173,7 +173,7 @@ function MorsePlayer() {
 }`);
 
 const es5 = codeString(
-`var morseMap = {
+  `var morseMap = {
   'a': '.-',
   'b': '-...',
   'c': '-.-.',
@@ -353,5 +353,5 @@ function MorsePlayer() {
 
 export default [
   { id: 'es6', code: es6 },
-  { id: 'es5', code: es5 }
+  { id: 'es5', code: es5 },
 ];

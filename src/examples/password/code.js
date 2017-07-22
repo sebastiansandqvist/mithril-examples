@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
-`var stream = require('mithril/stream');
+  `var stream = require('mithril/stream');
 
 // toggles a stream's value
 function toggle(s) {
@@ -29,7 +29,7 @@ function PasswordInput() {
 }`);
 
 const es6 = codeString(
-`import stream from 'mithril/stream';
+  `import stream from 'mithril/stream';
 
 // toggles a stream's value
 const toggle = (s) => s(!s());
@@ -56,5 +56,5 @@ function PasswordInput() {
 
 export default [
   { id: 'es6', code: es6 },
-  { id: 'es5', code: es5 }
+  { id: 'es5', code: es5 },
 ];

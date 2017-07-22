@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es6 = codeString(
-`function stopwatchModel() {
+  `function stopwatchModel() {
   return {
     interval: null,
     seconds: 0
@@ -35,7 +35,7 @@ function Stopwatch() {
 }`);
 
 const es5 = codeString(
-`function stopwatchModel() {
+  `function stopwatchModel() {
   return {
     interval: null,
     seconds: 0
@@ -70,5 +70,5 @@ function Stopwatch() {
 
 export default [
   { id: 'es6', code: es6 },
-  { id: 'es5', code: es5 }
+  { id: 'es5', code: es5 },
 ];

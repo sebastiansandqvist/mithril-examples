@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
-`var ButtonView = {
+  `var ButtonView = {
   view: function() {
     return (
       m('ul',
@@ -26,5 +26,5 @@ const es5 = codeString(
 };`);
 
 export default [
-  { id: 'es5', code: es5 }
+  { id: 'es5', code: es5 },
 ];

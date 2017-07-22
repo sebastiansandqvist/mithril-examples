@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
-`var Tooltip = {
+  `var Tooltip = {
   view: function(vnode) {
     return (
       m('.Tooltip-wrap',
@@ -26,7 +26,7 @@ var App = {
 };`);
 
 const es6 = codeString(
-`const Tooltip = {
+  `const Tooltip = {
   view({ attrs, children }) {
     return (
       m('.Tooltip-wrap',
@@ -51,7 +51,7 @@ const App = {
 };`);
 
 const css = codeString.css(
-`.Tooltip-wrap {
+  `.Tooltip-wrap {
   display: inline-block;
   position: relative;
 }
@@ -83,5 +83,5 @@ const css = codeString.css(
 export default [
   { id: 'es6', code: es6 },
   { id: 'es5', code: es5 },
-  { id: 'css', code: css }
+  { id: 'css', code: css },
 ];

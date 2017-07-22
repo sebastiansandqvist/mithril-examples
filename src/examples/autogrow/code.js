@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es6 = codeString(
-`function setHeight(domNode) {
+  `function setHeight(domNode) {
   domNode.style.height = ''; // reset before recalculating
   domNode.style.height = \`$\{domNode.scrollHeight}px\`;
 }
@@ -23,7 +23,7 @@ function Textarea() {
 }`);
 
 const es5 = codeString(
-`function setHeight(domNode) {
+  `function setHeight(domNode) {
   domNode.style.height = ''; // reset before recalculating
   domNode.style.height = domNode.scrollHeight + 'px';
 }
@@ -48,5 +48,5 @@ function Textarea() {
 
 export default [
   { id: 'es6', code: es6 },
-  { id: 'es5', code: es5 }
+  { id: 'es5', code: es5 },
 ];

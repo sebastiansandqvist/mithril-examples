@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
-`function App() {
+  `function App() {
   return [
     m('strong', 'Stopwatch 1: '),
     m(Stopwatch),
@@ -12,5 +12,5 @@ const es5 = codeString(
 }`);
 
 export default [
-  { id: 'js', code: es5 }
+  { id: 'js', code: es5 },
 ];

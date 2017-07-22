@@ -1,7 +1,7 @@
 import codeString from '../../util/codeString.js';
 
 const es5 = codeString(
-`var LinkView = {
+  `var LinkView = {
   view: function() {
     return (
       m('ul',
@@ -26,5 +26,5 @@ const es5 = codeString(
 };`);
 
 export default [
-  { id: 'js', code: es5 }
+  { id: 'js', code: es5 },
 ];

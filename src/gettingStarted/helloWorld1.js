@@ -2,12 +2,12 @@ import m from 'mithril';
 import codeString from '../util/codeString.js';
 
 const es5 = codeString(
-`function Button() {
+  `function Button() {
   return m('button', 'Hello World!');
 }`);
 
 export const code = [
-  { id: 'js', code: es5 }
+  { id: 'js', code: es5 },
 ];
 
 function Button() {
@@ -17,5 +17,5 @@ function Button() {
 export const Component = {
   view() {
     return Button();
-  }
+  },
 };
