@@ -126,7 +126,7 @@ const actions = {
         actions.playLetter(model, chars.join(''), cb));
         return;
       default:
-        alert('Unable to play character: ' + char);
+        alert('Unable to play character: ' + char); // eslint-disable-line no-alert
         cb();
     }
   },
