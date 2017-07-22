@@ -5,7 +5,7 @@ dependencies:
   prismjs: 1.5.1
   s-types: 1.3.0
 devDependencies:
-  '@seabass/eslint-config': 2.4.0
+  '@seabass/eslint-config': 2.5.0
   babel-eslint: 7.0.0
   eslint: 3.8.0
   npm-run-all: 4.0.2
@@ -17,10 +17,10 @@ devDependencies:
   rollup-watch: 2.5.0
   superstatic: 4.1.0
 packages:
-  /@seabass/eslint-config/2.4.0:
+  /@seabass/eslint-config/2.5.0:
     dev: true
     resolution:
-      integrity: sha512-TJ9Zh3lai+wjRxpg6VrUk5kfRWiiueJj+EIspNC1kBghZyLgVjj79Nay9OUqfRZHFDk70gDXh4zUYS4NUiJgiw==
+      integrity: sha512-ddJBVb5jDutxBbTMPuOUqVtDFme7i84mpRLhTVMrNjLI391O75GgH054x5gfq4CxBvBeiRi/lB1hbrbcleKxCA==
   /accepts/1.3.3:
     dependencies:
       mime-types: 2.1.15
@@ -2079,7 +2079,7 @@ packages:
 registry: 'https://registry.npmjs.org/'
 shrinkwrapVersion: 3
 specifiers:
-  '@seabass/eslint-config': ^2.4.0
+  '@seabass/eslint-config': ^2.5.0
   babel-eslint: 7.0.0
   eslint: 3.8.0
   fetch-ie8: 1.4.3
