@@ -47,9 +47,8 @@ function charToMorse(char) {
 }
 
 function morseModel() {
-  const AudioContext = window.AudioContext // Default
-    || window.webkitAudioContext; // Safari and old versions of Chrome
-  const audioCtx = new AudioContext;
+  const AudioContext = window.AudioContext || window.webkitAudioContext; // Safari and old versions of Chrome
+  const audioCtx = new AudioContext();
   const oscillator = audioCtx.createOscillator();
   const gainNode = audioCtx.createGain();
   oscillator.connect(gainNode);
@@ -221,9 +220,8 @@ function charToMorse(char) {
 }
 
 function morseModel() {
-  var AudioContext = window.AudioContext // Default
-    || window.webkitAudioContext; // Safari and old versions of Chrome
-  var audioCtx = new AudioContext;
+  var AudioContext = window.AudioContext || window.webkitAudioContext; // Safari and old versions of Chrome
+  var audioCtx = new AudioContext();
   var oscillator = audioCtx.createOscillator();
   var gainNode = audioCtx.createGain();
   oscillator.connect(gainNode);
