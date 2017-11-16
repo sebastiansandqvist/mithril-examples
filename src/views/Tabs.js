@@ -1,5 +1,5 @@
 import m from 'mithril';
-import stream from 'mithril/stream';
+import stream from 'mithril/stream/stream';
 import T from 's-types';
 
 const tabType = T({
