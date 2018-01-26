@@ -7,8 +7,8 @@ const tabType = T({
   fiddle: [T.string, T.optional],
   tabs: T.arrayOf(T.schema({
     id: T.string,
-    code: T.string,
-  })),
+    code: T.string
+  }))
 });
 
 const MAX_HEIGHT = 250;
@@ -45,7 +45,7 @@ export default function Tabs({ attrs }) {
                 m('.Tab', {
                   key: tab.id,
                   className: activeIndex() === i ? 'active' : '',
-                  onclick: () => activeIndex(i),
+                  onclick: () => activeIndex(i)
                 }, tab.id)
               )
             ),
@@ -64,8 +64,8 @@ export default function Tabs({ attrs }) {
               }
             },
             style: {
-              height: collapsed() ? px(Math.min(MAX_HEIGHT, tabContentHeight() || 0)) : px(tabContentHeight()),
-            },
+              height: collapsed() ? px(Math.min(MAX_HEIGHT, tabContentHeight() || 0)) : px(tabContentHeight())
+            }
           },
           m('code', m.trust(attrs.tabs[activeIndex()].code))
           ),
@@ -73,6 +73,6 @@ export default function Tabs({ attrs }) {
         )
       );
 
-    },
+    }
   };
 }

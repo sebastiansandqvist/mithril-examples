@@ -5,7 +5,7 @@ export default function BookView() {
   const books = stream([]);
   m.request({
     method: 'GET',
-    url: 'https://mithril-examples.firebaseio.com/books.json',
+    url: 'https://mithril-examples.firebaseio.com/books.json'
   }).then(books);
   return {
     view() {
@@ -15,8 +15,8 @@ export default function BookView() {
           books().map((book) =>
             m('li', { key: book.id }, book.name)
           )
-        ),
+        )
       ];
-    },
+    }
   };
 }

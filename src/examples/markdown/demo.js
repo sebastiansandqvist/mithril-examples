@@ -11,11 +11,11 @@ export default function MarkdownEditor() {
         m('h3', 'Input'),
         m('textarea.fullWidth', {
           oninput: m.withAttr('value', value),
-          value: value(),
+          value: value()
         }),
         m('h3', 'Output'),
-        m('div', m.trust(markdown())),
+        m('div', m.trust(markdown()))
       ];
-    },
+    }
   };
 }

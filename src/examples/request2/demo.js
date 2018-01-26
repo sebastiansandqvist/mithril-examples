@@ -15,8 +15,8 @@ export default function BookView() {
           books().map((book) =>
             m('li', { key: book.id }, book.name)
           )
-        ),
+        )
       ];
-    },
+    }
   };
 }

@@ -22,7 +22,7 @@ var App = {
 };`);
 
 export const code = [
-  { id: 'js', code: es5 },
+  { id: 'js', code: es5 }
 ];
 
 const Button = {
@@ -30,18 +30,18 @@ const Button = {
     return m('button', [
       'Hello ',
       vnode.children,
-      vnode.attrs.exclaim ? '!' : '',
+      vnode.attrs.exclaim ? '!' : ''
     ]);
-  },
+  }
 };
 
 const App = {
   view: function() {
     return [
       m(Button, { exclaim: true }, ['world']),
-      m(Button, ['everybody']),
+      m(Button, ['everybody'])
     ];
-  },
+  }
 };
 
 export const Component = App;

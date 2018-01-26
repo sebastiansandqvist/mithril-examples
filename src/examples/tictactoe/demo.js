@@ -5,9 +5,9 @@ function gameModel() {
     board: [
       [null, null, null],
       [null, null, null],
-      [null, null, null],
+      [null, null, null]
     ],
-    isX: true,
+    isX: true
   };
 }
 
@@ -25,7 +25,7 @@ function getWinner(board) {
 
     // diagonal
     [0, 4, 8], // board: [[x, _, _], [_, x, _], [_, _, x]]
-    [2, 4, 6], // board: [[_, _, x], [_, x, _], [x, _, _]]
+    [2, 4, 6] // board: [[_, _, x], [_, x, _], [x, _, _]]
   ];
 
   // Convert winning board numbers (like 2, 4, 6) to
@@ -41,7 +41,7 @@ function getWinner(board) {
     const [aPlayer, bPlayer, cPlayer] = [
       board[aRow][aCol],
       board[bRow][bCol],
-      board[cRow][cCol],
+      board[cRow][cCol]
     ];
     if (aPlayer && aPlayer === bPlayer && aPlayer === cPlayer) {
       return aPlayer;
@@ -74,7 +74,7 @@ export default function Board() {
     view() {
       return [
         m('button.right', {
-          onclick() { model = gameModel(); },
+          onclick() { model = gameModel(); }
         }, 'Reset'),
         m('div', getLabel(model)),
         m('table.Board',
@@ -83,12 +83,12 @@ export default function Board() {
               return m('td.Square', {
                 onclick() {
                   move(model, i, j);
-                },
+                }
               }, value);
             }));
           })
-        ),
+        )
       ];
-    },
+    }
   };
 }

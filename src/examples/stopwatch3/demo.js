@@ -7,12 +7,12 @@ function App() {
     m(Stopwatch),
     m('hr'),
     m('strong', 'Stopwatch 2: '),
-    m(Stopwatch),
+    m(Stopwatch)
   ];
 }
 
 export default {
   view() {
     return App();
-  },
+  }
 };

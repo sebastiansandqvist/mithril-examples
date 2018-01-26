@@ -5,7 +5,7 @@ function classNameModel() {
   return {
     hasError: stream(false),
     hasAnimation: stream(false),
-    corner: stream('squared'),
+    corner: stream('squared')
   };
 }
 
@@ -13,7 +13,7 @@ function getClassName(model) {
   return [
     model.hasError() ? 'error' : '',
     model.hasAnimation() ? 'animated' : '',
-    model.corner(),
+    model.corner()
   ].join(' ');
 }
 
@@ -21,10 +21,10 @@ const DynamicClassComponent = {
   view({ attrs }) {
     return (
       m('button.Button.Button--small', {
-        className: getClassName(attrs.model),
+        className: getClassName(attrs.model)
       }, 'Demo component')
     );
-  },
+  }
 };
 
 export default function ClassNamesComponent() {
@@ -36,7 +36,7 @@ export default function ClassNamesComponent() {
           m('label',
             m('input[type=checkbox]', {
               checked: model.hasError(),
-              onchange: m.withAttr('checked', model.hasError),
+              onchange: m.withAttr('checked', model.hasError)
             }),
             m('span', 'Add error class')
           ),
@@ -44,7 +44,7 @@ export default function ClassNamesComponent() {
           m('label',
             m('input[type=checkbox]', {
               checked: model.hasAnimation(),
-              onchange: m.withAttr('checked', model.hasAnimation),
+              onchange: m.withAttr('checked', model.hasAnimation)
             }),
             m('span', 'Add animated class')
           ),
@@ -52,14 +52,14 @@ export default function ClassNamesComponent() {
           m('label',
             m('input[type=radio][name=corner][value=rounded]', {
               checked: model.corner() === 'rounded',
-              onchange: m.withAttr('value', model.corner),
+              onchange: m.withAttr('value', model.corner)
             }),
             m('span', 'Rounded')
           ),
           m('label',
             m('input[type=radio][name=corner][value=squared]', {
               checked: model.corner() === 'squared',
-              onchange: m.withAttr('value', model.corner),
+              onchange: m.withAttr('value', model.corner)
             }),
             m('Span', 'Squared')
           ),
@@ -67,6 +67,6 @@ export default function ClassNamesComponent() {
           m(DynamicClassComponent, { model })
         )
       );
-    },
+    }
   };
 }

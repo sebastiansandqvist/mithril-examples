@@ -11,16 +11,16 @@ export default function CircleSlider() {
           m('circle', {
             cx: 130,
             cy: 60,
-            r: size(),
+            r: size()
           })
         ),
         m('label', 'Radius: '),
         m('input[type=range][min=1][max=100]', {
           value: size(),
-          oninput: m.withAttr('valueAsNumber', size),
+          oninput: m.withAttr('valueAsNumber', size)
         }),
-        m('span', size()),
+        m('span', size())
       ];
-    },
+    }
   };
 }

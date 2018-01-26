@@ -355,5 +355,5 @@ function MorsePlayer() {
 
 export default [
   { id: 'es6', code: es6 },
-  { id: 'es5', code: es5 },
+  { id: 'es5', code: es5 }
 ];

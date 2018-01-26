@@ -99,7 +99,7 @@ const tag = {
   trust: { name: 'm.trust', url: 'https://mithril.js.org/trust.html' },
   stream: { name: 'Stream', url: 'https://mithril.js.org/stream.html' },
   svg: { name: 'SVG', url: 'https://mithril.js.org/hyperscript.html#svg-and-mathml' },
-  withAttr: { name: 'm.withAttr', url: 'https://mithril.js.org/withAttr.html' },
+  withAttr: { name: 'm.withAttr', url: 'https://mithril.js.org/withAttr.html' }
 };
 
 const examples = [
@@ -113,9 +113,9 @@ const examples = [
         text: autogrowText,
         demo: autogrowDemo,
         code: autogrowCode,
-        fiddle: 'j3Lcw1vs',
-      },
-    ],
+        fiddle: 'j3Lcw1vs'
+      }
+    ]
   },
   {
     title: 'Dynamic Class Names',
@@ -127,9 +127,9 @@ const examples = [
         text: classNamesText,
         demo: classNamesDemo,
         code: classNamesCode,
-        fiddle: 'n7qj4yfu',
-      },
-    ],
+        fiddle: 'n7qj4yfu'
+      }
+    ]
   },
   {
     title: 'Form Validation',
@@ -141,9 +141,9 @@ const examples = [
         text: formValidationText,
         demo: formValidationDemo,
         code: formValidationCode,
-        fiddle: '0u1kq8q5',
-      },
-    ],
+        fiddle: '0u1kq8q5'
+      }
+    ]
   },
   {
     title: 'List Rotator',
@@ -155,9 +155,9 @@ const examples = [
         text: rotatorText,
         demo: rotatorDemo,
         code: rotatorCode,
-        fiddle: 's0of2sgf',
-      },
-    ],
+        fiddle: 's0of2sgf'
+      }
+    ]
   },
   {
     title: 'Markdown',
@@ -169,9 +169,9 @@ const examples = [
         text: markdownText,
         demo: markdownDemo,
         code: markdownCode,
-        fiddle: 'waybLfm4',
-      },
-    ],
+        fiddle: 'waybLfm4'
+      }
+    ]
   },
   {
     title: 'Morse Code Player',
@@ -183,9 +183,9 @@ const examples = [
         text: morseText,
         demo: morseDemo,
         code: morseCode,
-        fiddle: '6xqhLqc2',
-      },
-    ],
+        fiddle: '6xqhLqc2'
+      }
+    ]
   },
   {
     title: 'Password Input',
@@ -197,9 +197,9 @@ const examples = [
         text: passwordText,
         demo: passwordDemo,
         code: passwordCode,
-        fiddle: '9ujphc65',
-      },
-    ],
+        fiddle: '9ujphc65'
+      }
+    ]
   },
   {
     title: 'Request JSON from Server',
@@ -211,14 +211,14 @@ const examples = [
         text: requestText,
         demo: requestDemo,
         code: requestCode,
-        fiddle: 'xjcq37c9',
+        fiddle: 'xjcq37c9'
       },
       {
         text: request2Text,
         demo: request2Demo,
-        code: request2Code,
-      },
-    ],
+        code: request2Code
+      }
+    ]
   },
   {
     title: 'Route',
@@ -230,27 +230,27 @@ const examples = [
         text: routeText,
         demo: routeDemo,
         code: routeCode,
-        noTabs: true,
+        noTabs: true
       },
       {
         text: route2Text,
         demo: route2Demo,
         code: route2Code,
-        noTabs: true,
+        noTabs: true
       },
       {
         text: route3Text,
         demo: route3Demo,
         code: route3Code,
-        noTabs: true,
+        noTabs: true
       },
       {
         text: route4Text,
         demo: route4Demo,
         code: route4Code,
-        noTabs: true,
-      },
-    ],
+        noTabs: true
+      }
+    ]
   },
   {
     title: 'Shopping Cart',
@@ -262,9 +262,9 @@ const examples = [
         text: cartText,
         demo: cartDemo,
         code: cartCode,
-        fiddle: '80rvnyrs',
-      },
-    ],
+        fiddle: '80rvnyrs'
+      }
+    ]
   },
   {
     title: 'Stopwatch', // must be unique
@@ -276,21 +276,21 @@ const examples = [
         text: stopwatchText,
         demo: stopwatchDemo,
         code: stopwatchCode,
-        fiddle: '8476ypns',
+        fiddle: '8476ypns'
       },
       {
         text: stopwatch2Text,
         demo: stopwatch2Demo,
         code: stopwatch2Code,
-        fiddle: '09nLejgz',
+        fiddle: '09nLejgz'
       },
       {
         text: stopwatch3Text,
         demo: stopwatch3Demo,
         code: stopwatch3Code,
-        noTabs: true,
-      },
-    ],
+        noTabs: true
+      }
+    ]
   },
   {
     title: 'SVG', // must be unique
@@ -302,9 +302,9 @@ const examples = [
         text: svgText,
         demo: svgDemo,
         code: svgCode,
-        fiddle: 'nbeqzdmu',
-      },
-    ],
+        fiddle: 'nbeqzdmu'
+      }
+    ]
   },
   {
     title: 'Tabs',
@@ -316,9 +316,9 @@ const examples = [
         text: tabsText,
         demo: tabsDemo,
         code: tabsCode,
-        fiddle: '8v8v57wL',
-      },
-    ],
+        fiddle: '8v8v57wL'
+      }
+    ]
   },
   {
     title: 'Tic Tac Toe',
@@ -330,9 +330,9 @@ const examples = [
         text: tictactoeText,
         demo: tictactoeDemo,
         code: tictactoeCode,
-        fiddle: 's4atxu0x',
-      },
-    ],
+        fiddle: 's4atxu0x'
+      }
+    ]
   },
   {
     title: 'To-do List',
@@ -344,9 +344,9 @@ const examples = [
         text: todoText,
         demo: todoDemo,
         code: todoCode,
-        fiddle: 'pjrpz7gg',
-      },
-    ],
+        fiddle: 'pjrpz7gg'
+      }
+    ]
   },
   {
     title: 'Tooltips',
@@ -358,10 +358,10 @@ const examples = [
         text: tooltipText,
         demo: tooltipDemo,
         code: tooltipCode,
-        fiddle: '2k4290gu',
-      },
-    ],
-  },
+        fiddle: '2k4290gu'
+      }
+    ]
+  }
 ];
 
 export default examples;

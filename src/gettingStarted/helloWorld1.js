@@ -7,7 +7,7 @@ const es5 = codeString(
 }`);
 
 export const code = [
-  { id: 'js', code: es5 },
+  { id: 'js', code: es5 }
 ];
 
 function Button() {
@@ -17,5 +17,5 @@ function Button() {
 export const Component = {
   view() {
     return Button();
-  },
+  }
 };

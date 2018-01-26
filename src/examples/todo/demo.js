@@ -4,7 +4,7 @@ import stream from 'mithril/stream/stream';
 function todoModel() {
   return {
     todos: [],
-    newTodoText: stream(''),
+    newTodoText: stream('')
   };
 }
 
@@ -12,10 +12,10 @@ const actions = {
   addTodo(model) {
     model.todos.push({
       text: model.newTodoText(),
-      id: Date.now(),
+      id: Date.now()
     });
     model.newTodoText(''); // reset
-  },
+  }
 };
 
 const TodoList = {
@@ -27,7 +27,7 @@ const TodoList = {
         )
       )
     );
-  },
+  }
 };
 
 export default function TodoApp() {
@@ -41,17 +41,17 @@ export default function TodoApp() {
           onsubmit(event) {
             event.preventDefault();
             actions.addTodo(model);
-          },
+          }
         },
         m('input[type=text]', {
           oninput: m.withAttr('value', model.newTodoText),
-          value: model.newTodoText(),
+          value: model.newTodoText()
         }),
         m('button[type=submit]',
           `Add #${model.todos.length + 1}`
         )
-        ),
+        )
       ];
-    },
+    }
   };
 }

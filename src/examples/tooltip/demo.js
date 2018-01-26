@@ -8,7 +8,7 @@ const Tooltip = {
         m('.Tooltip', attrs.value)
       )
     );
-  },
+  }
 };
 
 export default {
@@ -19,7 +19,7 @@ export default {
       ),
       m(Tooltip, { value: 'Bar' },
         m('span', ' or hover here')
-      ),
+      )
     ];
-  },
+  }
 };

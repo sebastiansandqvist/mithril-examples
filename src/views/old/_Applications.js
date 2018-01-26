@@ -5,22 +5,22 @@ import markup from '../util/markup.js';
 
 import {
   code as todo1,
-  Component as TodoComponent1,
+  Component as TodoComponent1
 } from '../examples/todo1.js';
 
 import {
   code as cart1,
-  Component as CartComponent1,
+  Component as CartComponent1
 } from '../examples/cart1.js';
 
 import {
   code as translate1,
-  Component as TranslateComponent1,
+  Component as TranslateComponent1
 } from '../examples/translate1.js';
 
 import {
   code as markdown1,
-  Component as MarkdownComponent1,
+  Component as MarkdownComponent1
 } from '../examples/markdown1.js';
 
 function view() {
@@ -87,7 +87,7 @@ function view() {
 }
 
 const Applications = {
-  view,
+  view
 };
 
 export default Applications;

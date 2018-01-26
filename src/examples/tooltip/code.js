@@ -83,5 +83,5 @@ const css = codeString.css(
 export default [
   { id: 'es6', code: es6 },
   { id: 'es5', code: es5 },
-  { id: 'css', code: css },
+  { id: 'css', code: css }
 ];

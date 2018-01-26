@@ -5,12 +5,12 @@ import markup from '../util/markup.js';
 
 import {
   code as request1,
-  Component as RequestComponent1,
+  Component as RequestComponent1
 } from '../examples/requests/request1.js';
 
 import {
   code as request2,
-  Component as RequestComponent2,
+  Component as RequestComponent2
 } from '../examples/requests/request2.js';
 
 function view() {
@@ -58,7 +58,7 @@ function view() {
 }
 
 const Requests = {
-  view,
+  view
 };
 
 export default Requests;

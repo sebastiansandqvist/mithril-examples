@@ -10,7 +10,7 @@ function formModel() {
         model.longField.error =
      model.longField.value().length < 10 ?
        'Expected at least 10 characters' : '';
-      },
+      }
     },
     shortField: {
       value: stream(''),
@@ -19,8 +19,8 @@ function formModel() {
         model.shortField.error =
      model.shortField.value().length > 5 ?
        'Expected no more than 5 characters' : '';
-      },
-    },
+      }
+    }
   };
   return model;
 }
@@ -36,11 +36,11 @@ const ValidatedInput = {
       m('input[type=text]', {
         className: attrs.field.error ? 'error' : '',
         value: attrs.field.value(),
-        oninput: m.withAttr('value', attrs.field.value),
+        oninput: m.withAttr('value', attrs.field.value)
       }),
-      m('p.errorMessage', attrs.field.error),
+      m('p.errorMessage', attrs.field.error)
     ];
-  },
+  }
 };
 
 export default function Form() {
@@ -52,7 +52,7 @@ export default function Form() {
           onsubmit(event) {
             event.preventDefault();
             validateAll(model);
-          },
+          }
         },
         m('p', 'At least 10 characters:'),
         m(ValidatedInput, { field: model.longField }),
@@ -62,6 +62,6 @@ export default function Form() {
         m('button[type=submit]', 'Validate')
         )
       );
-    },
+    }
   };
 }

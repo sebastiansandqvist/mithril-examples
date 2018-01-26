@@ -3,12 +3,12 @@ import T from 's-types';
 
 const pages = [
   'Examples',
-  'Getting started',
+  'Getting started'
 ];
 
 const linkType = T({
   page: T.string,
-  active: T.string,
+  active: T.string
 });
 
 const Link = {
@@ -20,10 +20,10 @@ const Link = {
       m('a.Nav-link', {
         href: `/${attrs.page.replace(' ', '').toLowerCase()}`,
         oncreate: m.route.link,
-        className: attrs.active === attrs.page ? 'active' : '',
+        className: attrs.active === attrs.page ? 'active' : ''
       }, attrs.page)
     );
-  },
+  }
 };
 
 const navType = T({ active: T.string });
@@ -40,7 +40,7 @@ function view({ attrs }) {
 }
 
 const Nav = {
-  view,
+  view
 };
 
 export default Nav;

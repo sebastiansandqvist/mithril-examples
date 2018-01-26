@@ -13,12 +13,12 @@ const ExamplesType = T({
       demo: T.any, // a mithril component
       code: T.arrayOf(T.schema({ // tabs
         id: T.string,
-        code: T.string,
+        code: T.string
       })),
       noTabs: [T.bool, T.optional],
-      fiddle: [T.string, T.optional],
-    })),
-  })),
+      fiddle: [T.string, T.optional]
+    }))
+  }))
 });
 
 function view({ attrs }) {
@@ -32,11 +32,11 @@ function view({ attrs }) {
         m('.LeftContent',
           m('h2.Expander', {
             className: example.isOpen ? 'isOpen' : '',
-            onclick() { example.isOpen = !example.isOpen; },
+            onclick() { example.isOpen = !example.isOpen; }
           },
           example.title,
           m('span.Subtitle', {
-            className: example.isOpen ? 'fadeOut' : '',
+            className: example.isOpen ? 'fadeOut' : ''
           }, '[ View code ]')
           ),
           m('.Tags', example.tags.map((tag) => m('a.Tag', { href: tag.url, key: tag.name }, tag.name)))
@@ -68,7 +68,7 @@ function view({ attrs }) {
 }
 
 const MainView = {
-  view,
+  view
 };
 
 export default MainView;

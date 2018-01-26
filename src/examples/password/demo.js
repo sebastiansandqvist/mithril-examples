@@ -16,12 +16,12 @@ export default function PasswordInput() {
           type: visible() ? 'text' : 'password',
           placeholder: visible() ? 'password' : '••••••••',
           value: value(),
-          oninput: m.withAttr('value', value),
+          oninput: m.withAttr('value', value)
         }),
         m('button', {
-          onclick() { toggle(visible); },
-        }, visible() ? 'Hide' : 'Show'),
+          onclick() { toggle(visible); }
+        }, visible() ? 'Hide' : 'Show')
       ];
-    },
+    }
   };
 }

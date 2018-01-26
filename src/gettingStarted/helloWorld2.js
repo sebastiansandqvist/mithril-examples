@@ -14,7 +14,7 @@ function App() {
 }`);
 
 export const code = [
-  { id: 'js', code: es5 },
+  { id: 'js', code: es5 }
 ];
 
 function Button(name) {
@@ -24,12 +24,12 @@ function Button(name) {
 function App() {
   return [
     Button('world'),
-    Button('everybody'),
+    Button('everybody')
   ];
 }
 
 export const Component = {
   view() {
     return App();
-  },
+  }
 };

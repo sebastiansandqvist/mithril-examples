@@ -4,7 +4,7 @@ function stopwatchModel() {
   return {
     interval: null,
     seconds: 0,
-    isPaused: false,
+    isPaused: false
   };
 }
 
@@ -30,7 +30,7 @@ const actions = {
       actions.stop(model);
     }
     model.isPaused = !model.isPaused;
-  },
+  }
 };
 
 export default function Stopwatch() {
@@ -44,18 +44,18 @@ export default function Stopwatch() {
           m('button', {
             onclick: function() {
               actions.reset(model);
-            },
+            }
           }, 'Reset'),
           m('button', {
             onclick: function() {
               actions.toggle(model);
-            },
+            }
           }, model.isPaused ? 'Start' : 'Pause')
         )
       );
     },
     onremove: function() {
       actions.stop(model);
-    },
+    }
   };
 }

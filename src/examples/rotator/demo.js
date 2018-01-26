@@ -13,9 +13,9 @@ export default function Rotator() {
           m('li', { key: item }, item)
         )),
         m('button', {
-          onclick() { rotate(list); },
-        }, 'Rotate'),
+          onclick() { rotate(list); }
+        }, 'Rotate')
       ];
-    },
+    }
   };
 }

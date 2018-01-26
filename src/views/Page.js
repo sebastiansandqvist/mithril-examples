@@ -30,7 +30,7 @@ function view({ attrs, children }) {
 }
 
 const Page = {
-  view,
+  view
 };
 
 export default Page;

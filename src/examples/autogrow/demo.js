@@ -16,8 +16,8 @@ export default function AutogrowTextarea() {
       return m('textarea.fullWidth', {
         value: value(),
         placeholder: 'Enter some text',
-        oninput: m.withAttr('value', value),
+        oninput: m.withAttr('value', value)
       });
-    },
+    }
   };
 }

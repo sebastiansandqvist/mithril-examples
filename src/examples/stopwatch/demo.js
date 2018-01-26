@@ -3,7 +3,7 @@ import m from 'mithril';
 function stopwatchModel() {
   return {
     interval: null,
-    seconds: 0,
+    seconds: 0
   };
 }
 
@@ -17,7 +17,7 @@ const actions = {
   },
   stop: function(model) {
     model.interval = clearInterval(model.interval);
-  },
+  }
 };
 
 export default function Stopwatch() {
@@ -29,6 +29,6 @@ export default function Stopwatch() {
     },
     onremove: function() {
       actions.stop(model);
-    },
+    }
   };
 }

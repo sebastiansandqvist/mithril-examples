@@ -37,7 +37,7 @@ const morseMap = {
   '8': '---..',
   '9': '----.',
   '0': '-----',
-  ' ': ' ',
+  ' ': ' '
 };
 
 function charToMorse(char) {
@@ -63,7 +63,7 @@ function morseModel() {
     },
     morseString() {
       return model.morseArr().join('');
-    },
+    }
   };
   return model;
 }
@@ -139,7 +139,7 @@ const actions = {
         actions.playAll(model, morseArr, cb);
       });
     });
-  },
+  }
 };
 
 export default function MorsePlayer() {
@@ -156,7 +156,7 @@ export default function MorsePlayer() {
             placeholder: 'Enter some text',
             oninput(event) {
               actions.setText(model, event.target.value);
-            },
+            }
           }),
           m('div', m('code', model.morseString())),
           m('button', {
@@ -167,12 +167,12 @@ export default function MorsePlayer() {
                 actions.setPlaying(model, false);
                 m.redraw();
               });
-            },
-          }, 'Play'),
+            }
+          }, 'Play')
         ];
     },
     onremove() {
       actions.destroy(model);
-    },
+    }
   };
 }

@@ -6,7 +6,7 @@ function cartModel() {
     books: [],
     cart: [],
     query: stream(''),
-    total: 0,
+    total: 0
   };
 }
 
@@ -29,11 +29,11 @@ const actions = {
   fetchBooks(model) {
     m.request({
       method: 'GET',
-      url: 'https://mithril-examples.firebaseio.com/books.json',
+      url: 'https://mithril-examples.firebaseio.com/books.json'
     }).then(function(books) {
       model.books = books || [];
     });
-  },
+  }
 };
 
 const ListView = {
@@ -47,13 +47,13 @@ const ListView = {
             m('button.right', {
               onclick() {
                 attrs.action(model, book);
-              },
+              }
             }, attrs.actionLabel)
           )
         )
       )
     );
-  },
+  }
 };
 
 export default function Cart() {
@@ -70,13 +70,13 @@ export default function Cart() {
         m('input[type=text]', {
           placeholder: 'Filter',
           value: model.query(),
-          oninput: m.withAttr('value', model.query),
+          oninput: m.withAttr('value', model.query)
         }),
         m(ListView, {
           model,
           items: actions.getResults(model),
           action: actions.addToCart,
-          actionLabel: 'Add',
+          actionLabel: 'Add'
         }),
         m('hr'),
         m('h3', 'Cart'),
@@ -84,11 +84,11 @@ export default function Cart() {
           model,
           items: model.cart,
           action: actions.removeFromCart,
-          actionLabel: 'Remove',
+          actionLabel: 'Remove'
         }),
         m('strong', 'Total: '),
-        m('span', '$', model.total),
+        m('span', '$', model.total)
       ];
-    },
+    }
   };
 }

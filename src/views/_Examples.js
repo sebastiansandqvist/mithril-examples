@@ -6,7 +6,7 @@ import examples from '../examples';
 const ExamplesPage = {
   view() {
     return m(Page, { id: 'Examples' }, m(MainView, { examples }));
-  },
+  }
 };
 
 export default ExamplesPage;

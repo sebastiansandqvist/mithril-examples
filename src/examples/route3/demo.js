@@ -6,20 +6,20 @@ export default {
       m('ul',
         m('li',
           m('button', {
-            onclick: () => m.route.set('/examples'),
+            onclick: () => m.route.set('/examples')
           }, 'Examples page (root)')
         ),
         m('li',
           m('button', {
-            onclick: () => m.route.set('/examples/foo'),
+            onclick: () => m.route.set('/examples/foo')
           }, '/examples/foo')
         ),
         m('li',
           m('button', {
-            onclick: () => m.route.set('/examples/bar'),
+            onclick: () => m.route.set('/examples/bar')
           }, '/examples/bar')
         )
       )
     );
-  },
+  }
 };

@@ -5,57 +5,57 @@ import Tabs from './Tabs.js';
 
 import {
   code as stopwatch1,
-  Component as StopwatchComponent1,
+  Component as StopwatchComponent1
 } from '../examples/stopwatch1.js';
 
 import {
   code as stopwatch2,
-  Component as StopwatchComponent2,
+  Component as StopwatchComponent2
 } from '../examples/stopwatch2.js';
 
 import {
   code as stopwatch3,
-  Component as StopwatchComponent3,
+  Component as StopwatchComponent3
 } from '../examples/stopwatch3.js';
 
 import {
   code as stopwatch4,
-  Component as StopwatchComponent4,
+  Component as StopwatchComponent4
 } from '../examples/stopwatch4.js';
 
 import {
   code as rotator1,
-  Component as RotatorComponent1,
+  Component as RotatorComponent1
 } from '../examples/rotator1.js';
 
 import {
   code as classNames1,
-  Component as ClassNameComponent1,
+  Component as ClassNameComponent1
 } from '../examples/classNames1.js';
 
 import {
   code as password1,
-  Component as PasswordComponent1,
+  Component as PasswordComponent1
 } from '../examples/password1.js';
 
 import {
   code as textarea1,
-  Component as TextareaComponent1,
+  Component as TextareaComponent1
 } from '../examples/textarea1.js';
 
 import {
   code as formValidation1,
-  Component as FormValidationComponent1,
+  Component as FormValidationComponent1
 } from '../examples/form-validation1.js';
 
 import {
   code as tabs1,
-  Component as TabsComponent1,
+  Component as TabsComponent1
 } from '../examples/tabs1.js';
 
 import {
   code as tooltip1,
-  Component as TooltipComponent1,
+  Component as TooltipComponent1
 } from '../examples/tooltip1.js';
 
 function view() {
@@ -270,7 +270,7 @@ function view() {
 }
 
 const Components = {
-  view,
+  view
 };
 
 export default Components;

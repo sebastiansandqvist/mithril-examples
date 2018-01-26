@@ -5,52 +5,52 @@ import Tabs from './Tabs.js';
 
 import {
   code as stopwatch1,
-  Component as StopwatchComponent1,
+  Component as StopwatchComponent1
 } from '../examples/examples/stopwatch1.js';
 
 import {
   code as stopwatch2,
-  Component as StopwatchComponent2,
+  Component as StopwatchComponent2
 } from '../examples/examples/stopwatch2.js';
 
 import {
   code as stopwatch3,
-  Component as StopwatchComponent3,
+  Component as StopwatchComponent3
 } from '../examples/examples/stopwatch3.js';
 
 import {
   code as rotator1,
-  Component as RotatorComponent1,
+  Component as RotatorComponent1
 } from '../examples/examples/rotator1.js';
 
 import {
   code as className1,
-  Component as ClassNameComponent1,
+  Component as ClassNameComponent1
 } from '../examples/examples/classnames1.js';
 
 import {
   code as password1,
-  Component as PasswordComponent1,
+  Component as PasswordComponent1
 } from '../examples/examples/password1.js';
 
 import {
   code as autogrow1,
-  Component as AutogrowComponent1,
+  Component as AutogrowComponent1
 } from '../examples/examples/autogrow1.js';
 
 import {
   code as validation1,
-  Component as ValidationComponent1,
+  Component as ValidationComponent1
 } from '../examples/examples/validation1.js';
 
 import {
   code as tabs1,
-  Component as TabsComponent1,
+  Component as TabsComponent1
 } from '../examples/examples/tabs1.js';
 
 import {
   code as tooltips1,
-  Component as TooltipsComponent1,
+  Component as TooltipsComponent1
 } from '../examples/examples/tooltips1.js';
 
 
@@ -263,7 +263,7 @@ function view() {
 }
 
 const Examples = {
-  view,
+  view
 };
 
 export default Examples;

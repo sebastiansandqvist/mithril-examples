@@ -26,5 +26,5 @@ const es5 = codeString(
 };`);
 
 export default [
-  { id: 'es5', code: es5 },
+  { id: 'es5', code: es5 }
 ];

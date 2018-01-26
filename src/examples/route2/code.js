@@ -8,5 +8,5 @@ const es5 = codeString(
 };`);
 
 export default [
-  { id: 'js', code: es5 },
+  { id: 'js', code: es5 }
 ];

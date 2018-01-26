@@ -5,32 +5,32 @@ import markup from '../util/markup.js';
 
 import {
   code as helloWorld1,
-  Component as HelloWorldComponent1,
+  Component as HelloWorldComponent1
 } from '../gettingStarted/helloWorld1.js';
 
 import {
   code as helloWorld2,
-  Component as HelloWorldComponent2,
+  Component as HelloWorldComponent2
 } from '../gettingStarted/helloWorld2.js';
 
 import {
   code as helloWorld3,
-  Component as HelloWorldComponent3,
+  Component as HelloWorldComponent3
 } from '../gettingStarted/helloWorld3.js';
 
 import {
   code as helloWorld4,
-  Component as HelloWorldComponent4,
+  Component as HelloWorldComponent4
 } from '../gettingStarted/helloWorld4.js';
 
 import {
   code as helloWorld5,
-  Component as HelloWorldComponent5,
+  Component as HelloWorldComponent5
 } from '../gettingStarted/helloWorld5.js';
 
 import {
   code as helloWorld6,
-  Component as HelloWorldComponent6,
+  Component as HelloWorldComponent6
 } from '../gettingStarted/helloWorld6.js';
 
 
@@ -162,7 +162,7 @@ function view() {
         m('.center',
           m('a.Button.Button--large[href=/]', {
             // since mithril does not scroll to top by default
-            onclick() { window.scrollTo(0); },
+            onclick() { window.scrollTo(0); }
           }, 'View mithril examples →')
         )
       ),
@@ -182,7 +182,7 @@ function view() {
 }
 
 const GettingStarted = {
-  view,
+  view
 };
 
 export default GettingStarted;
