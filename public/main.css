@@ -1,93 +1,98 @@
 body {
-	background: #fafafa;
-	font-family: 'Open Sans', sans-serif;
-	margin: 0;
+  background: #fafafa;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+}
+
+input {
+  background: #fff;
+  color: #345;
 }
 
 /* ---------------------- LAYOUT ---------------------- */
 
 .Display {
-	background: #5a5;
-	border-bottom: 4px solid #6b6;
-	padding: 40px;
+  background: #5a5;
+  border-bottom: 4px solid #6b6;
+  padding: 40px;
 }
 
 .Container {
-	margin: 0 auto;
-	width: 860px;
+  margin: 0 auto;
+  width: 860px;
 }
 
 .Content {
-	margin: 50px auto;
+  margin: 50px auto;
 }
 
 .Section {
-	margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 /* clearfix */
 .Section::after {
-	content: '';
-	display: table;
-	clear: both;
+  content: '';
+  display: table;
+  clear: both;
 }
 
 .LeftContent {
-	float: left;
-	width: 540px; /* 860px Container - 300px RightContent - 20px Expandable padding */
+  float: left;
+  width: 540px; /* 860px Container - 300px RightContent - 20px Expandable padding */
 }
 
 .RightContent {
-	box-sizing: border-box;
-	float: right;
-	padding-left: 20px;
-	width: 300px;
+  box-sizing: border-box;
+  float: right;
+  padding-left: 20px;
+  width: 300px;
 }
 
 
 /* ---------------------- FOOTER ---------------------- */
 
 .Footer {
-	background: #5a5;
-	padding: 20px;
-	text-align: center;
+  background: #5a5;
+  padding: 20px;
+  text-align: center;
 }
 
 .Footer-link {
-	border-bottom: 1px solid #8d8;
-	color: #fff;
-	font-size: 12px;
-	letter-spacing: 2px;
-	opacity: 0.8;
-	margin: 0 25px;
-	padding: 2px 0;
-	text-decoration: none;
-	text-transform: uppercase;
-	transition: all .2s ease;
+  border-bottom: 1px solid #8d8;
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 2px;
+  opacity: 0.8;
+  margin: 0 25px;
+  padding: 2px 0;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all .2s ease;
 }
 
 .Footer-link:hover {
-	border-bottom: 1px solid #fff;
-	opacity: 1;
+  border-bottom: 1px solid #fff;
+  opacity: 1;
 }
 
 /* ---------------------- TAGS ---------------------- */
 
 .Tags {
-	margin: 10px 0;
+  margin: 10px 0;
 }
 
 .Tag {
-	background: #eee;
-	border-bottom: 1px solid #ddd;
-	border-top: 1px solid #fff;
-	color: #828;
-	cursor: pointer;
-	font-size: 12px;
-	font-weight: 400;
-	padding: 2px 10px;
-	margin: 0 5px 0 0;
-	text-decoration: none;
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #fff;
+  color: #828;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 2px 10px;
+  margin: 0 5px 0 0;
+  text-decoration: none;
 }
 
 /* ---------------------- DEMO ---------------------- */
@@ -97,380 +102,380 @@ body {
 }
 
 .Demo-left {
-	float: left;
-	width: 540px;
+  float: left;
+  width: 540px;
 }
 
 .Demo-right {
-	box-sizing: border-box;
-	float: left;
-	padding-left: 20px;
-	width: 300px;
+  box-sizing: border-box;
+  float: left;
+  padding-left: 20px;
+  width: 300px;
 }
 
 .Demo-result {
-	background: #fff;
-	border: 1px solid #f5f5f5;
-	font-size: 13px;
-	padding: 10px;
-	margin-top: 15px;
+  background: #fff;
+  border: 1px solid #f5f5f5;
+  font-size: 13px;
+  padding: 10px;
+  margin-top: 15px;
 }
 
 .Demo-result button {
-	height: 18px;
+  height: 18px;
 }
 
 /* generic layout helpers */
 
 .clear {
-	clear: both;
+  clear: both;
 }
 
 .right {
-	float: right;
+  float: right;
 }
 
 .drop20 {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .fullWidth {
-	width: 100%;
+  width: 100%;
 }
 
 ul {
-	margin: 0;
-	padding: 0 20px;
+  margin: 0;
+  padding: 0 20px;
 }
 
 /* tic tac toe */
 table.Board {
-	border-collapse: collapse;
-	table-layout: fixed;
-	width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
 }
 
 td.Square {
-	background: #fff;
-	border: 1px solid #000;
-	font-family: 'Monaco', monospace;
-	font-size: 12px;
-	height: 50px;
-	text-align: center;
+  background: #fff;
+  border: 1px solid #000;
+  font-family: 'Monaco', monospace;
+  font-size: 12px;
+  height: 50px;
+  text-align: center;
 }
 
 /* svg example */
 svg.Svg-wrap {
-	height: 120px;
-	width: 100%;
+  height: 120px;
+  width: 100%;
 }
 
 /* ---------------------- NAVIGATION ---------------------- */
 
 .Nav {
-	margin-top: 30px;
-	text-align: center;
+  margin-top: 30px;
+  text-align: center;
 }
 
 .Nav-link {
-	border: 1px solid #6b6;
-	color: #fff;
-	display: inline-block;
-	font-size: 12px;
-	font-weight: 400;
-	letter-spacing: 2px;
-	padding: 10px 20px;
-	margin: 0 5px;
-	text-decoration: none;
-	text-transform: uppercase;
-	width: 180px;
+  border: 1px solid #6b6;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  padding: 10px 20px;
+  margin: 0 5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 180px;
 }
 
 .Nav-link.active {
-	background: #39d;
-	border: 1px solid #39d;
-	border-bottom: 1px solid #28c;
-	border-top: 1px solid #4ae;
-	color: #fff;
-	cursor: default;
-	font-weight: 600;
+  background: #39d;
+  border: 1px solid #39d;
+  border-bottom: 1px solid #28c;
+  border-top: 1px solid #4ae;
+  color: #fff;
+  cursor: default;
+  font-weight: 600;
 }
 
 /* ---------------------- BUTTON ---------------------- */
 
 @keyframes pulse {
-	0% {
-		background: #5a5;
-	}
-	50% {
-		background: #55a;
-	}
-	100% {
-		background: #5a5;
-	}
+  0% {
+    background: #5a5;
+  }
+  50% {
+    background: #55a;
+  }
+  100% {
+    background: #5a5;
+  }
 }
 
 .Demo-result .Button,
 .Button {
-	background: #5a5;
-	border: 3px solid #5a5;
-	color: #fff;
-	height: 30px;
-	text-decoration: none;
+  background: #5a5;
+  border: 3px solid #5a5;
+  color: #fff;
+  height: 30px;
+  text-decoration: none;
 }
 
 .Button.rounded {
-	border-radius: 15px;
+  border-radius: 15px;
 }
 
 .Button.squared {
-	border-radius: 0;
+  border-radius: 0;
 }
 
 .Button.error {
-	background: #a55;
-	border: 3px solid #a55;
+  background: #a55;
+  border: 3px solid #a55;
 }
 
 .Button.animated {
-	animation: pulse 1s ease infinite;
+  animation: pulse 1s ease infinite;
 }
 
 .Button--small {
-	padding: 5px 10px;
+  padding: 5px 10px;
 }
 
 .Button--large {
-	display: inline-block;
-	padding: 10px 30px;
+  display: inline-block;
+  padding: 10px 30px;
 }
 
 /* ---------------------- TABS ---------------------- */
 
 .Tabs {
-	background: #2c3e50;
-	margin-bottom: 20px;
-	overflow: hidden;
-	position: relative;
+  background: #2c3e50;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
 }
 
 .TabBar {
-	background: #3a536c;
-	overflow: hidden;
+  background: #3a536c;
+  overflow: hidden;
 }
 
 .Tab {
-	color: white;
-	cursor: pointer;
-	float: left;
-	padding: 10px 25px;
+  color: white;
+  cursor: pointer;
+  float: left;
+  padding: 10px 25px;
 }
 
 .Tab.active {
-	background: #2c3e50;
-	cursor: default;
+  background: #2c3e50;
+  cursor: default;
 }
 
 .TabContent {
-	color: #fff;
-	padding: 0;
-	margin: 20px;
-	transition: height .2s ease;
+  color: #fff;
+  padding: 0;
+  margin: 20px;
+  transition: height .2s ease;
 }
 
 .FiddleLink {
-	background: #6b6;
-	color: #fff;
-	font-size: 12px;
-	cursor: pointer;
-	float: right;
-	margin: 10px 10px 0 0;
-	padding: 2px 10px;
-	text-decoration: none;
+  background: #6b6;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  float: right;
+  margin: 10px 10px 0 0;
+  padding: 2px 10px;
+  text-decoration: none;
 }
 
 .FiddleLink::after {
-	background: url(images/jsfiddle-logo.png);
-	background-size: 100% 100%;
-	content: '';
-	display: inline-block;
-	height: 10px;
-	margin-left:5px;
-	width: 15px;
+  background: url(images/jsfiddle-logo.png);
+  background-size: 100% 100%;
+  content: '';
+  display: inline-block;
+  height: 10px;
+  margin-left:5px;
+  width: 15px;
 }
 
 .ExpandTab {
-	background: #3a536c;
-	bottom: 0;
-	color: #fff;
-	cursor: pointer;
-	padding: 10px 0;
-	text-align: center;
-	position: absolute;
-	width: 100%;
+  background: #3a536c;
+  bottom: 0;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 0;
+  text-align: center;
+  position: absolute;
+  width: 100%;
 }
 
 /* ---------------------- TOOLTIP ---------------------- */
 
 .Tooltip-wrap {
-	display: inline-block;
-	position: relative;
+  display: inline-block;
+  position: relative;
 }
 
 .Tooltip-wrap:hover .Tooltip {
-		opacity: 1;
-		transform: translateX(-50%) translateY(5px);
-		transition: all .3s ease .5s;
-		visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(5px);
+    transition: all .3s ease .5s;
+    visibility: visible;
 }
 
 .Tooltip {
-	background: rgba(0, 0, 0, .8);
-	border-radius: 2px;
-	bottom: -30px;
-	color: white;
-	font-size: 12px;
-	left: 50%;
-	opacity: 0;
-	padding: 5px 10px;
-	position: absolute;
-	transition: all .2s ease;
-	transform: translateX(-50%) translateY(0);
-	user-select: none;
-	visibility: hidden;
-	white-space: nowrap;
+  background: rgba(0, 0, 0, .8);
+  border-radius: 2px;
+  bottom: -30px;
+  color: white;
+  font-size: 12px;
+  left: 50%;
+  opacity: 0;
+  padding: 5px 10px;
+  position: absolute;
+  transition: all .2s ease;
+  transform: translateX(-50%) translateY(0);
+  user-select: none;
+  visibility: hidden;
+  white-space: nowrap;
 }
 
 
 /* ---------------------- TYPOGRAPHY ---------------------- */
 
 h1 {
-	color: #fff;
-	font-weight: 300;
-	font-size: 26px;
-	margin: 0;
-	text-align: center;
+  color: #fff;
+  font-weight: 300;
+  font-size: 26px;
+  margin: 0;
+  text-align: center;
 }
 
 .Demo-result h1 {
-	color: #345;
-	text-align: left;
+  color: #345;
+  text-align: left;
 }
 
 h2 {
-	color: #345;
-	font-size: 20px;
-	font-weight: 600;
-	margin: 0;
+  color: #345;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
 }
 
 h3 {
-	color: #345;
-	font-size: 18px;
-	font-weight: 400;
-	margin: 0;
+  color: #345;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
 }
 
 h4,
 h5,
 h6 {
-	margin: 0;
+  margin: 0;
 }
 
 p {
-	color: #345;
-	font-size: 16px;
-	font-weight: 400;
-	margin: 0;
-	padding: 10px 0 0 0;
+  color: #345;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  padding: 10px 0 0 0;
 }
 
 .Demo-result p {
-	font-size: 13px;
-	padding: 0;
+  font-size: 13px;
+  padding: 0;
 }
 
 .Expander {
-	cursor: pointer;
-	margin-left: 30px;
+  cursor: pointer;
+  margin-left: 30px;
 }
 
 .Expander::before {
-	content: '▸';
-	margin-left: -30px;
-	position: absolute;
-	transition: transform .2s ease;
-	transform: rotate(0deg);
+  content: '▸';
+  margin-left: -30px;
+  position: absolute;
+  transition: transform .2s ease;
+  transform: rotate(0deg);
 }
 
 .Expander.isOpen::before {
-	transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
 }
 
 .Subtitle {
-	color: #89a;
-	font-size: 13px;
-	font-weight: 400;
-	padding-left: 15px;
-	position: relative;
-	top: -2px;
+  color: #89a;
+  font-size: 13px;
+  font-weight: 400;
+  padding-left: 15px;
+  position: relative;
+  top: -2px;
 }
 
 .errorMessage {
-	color: #a55;
-	font-size: 12px;
-	padding: 0;
+  color: #a55;
+  font-size: 12px;
+  padding: 0;
 }
 
 .error {
-	border: 1px solid #a55;
+  border: 1px solid #a55;
 }
 
 .fadeOut {
-	transition: all .2s ease;
-	opacity: 0;
+  transition: all .2s ease;
+  opacity: 0;
 }
 
 pre {
-	tab-size: 2;
+  tab-size: 2;
 }
 
 code {
-	color: white;
-	font-family: 'Monaco', monospace;
-	font-size: 13px;
+  color: white;
+  font-family: 'Monaco', monospace;
+  font-size: 13px;
 }
 
 .Demo-result code {
-	color: #345;
+  color: #345;
 }
 
 code.inline {
-	background: #eee;
-	color: #345;
-	padding: 0 5px;
+  background: #eee;
+  color: #345;
+  padding: 0 5px;
 }
 
 .property,
 .keyword {
-	color: #93ddf5;
+  color: #93ddf5;
 }
 
 .number,
 .boolean {
-	color: #ae81ff;
+  color: #ae81ff;
 }
 
 .selector,
 .string {
-	color: #a7e040;
+  color: #a7e040;
 }
 
 .operator,
 .punctuation {
-	color: #c1e0ff;
+  color: #c1e0ff;
 }
 
 .comment {
-	color: #7d9bb9;
+  color: #7d9bb9;
 }
