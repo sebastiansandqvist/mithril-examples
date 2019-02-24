@@ -10,7 +10,9 @@ export default function MarkdownEditor() {
       return [
         m('h3', 'Input'),
         m('textarea.fullWidth', {
-          oninput: m.withAttr('value', value),
+          oninput(event) {
+            value(event.target.value);
+          },
           value: value()
         }),
         m('h3', 'Output'),

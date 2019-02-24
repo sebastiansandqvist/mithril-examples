@@ -70,7 +70,9 @@ export default function Cart() {
         m('input[type=text]', {
           placeholder: 'Filter',
           value: model.query(),
-          oninput: m.withAttr('value', model.query)
+          oninput(event) {
+            model.query(event.target.value);
+          }
         }),
         m(ListView, {
           model,

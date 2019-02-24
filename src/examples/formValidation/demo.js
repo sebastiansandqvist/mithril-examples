@@ -36,7 +36,9 @@ const ValidatedInput = {
       m('input[type=text]', {
         className: attrs.field.error ? 'error' : '',
         value: attrs.field.value(),
-        oninput: m.withAttr('value', attrs.field.value)
+        oninput(event) {
+          attrs.field.value(event.target.value);
+        }
       }),
       m('p.errorMessage', attrs.field.error)
     ];

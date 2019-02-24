@@ -36,7 +36,9 @@ export default function ClassNamesComponent() {
           m('label',
             m('input[type=checkbox]', {
               checked: model.hasError(),
-              onchange: m.withAttr('checked', model.hasError)
+              onchange(event) {
+                model.hasError(event.target.checked);
+              }
             }),
             m('span', 'Add error class')
           ),
@@ -44,7 +46,9 @@ export default function ClassNamesComponent() {
           m('label',
             m('input[type=checkbox]', {
               checked: model.hasAnimation(),
-              onchange: m.withAttr('checked', model.hasAnimation)
+              onchange(event) {
+                model.hasAnimation(event.target.checked);
+              }
             }),
             m('span', 'Add animated class')
           ),
@@ -52,14 +56,18 @@ export default function ClassNamesComponent() {
           m('label',
             m('input[type=radio][name=corner][value=rounded]', {
               checked: model.corner() === 'rounded',
-              onchange: m.withAttr('value', model.corner)
+              onchange(event) {
+                model.corner(event.target.value);
+              }
             }),
             m('span', 'Rounded')
           ),
           m('label',
             m('input[type=radio][name=corner][value=squared]', {
               checked: model.corner() === 'squared',
-              onchange: m.withAttr('value', model.corner)
+              onchange(event) {
+                model.corner(event.target.value);
+              }
             }),
             m('Span', 'Squared')
           ),

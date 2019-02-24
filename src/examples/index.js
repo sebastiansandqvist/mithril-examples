@@ -98,15 +98,14 @@ const tag = {
   route: { name: 'm.route', url: 'https://mithril.js.org/route.html' },
   trust: { name: 'm.trust', url: 'https://mithril.js.org/trust.html' },
   stream: { name: 'Stream', url: 'https://mithril.js.org/stream.html' },
-  svg: { name: 'SVG', url: 'https://mithril.js.org/hyperscript.html#svg-and-mathml' },
-  withAttr: { name: 'm.withAttr', url: 'https://mithril.js.org/withAttr.html' }
+  svg: { name: 'SVG', url: 'https://mithril.js.org/hyperscript.html#svg-and-mathml' }
 };
 
 const examples = [
   {
     title: 'Autogrow Textarea',
     demo: autogrowDemo,
-    tags: [tag.closureComponent, tag.dom, tag.lifecycle, tag.stream, tag.withAttr],
+    tags: [tag.closureComponent, tag.dom, tag.lifecycle, tag.stream],
     isOpen: false,
     description: [
       {
@@ -120,7 +119,7 @@ const examples = [
   {
     title: 'Dynamic Class Names',
     demo: classNamesDemo,
-    tags: [tag.closureComponent, tag.stream, tag.withAttr],
+    tags: [tag.closureComponent, tag.stream],
     isOpen: false,
     description: [
       {
@@ -134,7 +133,7 @@ const examples = [
   {
     title: 'Form Validation',
     demo: formValidationDemo,
-    tags: [tag.closureComponent, tag.stream, tag.withAttr],
+    tags: [tag.closureComponent, tag.stream],
     isOpen: false,
     description: [
       {
@@ -162,7 +161,7 @@ const examples = [
   {
     title: 'Markdown',
     demo: markdownDemo,
-    tags: [tag.closureComponent, tag.stream, tag.trust, tag.withAttr],
+    tags: [tag.closureComponent, tag.stream, tag.trust],
     isOpen: false,
     description: [
       {
@@ -190,7 +189,7 @@ const examples = [
   {
     title: 'Password Input',
     demo: passwordDemo,
-    tags: [tag.closureComponent, tag.stream, tag.withAttr],
+    tags: [tag.closureComponent, tag.stream],
     isOpen: false,
     description: [
       {
@@ -255,7 +254,7 @@ const examples = [
   {
     title: 'Shopping Cart',
     demo: cartDemo,
-    tags: [tag.closureComponent, tag.keys, tag.request, tag.stream, tag.withAttr],
+    tags: [tag.closureComponent, tag.keys, tag.request, tag.stream],
     isOpen: false,
     description: [
       {
@@ -295,7 +294,7 @@ const examples = [
   {
     title: 'SVG', // must be unique
     demo: svgDemo,
-    tags: [tag.closureComponent, tag.svg, tag.withAttr],
+    tags: [tag.closureComponent, tag.svg],
     isOpen: false,
     description: [
       {
@@ -337,7 +336,7 @@ const examples = [
   {
     title: 'To-do List',
     demo: todoDemo,
-    tags: [tag.closureComponent, tag.stream, tag.withAttr],
+    tags: [tag.closureComponent, tag.stream],
     isOpen: false,
     description: [
       {

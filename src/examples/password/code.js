@@ -18,7 +18,9 @@ function PasswordInput() {
           type: visible() ? 'text' : 'password',
           placeholder: visible() ? 'password' : '••••••••',
           value: value(),
-          oninput: m.withAttr('value', value)
+          oninput: function(event) {
+            value(event.target.value);
+          }
         }),
         m('button', {
           onclick: function() { toggle(visible); }
@@ -44,7 +46,9 @@ function PasswordInput() {
           type: visible() ? 'text' : 'password',
           placeholder: visible() ? 'password' : '••••••••',
           value: value(),
-          oninput: m.withAttr('value', value)
+          oninput(event) {
+            value(event.target.value);
+          }
         }),
         m('button', {
           onclick() { toggle(visible); }

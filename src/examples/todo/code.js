@@ -46,7 +46,9 @@ function TodoApp() {
           }
         },
           m('input[type=text]', {
-            oninput: m.withAttr('value', model.newTodoText),
+            oninput(event) {
+              model.newTodoText(event.target.value);
+            },
             value: model.newTodoText()
           }),
           m('button[type=submit]',
@@ -104,7 +106,9 @@ function TodoApp() {
           }
         },
           m('input[type=text]', {
-            oninput: m.withAttr('value', model.newTodoText),
+            oninput: function(event) {
+              model.newTodoText(event.target.value);
+            },
             value: model.newTodoText()
           }),
           m('button[type=submit]',

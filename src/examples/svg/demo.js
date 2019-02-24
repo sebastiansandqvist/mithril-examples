@@ -17,7 +17,9 @@ export default function CircleSlider() {
         m('label', 'Radius: '),
         m('input[type=range][min=1][max=100]', {
           value: size(),
-          oninput: m.withAttr('valueAsNumber', size)
+          oninput(event) {
+            size(event.target.valueAsNumber);
+          }
         }),
         m('span', size())
       ];
