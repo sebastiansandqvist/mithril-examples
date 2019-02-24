@@ -3,3 +3,4 @@ node_modules/
 npm-debug.log
 firebase-debug.log
 public/js
+.firebase/

@@ -42,7 +42,7 @@ function view() {
         m('p',
           markup(
             'Mithril is a client-side MVC framework. You can read more about it at the [official website](https://mithril.js.org).',
-            'This is an unofficial guide and collection of examples using Mithril version 1.1 and above.'
+            'This is an unofficial guide and collection of examples using Mithril version 2.0 and above.'
           )
         )
       ),
