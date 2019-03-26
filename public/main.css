@@ -122,7 +122,7 @@ input {
 }
 
 .Demo-result button {
-  height: 18px;
+  min-height: 18px;
 }
 
 /* generic layout helpers */
